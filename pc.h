@@ -9,7 +9,6 @@ class PC: piblic Character {
   public:
   virtual PC(int initHP, int initAtk, int initDef, int Gold, int row, int col, int max);
   virtual ~PC();
-  virtual attack(Enemy *target);
   void pickUpItem(Item *i);
   int getMax()
 
