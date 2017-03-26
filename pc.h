@@ -11,9 +11,8 @@ class PC: piblic Character {
   virtual ~PC();
   virtual attack(Enemy *target) = 0;
   virtual void move(std::string direction);
-  virtual void getGold();
   void pickUpItem(Item *i);
-  void getMax()
+  int getMax()
 };
 
 #endif
