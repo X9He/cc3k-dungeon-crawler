@@ -8,8 +8,7 @@ class Character{
   int initHP, initAtk, initDef, Gold, row, col, curHp, curAtk, curDef;
   char name;
   publlic:
-  virtual void move() = 0;
-  virtual void move(string direction) = 0;
+  void changePosition(int , int y);
   virtual void attack(Character &Target) = 0;
   Character(int initHp, int initAtk, int initDef, int Gold, int row, int col);
   virtual  ~Character();

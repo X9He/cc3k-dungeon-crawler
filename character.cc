@@ -22,5 +22,8 @@ int Character::getCol() {return col;}
 
 char Character::getNamr£¨£© {return char;}
 
-
+void Character::changePosition(int x, int y) {
+  row = x;
+  col = y;
+}
 
