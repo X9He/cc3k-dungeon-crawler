@@ -5,6 +5,25 @@
 #include <utility>
 
 class Cell {
+
+	char type;
+
 	int row;
+
 	int col;
+	// xu hao
+	int num;
+
+
+public:
+	virtual void prettyPrint()=0;
+
+	// decide if 
+	virtual bool canPass(char type)=0;
+
+	//
+	int getRow();
+
+	int getCol();
+
 }
