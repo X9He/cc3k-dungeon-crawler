@@ -10,9 +10,17 @@ class PC: piblic Character {
   virtual PC(int initHP, int initAtk, int initDef, int Gold, int row, int col, int max);
   virtual ~PC();
   virtual attack(Enemy *target) = 0;
-  virtual void move(std::string direction);
   void pickUpItem(Item *i);
   int getMax()
+
+  virtual void changeHP(int effect) = 0;
+  virtual void changeAtk(int effect) = 0;
+  virtual void changeDef(int effect) = 0;
+  virtual int getHp() = 0;
+  virtual int getAtk() = 0;
+  virtual int getDef() = 0;
+  virtual int getGold() = 0;
+  virtual void changeGold() = 0;
 };
 
 #endif
