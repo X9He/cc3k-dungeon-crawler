@@ -9,7 +9,7 @@
 #ifndef potion_hpp
 #define potion_hpp
 
-#include "Item.hpp"
+#include "Item.h"
 
 class Potion: public Item {
 public:
