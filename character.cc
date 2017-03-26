@@ -1,6 +1,6 @@
 #include "character.h"
 
-Character::Character(int initHP, ini initAtk, int initDef, int Gold, int row, int col, int curHP, int curAtk, int curDef):
+Character::Character(int initHP, ini initAtk, int initDef, int Gold, int row, int col):
   initHP{initHP}, initAtk{initAtk}, initDef{initDef}, Gold{Gold}, row{row}, col{col} {
    curHP = initHp;
    curAtk = initAtk;
