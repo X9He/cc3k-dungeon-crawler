@@ -9,7 +9,7 @@
 #ifndef Treasure_hpp
 #define Treasure_hpp
 
-#include "Item.hpp"
+#include "Item.h"
 
 class Treasure: public Item {
     int value;
