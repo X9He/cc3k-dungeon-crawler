@@ -16,4 +16,34 @@ public:
     virtual void useItem() = 0;
 };
 
+class RH: public Potion {
+public:
+    void useItem() override;
+};
+
+class BA: public Potion {
+public:
+    void useItem() override;
+};
+
+class BD: public Potion {
+public:
+    void useItem() override;
+};
+
+class PH: public Potion {
+public:
+    void useItem() override;
+};
+
+class WA: public Potion {
+public:
+    void useItem() override;
+};
+
+class WD: public Potion {
+public:
+    void useItem() override;
+};
+
 #endif /* potion_hpp */
