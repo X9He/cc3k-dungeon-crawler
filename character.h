@@ -6,6 +6,7 @@ class Item;
 
 class Character{
   int initHP, initAtk, initDef, Gold, row, col, curHp, curAtk, curDef;
+  protected:
   char name;
   publlic:
   void changePosition(int , int y);
