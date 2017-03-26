@@ -12,7 +12,7 @@ class Character{
   virtual void move(string direction) = 0;
   virtual void attack(Character &Target) = 0;
   virtual void defense() = 0;
-  Character();
+  Character(int initHp, int initAtk, int initDef, int Gold, int row, int col);
   virtual  ~Character();
   virtual void damage() = 0;
   bool die();
