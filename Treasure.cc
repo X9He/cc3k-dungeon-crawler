@@ -6,7 +6,7 @@
 //  Copyright © 2017 Wanxin Li. All rights reserved.
 //
 
-#include "Treasure.hpp"
+#include "Treasure.h"
 
 Treasure::Treasure(int value, bool protect):
 value{value}, protect{protect} {}
