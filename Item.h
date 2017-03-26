@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 
-class PC;
 
 
 class Item {
