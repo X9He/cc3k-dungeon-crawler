@@ -1,14 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "door.h"
+#include "NormalCell.h"
 using namespace std;
 
-void Door::prettyPrint(){
+void Stair::prettyPrint(){
 	cout << type << endl;
 }
 
-int Door::canPass(char *c){
+int Stair::canPass(char *c){
 	if (c == '@') {
 		return 0;
 	} else {

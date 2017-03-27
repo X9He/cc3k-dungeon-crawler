@@ -19,7 +19,7 @@ public:
 	virtual void prettyPrint()=0;
 
 	// decide if 
-	virtual bool canPass(char type)=0;
+	virtual int canPass(char type)=0;
 
 	//
 	int getRow();

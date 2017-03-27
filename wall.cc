@@ -20,7 +20,7 @@ Wall::~Wall(){
 }
 
 void Wall::prettyPrint(){
-	cout << wallType << endl;
+	cout << type << endl;
 }
 
 bool Wall::canPass(){

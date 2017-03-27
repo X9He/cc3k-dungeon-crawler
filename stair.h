@@ -1,13 +1,14 @@
-#ifndef __DOOR_H__
-#define __DOOR_H__
+#ifndef __STAIR_H__
+#define __STAIR_H__
 #include <iostream>
 #include <vector>
 #include <utility>
 #include "NormalCell.h"
 
-class Door : public NormalCell{
+class Stair : public NormalCell {	
 public:
 	void prettyPrint() override;
 
 	int canPass() override;
+
 }

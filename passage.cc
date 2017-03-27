@@ -1,14 +1,15 @@
+#ifndef __DOOR_H__
+#define __DOOR_H__
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "door.h"
-using namespace std;
+#include "passage.h"
 
-void Door::prettyPrint(){
+void Passage::prettyPrint(){
 	cout << type << endl;
 }
 
-int Door::canPass(char *c){
+int Passage::canPass(char *c){
 	if (c == '@') {
 		return 0;
 	} else {
