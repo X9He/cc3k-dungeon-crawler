@@ -5,6 +5,7 @@
 class Troll: public PC{
   int stealHP;
   pulic:
+  Troll();
   ~Troll();
   void regainHealth(); 
 };
@@ -12,6 +13,7 @@ class Troll: public PC{
 class Vampire: public PC{ 
   public:
   ~Vampire();
+  Vampire();
   void VchangHP(int effet);
 
 };
@@ -19,6 +21,7 @@ class Vampire: public PC{
 class Goblin: public PC{ 
   int stealGold;
   public:
+  Goblin();
   ~Goblin();
   void stealGold()
 
@@ -27,6 +30,7 @@ class Goblin: public PC{
 class Drow: public PC{
   int potionMagnify;
   public:
+  Drow();
   ~Drow();
   void pickUpItem(Item &i); 
 };

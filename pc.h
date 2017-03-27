@@ -4,10 +4,10 @@
 #include <iostream>
 #include "character.h"
 
-class PC: public Character {
+class PC: piblic Character {
   int max;
   public:
-  virtual PC(int initHP, int initAtk, int initDef, int Gold, int row, int col, int max);
+  virtual PC(int initHP=125, int initAtk=25, int initDef=25, int Gold=0, int row, int col, int max=initHP);
   virtual ~PC();
   void pickUpItem(Item *i);
   int getMax();
@@ -16,8 +16,8 @@ class PC: public Character {
   void hurt(Human &h);
   void hurt(Dragon &d);
   void hurt(Elf &e);
-    void hurt(Halfing &l);
-    void hurt(Dwarf &w);
+  void hurt(Halfing &l);
+  void hurt(Dwarf &w);
   void hurt(Orcs &o);
 
 };
