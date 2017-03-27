@@ -15,6 +15,7 @@ public:
     void move();
     virtual void attack(PC *) = 0;
     Enemy(PC *);
+    void changeFrozen();
 };
 
 class NormalEnemy: public Enemy {
