@@ -14,7 +14,6 @@ class Enemy: public Character {
 public:
     void move();
     virtual void attack(PC *) = 0;
-    void HPchange();
     Enemy(PC *);
 };
 
