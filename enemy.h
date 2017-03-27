@@ -8,14 +8,15 @@ class PC;
 
 class Enemy: public Character {
     PC * Target;
-    int hitChance;
     bool isFrozon;
-    
+    bool moved;
 public:
     void move();
     virtual void attack(PC *) = 0;
     Enemy(PC *);
     void changeFrozen();
+    void changeMoved();
+    bool getMoved();
 };
 
 class NormalEnemy: public Enemy {
