@@ -1,10 +1,3 @@
-//
-//  enemy.hpp
-//  CC3K
-//
-//  Created by Li on 2017-03-26.
-//  Copyright © 2017 Wanxin Li. All rights reserved.
-//
 
 #ifndef enemy_hpp
 #define enemy_hpp
