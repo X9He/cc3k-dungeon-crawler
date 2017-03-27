@@ -4,7 +4,7 @@
 #include <iostream>
 #include "character.h"
 
-class PC: piblic Character {
+class PC: public Character {
   int max;
   public:
   virtual PC(int initHP, int initAtk, int initDef, int Gold, int row, int col, int max);
