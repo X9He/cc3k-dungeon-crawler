@@ -10,6 +10,7 @@ class Floor {
 	int level;
 	vector<Enemy *> enemyList;
 	PC *player;
+	vector<Chamber *> roomList;
 
 public:
 	Floor(PC*);
@@ -24,19 +25,23 @@ public:
 
 	void notify();
 
-	void initPC();
+	void initPC(char);
 
 	int getLevel();
 
 	bool gameOver();
 
-	void createEnemy();
+	void createEnemy(int);
 
-	void createPC();
+	void createPotion(int);
 
-	void createItem();
+	void createTreasure(int);
 
-	void createTreasure();
+	void createStair();
+
+	bool movePlayer(PC *);
+
+	void updateEnemy();
 
 };
 

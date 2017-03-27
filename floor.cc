@@ -15,7 +15,6 @@ int random(int x, int y){
 	return ran;
 }
 
-double human = cur.human;
 
 void Floor::prettyPrint(){
 	for (int i = 0; i < cellList.size() ; ++i){
@@ -28,6 +27,9 @@ void Floor::prettyPrint(){
 
 void Floor::clearFloor(){
 	td = nullptr;
+	for (auto e: enemyList) {
+		delete e;
+	}
 	enemyList.clear();
 	for (int i = 0; i < cellList.size() ; ++i){
 		for (int j = 0; j < cellList[i].size(); ++j){
@@ -76,22 +78,68 @@ void Floor::init(){
 	}
 }
 
-// void Floor::notify(){
 
-// }
 
-void Floor::CreateEnemy(int num){
-	while (num > 0){
-		int ran = random() % 18 + 1;
-		if ()
-		Enemy *newE = new Enemy{};
-		enemyList.emplace_back(newE);
+void Floor::initPC(string s){
 
-	}
 
 }
 
 int Floor::getLevel(){
 	return level;
 }
+
+bool Floor::gameOver(){
+	if (player->getHP() <= 0){
+		return true;
+	}
+	return false;
+}
+
+void Floor::createEnemy(int num){
+	while (num > 0){
+		int r = random(1, 18);
+		Enemy *newE;
+		if (r >= 1 && r <= 4) {
+			newE = new Human{player};
+		} else if (r >= 5 && r <= 7) {
+			newE = new Dwarf{player};
+		} else if (r >= 8 && r <= 12){
+			newE = new Halfling{player};
+		} else if (r >= 13 && r <= 14) {
+			newE = new Elf{player};
+		} else if (r >= 15 && r <= 16) {
+			newE = new Orc{player};
+		} else {
+			newE = new Merchant{player};
+		}
+		enemyList.emplace_back(newE);
+		--num;
+	}
+}
+
+
+void Floor::createPotion(int num){
+	while(num > 0) {
+		int r = random(1, 6);
+		Potion *newP;
+		
+	}
+
+}
+
+void Floor::createTreasure(int num){
+
+}
+
+void Floor::createStair(int num){
+
+}
+
+bool Floor::movePlayer(PC *){
+
+}
+
+
+void Floor::updateEnemy(){}
 
