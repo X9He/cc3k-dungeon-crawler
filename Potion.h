@@ -1,10 +1,3 @@
-//
-//  potion.hpp
-//  CC3K
-//
-//  Created by Li on 2017-03-25.
-//  Copyright © 2017 Wanxin Li. All rights reserved.
-//
 
 #ifndef potion_hpp
 #define potion_hpp
@@ -13,37 +6,37 @@
 
 class Potion: public Item {
 public:
-    virtual void useItem() = 0;
+    virtual void useItem(int mag) = 0;
 };
 
 class RH: public Potion {
 public:
-    void useItem() override;
+    void useItem(int mag) override;
 };
 
 class BA: public Potion {
 public:
-    void useItem() override;
+    void useItem(int mag) override;
 };
 
 class BD: public Potion {
 public:
-    void useItem() override;
+    void useItem(int mag) override;
 };
 
 class PH: public Potion {
 public:
-    void useItem() override;
+    void useItem(int mag) override;
 };
 
 class WA: public Potion {
 public:
-    void useItem() override;
+    void useItem(int mag) override;
 };
 
 class WD: public Potion {
 public:
-    void useItem() override;
+    void useItem(int mag) override;
 };
 
 #endif /* potion_hpp */
