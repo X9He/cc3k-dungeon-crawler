@@ -11,6 +11,8 @@ class Enemy: public Character {
     bool isFrozon;
     bool moved;
 public:
+    ~Enemy();
+    Enemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool isFrozen = false, bool moved = false} 
     void move();
     virtual void attack(PC *) = 0;
     Enemy(PC *);
