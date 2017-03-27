@@ -18,7 +18,7 @@ class Item {
     int col;
     
 public:
-    virtual void UseItem() = 0;
+    virtual void UseItem(int mag=1) = 0;
     
 protected:
     PC * target;
