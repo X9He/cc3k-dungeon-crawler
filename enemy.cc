@@ -5,8 +5,8 @@
 // enemy attack 50% miss
 
 
-Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, int row, int col, PC * target, int hitChance, bool isFrozen)
-: Character{initHP, initAtk, initDef, Gold, row, col}, Target(target), hitChance{hitChance}, isFrozon{isFrozen} {}
+Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, int row, int col, PC * target, bool isFrozen, bool moved)
+: Character{initHP, initAtk, initDef, Gold, row, col}, Target(target), isFrozon{isFrozen}, moevd{moved} {}
 
 void Enemy::changeFrozen() {
     isFrozen = !isFrozen;
