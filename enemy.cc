@@ -37,4 +37,3 @@ void Human::attack(PC * player) {
 }
 
 
-
