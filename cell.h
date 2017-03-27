@@ -16,6 +16,10 @@ class Cell {
 
 
 public:
+	Cell(char type, int row, int col, int num);
+
+	~Cell();
+
 	virtual void prettyPrint()=0;
 
 	// decide if 
@@ -27,3 +31,5 @@ public:
 	int getCol();
 
 }
+
+#endif

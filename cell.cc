@@ -4,11 +4,11 @@
 #include <utility>
 using namespace std;
 
-Cell::Cell(): charTarget{nullptr}, item{nullptr} {}
+Cell::Cell(): type{type}, row{row}, col{col}, num{num} {}
 
 Cell::~Cell(): {}
 
-	//
+
 int Cell::getRow(){
 	return row;
 }
