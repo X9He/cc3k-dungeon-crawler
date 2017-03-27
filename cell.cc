@@ -6,7 +6,7 @@ using namespace std;
 
 Cell::Cell(): type{type}, row{row}, col{col}, num{num} {}
 
-Cell::~Cell(): {}
+Cell::~Cell(){}
 
 
 int Cell::getRow(){

@@ -12,6 +12,10 @@ class NormalCell : public Cell {
 
 public:	
 
+	NormalCell(char type, int row, int col, int num);
+
+	~NormalCell();
+
 	void attach(Cell *c);
 
 	void putCharacter(Character *ch);
@@ -19,4 +23,6 @@ public:
 	void removeCharacter();
 
 	Character *getCharacter();
-}
+};
+
+#endif

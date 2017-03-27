@@ -1,9 +1,11 @@
-#ifndef __DOOR_H__
-#define __DOOR_H__
 #include <iostream>
 #include <vector>
 #include <utility>
 #include "passage.h"
+using namespace std;
+
+
+Passage::Passage(char type, int row, int col, int num): Cell(type, row, col, num) {}
 
 void Passage::prettyPrint(){
 	cout << type << endl;

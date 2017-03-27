@@ -11,6 +11,10 @@ class Chamber: public Cell {
 	Item *item;
 
 public:
+	Chamber(char type, int row, int col, int num, int chamberNum);
+
+	~Chamber();
+
 	void prettyPrint() override;
 
 	int canPass() override;
@@ -20,6 +24,6 @@ public:
 	void removeItem();
 
 	void getItem();
-}
+};
 
 #endif

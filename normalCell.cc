@@ -4,6 +4,10 @@
 #include <utility>
 using namespace std;
 
+NormalCell::NormalCell(char type, int row, int col, int num): Cell(type, row, col, num) {}
+
+NormalCell::~NormalCell(){}
+
 
 void NormalCell::attach(Cell *c){
 	neighbours.emplaceback(c);

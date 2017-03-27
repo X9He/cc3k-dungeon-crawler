@@ -4,20 +4,9 @@
 #include "Wall.h"
 using namespace std;
 
-Wall::Wall(int i) {
-	Cell{} {
-		if (int i == 0) {
-			wallType = '';
-		} else if (int i == 1) {
-			wallType = '|';
-		} else {
-			wallType = '-';
-		}
-	}
-}
+Wall::Wall(char type, int row, int col, int num): Cell(type, row, col, num) {}
 
-Wall::~Wall(){
-}
+Wall::~Wall(){}
 
 void Wall::prettyPrint(){
 	cout << type << endl;

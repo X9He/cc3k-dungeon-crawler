@@ -3,17 +3,20 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "NormalCell.h"
+#include "Cell.h"
 
 class Wall: public Cell {
 	char wallType;
 
 public:
+	Wall(char type, int row, int col, int num);
+
+	~Wall();
+
 	void prettyPrint() override;
 
 	bool canPass() override;
 
-	Wall(int i){};
+};
 
-	~Wall(){};
-}
+#endif

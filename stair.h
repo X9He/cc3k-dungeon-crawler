@@ -7,8 +7,14 @@
 
 class Stair : public NormalCell {	
 public:
+	Stair(char type, int row, int col, int num);
+
+	~Stair();
+	
 	void prettyPrint() override;
 
 	int canPass() override;
 
-}
+};
+
+#endif

@@ -4,6 +4,10 @@
 #include "chamber.h"
 using namespace std;
 
+Chamber::Chamber(char type, int row, int col, int num, int chamberNum): Cell(type, row, col, num), chamberNum{chamberNum} {}
+
+Chamber::~Chamber() {}
+
 
 void Chamber::prettyPrint(){
 	if (charTarget != nullptr) {

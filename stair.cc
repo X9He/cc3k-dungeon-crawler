@@ -1,8 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "NormalCell.h"
+#include "Stair.h"
 using namespace std;
+
+Stair::Stair(char type, int row, int col, int num): Cell(type, row, col, num) {}
+
+Stair::~Stair() {}
 
 void Stair::prettyPrint(){
 	cout << type << endl;

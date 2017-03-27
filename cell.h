@@ -30,6 +30,6 @@ public:
 
 	int getCol();
 
-}
+};
 
 #endif
