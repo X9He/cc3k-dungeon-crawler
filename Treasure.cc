@@ -1,10 +1,4 @@
-//
-//  Treasure.cpp
-//  CC3K
-//
-//  Created by Li on 2017-03-25.
-//  Copyright © 2017 Wanxin Li. All rights reserved.
-//
+
 
 #include "Treasure.h"
 
@@ -18,7 +12,7 @@ bool Treasure::isProtect() {
     return protect;
 }
 
-void Treasure::useItem() {
+void Treasure::useItem(int mag) {
     target->pickupItem(*this);
 }
 
