@@ -17,6 +17,14 @@ void Enemy::hurt(PC *p) {
     changeHP(effect);
 }
 
+void Enemy::changeMoved() {
+    moved = !moved;
+}
+
+bool Enemy::getMoved() {
+    return moved;
+}
+
 void Elf::attack(PC * player) {
     player->hurt(*this);
 }
