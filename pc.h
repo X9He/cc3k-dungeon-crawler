@@ -53,7 +53,7 @@ class Drow: public PC{
   public:
   Drow();
   ~Drow();
-  void pickUpItem(Item &i); 
+  void pickUpItem(Item &i, int effect); 
 };
 
 #endif
