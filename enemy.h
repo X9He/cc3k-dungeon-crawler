@@ -6,7 +6,6 @@ class Character;
 class PC;
 
 class Enemy: public Character {
-    int dropAmount;
     PC * Target;
     int hitChance;
     bool isFrozon;
@@ -15,7 +14,7 @@ public:
     void move();
     virtual void attack(PC *) = 0;
     void HPchange();
-    Enemy(int, int, int, int, int, int, int, PC *, int, bool isFrozen=false);
+    Enemy(int, int, int, int, int, int, PC *, int, bool isFrozen=false);
 };
 
 class NormalEnemy: public Enemy {
