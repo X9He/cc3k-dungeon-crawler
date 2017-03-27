@@ -15,7 +15,7 @@ public:
     void move();
     virtual void attack(PC *) = 0;
     void HPchange();
-    Enemy(int, int, int, int, int, int, int, PC *, int, bool);
+    Enemy(int, int, int, int, int, int, int, PC *, int, bool isFrozen=false);
 };
 
 class NormalEnemy: public Enemy {
