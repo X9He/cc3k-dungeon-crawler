@@ -5,6 +5,7 @@
 class Character;
 class PC;
 
+
 class Enemy: public Character {
     PC * Target;
     int hitChance;
@@ -14,7 +15,7 @@ public:
     void move();
     virtual void attack(PC *) = 0;
     void HPchange();
-    Enemy(int, int, int, int, int, int, PC *, int, bool isFrozen=false);
+    Enemy(PC *);
 };
 
 class NormalEnemy: public Enemy {
@@ -25,25 +26,25 @@ class NormalEnemy: public Enemy {
 class Elf: public NormalEnemy {
 public:
     void attack(PC *) override;
-    Elf(int row, int col, PC * target, int Gold, int hitChance, bool isFrozen);
+    Elf(PC *);
 };
 
 class Dward: public NormalEnemy {
 public:
     void attack(PC *) override;
-    Dward(int row, int col, PC * target, int Gold, int hitChance, bool isFrozen);
+    Dward(PC *);
 };
 
 class Halfing: public NormalEnemy {
 public:
     void attack(PC *) override;
-    Halfing(int row, int col, PC * target, int Gold, int hitChance, bool isFrozen);
+    Halfing(PC *);
 };
 
 class Orcs: public NormalEnemy {
 public:
     void attack(PC *) override;
-    Orcs(int row, int col, PC * target, int Gold, int hitChance, bool isFrozen);
+    Orcs(PC *);
 };
 
 class Merchant: public Enemy {
@@ -53,20 +54,20 @@ public:
     void attack(PC *) override;
     bool IsHostile();
     void changeStatus();
-    Merchant(int row, int col, PC * target, int Gold, int hitChance, bool isFrozen);
+    Merchant(PC *);
 };
 
 class Dragon: public Enemy {
     Treasure * hoard;
 public:
     void attack (PC *) override;
-    Dragon(int row, int col, PC * target, int hitChance, bool isFrozen, Treasure * t);
+    Dragon(PC * target, Treasure * t);
 };
 
 class Human: public Enemy {
 public:
     void attack (PC *) override;
-    Human(int row, int col, PC * target, int hitChance, bool isFrozen);
+    Human(PC *);
 };
 
 #endif /* enemy_hpp */
