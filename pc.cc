@@ -90,7 +90,7 @@ void PC::hurt(Human & h) {
 }
 
 void Vampire::hurt(Elf & e) {
-    int effecr = damage(e);
+    int effect = damage(e);
     changeHP(effect);
 }
 
