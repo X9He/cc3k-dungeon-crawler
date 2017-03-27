@@ -1,10 +1,3 @@
-//
-//  Treasure.hpp
-//  CC3K
-//
-//  Created by Li on 2017-03-25.
-//  Copyright © 2017 Wanxin Li. All rights reserved.
-//
 
 #ifndef Treasure_hpp
 #define Treasure_hpp
@@ -18,7 +11,7 @@ public:
     Treasure(int, bool);
     int getValue();
     bool isProtect();
-    void useItem();
+    void useItem(int mag=1) override;
 };
 
 #endif /* Treasure_hpp */
