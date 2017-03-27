@@ -13,7 +13,7 @@ class Enemy: public Character {
     
 public:
     void move();
-    void virtual attack(PC *) = 0;
+    virtual void attack(PC *) = 0;
     void HPchange();
     Enemy(int, int, int, int, int, int, int, PC *, int, bool);
 };
