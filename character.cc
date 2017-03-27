@@ -10,8 +10,8 @@ Character::Character(int initHP, ini initAtk, int initDef, int Gold, int row, in
 
 Character::~Character() {}
 
-integer Character::damage(Character &other) {
-  return 0 - ceiling((100 / (100 + Def))) * other.Atk;
+integer Character::damage(Character &other, float mag = 1) {
+  return 0 - ceiling((100 / (100 + Def))) * (mag * other.Atk);
 }
 
 bool Character::die() {return HP == 0;}

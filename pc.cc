@@ -12,144 +12,43 @@ void PC::pickUpItem(Item &i) {
 int PC::getMax() {
   return max;
 }
-
-void Troll::hurt(Elf & e) {
-    damage(e);
+void PC::atack(Enemy  *target) {
+   target->hurt(*this);
+}
+void PC::hurt(Merchant &m){
+  if (!m.status){
+    int effect = m.damage(*this);
+    m.changetHP(effet);
+  }
 }
 
-void Vampire::hurt(Elf & e) {
-    damage(e, 2);
+void PC::hurt(Human &h){
+  int effect = h.damage(*this);
+  h.changetHP(effet);
 }
 
-void Goblin::hurt(Elf & e) {
-    damage(e, 2);
+void PC::hurt(Dragon &d){
+  int effect = d.damage(*this);
+  d.changetHP(effet);
 }
 
-void Drow::hurt(Elf & e) {
-    damage(e, 2);
+void PC::hurt(Elf &e){
+  int effect = e.damage(*this);
+   e.changetHP(effet);
 }
 
-void PC::attack(Elf & e) {
-    damage(e, 2);
+void PC::hurt(Halfing &l){
+  int effect = l.damage(*this);
+  l.changetHP(effet);
 }
 
-void Troll::hurt(Dwarf & d) {
-    damage(d);
+void PC::hurt(Dwarf &w){
+  int effect = w.damage(*this);
+  w.changetHP(effet);
 }
 
-void Vampire::hurt(Dwarf & d) {
-    damage(d);
+void PC::hurt(Orcs &o){
+  int effect = o.damage(*this);
+  o.changetHP(effet);
 }
-
-void Goblin::hurt(Dwarf & d) {
-    damage(d);
-}
-
-void Drow::hurt(Dwarf & d) {
-    damage(d);
-}
-
-void PC::hurt(Dwarf & d) {
-    damage(d);
-}
-
-void Troll::hurt(Halfing & h) {
-    damage(h);
-}
-
-void Vampire::hurt(Halfing & h) {
-    damage(h);
-}
-
-void Goblin::hurt(Halfing & h) {
-    damage(h);
-}
-
-void Drow::hurt(Halfing & h) {
-    damage(h);
-}
-
-void PC::hurt(Halfing & h) {
-    damage(h);
-}
-
-void Troll::hurt(Orcs & o) {
-    damage(o);
-}
-
-void Vampire::hurt(Orcs & o) {
-    damage(o);
-}
-
-void Goblin::hurt(Orcs & o) {
-    damage(o, 1.5);
-}
-
-void Drow::hurt(Orcs & o) {
-    damage(o);
-}
-
-void PC::hurt(Orcs & o) {
-    damage(o);
-}
-
-void Troll::hurt(Merchant & m) {
-    damage(m);
-}
-
-void Vampire::hurt(Merchant & m) {
-    damage(m);
-}
-
-void Goblin::hurt(Merchant & m) {
-    damage(m);
-}
-
-void Drow::hurt(Merchant & m) {
-    damage(m);
-}
-
-void PC::hurt(Merchant & m) {
-    damage(m);
-}
-
-void Troll::hurt(Dragon & d) {
-    damage(d);
-}
-
-void Vampire::hurt(Dragon & d) {
-    damage(d);
-}
-
-void Goblin::hurt(Dragon & d) {
-    damage(d);
-}
-
-void Drow::hurt(Dragon & d) {
-    damage(d);
-}
-
-void PC::hurt(Dragon & d) {
-    damage(d);
-}
-
-void Troll::hurt(Human & h) {
-    damage(h);
-}
-
-void Vampire::hurt(Human & h) {
-    damage(h);
-}
-
-void Goblin::hurt(Human & h) {
-    damage(h);
-}
-
-void Drow::hurt(Human & h) {
-    damage(h);
-}
-
-void PC::hurt(Human & h) {
-    damage(h);
-}
-
+  

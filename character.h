@@ -12,7 +12,7 @@ class Character{
   void changePosition(int , int y);
   Character(int initHp, int initAtk, int initDef, int Gold, int row, int col);
   virtual  ~Character();
-  integer damage();
+  integer damage(Character &other, float mag = 1);
   bool die();
   virtual void changeHP(int effect);
   virtual void changeAtk(int effect);
