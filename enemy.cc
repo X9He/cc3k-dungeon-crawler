@@ -3,7 +3,13 @@
 
 
 // enemy attack 50% miss
-
+// generate random number
+int random(int x, int y){
+ int ran;
+ srand(time(0));
+ ran = x + (rand() % (y - x + 1));
+ return ran;
+}
 
 Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool isFrozen, bool moved)
 : Character{initHP, initAtk, initDef, Gold, row, col}, Target(target), isFrozon{isFrozen}, moevd{moved} {}
@@ -51,27 +57,45 @@ Halfing(PC * target):
 Enemy{100, 15, 20, PC, false}{}
 
 void Dward::attack(PC * player) {
+    int rad = random(0, 1);
+    if (rad == 0) {
     player->hurt(*this);
+    }
 }
 
 void Halfing::attack(PC * player) {
+    int rad = random(0, 1);
+    if (rad == 0) {
     player->hurt(*this);
+    }
 }
 
 void Orcs::attack(PC * player) {
+    int rad = random(0, 1);
+    if (rad == 0) {
     player->hurt(*this);
+    }
 }
 
 void Merchant::attack(PC * player) {
+   int rad = random(0, 1);
+    if (rad == 0) {
     player->hurt(*this);
+    }
 }
 
 void Dragon::attack(PC * player) {
+    int rad = random(0, 1);
+    if (rad == 0) {
     player->hurt(*this);
+    }
 }
 
 void Human::attack(PC * player) {
+    int rad = random(0, 1);
+    if (rad == 0) {
     player->hurt(*this);
+    }
 }
 
 
