@@ -12,7 +12,7 @@ class Floor {
 	PC *player;
 
 public:
-	Floor();
+	Floor(PC*);
 
 	~Floor();
 	
@@ -24,25 +24,19 @@ public:
 
 	void notify();
 
-	void spawnEnemy(int num);
-
-	void spawnItem();
-
-	void spawnStair();
-
 	void initPC();
 
 	int getLevel();
 
 	bool gameOver();
 
-	Enemy* createEnemy();
+	void createEnemy();
 
-	PC* createPC();
+	void createPC();
 
-	Item* createItem();
+	void createItem();
 
-	Treasure* createTreasure();
+	void createTreasure();
 
 };
 

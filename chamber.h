@@ -3,27 +3,26 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "NormalCell.h"
+#include "spawn.h"
 
-class Chamber: public Cell {
-	int chamberNum;
-
-	Item *item;
+class Chamber {
+	vector<Spawn *> emptySpawn;
+	vector<Spawn *> fullSpawn;
+	int capacity;
+	int emptyAmount;
 
 public:
-	Chamber(char type, int row, int col, int num, int chamberNum);
-
+	Chamber(int capacity, int emptyAmount);
 	~Chamber();
+	Spawn* findSpawn(int row, int col);
+	void addSpawn(Spawn *);
+	void assignPotion(Potion *);
+	void assignPC(PC *);
+	void assignEnemy(Enemy *);
+	void assignTreasure(Treasure *);
+	void assignDragon(Dragon *);
+}
 
-	void prettyPrint() override;
 
-	int canPass() override;
-
-	void putItem();
-
-	void removeItem();
-
-	void getItem();
-};
 
 #endif
