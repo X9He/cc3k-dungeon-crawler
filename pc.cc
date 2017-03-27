@@ -55,41 +55,51 @@ void PC::hurt(Orcs &o){
 
 //
 void PC::hurt(Merchant & m) {
-    damage(m);
+    int effect = damage(m);
+    changeHP(effect);
 }
 
 void PC::hurt(Dragon & d) {
-    damage(d);
+    int effect = damage(d);
+    changeHP(effect);
 }
 
 void PC::hurt(Elf & e) {
-    damage(e, 2);
+    int effect = damage(e, 2);
+   changeHP(effect);
 }
 
-void PC::hurt(Dwarf & d) {
-    damage(d);
+void PC::hurt(Dwarf & w) {
+    int effect = damage(w);
+    changeHP(effect);
 }
 
-void PC::hurt(Halfing & h) {
-    damage(h);
+void PC::hurt(Halfing & l) {
+    int effect = damage(h);
+    changeHP(effect);
 }
 
 void PC::hurt(Orcs & o) {
-    damage(o);
+    int effect = damage(o);
+    changHP(effect);
 }
 
 void PC::hurt(Human & h) {
-    damage(h);
+    int effect = damage(h);
+    changeHP(effect);
 }
 
 void Vampire::hurt(Elf & e) {
-    damage(e);
+    int effecr = damage(e);
+    changeHP(effect);
 }
 
 void Goblin::hurt(Orcs & o) {
-    damage(o, 1.5);
+    int effect = damage(o, 1.5);
+    changeHP(effect)
 }
 
 void Drow::hurt(Elf & e) {
-    damage(e);
+   int effect = damage(e);
+  changeHP(effect);
 }
