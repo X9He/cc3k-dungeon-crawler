@@ -12,6 +12,10 @@ class Floor {
 	PC *player;
 
 public:
+	Floor();
+
+	~Floor();
+	
 	void prettyPrint();
 
 	void clearFloor();
@@ -20,7 +24,7 @@ public:
 
 	void notify();
 
-	void spawnEnemy();
+	void spawnEnemy(int num);
 
 	void spawnItem();
 
@@ -40,4 +44,6 @@ public:
 
 	Treasure* createTreasure();
 
-}
+};
+
+#endif

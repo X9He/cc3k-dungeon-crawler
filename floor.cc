@@ -23,12 +23,36 @@ void Floor::clearFloor(){
 	}
 }
 
-void Floor::init(x, y){
-	td = new Display(x , y);
+void Floor::init(){
+	fstream fs;
+	fs.open('cc3k.txt');
+	string s;
+	int i = 0;
+	while(s << fs.getline()){
+		char c;
+		vector<Cell> newVec;
+		for(int j = 0; j < s.size(); ++j) {			
+			Cell *newC;
+			if(ch == '-'){
+				newC = new Wall('-', i, j, )
+			} else if (ch == '|'){
+			}
+			= new Cell{}
+			newVec.emplaceback();
+		}
 
-
+	}
 }
 
 void Floor::notify(){
 
 }
+
+void Floor::SpawnEnemy(){
+
+}
+
+void Floor::getLevel(){
+	return level;
+}
+

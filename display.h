@@ -11,9 +11,9 @@ class Display {
 public:
 	Display(int x, int y);
 
-	void update();
-
 	~Display();
+
+	void update();
 };
 
 #endif
