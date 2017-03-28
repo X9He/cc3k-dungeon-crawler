@@ -45,8 +45,11 @@ public:
 
 	void deleteEnemy();
 
-	void simpleMovePlayer(int, int, int, int);
+	void simpleMoveCharacter(int, int, int, int);
 
+	vector<Cell*> produceSurroundEmpty(int, int);
+
+	Cell* checkPC(int, int);
 };
 
 #endif
