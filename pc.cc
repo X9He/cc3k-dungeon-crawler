@@ -10,8 +10,8 @@ Character::Character(int initHP, ini initAtk, int initDef, int Gold):
 }
 */
 
-PC::PC(int initHP, int initAtk, int initDef, string message): 
-  Character(initHP, initAtk, initDef, 0), max{initHP}, name{'@'}, message{message} {}
+PC::PC(int initHP, int initAtk, int initDef): 
+  Character(initHP, initAtk, initDef, 0, 0, 0), max{initHP}, name{'@'}, message{""} {}
 
 PC::~PC() {}
 
@@ -34,6 +34,12 @@ void PC::attack(Enemy  *target) {
 
 void PC::attack(Elf  *target) {
    target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+   int effect1= target->damage(*this);
+   int effect2 = damage(target);
+   message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
 }
 
 void PC::attack(Dward  *target) {
@@ -41,6 +47,7 @@ void PC::attack(Dward  *target) {
    if (target->getHP() == 0) {
      changeGold(target->getGold());
    }
+  message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
 }
 
 void PC::attack(Halfing  *target) {
@@ -48,6 +55,7 @@ void PC::attack(Halfing  *target) {
    if (target->getHP() == 0) {
      changeGold(target->getGold());
    }
+  message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
 }
 
 
@@ -68,6 +76,7 @@ void PC::attack(Orcs  *target) {
      changeGold(target->getGold());
    }
   }
+  message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
 }
 
 
@@ -76,6 +85,7 @@ void PC::attack(Merchant  *target) {
    if (target->getHP() == 0) {
      changeGold(target->getGold());
    }
+  message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
 }
 
 void PC::attack(Dragon  *target) {
@@ -83,6 +93,7 @@ void PC::attack(Dragon  *target) {
    if (target->getHP() == 0) {
      changeGold(target->getGold());
    }
+  message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
 }
 
 void PC::attack(Human  *target) {
@@ -90,6 +101,7 @@ void PC::attack(Human  *target) {
    if (target->getHP() == 0) {
      changeGold(target->getGold());
    }
+  message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
 }
 
 
@@ -209,6 +221,7 @@ void Vampire::VchangeHP(int effect) {
   changeHP(effect, current + effect);
 }
 
+
 Goblin::Goblin() :
   pc(110, 15, 20) {}
 
@@ -237,117 +250,120 @@ void Drow::pickUpItem(Item &i, int effect){
 
 ////////////////////////////////////
 void Troll::hurt(Merchant &m) {
-  int effect = m.damage(m);
+  int effect = damage(m);
   changeHP(effect);
 }
 void Troll::hurt(Human &h) {
-  int effect = h.damage(h);
+  int effect = damage(h);
   changeHP(effect);
 }
 void Troll::hurt(Dragon &d) {
-  int effect = d.damage(a);
+  int effect = damage(a);
   changeHP(effect);
 }
 void Troll::hurt(Elf &e) {
-  int effect = e.damage(e,2);
+  int effect = damage(e,2);
   changeHP(effect);
 }
 void Troll::hurt(Halfing &l) {
-  int effect = l.damage(l);
+  int effect = damage(l);
   changeHP(effect);
 }
 void Troll::hurt(Dwarf &w) {
-  int effect = w.damage(w);
+  int effect = damage(w);
   changeHP(effect);
 }
 void Troll::hurt(Orcs &o) {
-  int effect = o.damage(o);
+  int effect = damage(o);
   chanegHP(effect);
 }
 
 void Vampire::hurt(Merchant &m) {
-  int effect = m.damage(m);
+  int effect = damage(m);
   changeHP(effect);
 }
 void Vampire::hurt(Human &h) {
-  int effect = h.damage(h);
+  int effect = damage(h);
   changeHP(effect);
 }
 void Vampire::hurt(Dragon &d) {
-  int effect = d.damage(a);
+  int effect = damage(a);
   changeHP(effect);
 }
 void Vampire::hurt(Elf &e) {
-  int effect = e.damage(e,2);
+  int effect = damage(e,2);
   changeHP(effect);
 }
 void Vampire::hurt(Halfing &l) {
-  int effect = l.damage(l);
+  int effect = damage(l);
   changeHP(effect);
 }
 void Vampire::hurt(Dwarf &w) {
-  int effect = w.damage(w);
+  int effect = damage(w);
   changeHP(effect);
 }
 void Vampire::hurt(Orcs &o) {
-  int effect = o.damage(o);
+  int effect = damage(o);
   chanegHP(effect);
 }
 
 void Goblin::hurt(Merchant &m) {
-  int effect = m.damage(m);
+  int effect = damage(m);
   changeHP(effect);
 }
 void Goblin::hurt(Human &h) {
-  int effect = h.damage(h);
+  int effect = damage(h);
   changeHP(effect);
 }
 void Goblin::hurt(Dragon &d) {
-  int effect = d.damage(a);
+  int effect = damage(a);
   changeHP(effect);
 }
 void Goblin::hurt(Elf &e) {
-  int effect = e.damage(e,2);
+  int effect = damage(e,2);
   changeHP(effect);
 }
 void Goblin::hurt(Halfing &l) {
-  int effect = l.damage(l);
+  int effect = damage(l);
   changeHP(effect);
 }
 void Goblin::hurt(Dwarf &w) {
-  int effect = w.damage(w);
+  int effect = damage(w);
   changeHP(effect);
 }
 void Goblin::hurt(Orcs &o) {
-  int effect = o.damage(o, 1.5);
+  int effect = damage(o, 1.5);
   chanegHP(effect);
 }
 
 void Drow::hurt(Merchant &m) {
-  int effect = m.damage(m);
+  int effect = damage(m);
   changeHP(effect);
 }
 void Drow::hurt(Human &h) {
-  int effect = h.damage(h);
+  int effect = damage(h);
   changeHP(effect);
 }
 void Drow::hurt(Dragon &d) {
-  int effect = d.damage(a);
+  int effect = damage(a);
   changeHP(effect);
 }
 void Drow::hurt(Elf &e) {
-  int effect = e.damage(e);
+  int effect = damage(e);
   changeHP(effect);
 }
 void Drow::hurt(Halfing &l) {
-  int effect = l.damage(l);
+  int effect = damage(l);
   changeHP(effect);
 }
 void Drow::hurt(Dwarf &w) {
-  int effect = w.damage(w);
+  int effect = damage(w);
   changeHP(effect);
 }
 void Drow::hurt(Orcs &o) {
-  int effect = o.damage(o);
+  int effect = damage(o);
   chanegHP(effect);
 }
+
+
+//////////////////////////////////////
