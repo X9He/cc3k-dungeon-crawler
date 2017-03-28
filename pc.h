@@ -29,6 +29,14 @@ class Troll: public PC{
   Troll();
   ~Troll();
   void regainHealth(); 
+  void attack(Enemy *target);
+  void hurt(Merchant &m);
+  void hurt(Human &h);
+  void hurt(Dragon &d);
+  void hurt(Elf &e);
+  void hurt(Halfing &l);
+  void hurt(Dwarf &w);
+  void hurt(Orcs &o);
 };
 
 class Vampire: public PC{ 
@@ -36,6 +44,14 @@ class Vampire: public PC{
   ~Vampire();
   Vampire();
   void VchangHP(int effet);
+  void attack(Enemy *target);
+  void hurt(Merchant &m);
+  void hurt(Human &h);
+  void hurt(Dragon &d);
+  void hurt(Elf &e);
+  void hurt(Halfing &l);
+  void hurt(Dwarf &w);
+  void hurt(Orcs &o);
 
 };
 
@@ -44,7 +60,15 @@ class Goblin: public PC{
   public:
   Goblin();
   ~Goblin();
-  void stealGold()
+  void stealGold();
+  void attack(Enemy *target);
+  void hurt(Merchant &m);
+  void hurt(Human &h);
+  void hurt(Dragon &d);
+  void hurt(Elf &e);
+  void hurt(Halfing &l);
+  void hurt(Dwarf &w);
+  void hurt(Orcs &o);
 
 };
 
@@ -54,6 +78,14 @@ class Drow: public PC{
   Drow();
   ~Drow();
   void pickUpItem(Item &i, int effect); 
+  void attack(Enemy *target);
+  void hurt(Merchant &m);
+  void hurt(Human &h);
+  void hurt(Dragon &d);
+  void hurt(Elf &e);
+  void hurt(Halfing &l);
+  void hurt(Dwarf &w);
+  void hurt(Orcs &o);
 };
 
 #endif
