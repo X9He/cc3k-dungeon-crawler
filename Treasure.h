@@ -12,6 +12,7 @@ public:
     int getValue();
     bool isProtect();
     void useItem(int mag=1) override;
+    void changeProtect();
 };
 
 class Small: public Treasure {
