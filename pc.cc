@@ -1,5 +1,5 @@
 #include "pc.h"
-#include <stringstream>
+#include <sstream>
 using namespace std;
 /*
 Character::Character(int initHP, ini initAtk, int initDef, int Gold):
