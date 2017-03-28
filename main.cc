@@ -31,6 +31,7 @@ int main() {
     } else if (role == "g"){
         Goblin * player;
     } else if (role == "q"){
+        cout << "Quiting" << endl;
         return;
     }
     
@@ -39,10 +40,17 @@ int main() {
         Floor f{PC};
         string direction;
         while (cin >> direction) {
-            if (direction == "q") return;
+            if (direction == "q") {
+                cout << "Quiting" << endl;
+                return;
+            }
             if (floor.moveplayer(direction) == false) {
                 level++;
                 break;
+            }
+            if (player->die()) {
+                cout << "Lost" << endl;
+                return;
             }
             floor.updateEnemy();
             floor.prettyprint();
