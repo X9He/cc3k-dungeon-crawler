@@ -10,7 +10,7 @@ class Character{
   char name;
   publlic:
   void changePosition(int x, int y);
-  Character(int initHp, int initAtk, int initDef, int Gold, int row, int col);
+  Character(int initHp, int initAtk, int initDef, int Gold);
   virtual  ~Character();
   integer damage(Character &other, float mag = 1);
   bool die();
