@@ -21,38 +21,38 @@ void PC::atack(Enemy  *target) {
 void PC::hurt(Merchant &m){
   if (!m.status){
     int effect = m.damage(*this);
-    m.changetHP(effet);
+    m.changetHP(effect);
   }
 }
 
 void PC::hurt(Human &h){
   int effect = h.damage(*this);
-  h.changetHP(effet);
+  h.changetHP(effect);
 }
 
 void PC::hurt(Dragon &d){
   int effect = d.damage(*this);
-  d.changetHP(effet);
+  d.changetHP(effect);
 }
 
 void PC::hurt(Elf &e){
   int effect = e.damage(*this);
-   e.changetHP(effet);
+   e.changetHP(effect);
 }
 
 void PC::hurt(Halfing &l){
   int effect = l.damage(*this);
-  l.changetHP(effet);
+  l.changetHP(effect);
 }
 
 void PC::hurt(Dwarf &w){
   int effect = w.damage(*this);
-  w.changetHP(effet);
+  w.changetHP(effect);
 }
 
 void PC::hurt(Orcs &o){
   int effect = o.damage(*this);
-  o.changetHP(effet);
+  o.changetHP(effect);
 }
   
 //
