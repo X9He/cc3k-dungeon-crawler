@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-
+#include "item.h"
 class Cell {
 
 	char type;
