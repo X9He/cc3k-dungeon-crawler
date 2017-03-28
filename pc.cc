@@ -173,7 +173,8 @@ void PC::hurt(Human & h) {
     changeHP(effect);
 }
 
-void Vampire::hurt(Elf & e) {
+/*
+  void Vampire::hurt(Elf & e) {
     int effect = damage(e);
     changeHP(effect);
 }
@@ -187,6 +188,7 @@ void Drow::hurt(Elf & e) {
     int effect = damage(e);
     changeHP(effect);
 }
+*/
 
 Troll::Troll() :
   Character{120, 25, 15, 0, 0, 0, 120, 25, 15}, max{120} {}
@@ -231,4 +233,121 @@ Drow::~Drow() {}
 
 void Drow::pickUpItem(Item &i, int effect){
   i.useItem(effect);
+}
+
+////////////////////////////////////
+void Troll::hurt(Merchant &m) {
+  int effect = m.damage(m);
+  changeHP(effect);
+}
+void Troll::hurt(Human &h) {
+  int effect = h.damage(h);
+  changeHP(effect);
+}
+void Troll::hurt(Dragon &d) {
+  int effect = d.damage(a);
+  changeHP(effect);
+}
+void Troll::hurt(Elf &e) {
+  int effect = e.damage(e,2);
+  changeHP(effect);
+}
+void Troll::hurt(Halfing &l) {
+  int effect = l.damage(l);
+  changeHP(effect);
+}
+void Troll::hurt(Dwarf &w) {
+  int effect = w.damage(w);
+  changeHP(effect);
+}
+void Troll::hurt(Orcs &o) {
+  int effect = o.damage(o);
+  chanegHP(effect);
+}
+
+void Vampire::hurt(Merchant &m) {
+  int effect = m.damage(m);
+  changeHP(effect);
+}
+void Vampire::hurt(Human &h) {
+  int effect = h.damage(h);
+  changeHP(effect);
+}
+void Vampire::hurt(Dragon &d) {
+  int effect = d.damage(a);
+  changeHP(effect);
+}
+void Vampire::hurt(Elf &e) {
+  int effect = e.damage(e,2);
+  changeHP(effect);
+}
+void Vampire::hurt(Halfing &l) {
+  int effect = l.damage(l);
+  changeHP(effect);
+}
+void Vampire::hurt(Dwarf &w) {
+  int effect = w.damage(w);
+  changeHP(effect);
+}
+void Vampire::hurt(Orcs &o) {
+  int effect = o.damage(o);
+  chanegHP(effect);
+}
+
+void Goblin::hurt(Merchant &m) {
+  int effect = m.damage(m);
+  changeHP(effect);
+}
+void Goblin::hurt(Human &h) {
+  int effect = h.damage(h);
+  changeHP(effect);
+}
+void Goblin::hurt(Dragon &d) {
+  int effect = d.damage(a);
+  changeHP(effect);
+}
+void Goblin::hurt(Elf &e) {
+  int effect = e.damage(e,2);
+  changeHP(effect);
+}
+void Goblin::hurt(Halfing &l) {
+  int effect = l.damage(l);
+  changeHP(effect);
+}
+void Goblin::hurt(Dwarf &w) {
+  int effect = w.damage(w);
+  changeHP(effect);
+}
+void Goblin::hurt(Orcs &o) {
+  int effect = o.damage(o, 1.5);
+  chanegHP(effect);
+}
+
+void Drow::hurt(Merchant &m) {
+  int effect = m.damage(m);
+  changeHP(effect);
+}
+void Drow::hurt(Human &h) {
+  int effect = h.damage(h);
+  changeHP(effect);
+}
+void Drow::hurt(Dragon &d) {
+  int effect = d.damage(a);
+  changeHP(effect);
+}
+void Drow::hurt(Elf &e) {
+  int effect = e.damage(e);
+  changeHP(effect);
+}
+void Drow::hurt(Halfing &l) {
+  int effect = l.damage(l);
+  changeHP(effect);
+}
+void Drow::hurt(Dwarf &w) {
+  int effect = w.damage(w);
+  changeHP(effect);
+}
+void Drow::hurt(Orcs &o) {
+  int effect = o.damage(o);
+  chanegHP(effect);
 }
