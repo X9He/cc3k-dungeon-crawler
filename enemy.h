@@ -3,6 +3,7 @@
 #define enemy_hpp
 
 #include "pc.h"
+#include "character.h"
 
 
 class Enemy: public Character {
