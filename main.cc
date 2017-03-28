@@ -46,6 +46,7 @@ int main() {
             }
             if (floor.moveplayer(direction) == false) {
                 level++;
+                PC.initAtkDef();
                 break;
             }
             if (player->die()) {
