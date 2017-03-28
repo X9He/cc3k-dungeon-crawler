@@ -2,15 +2,6 @@
 
 #include "Treasure.h"
 
-int random(){
-    int x = 0;
-    int y = 1;
-    int ran;
-    srand(time(0));
-    ran = x + (rand() % (y - x + 1));
-    if (ran == 0) return 1;
-    return 2;
-}
 
 Treasure::Treasure(int value, bool protect):
 value{value}, protect{protect} {}
@@ -25,4 +16,16 @@ bool Treasure::isProtect() {
 void Treasure::useItem(int mag) {
     target->pickupItem(*this);
 }
+
+Small::Small():
+Treasure{1, false} {}
+
+Normal::Normal():
+Treasure{2, false} {}
+
+MH::MH():
+Treasure{4, false} {}
+
+DH::DH():
+Treasure{6, true} {}
 
