@@ -2,25 +2,25 @@
 #include "enemy.h"
 
 Human(PC * target):
-Enemy{140, 20, 20, 4, PC}{}
+Enemy{140, 20, 20, 4, PC}, name{'H'}{}
 
 Dward(PC * target):
-Enemy{100, 20, 30, random_gold(), PC}{}
+Enemy{100, 20, 30, random_gold(), PC}, name{'D'}{}
 
 Elf(PC * target):
-Enemy{140, 30, 10, random_gold(), PC}{}
+Enemy{140, 30, 10, random_gold(), PC}, name{'E'}{}
 
 Orcs(PC * target):
-Enemy{180, 30, 25, random_gold(), PC}{}
+Enemy{180, 30, 25, random_gold(), PC}, name{'O'}{}
 
 Merchant(PC * target):
-Enemy{30, 70, 5, random_gold(), PC}{}
+Enemy{30, 70, 5, random_gold(), PC}, name{'M'}{}
 
 Dragon(PC * target, Treasure * t):
-Enemy{150, 20, 20, random_gold(), PC}, Treasure{t}{}
+Enemy{150, 20, 20, random_gold(), PC}, Treasure{t}, name{'D'}{}
 
 Halfing(PC * target):
-Enemy{100, 15, 20, random_gold(), PC} {}
+Enemy{100, 15, 20, random_gold(), PC}, name{'L'} {}
       
       
 // enemy attack 50% miss
