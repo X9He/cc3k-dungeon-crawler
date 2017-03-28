@@ -47,6 +47,7 @@ int main() {
             if (floor.moveplayer(direction) == false) {
                 level++;
                 PC.initAtkDef();
+                cout << "Entering level " << level << endl;
                 break;
             }
             if (player->die()) {
