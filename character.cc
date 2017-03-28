@@ -10,7 +10,7 @@ Character::Character(int initHP, ini initAtk, int initDef, int Gold):
 
 Character::~Character() {}
 
-integer Character::damage(Character &other, float mag = 1) {
+int Character::damage(Character &other, float mag = 1) {
   return 0 - ceiling((100 / (100 + Def))) * (mag * other.Atk);
 }
 
@@ -20,7 +20,7 @@ int Character::getRow() {return row;}
 
 int Character::getCol() {return col;}
 
-char Character::getNamr£¨£© {return char;}
+char Character::getName() {return char;}
 
 void Character::changePosition(int x, int y) {
   row = x;
@@ -31,20 +31,18 @@ void Character::changeHP(int effect) {
   int afterChange = curHP + effect;
    if (afterChange  <=0) curHP = 0;
    else if (afterChange >= initHP) curHp = initHP;
-   else curHP = afterChaneg;
+   else curHP = afterChange;
 }
 
 void Character::changeAtk(int effect) {
   int afterChange = curAtk + effect;
     if (afterChange <= 0) curAtk = 0;
-   else if (afterChange >= initAtk) curAtk = initAtk;
    else curHp = afterChaneg;
 }
 
 void Charactetr::changeDef(int effect){
     int afterChange = curDef + effect;
    if (afterChange  <=0) curDef = 0;
-   else if (afterChange >= initDef) curDef = initDef;
    else curDef = afterChaneg;
 }
 
