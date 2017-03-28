@@ -28,8 +28,7 @@ class Troll: public PC{
   pulic:
   Troll();
   ~Troll();
-  void regainHealth(); 
-  void attack(Enemy *target);
+  void regainHealth();
   void hurt(Merchant &m);
   void hurt(Human &h);
   void hurt(Dragon &d);
@@ -77,8 +76,7 @@ class Drow: public PC{
   public:
   Drow();
   ~Drow();
-  void pickUpItem(Item &i, int effect); 
-  void attack(Enemy *target);
+  void pickUpItem(Item &i, int effect);
   void hurt(Merchant &m);
   void hurt(Human &h);
   void hurt(Dragon &d);
