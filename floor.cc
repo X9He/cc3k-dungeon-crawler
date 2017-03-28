@@ -7,7 +7,7 @@
 #include "predefined.h"
 using namespace std;
 
-Probability cur{2/9, 3/18, 5/18, 1/9, 1/9, 1/9};
+// Probability cur{2/9, 3/18, 5/18, 1/9, 1/9, 1/9};
 
 int random(int x, int y){
 	int ran;
@@ -45,16 +45,18 @@ void Floor::init(){
 	fstream fs{"cc3k.txt"};
 	string s;
 	int i = 0;
-	while(getline(fs, s)){
+	while(getline(fs, s))
+	{
+
 		vector<Cell*> newVec;
 		char c;
+
 		for(int j = 0; j < s.size(); ++j)
 		{
 			c = s[j];
 			Cell *newC;
 
-
-			if (c == '' || c == '-' || c == '|') 
+			if (c == ' ' || c == '-' || c == '|') 
 			{
 				newC = new Wall{c, i, j};
 			} 
@@ -63,18 +65,21 @@ void Floor::init(){
 				newC = new Passage{c, i , j};
 			} else if (c == '.') 
 			{
-				newC = new Chamber{c, i, j};
+				newC = new Spawn{c, i, j};
 			} else
 			{
 				newC = new Door{c, i, j};
 			} 
-
 			newVec.emplace_back(newC);
 		}
 
 
 		cellList.emplace_back(newVec);
+		++i;
 	}
+
+	//Chamber 1
+	for (int i = 3; i < )
 }
 
 
