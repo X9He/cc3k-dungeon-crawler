@@ -11,8 +11,16 @@ int random(int x, int y){
  return ran;
 }
 
+int random_gold(){
+ int ran;
+ srand(time(0));
+ ran = 0 + (rand() % (1 - 0 + 1));
+ if (ran == 0) return 1;
+ return 2;
+}
+
 Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool isFrozen, bool moved)
-: Character{initHP, initAtk, initDef, Gold, row, col}, Target(target), isFrozon{isFrozen}, moevd{moved} {}
+: Character{initHP, initAtk, initDef, Gold}, Target(target), isFrozon{isFrozen}, moevd{moved} {}
 
 void Enemy::changeFrozen() {
     isFrozen = !isFrozen;
