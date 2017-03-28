@@ -1,7 +1,17 @@
 #include "pc.h"
 
-PC::PC(int initHP, int initAtk, int initDef, int Gold, int row, int col, int max): 
-  Character(initHP, initAtk, initDef, row, col), max{max}, name{'@'} {}
+/*
+Character::Character(int initHP, ini initAtk, int initDef, int Gold):
+  initHP{initHP}, initAtk{initAtk}, initDef{initDef}, Gold{Gold}{
+   curHP = initHp;
+   curAtk = initAtk;
+   curDef = initDef;
+   }
+}
+*/
+
+PC::PC(int initHP, int initAtk, int initDef): 
+  Character(initHP, initAtk, initDef, 0), max{initHP}, name{'@'} {}
 
 PC::~PC() {}
 
@@ -12,12 +22,65 @@ void PC::pickUpItem(Item &i) {
 int PC::getMax() {
   return max;
 }
+
+/*
 void PC::attack(Enemy  *target) {
    target->hurt(*this);
    if (target->getHP() == 0) {
      changeGold(target->getGold());
    }
 }
+*/
+
+void PC::attack(Elf  *target) {
+   target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+}
+
+void PC::attack(Dward  *target) {
+   target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+}
+
+void PC::attack(Halfing  *target) {
+   target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+}
+
+void PC::attack(Orcs  *target) {
+   target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+}
+
+void PC::attack(Merchant  *target) {
+   target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+}
+
+void PC::attack(Dragon  *target) {
+   target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+}
+
+void PC::attack(Human  *target) {
+   target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+}
+
 
 /*
 void PC::hurt(Merchant &m){
