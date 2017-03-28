@@ -45,9 +45,10 @@ int main() {
                 break;
             }
             floor.updateEnemy();
+            floor.prettyprint();
         }
     }
     
     cout << "Won" << endl;
-    cout << "Gold Amount" << PC.getGold() << endl;
+    cout << "Gold Amount: " << PC.getGold() << endl;
 }
