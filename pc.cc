@@ -53,12 +53,26 @@ void PC::attack(Halfing  *target) {
    }
 }
 
+
+int random(int x, int y){
+ int ran;
+ srand(time(0));
+ ran = x + (rand() % (y - x + 1));
+ return ran;
+}
+
+
 void PC::attack(Orcs  *target) {
+  // 50% miss
+  int ran = random(0, 1);
+  if (ran == 0) {
    target->hurt(*this);
    if (target->getHP() == 0) {
      changeGold(target->getGold());
    }
+  }
 }
+
 
 void PC::attack(Merchant  *target) {
    target->hurt(*this);
