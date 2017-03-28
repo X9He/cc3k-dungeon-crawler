@@ -29,6 +29,8 @@ public:
 	int getRow();
 
 	int getCol();
+    
+    char getType();
 
 };
 

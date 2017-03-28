@@ -64,7 +64,6 @@ class Dragon: public Enemy {
     Treasure * hoard;
 public:
     void attack (PC *) override;
-    Treasure * getHoard();
     Dragon(PC * target, Treasure * t);
 };
 

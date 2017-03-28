@@ -3,12 +3,14 @@
 #include <string>
 #include <iostream>
 #include "character.h"
+#include "item.h"
+#include "enemy.h"
 
-class PC: piblic Character {
+class PC: public Character {
   int max;
-  string message;
+  std::string message;
   public:
-  virtual PC(int initHP=125, int initAtk=25, int initDef=25);
+  PC(int initHP=125, int initAtk=25, int initDef=25);
   virtual ~PC();
   void pickUpItem(Item *i);
   int getMax();
@@ -26,7 +28,7 @@ class PC: piblic Character {
 
 class Troll: public PC{
   int stealHP;
-  pulic:
+  public:
   Troll();
   ~Troll();
   void regainHealth();

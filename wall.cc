@@ -9,7 +9,7 @@ Wall::Wall(char type, int row, int col, int num): Cell(type, row, col, num) {}
 Wall::~Wall(){}
 
 void Wall::prettyPrint(){
-	cout << type << endl;
+	cout << getType() << endl;
 }
 
 bool Wall::canPass(){

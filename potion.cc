@@ -1,5 +1,6 @@
 
 #include "potion.h"
+#include "pc.h"
 
 void RH::useItem(int mag) {
     int max_HP = target->getmax();

@@ -33,9 +33,9 @@ void Floor::prettyPrint(){
 						cout << 'G';
 					}
 				}
-			}
-			cout << endl;
-		}
+            }
+        }
+        cout << endl;
 	}
 }
 

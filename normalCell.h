@@ -4,11 +4,13 @@
 #include <vector>
 #include <utility>
 #include "cell.h"
+#include "character.h"
+
 
 class NormalCell : public Cell {
 	Character *charTarget;
 
-	vector<Cell> neighbours;
+ std::vector<Cell> neighbours;
 
 public:	
 
@@ -24,5 +26,6 @@ public:
 
 	Character *getCharacter();
 };
+
 
 #endif

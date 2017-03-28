@@ -128,7 +128,3 @@ void Human::attack(PC * player) {
 }
 
 
-void Dragon::getHoard(){
-    return hoard;
-}
-
