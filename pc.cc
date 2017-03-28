@@ -191,7 +191,7 @@ void Drow::hurt(Elf & e) {
 */
 
 Troll::Troll() :
-  PC{120, 25, 15,}{}
+  PC(120, 25, 15){}
 
 Troll::~Troll(){}
 
@@ -200,7 +200,7 @@ void Troll::regainHealth(){
 }
 
 Vampire::Vampire() :
-  PC{50, 25, 25,} {}
+  PC(50, 25, 25) {}
 
 Vampire::~Vampire() {}
 
@@ -210,7 +210,7 @@ void Vampire::VchangeHP(int effect) {
 }
 
 Goblin::Goblin() :
-  pc{110, 15, 20,} {}
+  pc(110, 15, 20) {}
 
 Goblin::~Goblin() {}
 
@@ -227,7 +227,7 @@ void Goblin::attack(Enemy *target) {
 }
 
 Drow::Drow():
-  PC{150, 25, 15} {}
+  PC(150, 25, 15) {}
 
 Drow::~Drow() {}
 
