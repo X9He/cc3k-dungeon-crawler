@@ -9,16 +9,20 @@ class Chamber {
 	vector<Spawn *> emptySpawn;
 	vector<Spawn *> fullSpawn;
 	int chamberNumber;
+	int capacity;
 	int emptyAmount;
+	bool hasP;
 
 public:
-	Chamber(int);
+	Chamber(int, bool hasP = true);
 	~Chamber();
 	Spawn* findSpawn(int row, int col);
 	void addSpawn(Spawn *);
 	void assignItem(Potion *);
 	void assignCharacter(Character *);
 	void assignTreasure(Treasure *, Dragon *);
+	bool hasPlayer();
+	int getNum();
 };
 
 

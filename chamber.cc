@@ -12,7 +12,7 @@ int random(int x, int y){
 	return ran;
 }
 
-Chamber::Chamber(int chamberNumber): chamberNumber{chamberNumber}{}
+Chamber::Chamber(int chamberNumber, bool hasP): chamberNumber{chamberNumber}, hasP{hasP}{}
 
 Chamber::~Chamber() {}
 
@@ -44,6 +44,9 @@ void Chamber::assignCharacter(Character *c){
 	emptySpawn[ran]->putChar(pc);
 	fullSpawn.emplace_back(emptySpawn[ran]);
 	emptySpawn.erase(ran);
+	if (PC *pc = dynamic_cast<PC*>(c)) {
+		hasP = true;
+	}
 }
 
 
@@ -113,4 +116,14 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 	fullSpawn.emplace_back(emptySpawn[ranD]);
 	emptySpawn.erase(ranD);
 
+}
+
+bool Chamber::hasPlayer(){
+	return hasP;
+}
+
+
+
+int Chamber::getNum(){
+	return chamberNumber;
 }
