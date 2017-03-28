@@ -17,6 +17,10 @@ void Treasure::useItem(int mag) {
     target->pickupItem(*this);
 }
 
+void Treasure::changeProtect() {
+    protect = !protect;
+}
+
 Small::Small():
 Treasure{1, false} {}
 
