@@ -19,21 +19,30 @@ int main() {
     cout << "q for quit" << endl;
     
     string role;
-    cin >> role;
+    while (cin >> role) {
     if (role == "s") {
         PC * player;
+        break;
     } else if (role == "d") {
         Drow * player;
+        break;
     } else if (role == "v") {
         Vampire * player;
+        break;
     } else if (role == "t") {
         Troll * player;
+        break;
     } else if (role == "g"){
         Goblin * player;
+        break;
     } else if (role == "q"){
         cout << "Quiting" << endl;
         return;
+    } else {
+        cout << "Invalid role" << endl;
     }
+    }
+    
     
     
     while (level < 6) {
@@ -57,8 +66,9 @@ int main() {
             floor.updateEnemy();
             floor.prettyprint();
         }
-    }
+    
     
     cout << "Won" << endl;
     cout << "Gold Amount: " << PC.getGold() << endl;
 }
+
