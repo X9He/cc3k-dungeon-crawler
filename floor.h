@@ -23,8 +23,6 @@ public:
 
 	void init();
 
-	void notify();
-
 	void initPC(char);
 
 	int getLevel();

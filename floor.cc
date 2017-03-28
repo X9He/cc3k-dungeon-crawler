@@ -33,9 +33,9 @@ void Floor::prettyPrint(){
 						cout << 'G';
 					}
 				}
-            }
-        }
-        cout << endl;
+			}
+			cout << endl;
+		}
 	}
 }
 
@@ -49,6 +49,10 @@ void Floor::clearFloor(){
 		for (int j = 0; j < cellList[i].size(); ++j){
 			delete cellList[i].[j];
 		}
+	}
+
+	for (int i = 0; i < roomList.size(); ++i){
+		delete roomList[i];
 	}
 }
 
@@ -318,9 +322,9 @@ bool Floor::movePlayer(string dir){
 			Enemy *curE = cur->getCharacter();
 			player.attack(curE);
 
-			if (curE.getHP() <= 0) 
+			if (curE->getHP() <= 0) 
 			{
-				player.getGold(curE);
+				player->getGold(curE);
 				curCell->putChar(nullptr);
 				deleteEnemy(curE->getRow(), curE->getCol());
 			}
@@ -329,7 +333,7 @@ bool Floor::movePlayer(string dir){
 		// Spawn has an item
 		else if (curCell->hasItem()) {
 			Item *curI = curCell->getItem();
-			curI.useItem();
+			curI->useItem();
 			simpleMoveCharacter(newRow, newCol);
 		} 
 
@@ -362,35 +366,106 @@ void Floor::updateEnemy(){
 	for(int i = 0; i < x; ++i){
 		for (int j = 0; j < y; ++j){
 
+			//check if cell has character
 			Character *c = cellList[i][j]->getChar;
 			if (c == nullptr){
 				continue;
 			} 
 
-			if (PC *pc = dynamic_cast<PC*>(c)) {
+			//cell has player
+			else if (c->getName() == '@') {
 				continue;
 			}
 
-			if (Enemy *e = dynamic_cast<Enemy*>(c)) {
-				Player *tar = checkChar(i, j);
-				if (tar != nullptr) 
-				{
-					e->attack(tar);
-					continue;
-				} 
-				else 
-				{
-					vector<Cell *> surround = produceSurroundEmpty(i, j);
-					if (surround.size() != 0) {
-						int size = surround.size();
-						int r = random(0, size - 1);
-						int newR = surround[r].getRow;
-						int newC = surround[r].getCol;
-						simpleMoveCharacter(i, j, newR, newC, c);
 
+			//cell has enemy, and it has not moved this round
+			else if (!c->getMoved()) {
+				//cell has dragon
+				if (c->getName() == 'D') {
+					Treasure *t = c.getHoard();
+					int tRow = t->getRow();
+					int tCol = t->getCol();
+
+					Player *tar = checkPC(tRow, tCol);
+
+					if (tar != nullptr) {
+						c->attack(tar);
+					} 
+
+				// cell has merchant
+				} 
+
+				else if (c->getName() == 'M') {					
+					Player *tar = checkPC(i, j);
+					if (c->isHostile()) {
+						if (tar != nullptr){
+							c->attack(tar);
+						} 
 					} else {
-						continue;
+						vector<Cell *> surround = produceSurroundEmpty(i, j);
+						if (surround.size() != 0) {
+							int size = surround.size();
+							int r = random(0, size - 1);
+							int newR = surround[r].getRow;
+							int newC = surround[r].getCol;
+							simpleMoveCharacter(i, j, newR, newC, c);
+						} else {
+							continue;
+						}
 					}
+				}
+
+
+
+				// cell has normal enemy
+				else {
+					Player *tar = checkPC(i, j);
+					if (tar != nullptr) 
+					{
+						c->attack(tar);
+						continue;
+					} 
+					else 
+					{
+						vector<Cell *> surround = produceSurroundEmpty(i, j);
+						if (surround.size() != 0) {
+							int size = surround.size();
+							int r = random(0, size - 1);
+							int newR = surround[r].getRow;
+							int newC = surround[r].getCol;
+							simpleMoveCharacter(i, j, newR, newC, c);
+
+						} else {
+							continue;
+						}
+					}						
+				}
+			}
+
+			//enemy has moved already
+			else {
+				continue;
+			}
+		}
+	}
+
+
+	// resset all enemies moved state to false
+	for(int i = 0; i < x; ++i){
+		for(int j = 0; j < y; ++j){
+
+			//check if cell has character
+			Character *c = cellList[i][j]->getChar;
+
+			//cell does not have character
+			if (c == nullptr){
+				continue;
+			} 
+
+			//cell has character
+			else {
+				if (c->getMoved()){
+					c->changeMoved();
 				}
 			}
 		}
@@ -449,28 +524,28 @@ vector<Cell *> Floor::produceSurroundEmpty(int i, int j){
 
 
 Cell * Floor::checkPC(int i, int j){
-	if ((PC *pc = dynamic_cast<PC*>(cellList[i+1][j]->getChar())) && (!cellList[i+1][j]->hasChar) && (cellList[i+1][j]->getType) == '.') {
+	if (((cellList[i+1][j]->getChar())->getName() == '@') && (!cellList[i+1][j]->hasChar) && (cellList[i+1][j]->getType) == '.') {
 		return cellList[i+1][j];
 	} 
-	if ((PC *pc = dynamic_cast<PC*>(cellList[i+1][j+1]->getChar())) && (!cellList[i+1][j+1]->hasChar) && (cellList[i+1][j+1]->getType) == '.') {
+	if (((cellList[i+1][j+1]->getChar())->getName() == '@') && (!cellList[i+1][j+1]->hasChar) && (cellList[i+1][j+1]->getType) == '.') {
 		return cellList[i+1][j+1];
 	} 
-	if ((PC *pc = dynamic_cast<PC*>(cellList[i][j+1]->getChar())) && (cellList[i][j+1]->getType) == '.') {
+	if (((cellList[i][j+1]->getChar())->getName() == '@') && (cellList[i][j+1]->getType) == '.') {
 		return cellList[i][j+1];
 	} 
-	if ((PC *pc = dynamic_cast<PC*>(cellList[i-1][j]->getChar())) && (!cellList[i-1][j]->hasChar) && (cellList[i-1][j]->getType) == '.'){
+	if (((cellList[i-1][j]->getChar())->getName() == '@') && (!cellList[i-1][j]->hasChar) && (cellList[i-1][j]->getType) == '.'){
 		return cellList[i-1][j];
 	} 
-	if ((PC *pc = dynamic_cast<PC*>(cellList[i-1][j-1]->getChar())) && (!cellList[i-1][j-1]->hasChar)  && (cellList[i-1][j-1]->getType) == '.') {
+	if (((cellList[i-1][j-1]->getChar())->getName() == '@') && (!cellList[i-1][j-1]->hasChar)  && (cellList[i-1][j-1]->getType) == '.') {
 		return cellList[i-1][j-1];
 	} 
-	if ((PC *pc = dynamic_cast<PC*>(cellList[i][j-1]->getChar())) && (!cellList[i][j-1]->hasChar) && (cellList[i][j-1]->getType) == '.') {
+	if (((cellList[i][j-1]->getChar())->getName() == '@') && (!cellList[i][j-1]->hasChar) && (cellList[i][j-1]->getType) == '.') {
 		return cellList[i][j-1];
 	} 
-	if ((PC *pc = dynamic_cast<PC*>(cellList[i+1][j-1]->getChar())) && (!cellList[i+1][j-1]->hasChar) && (cellList[i+1][j-1]->getType) == '.') {
+	if (((cellList[i+1][j-1]->getChar())->getName() == '@') && (!cellList[i+1][j-1]->hasChar) && (cellList[i+1][j-1]->getType) == '.') {
 		return cellList[i+1][j-1];
 	} 
-	if ((PC *pc = dynamic_cast<PC*>(cellList[i-1][j+1]->getChar())) && (!cellList[i-1][j+1]->hasChar) && (cellList[i-1][j+1]->getType) == '.'){
+	if (((cellList[i-1][j+1]->getChar())->getName() == '@') && (!cellList[i-1][j+1]->hasChar) && (cellList[i-1][j+1]->getType) == '.'){
 		return cellList[i-1][j+1];
 	} 
 	return nullptr;
