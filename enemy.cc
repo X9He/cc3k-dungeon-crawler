@@ -50,7 +50,7 @@ void Enemy::changeFrozen() {
 }
 
 void Enemy::hurt(PC *p) {
-    int effect = p->damage(p);
+    int effect = damage(p);
     changeHP(effect);
 }
 
