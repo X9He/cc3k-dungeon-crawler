@@ -17,21 +17,21 @@ public:
 class Small: public Treasure {
     public:
     Small();
-}
+};
 
 class Normal: public Treasure {
     public:
     Normal();
-} 
+};
 
 class MH: public Treasure {
     public:
     MH();
-}
+};
 
 class DH: public Treasure {
     public:
     DH();
-}
+};
 
 #endif /* Treasure_hpp */
