@@ -222,7 +222,28 @@ void Floor::createTreasure(int num){
 	}
 }
 
-void Floor::createStair(int num){
+void Floor::createStair() {
+    int room_hasplayer;
+    for (int i = 1; i < 6; i++) {
+        roomList[i].hasplayer();
+        room_hasplayer = i;
+    }
+    
+        int r1 = random(1,4);
+        int stair_room = r1;
+        if (r1 > room_hasplayer) {
+             stair_room++;
+        }
+        
+       int num = roomList[stair_room].getemptyAmount();
+       int r2 = random(1, num);
+       Spawn * tar = emptySpawn[r2];
+      
+      static_cast<Stair>(*tar);
+     std::vector<Spawn*>::iterator pos = std::find(myVector.begin(), myVector.end(), tar);
+      emptySpawn.erase(pos);
+      fullSpawn.emplace_back(tar);
+      
 
 }
 
