@@ -8,7 +8,7 @@ class PC: piblic Character {
   int max;
   string message;
   public:
-  virtual PC(int initHP=125, int initAtk=25, int initDef=25, string message);
+  virtual PC(int initHP=125, int initAtk=25, int initDef=25);
   virtual ~PC();
   void pickUpItem(Item *i);
   int getMax();
