@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "Cell.h"
+#include "cell.h"
 
 class NormalCell : public Cell {
 	Character *charTarget;
