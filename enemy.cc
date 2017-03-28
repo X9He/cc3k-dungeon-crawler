@@ -49,7 +49,22 @@ void Enemy::changeFrozen() {
     isFrozen = !isFrozen;
 }
 
-void Enemy::hurt(PC *p) {
+void Enemy::hurt(Troll *p) {
+    int effect = damage(p);
+    changeHP(effect);
+}
+
+void Enemy::hurt(Vampire *p) {
+    int effect = damage(p);
+    changeHP(effect);
+}
+
+void Enemy::hurt(Goblin *p) {
+    int effect = damage(p);
+    changeHP(effect);
+}
+
+void Enemy::hurt(Drow *p) {
     int effect = damage(p);
     changeHP(effect);
 }
