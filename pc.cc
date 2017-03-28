@@ -42,13 +42,13 @@ void PC::attack(Elf  *target) {
      a << amount
      message = "PC steals " + a.str() + " from " + target->name;
    } else {
-     int effect1= target->damage(*this);
+     int effect1= target->damage(*this, 2);
      int effect2 = damage(target);
      stringstream a1;
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+     message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
    }
 }
 
@@ -67,7 +67,7 @@ void PC::attack(Dward  *target) {
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+     message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
    }
 }
 
@@ -86,7 +86,7 @@ void PC::attack(Halfing  *target) {
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+     message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
    }
 }
 
@@ -112,13 +112,13 @@ void PC::attack(Orcs  *target) {
      message = "PC steals " + a.str() + " from " + target->name;
    }
   } else {
-    int effect1= target->damage(*this);
+    int effect1= target->damage(*this, 1.5);
     int effect2 = damage(target);
     stringstream a1;
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
   }
 }
 
@@ -138,7 +138,7 @@ void PC::attack(Merchant  *target) {
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+     message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
    }
 }
 
@@ -158,7 +158,7 @@ void PC::attack(Dragon  *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
   }
 }
 
@@ -178,7 +178,7 @@ void PC::attack(Human  *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
   }
 }
 
@@ -463,7 +463,7 @@ void Troll::attack(Enemy *target) {
      stringstream a;
      int amount = targey->getGold();
      a << amount
-     message = "PC streals " + a.str() + " gold from " + target->name;
+     message = "PC steals " + a.str() + " gold from " + target->name;
   }
   else {
     int effect1= target->damage(*this);
@@ -472,7 +472,7 @@ void Troll::attack(Enemy *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
   }
 }
 
@@ -483,7 +483,7 @@ void Vampire::attack(Enemy *target) {
      stringstream a;
      int amount = targey->getGold();
      a << amount
-     message = "PC streals " + a.str() + " gold from " + target->name;
+     message = "PC steals " + a.str() + " gold from " + target->name;
    }
   else {
     int effect1= target->damage(*this);
@@ -492,7 +492,12 @@ void Vampire::attack(Enemy *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+    if (effect1 > 0) {
+      message  = "PC deals " + a1.str() + "damages to (" + target->name + "). "
+        + "PC gains 5 HP. " + target->name + " deals " + a2.str()+ " to PC.";
+    } else {
+      message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+    }
   }
 }
 
@@ -503,7 +508,7 @@ void Drow::attaCK(Enemey *target) {
      stringstream a;
      int amount = targey->getGold();
      a << amount
-     message = "PC streals " + a.str() + " gold  from " + target->name;
+     message = "PC steals " + a.str() + " gold  from " + target->name;
    }
   else {
     int effect1= target->damage(*this);
@@ -512,6 +517,6 @@ void Drow::attaCK(Enemey *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deal " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + target->name + "). " + target->name + " deals " + a2.str()+ " to PC.";
   }
 }
