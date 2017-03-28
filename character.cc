@@ -1,7 +1,7 @@
 #include "character.h"
 
-Character::Character(int initHP, ini initAtk, int initDef, int Gold, int row, int col):
-  initHP{initHP}, initAtk{initAtk}, initDef{initDef}, Gold{Gold}, row{row}, col{col}{
+Character::Character(int initHP, ini initAtk, int initDef, int Gold):
+  initHP{initHP}, initAtk{initAtk}, initDef{initDef}, Gold{Gold}{
    curHP = initHp;
    curAtk = initAtk;
    curDef = initDef;
@@ -20,7 +20,7 @@ int Character::getRow() {return row;}
 
 int Character::getCol() {return col;}
 
-char Character::getNamr£¨£© {return char;}
+char Character::getNamrÂ£Â¨Â£Â© {return char;}
 
 void Character::changePosition(int x, int y) {
   row = x;
