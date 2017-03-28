@@ -34,9 +34,6 @@ void PC::attack(Enemy  *target) {
 
 void PC::attack(Elf  *target) {
    target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-   }
 }
 
 void PC::attack(Dward  *target) {
@@ -187,7 +184,8 @@ void Goblin::hurt(Orcs & o) {
 }
 
 void Drow::hurt(Elf & e) {
-    damage(e);
+    int effect = damage(e);
+    changeHP(effect);
 }
 
 Troll::Troll() :
@@ -217,6 +215,13 @@ Goblin::~Goblin() {}
 void Goblin::stealGold(){
   int amount = 5;
   changGold(amount);
+}
+
+void Goblin::attack(Enemy *target) {
+  if (target->getHP() == 0) {
+     changeGold(target->getGold());
+   }
+  stealGold();
 }
 
 Drow::Drow():
