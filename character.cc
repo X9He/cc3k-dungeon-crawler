@@ -1,26 +1,27 @@
 #include "character.h"
+#include <math.h>
 
-Character::Character(int initHP, ini initAtk, int initDef, int Gold):
+Character::Character(int initHP, int initAtk, int initDef, int Gold):
   initHP{initHP}, initAtk{initAtk}, initDef{initDef}, Gold{Gold}{
-   curHP = initHp;
+   curHP = initHP;
    curAtk = initAtk;
    curDef = initDef;
    }
-}
+
 
 Character::~Character() {}
 
-int Character::damage(Character &other, float mag = 1) {
-  return 0 - ceiling((100 / (100 + Def))) * (mag * other.Atk);
+int Character::damage(Character &other, float mag) {
+  return (0 - ceil((100 / (100 + getDef()))) * (mag * other.curAtk));
 }
 
-bool Character::die() {return HP == 0;}
+bool Character::die() {return curHP == 0;}
 
-int Character::getRow() {return row;}
+int Character::getrow() {return row;}
 
-int Character::getCol() {return col;}
+int Character::getcol() {return col;}
 
-char Character::getName() {return char;}
+char Character::getName() {return name;}
 
 void Character::changePosition(int x, int y) {
   row = x;
@@ -30,20 +31,20 @@ void Character::changePosition(int x, int y) {
 void Character::changeHP(int effect) {
   int afterChange = curHP + effect;
    if (afterChange  <=0) curHP = 0;
-   else if (afterChange >= initHP) curHp = initHP;
+   else if (afterChange >= initHP) curHP = initHP;
    else curHP = afterChange;
 }
 
 void Character::changeAtk(int effect) {
   int afterChange = curAtk + effect;
     if (afterChange <= 0) curAtk = 0;
-   else curHp = afterChaneg;
+   else curAtk = afterChange;
 }
 
-void Charactetr::changeDef(int effect){
+void Character::changeDef(int effect){
     int afterChange = curDef + effect;
    if (afterChange  <=0) curDef = 0;
-   else curDef = afterChaneg;
+   else curDef = afterChange;
 }
 
 int Character::getHp() {
