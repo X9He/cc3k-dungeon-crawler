@@ -16,11 +16,9 @@ public:
 	~Chamber();
 	Spawn* findSpawn(int row, int col);
 	void addSpawn(Spawn *);
-	void assignPotion(Potion *);
-	void assignPC(PC *);
-	void assignEnemy(Enemy *);
-	void assignTreasure(Treasure *);
-	void assignDragon(Dragon *);
+	void assignItem(Potion *);
+	void assignCharacter(Character *);
+	void assignTreasure(Treasure *, Dragon *);
 }
 
 

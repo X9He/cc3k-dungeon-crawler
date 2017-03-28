@@ -2,6 +2,7 @@
 #include <vector>
 #include <utility>
 #include <cstdlib>
+#include <typeinfo>
 #include "floor.h"
 #include "predefined.h"
 using namespace std;
@@ -49,8 +50,6 @@ void Floor::init(){
 		char c;
 		for(int j = 0; j < s.size(); ++j)
 		{
-
-
 			c = s[j];
 			Cell *newC;
 
@@ -122,19 +121,19 @@ void Floor::createEnemy(int num){
 void Floor::createPotion(int num){
 	while(num > 0) {
 		int r = random(1, 6);
-		Potion *newP;
+		Item *newP;
 		if (r == 1) {
-			newE = new ;
+			newP = new ;
 		} else if (r == 2) {
-			newE = new ;
+			newP = new ;
 		} else if (r == 3){
-			newE = new ;
+			newP = new ;
 		} else if (r == 4) {
-			newE = new ;
+			newP = new ;
 		} else if (r == 5) {
-			newE = new ;
+			newP = new ;
 		} else {
-			newE = new ;
+			newP = new ;
 		}
 		--num;
 	}
@@ -144,28 +143,143 @@ void Floor::createPotion(int num){
 void Floor::createTreasure(int num){
 	while(num > 0){
 		int r = random(1, 8);
-		Treasure *newT;
+		int chamberR = random(1,5);
+		Item *newT;
+		// Dragon Hoard
 		if (r == 1) {
-			newE = new Treasure;
-		} else if (r >=2 && r <= 4) {
-			newE = new Treasure;
-		} else {
-			newE = new Treasure;
+			newT = new Treasure; //psudeo
+			Character *newD = new Dragon; //psudeo
+			enemyList.emplace_back(newD);
+			roomList[chamberR]->assignTreasure(newT, newD);
+		}
+		// Small Hoard
+		 else if (r >=2 && r <= 4) {
+			newT = new Treasure; //psudeo
+			roomList[chamberR]->assignItem(newT);
+		} 
+		// Normal Hoard
+		else {
+			newT = new NormalTreasure; //psudeo
+			roomList[chamberR]->assignItem(newT);
 		}
 		--num;
 	}
-
-
 }
 
 void Floor::createStair(int num){
 
 }
 
-bool Floor::movePlayer(PC *){
+bool Floor::movePlayer(string dir){
+	// get current position of player
+	int curRow = player.getRow();
+	int curCol = player.getCol();
 
+	// compute new position x and y
+	int newRow = curRow;
+	int newCol = curCol;
+	if (dir == "no") {
+		++newCol;
+	}
+	if (dir == "so") {
+		--newCol;		
+	}
+	if (dir == "ea") {
+		++newRow;
+	}
+	if (dir == "we") {
+		--newRow;
+	}
+	if (dir == "ne") {
+		++newCol;
+		++newRow;
+	}
+	if (dir == "nw") {
+		--newRow;
+		++newCol;
+	}
+	if (dir == "se") {
+		++newRow;
+		--newCol;
+	}
+	if (dir == "sw") {
+		--newRow;
+		--newCol;
+	}
+
+
+	// find the cell player wants to move to
+	Cell* curCell = cellList[newRow][newCol];
+
+
+	// if the next cell is wall, spawn, passage, door, or stairs
+
+	//WALL
+	if (Wall *w = dynamic_cast<Wall*>(curCell)) {
+		return;
+	} 
+	//SPAWN
+	else if (Spawn *s = dynamic_cast<Spawn*>(curCell))
+	{
+		// Spawn has an enemy
+		if (curCell->hasChar())
+		{
+			Enemy *curE = cur->getCharacter();
+			player.attack(curE);
+
+			if (curE.getHP() <= 0) 
+			{
+				player.getGold(curE);
+				curCell->putChar(nullptr);
+				deleteEnemy(curE->getRow(), curE->getCol());
+			}
+		}
+
+		// Spawn has an item
+		else if (curCell->hasItem()) {
+			Item *curI = curCell->getItem();
+			curI.useItem();
+			simpleMovePlayer(newRow, newCol);
+		} 
+
+		// Spawn is empty
+		else {
+			simpleMovePlayer(newRow, newCol);
+		}
+	} 
+	//PASSAGE
+	else if (Passage *p = dynamic_cast<Passage*>(cur)){
+		simpleMovePlayer(newRow, newCol);
+		return true;
+	} 
+	//DOOR
+	else if (Door *d = dynamic_cast<Door*>(cur)){
+		simpleMovePlayer(newRow, newCol);
+		return true;
+	} 
+	//STAIRS
+	else {
+		return false;
+	}
 }
 
 
 void Floor::updateEnemy(){}
 
+void Floor::deleteEnemy(int row, int col){
+	int i = 0;
+	for (auto e: enemyList) {
+		if (e->getRow() == row && e->getCol() == col) {
+			break;
+		}
+		++i;
+	}
+	delete enemyList[i];
+	enemyList.erase(i);
+}
+
+void Floor::simpleMovePlayer(int oldRow, int oldCol, int row, int col){
+	cellList[oldRow][oldCol]->putChar(nullptr);
+	player->changePosition(row, col);
+	cellList[row][col]->putChar(player);
+}

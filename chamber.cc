@@ -31,33 +31,27 @@ void Chamber::addSpawn(Spawn *s) {
 	++capacity;
 }
 
-void Chamber::assignPotion(Potion *p){
+void Chamber::assignItem(Item *i){
 	int ran = random(1, emptyAmount);
-	emptySpawn[ran]->attach(p);
+	emptySpawn[ran]->putItem(i);
 	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn[ran].erase();
+	emptySpawn.erase(ran);
 }
 
 
-void Chamber::assignPC(PC *pc){
+void Chamber::assignCharacter(Character *c){
 	int ran = random(1, emptyAmount);
-	emptySpawn[ran]->attach(pc);
+	emptySpawn[ran]->putChar(pc);
 	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn[ran].erase();
+	emptySpawn.erase(ran);
 }
 
-void Chamber::assignEnemy(Enemy *e){
-	int ran = random(1, emptyAmount);
-	emptySpawn[ran]->attach(e);
-	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn[ran].erase();
-}
 
 void Chamber::assignTreasure(Treasure *t, Dragon *d){
 	int ran = random(1, emptyAmount);
 	emptySpawn[ran]->attach(t);
 	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn[ran].erase();
+	emptySpawn.erase(ran);
 
 	int tRow = t->getRow();
 	int tCol = t->getCol();
@@ -114,10 +108,9 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 	}
 
 
-	bool spawned = true;
 	int ranD = random(1, amount);
 	newVec[ranD]->attach(d);	
 	fullSpawn.emplace_back(emptySpawn[ranD]);
-	emptySpawn[ranD].erase();
+	emptySpawn.erase(ranD);
 
 }

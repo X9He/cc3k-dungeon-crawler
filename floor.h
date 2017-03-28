@@ -43,6 +43,10 @@ public:
 
 	void updateEnemy();
 
+	void deleteEnemy();
+
+	void simpleMovePlayer(int, int, int, int);
+
 };
 
 #endif
