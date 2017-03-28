@@ -10,8 +10,8 @@ Character::Character(int initHP, ini initAtk, int initDef, int Gold):
 }
 */
 
-PC::PC(int initHP, int initAtk, int initDef): 
-  Character(initHP, initAtk, initDef, 0), max{initHP}, name{'@'} {}
+PC::PC(int initHP, int initAtk, int initDef, string message): 
+  Character(initHP, initAtk, initDef, 0), max{initHP}, name{'@'}, message{message} {}
 
 PC::~PC() {}
 
@@ -191,7 +191,7 @@ void Drow::hurt(Elf & e) {
 */
 
 Troll::Troll() :
-  Character{120, 25, 15, 0, 0, 0, 120, 25, 15}, max{120} {}
+  PC{120, 25, 15,}{}
 
 Troll::~Troll(){}
 
@@ -200,7 +200,7 @@ void Troll::regainHealth(){
 }
 
 Vampire::Vampire() :
-  Character{50, 25, 25, 0, 0, 0, 50, 25, 25}, max{50} {}
+  PC{50, 25, 25,} {}
 
 Vampire::~Vampire() {}
 
@@ -210,7 +210,7 @@ void Vampire::VchangeHP(int effect) {
 }
 
 Goblin::Goblin() :
-  Character{110, 15, 20, 0, 0, 0, 110, 15, 20}, max{110} {}
+  pc{110, 15, 20,} {}
 
 Goblin::~Goblin() {}
 
@@ -227,7 +227,7 @@ void Goblin::attack(Enemy *target) {
 }
 
 Drow::Drow():
-  Character{150, 25, 15, 0, 0, 0, 150, 25, 15}, max{150} {}
+  PC{150, 25, 15} {}
 
 Drow::~Drow() {}
 
