@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "Wall.h"
+#include "wall.h"
 using namespace std;
 
 Wall::Wall(char type, int row, int col, int num): Cell(type, row, col, num) {}
