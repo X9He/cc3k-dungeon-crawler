@@ -233,10 +233,15 @@ void Goblin::stealGold(){
 }
 
 void Goblin::attack(Enemy *target) {
+  target->hurt(*this);
   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-   }
-  stealGold();
+    changeGold(target->getGold());
+    stealGold();
+    message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
+  }  
+  else {
+    message << "PC deal " << effect1 << "damages to (" << target->name << "). " << target->name << " deals " << effect2 << " to PC.";
+  }
 }
 
 Drow::Drow():
@@ -367,3 +372,11 @@ void Drow::hurt(Orcs &o) {
 
 
 //////////////////////////////////////
+void Troll::attack(Enemy *target) {
+}
+
+void Vampire::attack(Enemy *target) {
+}
+
+void Drow::attaCK(Enemey *target) {
+}
