@@ -12,7 +12,7 @@ class NormalCell : public Cell {
 
 public:	
 
-	NormalCell(char type, int row, int col, int num);
+	NormalCell(char type, int row, int col, int num, Character* charTarget = nullptr);
 
 	~NormalCell();
 

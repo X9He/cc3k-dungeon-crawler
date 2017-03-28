@@ -4,7 +4,7 @@
 #include <utility>
 using namespace std;
 
-NormalCell::NormalCell(char type, int row, int col, int num): Cell(type, row, col, num) {}
+NormalCell::NormalCell(char type, int row, int col, int num, Character *c): Cell(type, row, col, num), charTarget{charTarget} {}
 
 NormalCell::~NormalCell(){}
 
