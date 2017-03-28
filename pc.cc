@@ -12,7 +12,7 @@ Character::Character(int initHP, ini initAtk, int initDef, int Gold):
 */
 
 PC::PC(int initHP, int initAtk, int initDef): 
-  Character(initHP, initAtk, initDef, 0, 0, 0), max{initHP}, name{'@'}, message{""} {}
+  Character{initHP, initAtk, initDef, 0, 0, 0, initHP, initAtk, initDef}, max{initHP}, name{'@'}, message{""} {}
 
 PC::~PC() {}
 
