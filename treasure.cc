@@ -1,6 +1,6 @@
 
 
-#include "Treasure.h"
+#include "treasure.h"
 
 
 Treasure::Treasure(int value, bool protect):
