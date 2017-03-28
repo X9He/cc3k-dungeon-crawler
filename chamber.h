@@ -23,7 +23,7 @@ public:
 	void assignTreasure(Treasure *, Dragon *);
 	bool hasPlayer();
 	int getNum();
-	int getAmount();
+	int getemptyAmount();
 };
 
 
