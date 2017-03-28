@@ -79,15 +79,66 @@ void Floor::init(){
 	}
 
 	//Chamber 1
-	for (int i = 3; i < )
+	for (int i = 3; i <= 6; ++i){
+		Chamber *newChamber = new Chamber{1};
+		for (int j = 3; j <= 28; ++j){
+			newChamber->addSpawn(cellList[i][j]);
+		}
+		roomList.emplace_back(newChamber);
+	}
+
+	//Chamber 2
+	Chamber *chamberTwo = new Chamber{2};
+	for (int i = 3; i <= 6; ++i){
+		for (int j = 39; j <= 72; ++j){
+			chamberTwo->addSpawn(cellList[i][j]);
+		}
+	}
+	for (int i = 7; i <= 12; ++i){
+		for (int j = 61; j <= 75; ++j){
+			chamberTwo->addSpawn(cellList[i][j]);
+		}
+	}
+	roomList.emplace_back(chamberTwo);
+
+	//Chamber 3
+	Chamber *chamberThree = new Chamber{3};
+	for (int i = 10; i <= 12; ++i){
+		for (int j = 38; j <= 49; ++j){
+			chamberThree->addSpawn(cellList[i][j]);
+		}
+	}
+	roomList.emplace_back(chamberThree);
+
+
+	//Chamber 4	
+	Chamber *chamberFour = new Chamber{4};
+	for (int i = 15; i <= 21; ++i){
+		for (int j = 4; j <= 24; ++j){
+			chamberFour->addSpawn(cellList[i][j]);
+		}
+	}
+	roomList.emplace_back(chamberFour);
+
+
+	//Chamber 5
+	Chamber *chamberFive = new Chamber{5};
+	for (int i = 19; i <= 21; ++i){
+		for (int j = 37; j <= 75; ++j){
+			chamberFive->addSpawn(cellList[i][j]);
+		}
+	}
+	for (int i = 16; i <= 18; ++i){
+		for (int j = 65; j <= 75; ++j){
+			chamberFive->addSpawn(cellList[i][j]);
+		}
+	}
+	roomList.emplace_back(chamberFive);
+
+
 }
 
 
-
-void Floor::initPC(string s){
-
-
-}
 
 int Floor::getLevel(){
 	return level;

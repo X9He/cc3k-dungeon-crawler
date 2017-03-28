@@ -12,7 +12,7 @@ int random(int x, int y){
 	return ran;
 }
 
-Chamber::Chamber(int capacity, int emptyAmount): capacity{capacity}, emptyAmount{emptyAmount}{}
+Chamber::Chamber(int chamberNumber): chamberNumber{chamberNumber}{}
 
 Chamber::~Chamber() {}
 
