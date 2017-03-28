@@ -48,7 +48,8 @@ void PC::attack(Elf  *target) {
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
    }
 }
 
@@ -67,7 +68,8 @@ void PC::attack(Dward  *target) {
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
    }
 }
 
@@ -86,7 +88,8 @@ void PC::attack(Halfing  *target) {
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
    }
 }
 
@@ -118,7 +121,8 @@ void PC::attack(Orcs  *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
   }
 }
 
@@ -138,7 +142,8 @@ void PC::attack(Merchant  *target) {
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) +
+       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
    }
 }
 
@@ -158,7 +163,8 @@ void PC::attack(Dragon  *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) +
+      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
   }
 }
 
@@ -178,7 +184,8 @@ void PC::attack(Human  *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
   }
 }
 
@@ -324,7 +331,8 @@ void Goblin::attack(Enemy *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message = "PC deals " + effect1 + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + effect2 + " to PC.";
+    message = "PC deals " + effect1 + "damages to (" + to_string(target->name) + 
+      "). " + to_string(target->name) + " deals " + effect2 + " to PC.";
   }
 }
 
@@ -472,7 +480,8 @@ void Troll::attack(Enemy *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
   }
 }
 
@@ -496,7 +505,8 @@ void Vampire::attack(Enemy *target) {
       message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). "
         + "PC gains 5 HP. " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
     } else {
-      message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+      message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+        "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
     }
   }
 }
@@ -517,6 +527,7 @@ void Drow::attaCK(Enemey *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
+    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
   }
 }
