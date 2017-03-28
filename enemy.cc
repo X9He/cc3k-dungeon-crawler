@@ -1,7 +1,28 @@
 
 #include "enemy.h"
 
+Human(PC * target):
+Enemy{140, 20, 20, 4, PC}{}
 
+Dward(PC * target):
+Enemy{100, 20, 30, random_gold(), PC}{}
+
+Elf(PC * target):
+Enemy{140, 30, 10, random_gold(), PC}{}
+
+Orcs(PC * target):
+Enemy{180, 30, 25, random_gold(), PC}{}
+
+Merchant(PC * target):
+Enemy{30, 70, 5, random_gold(), PC}{}
+
+Dragon(PC * target, Treasure * t):
+Enemy{150, 20, 20, random_gold(), PC}, Treasure{t}{}
+
+Halfing(PC * target):
+Enemy{100, 15, 20, random_gold(), PC} {}
+      
+      
 // enemy attack 50% miss
 // generate random number
 int random(int x, int y){
@@ -11,6 +32,7 @@ int random(int x, int y){
  return ran;
 }
 
+// generate random gold
 int random_gold(){
  int ran;
  srand(time(0));
@@ -41,29 +63,12 @@ bool Enemy::getMoved() {
 }
 
 void Elf::attack(PC * player) {
+    int rad = random(0, 1);
+    if (rad == 0) {
     player->hurt(*this);
+    }
 }
 
-Human(PC * target):
-Enemy{140, 20, 20, 4, PC}{}
-
-Dward(PC * target):
-Enemy{100, 20, 30, random_gold(), PC}{}
-
-Elf(PC * target):
-Enemy{140, 30, 10, random_gold(), PC}{}
-
-Orcs(PC * target):
-Enemy{180, 30, 25, random_gold(), PC}{}
-
-Merchant(PC * target):
-Enemy{30, 70, 5, random_gold(), PC}{}
-
-Dragon(PC * target, Treasure * t):
-Enemy{150, 20, 20, random_gold(), PC}, Treasure{t}{}
-
-Halfing(PC * target):
-Enemy{100, 15, 20, random_gold(), PC{}
 
 void Dward::attack(PC * player) {
     int rad = random(0, 1);
