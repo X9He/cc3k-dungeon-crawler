@@ -14,6 +14,9 @@ int PC::getMax() {
 }
 void PC::atack(Enemy  *target) {
    target->hurt(*this);
+   if (target->getHP() == 0) {
+     changeGold(getGold());
+   }
 }
 void PC::hurt(Merchant &m){
   if (!m.status){
