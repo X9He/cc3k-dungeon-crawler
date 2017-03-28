@@ -123,12 +123,38 @@ void Floor::createPotion(int num){
 	while(num > 0) {
 		int r = random(1, 6);
 		Potion *newP;
-		
+		if (r == 1) {
+			newE = new ;
+		} else if (r == 2) {
+			newE = new ;
+		} else if (r == 3){
+			newE = new ;
+		} else if (r == 4) {
+			newE = new ;
+		} else if (r == 5) {
+			newE = new ;
+		} else {
+			newE = new ;
+		}
+		--num;
 	}
 
 }
 
 void Floor::createTreasure(int num){
+	while(num > 0){
+		int r = random(1, 8);
+		Treasure *newT;
+		if (r == 1) {
+			newE = new Treasure;
+		} else if (r >=2 && r <= 4) {
+			newE = new Treasure;
+		} else {
+			newE = new Treasure;
+		}
+		--num;
+	}
+
 
 }
 
