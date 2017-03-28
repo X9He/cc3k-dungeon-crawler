@@ -9,7 +9,7 @@ class Character{
   protected:
   char name;
   publlic:
-  void changePosition(int x, int y);
+  virtual void changePosition(int x, int y);
   Character(int initHp, int initAtk, int initDef, int Gold);
   virtual  ~Character();
   integer damage(Character &other, float mag = 1);
