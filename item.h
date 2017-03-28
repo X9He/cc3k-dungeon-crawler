@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 
+class PC;
 
 class Item {
     int row;
