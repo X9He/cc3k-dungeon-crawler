@@ -22,6 +22,7 @@ int random_gold(){
 Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool isFrozen, bool moved)
 : Character{initHP, initAtk, initDef, Gold}, Target(target), isFrozon{isFrozen}, moevd{moved} {}
 
+
 void Enemy::changeFrozen() {
     isFrozen = !isFrozen;
 }
@@ -44,25 +45,25 @@ void Elf::attack(PC * player) {
 }
 
 Human(PC * target):
-Enemy{140, 20, 20, 4, PC, false}{}
+Enemy{140, 20, 20, 4, PC}{}
 
 Dward(PC * target):
-Enemy{100, 20, 30, PC, false}{}
+Enemy{100, 20, 30, random_gold(), PC}{}
 
 Elf(PC * target):
-Enemy{140, 30, 10, PC, false}{}
+Enemy{140, 30, 10, random_gold(), PC}{}
 
 Orcs(PC * target):
-Enemy{180, 30, 25, PC, false}{}
+Enemy{180, 30, 25, random_gold(), PC}{}
 
 Merchant(PC * target):
-Enemy{30, 70, 5, PC, false}{}
+Enemy{30, 70, 5, random_gold(), PC}{}
 
 Dragon(PC * target, Treasure * t):
-Enemy{150, 20, 20, PC, false}, Treasure{t}{}
+Enemy{150, 20, 20, random_gold(), PC}, Treasure{t}{}
 
 Halfing(PC * target):
-Enemy{100, 15, 20, PC, false}{}
+Enemy{100, 15, 20, random_gold(), PC{}
 
 void Dward::attack(PC * player) {
     int rad = random(0, 1);
