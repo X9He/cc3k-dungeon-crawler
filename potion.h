@@ -2,7 +2,7 @@
 #ifndef potion_hpp
 #define potion_hpp
 
-#include "Item.h"
+#include "item.h"
 
 class Potion: public Item {
 public:
