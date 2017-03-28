@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "NormalCell.h"
+#include "normalCell.h"
 
 class Spawn: public Cell {
 	int chamberNum;
