@@ -12,12 +12,14 @@ void PC::pickUpItem(Item &i) {
 int PC::getMax() {
   return max;
 }
-void PC::atack(Enemy  *target) {
+void PC::attack(Enemy  *target) {
    target->hurt(*this);
    if (target->getHP() == 0) {
      changeGold(target->getGold());
    }
 }
+
+/*
 void PC::hurt(Merchant &m){
   if (!m.status){
     int effect = m.damage(*this);
@@ -40,6 +42,10 @@ void PC::hurt(Elf &e){
    e.changetHP(effect);
 }
 
+integer Character::damage(Character &other, float mag = 1) {
+  return 0 - ceiling((100 / (100 + Def))) * (mag * other.Atk);
+}
+
 void PC::hurt(Halfing &l){
   int effect = l.damage(*this);
   l.changetHP(effect);
@@ -54,7 +60,9 @@ void PC::hurt(Orcs &o){
   int effect = o.damage(*this);
   o.changetHP(effect);
 }
-  
+*/ 
+
+
 //
 void PC::hurt(Merchant & m) {
     int effect = damage(m);
