@@ -127,3 +127,7 @@ bool Chamber::hasPlayer(){
 int Chamber::getNum(){
 	return chamberNumber;
 }
+
+int Chamber::getemptyAmount() {
+	return getemptyAmount;
+}
