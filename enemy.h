@@ -2,8 +2,7 @@
 #ifndef enemy_hpp
 #define enemy_hpp
 
-class Character;
-class PC;
+#include "pc.h"
 
 
 class Enemy: public Character {
