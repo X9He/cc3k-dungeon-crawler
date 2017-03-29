@@ -1,6 +1,8 @@
-
-
+#include <iostream>
+#include <vector>
+#include <utility>
 #include "treasure.h"
+#include "pc.h"
 
 
 Treasure::Treasure(int value, bool protect):
@@ -14,7 +16,7 @@ bool Treasure::isProtect() {
 }
 
 void Treasure::useItem(int mag) {
-    target->pickupItem(*this);
+    target->pickUpItem(*this);
 }
 
 void Treasure::changeProtect() {

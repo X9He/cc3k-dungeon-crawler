@@ -5,16 +5,20 @@
 using namespace std;
 
 
-Passage::Passage(char type, int row, int col, int num): Cell(type, row, col, num) {}
+Passage::Passage(char type, int row, int col, Character *c): NormalCell{type, row, col, c}{}
 
 void Passage::prettyPrint(){
-	cout << type << endl;
-}
-
-int Passage::canPass(char *c){
-	if (c == '@') {
-		return 0;
+	if(hasCharacter()){
+		cout << getCharacter()->getName();
 	} else {
-		return 3;
+		cout << getType();
 	}
 }
+
+// int Passage::canPass(char c){
+// 	if (c == '@') {
+// 		return 0;
+// 	} else {
+// 		return 3;
+// 	}
+// }
