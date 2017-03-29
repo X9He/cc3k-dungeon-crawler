@@ -146,7 +146,8 @@ void Floor::init(PC *p){
 	for (int i = 3; i <= 6; ++i){
 		Chamber *newChamber = new Chamber{1};
 		for (int j = 3; j <= 28; ++j){
-			newChamber->addSpawn(cellList[i][j]);
+			Spawn *cur=dynamic_cast<Spawn *>(cellList[i][j]);
+			newChamber->addSpawn(cur);
 		}
 		roomList.emplace_back(newChamber);
 	}
@@ -156,14 +157,16 @@ void Floor::init(PC *p){
 	for (int i = 3; i <= 6; ++i){
 		for (int j = 39; j <= 72; ++j){
 			if (cellList[i][j]->getType() == '.'){
-				chamberTwo->addSpawn(cellList[i][j]);
+				Spawn *cur=dynamic_cast<Spawn *>(cellList[i][j]);
+				chamberTwo->addSpawn(cur);
 			}
 		}
 	}
 	for (int i = 7; i <= 12; ++i){
 		for (int j = 61; j <= 75; ++j){
 			if (cellList[i][j]->getType() == '.'){
-				chamberTwo->addSpawn(cellList[i][j]);
+				Spawn *cur=dynamic_cast<Spawn *>(cellList[i][j]);
+				chamberTwo->addSpawn(cur);
 			}
 		}
 	}
@@ -172,8 +175,9 @@ void Floor::init(PC *p){
 	//Chamber 3
 	Chamber *chamberThree = new Chamber{3};
 	for (int i = 10; i <= 12; ++i){
-		for (int j = 38; j <= 49; ++j){
-			chamberThree->addSpawn(cellList[i][j]);
+		for (int j = 38; j <= 49; ++j){			
+			Spawn *cur=dynamic_cast<Spawn *>(cellList[i][j]);
+			chamberThree->addSpawn(cur);
 		}
 	}
 	roomList.emplace_back(chamberThree);
@@ -182,8 +186,9 @@ void Floor::init(PC *p){
 	//Chamber 4	
 	Chamber *chamberFour = new Chamber{4};
 	for (int i = 15; i <= 21; ++i){
-		for (int j = 4; j <= 24; ++j){
-			chamberFour->addSpawn(cellList[i][j]);
+		for (int j = 4; j <= 24; ++j){			
+			Spawn *cur=dynamic_cast<Spawn *>(cellList[i][j]);
+			chamberFour->addSpawn(cur);
 		}
 	}
 	roomList.emplace_back(chamberFour);
@@ -193,12 +198,14 @@ void Floor::init(PC *p){
 	Chamber *chamberFive = new Chamber{5};
 	for (int i = 19; i <= 21; ++i){
 		for (int j = 37; j <= 75; ++j){
-			chamberFive->addSpawn(cellList[i][j]);
+			Spawn *cur=dynamic_cast<Spawn *>(cellList[i][j]);
+			chamberFive->addSpawn(cur);
 		}
 	}
 	for (int i = 16; i <= 18; ++i){
 		for (int j = 65; j <= 75; ++j){
-			chamberFive->addSpawn(cellList[i][j]);
+			Spawn *cur=dynamic_cast<Spawn *>(cellList[i][j]);
+			chamberFive->addSpawn(cur);
 		}
 	}
 	roomList.emplace_back(chamberFive);
@@ -240,7 +247,7 @@ void Floor::createEnemy(int num){
 			Enemy *newE = new Elf{player};
 			enemyList.emplace_back(newE);
 		} else if (r >= 15 && r <= 16) {
-			Enemy *newE = new Orc{player};
+			Enemy *newE = new Orcs{player};
 			enemyList.emplace_back(newE);
 		} else {
 			Enemy *newE = new Merchant{player};
@@ -275,8 +282,8 @@ void Floor::createPotion(int num){
 		}
 		--num;
 	}
-
 }
+
 
 void Floor::createTreasure(int num){
 	while(num > 0){
@@ -284,9 +291,9 @@ void Floor::createTreasure(int num){
 		int chamberR = random(1,5);
 		// Dragon Hoard
 		if (r == 1) {
-			Item *newT = new DH{};
+			Treasure *newT = new DH{};
 			itemList.emplace_back(newT);
-			Character *newD = new Dragon{player, newT};
+			Dragon *newD = new Dragon{player, newT};
 			enemyList.emplace_back(newD);
 			roomList[chamberR]->assignTreasure(newT, newD);
 		}
@@ -307,34 +314,40 @@ void Floor::createTreasure(int num){
 }
 
 void Floor::createStair(){
-
+    
     int room_hasplayer;
     for (int i = 1; i < 6; i++) {
-        roomList[i].hasplayer();
+        roomList[i]->hasPlayer();
         room_hasplayer = i;
     }
     int r1 = random(1,4);
     int stair_room = r1;
     if (r1 > room_hasplayer) {
-    	stair_room++;
+        stair_room++;
     }
-
-    int num = roomList[stair_room].getemptyAmount();
+    
+    int num = roomList[stair_room]->getemptyAmount();
     int r2 = random(1, num);
-    Spawn * tar = emptySpawn[r2];
-      
-    static_cast<Stair>(*tar);
-    vector<Spawn*>::iterator pos = find(myVector.begin(), myVector.end(), tar);
-    emptySpawn.erase(pos);
-    fullSpawn.emplace_back(tar);
-      
 
+    Spawn * tar = roomList[stair_room]->getemptySpawn()[r2];
+    int row = tar->getRow();
+    int col = tar->getCol();
+    
+    Stair new_stair{'/', row, col};
+    
+    cellList[row][col] = &new_stair;
+    
+    roomList[stair_room]->erase_emptySpawn(r2);
+    
+    delete tar;
+    
+    
 }
 
 bool Floor::movePlayer(string dir){
 	// get current position of player
-	int curRow = player.getRow();
-	int curCol = player.getCol();
+	int curRow = player->getRow();
+	int curCol = player->getCol();
 
 	// compute new position x and y
 	int newRow = curRow;
@@ -370,8 +383,8 @@ bool Floor::movePlayer(string dir){
 
 
 	// find the cell player wants to move to
-	Cell* curCell = cellList[newRow][newCol];
-	char c = curCell->getType();
+	Cell* cur = cellList[newRow][newCol];
+	char c = cur->getType();
 
 
 	// if the next cell is wall, spawn, passage, door, or stairs
@@ -383,16 +396,17 @@ bool Floor::movePlayer(string dir){
 	//SPAWN
 	else if (c == '.')
 	{
+		Spawn *curCell =dynamic_cast<Spawn *>(cur);
 		// Spawn has an enemy
-		if (curCell->hasChar())
+		if (curCell->hasCharacter())
 		{
-			Enemy *curE = cur->getCharacter();
-			player.attack(curE);
+			Enemy *curE = curCell->getCharacter();
+			player->attack(curE);
 
 			if (curE->getHP() <= 0) 
 			{
-				player->getGold(curE);
-				curCell->putChar(nullptr);
+				player->changeGold(curE->getGold());
+				curCell->putCharacter(nullptr);
 				deleteEnemy(curE->getRow(), curE->getCol());
 			}
 		}
@@ -401,29 +415,27 @@ bool Floor::movePlayer(string dir){
 		else if (curCell->hasItem()) {
 			Item *curI = curCell->getItem();
 			curI->useItem();
-			simpleMoveCharacter(newRow, newCol);
-			curCell.putItem(nullptr);
+			simpleMoveCharacter(newRow, newCol, curRow, curCol, player);
+			curCell->putItem(nullptr);
 		} 
 
 		// Spawn is empty
 		else {
-			simpleMoveCharacter(newRow, newCol);
+			simpleMoveCharacter(newRow, newCol, curRow, curCol, player);
 		}
 	} 
 	//PASSAGE
 	else if (c == '#'){
-		simpleMoveCharacter(newRow, newCol);
+		simpleMoveCharacter(newRow, newCol, curRow, curCol, player);
 		return true;
 	} 
 	//DOOR
 	else if (c == '+'){
-		simpleMoveCharacter(newRow, newCol);
+		simpleMoveCharacter(newRow, newCol, curRow, curCol, player);
 		return true;
 	} 
 	//STAIRS
-	else {
-		return false;
-	}
+	return false;
 }
 
 
@@ -432,10 +444,10 @@ void Floor::updateEnemy(){
 	int y = cellList[0].size();
 
 	for(int i = 0; i < x; ++i){
-		for (int j = 0; j < y; ++j){
-
+		for (int j = 0; j < y && (cellList[i][j]->getType() == '.'); ++j){
+			Spawn *curSpawn = dynamic_cast<Spawn *>(cellList[i][j]);
 			//check if cell has character
-			Character *c = cellList[i][j]->getChar;
+			Character *c = curSpawn->getCharacter();
 			if (c == nullptr){
 				continue;
 			} 
@@ -449,33 +461,35 @@ void Floor::updateEnemy(){
 			//cell has enemy, and it has not moved this round
 			else if (!c->getMoved()) {
 				//cell has dragon
-				if (c->getName() == 'D') {
-					Treasure *t = c.getHoard();
+				if (curE->getName() == 'D') {
+					Dragon *d = dynamic_cast<Dragon *>(c);
+					Treasure *t = d->getHoard();
 					int tRow = t->getRow();
 					int tCol = t->getCol();
 
-					Player *tar = checkPC(tRow, tCol);
+					PC *tar = checkPC(tRow, tCol);
 
 					if (tar != nullptr) {
-						c->attack(tar);
+						d->attack(tar);
 					} 
-
 				// cell has merchant
 				} 
 
-				else if (c->getName() == 'M') {					
-					Player *tar = checkPC(i, j);
-					if (c->isHostile()) {
+
+				else if (curE->getName() == 'M') {				
+					Merchant *m = dynamic_cast<Merchant *>(c);					
+					PC *tar = checkPC(i, j);
+					if (m->isHostile()) {
 						if (tar != nullptr){
-							c->attack(tar);
+							m->attack(tar);
 						} 
 					} else {
 						vector<Cell *> surround = produceSurroundEmpty(i, j);
 						if (surround.size() != 0) {
 							int size = surround.size();
 							int r = random(0, size - 1);
-							int newR = surround[r].getRow;
-							int newC = surround[r].getCol;
+							int newR = surround[r]->getRow;
+							int newC = surround[r]->getCol;
 							simpleMoveCharacter(i, j, newR, newC, c);
 						} else {
 							continue;
@@ -484,13 +498,13 @@ void Floor::updateEnemy(){
 				}
 
 
-
 				// cell has normal enemy
 				else {
-					Player *tar = checkPC(i, j);
+					Enemy *curE = dynamic_cast<Enemy *>(c);
+					PC *tar = checkPC(i, j);
 					if (tar != nullptr) 
 					{
-						c->attack(tar);
+						curE->attack(tar);
 						continue;
 					} 
 					else 
@@ -499,8 +513,8 @@ void Floor::updateEnemy(){
 						if (surround.size() != 0) {
 							int size = surround.size();
 							int r = random(0, size - 1);
-							int newR = surround[r].getRow;
-							int newC = surround[r].getCol;
+							int newR = surround[r]->getRow;
+							int newC = surround[r]->getCol;
 							simpleMoveCharacter(i, j, newR, newC, c);
 
 						} else {
@@ -523,7 +537,7 @@ void Floor::updateEnemy(){
 		for(int j = 0; j < y; ++j){
 
 			//check if cell has character
-			Character *c = cellList[i][j]->getChar;
+			Character *c = cellList[i][j]->getCharacter;
 
 			//cell does not have character
 			if (c == nullptr){
@@ -568,7 +582,7 @@ vector<Spawn *> Floor::scanEmptyEnemy(int i, int j){
 		int newC = newCords[i][1];
 		Cell *curCell = cellList[newR][newC];
 		if(curCell->getType() == '.'){
-			Spawn *curSpawn = curCell;
+			Spawn *curSpawn = dynamic_cast<Spawn *>(curCell);
 			if(!curSpawn->hasItem() && !curSpawn->hasCharacter()){
 				newVec.emplace_back(curSpawn);
 			}
@@ -604,31 +618,46 @@ vector<Spawn *> Floor::scanEmptyEnemy(int i, int j){
 }
 
 
-Cell * Floor::checkPC(int i, int j){
-	if (((cellList[i+1][j]->getChar())->getName() == '@') && (!cellList[i+1][j]->hasChar) && (cellList[i+1][j]->getType()) == '.') {
-		return cellList[i+1][j];
-	} 
-	if (((cellList[i+1][j+1]->getChar())->getName() == '@') && (!cellList[i+1][j+1]->hasChar) && (cellList[i+1][j+1]->getType()) == '.') {
-		return cellList[i+1][j+1];
-	} 
-	if (((cellList[i][j+1]->getChar())->getName() == '@') && (cellList[i][j+1]->getType()) == '.') {
-		return cellList[i][j+1];
-	} 
-	if (((cellList[i-1][j]->getChar())->getName() == '@') && (!cellList[i-1][j]->hasChar) && (cellList[i-1][j]->getType()) == '.'){
-		return cellList[i-1][j];
-	} 
-	if (((cellList[i-1][j-1]->getChar())->getName() == '@') && (!cellList[i-1][j-1]->hasChar)  && (cellList[i-1][j-1]->getType()) == '.') {
-		return cellList[i-1][j-1];
-	} 
-	if (((cellList[i][j-1]->getChar())->getName() == '@') && (!cellList[i][j-1]->hasChar) && (cellList[i][j-1]->getType()) == '.') {
-		return cellList[i][j-1];
-	} 
-	if (((cellList[i+1][j-1]->getChar())->getName() == '@') && (!cellList[i+1][j-1]->hasChar) && (cellList[i+1][j-1]->getType()) == '.') {
-		return cellList[i+1][j-1];
-	} 
-	if (((cellList[i-1][j+1]->getChar())->getName() == '@') && (!cellList[i-1][j+1]->hasChar) && (cellList[i-1][j+1]->getType()) == '.'){
-		return cellList[i-1][j+1];
-	} 
+PC* Floor::checkPC(int i, int j){
+
+	vector<vector<int>> newCords = genEightCord(i,j);
+	vector<Spawn *> newVec;
+	for (int i = 0; i < 8; ++i) {
+		int newR = newCords[i][0];
+		int newC = newCords[i][1];
+		Cell *curCell = cellList[newR][newC];
+		if(curCell->getType() == '.'){
+			Spawn *curSpawn = dynamic_cast<Spawn *>(curCell);
+			if(curSpawn->hasCharacter() && (curSpawn->getCharacter()->getName()) == '@'){
+				return curSpawn->getCharacter();
+			}
+		}
+	}
+
+	// if (((cellList[i+1][j]->getChar())->getName() == '@') && (!cellList[i+1][j]->hasChar) && (cellList[i+1][j]->getType()) == '.') {
+	// 	return cellList[i+1][j];
+	// } 
+	// if (((cellList[i+1][j+1]->getChar())->getName() == '@') && (!cellList[i+1][j+1]->hasChar) && (cellList[i+1][j+1]->getType()) == '.') {
+	// 	return cellList[i+1][j+1];
+	// } 
+	// if (((cellList[i][j+1]->getChar())->getName() == '@') && (cellList[i][j+1]->getType()) == '.') {
+	// 	return cellList[i][j+1];
+	// } 
+	// if (((cellList[i-1][j]->getChar())->getName() == '@') && (!cellList[i-1][j]->hasChar) && (cellList[i-1][j]->getType()) == '.'){
+	// 	return cellList[i-1][j];
+	// } 
+	// if (((cellList[i-1][j-1]->getChar())->getName() == '@') && (!cellList[i-1][j-1]->hasChar)  && (cellList[i-1][j-1]->getType()) == '.') {
+	// 	return cellList[i-1][j-1];
+	// } 
+	// if (((cellList[i][j-1]->getChar())->getName() == '@') && (!cellList[i][j-1]->hasChar) && (cellList[i][j-1]->getType()) == '.') {
+	// 	return cellList[i][j-1];
+	// } 
+	// if (((cellList[i+1][j-1]->getChar())->getName() == '@') && (!cellList[i+1][j-1]->hasChar) && (cellList[i+1][j-1]->getType()) == '.') {
+	// 	return cellList[i+1][j-1];
+	// } 
+	// if (((cellList[i-1][j+1]->getChar())->getName() == '@') && (!cellList[i-1][j+1]->hasChar) && (cellList[i-1][j+1]->getType()) == '.'){
+	// 	return cellList[i-1][j+1];
+	// } 
 	return nullptr;
 }
 

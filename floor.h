@@ -49,11 +49,13 @@ public:
 
 	void deleteEnemy();
 
-	void simpleMoveCharacter(int, int, int, int);
+	void simpleMoveCharacter(int, int, int, int, Character *c);
 
-	std::vector<Cell*> produceSurroundEmpty(int, int);
+	// std::vector<Cell*> produceSurroundEmpty(int, int);
 
-	Cell* checkPC(int, int);
+	std::vector<Spawn *> scanEmptyEnemy(int, int);
+
+	PC* checkPC(int, int);
 };
 
 #endif
