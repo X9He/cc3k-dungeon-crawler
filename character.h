@@ -25,6 +25,7 @@ class Character {
   int getcol();
   char getName(); 
   void initAtkDef();
+    void changeGold(int);
 };  
 
 #endif

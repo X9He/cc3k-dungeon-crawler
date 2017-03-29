@@ -11,6 +11,7 @@ class Troll;
 class Vampire;
 class Goblin;
 class Drow;
+class Elf;
 
 class Enemy: public Character {
     PC * Target;
@@ -29,6 +30,8 @@ public:
     void hurt(Vampire *p);
     void hurt(Goblin *p);
     void hurt(Drow *p);
+    void hurt(Elf *p); // to implement
+    void hurt(PC * p); // to implement
 };
 
 class NormalEnemy: public Enemy {

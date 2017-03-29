@@ -19,21 +19,29 @@ class Dwarf;
 class Orcs;
 
 class PC: public Character {
-  int max;
-  std::string message;
-  public:
-  PC(int initHP=125, int initAtk=25, int initDef=25);
-  virtual ~PC();
-  void pickUpItem(Item &i);
-  int getMax();
-  void attack(Enemy *target);
-  void hurt(Merchant &m);
-  void hurt(Human &h);
-  void hurt(Dragon &d);
-  void hurt(Elf &e);
-  void hurt(Halfling &l);
-  void hurt(Dwarf &w);
-  void hurt(Orcs &o);
+    int max;
+protected:
+    std::string message;
+public:
+    PC(int initHP=125, int initAtk=25, int initDef=25);
+    virtual ~PC();
+    void pickUpItem(Item &i);
+    int getMax();
+    void attack(Elf *target);
+    void attack(Dwarf  *target);
+    void attack(Halfling  *target);
+    void attack(Orcs  *target);
+    void attack(Merchant  *target);
+    void attack(Dragon  *target);
+    void attack(Human  *target);
+    void hurt(Merchant &m);
+    void hurt(Human &h);
+    void hurt(Dragon &d);
+    void hurt(Elf &e);
+    void hurt(Halfling &l);
+    void hurt(Dwarf &w);
+    void hurt(Orcs &o);
+    
 };
 
 
@@ -50,6 +58,7 @@ class Troll: public PC{
   void hurt(Halfling &l);
   void hurt(Dwarf &w);
   void hurt(Orcs &o);
+    void attack(Enemy *target);
 };
 
 class Vampire: public PC{ 
@@ -98,6 +107,7 @@ class Drow: public PC{
   void hurt(Halfling &l);
   void hurt(Dwarf &w);
   void hurt(Orcs &o);
+    void attack(Enemy *target);
 };
 
 #endif

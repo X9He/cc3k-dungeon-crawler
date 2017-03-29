@@ -11,6 +11,10 @@ initHP{initHP}, initAtk{initAtk}, initDef{initDef}, Gold{Gold}{
 
 Character::~Character() {}
 
+void Character::changeGold(int i) {
+    Gold = Gold+i;
+}
+
 int Character::damage(Character &other, float mag) {
     return 0 - ceil((100 / (100 + this->getDef()))) * (mag * other.getAtk());
 }
