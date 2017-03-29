@@ -31,6 +31,7 @@ void Chamber::addSpawn(Spawn *s) {
 	++capacity;
 }
 
+
 void Chamber::assignItem(Item *i){
 	int ran = random(0, emptyAmount-1);
 	emptySpawn[ran]->putItem(i);
@@ -62,19 +63,19 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 	vector<Cell*> newVec;
 	int amount = 0;
 	if (findSpawn(tRow, tCol + 1)!=nullptr){
-		if (!findSpawn(tRow, tCol + 1).hasChar() && !findSpawn(tRow, tCol + 1).hasItem()){
+		if (!findSpawn(tRow, tCol + 1)->hasChar() && !findSpawn(tRow, tCol + 1)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow, tCol + 1));
 		}
 		++amount;
 	} 
 	if (findSpawn(tRow + 1, tCol + 1)!=nullptr) {
-		if (!findSpawn(tRow + 1, tCol + 1).hasChar() && !findSpawn(tRow + 1, tCol + 1).hasItem()){
+		if (!findSpawn(tRow + 1, tCol + 1)->hasChar() && !findSpawn(tRow + 1, tCol + 1)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow + 1, tCol + 1));
 		}
 		++amount;
 	}
 	if (findSpawn(tRow + 1, tCol)!=nullptr) {
-		if (!findSpawn(tRow + 1, tCol).hasChar() && !findSpawn(tRow + 1, tCol).hasItem()){
+		if (!findSpawn(tRow + 1, tCol)->hasChar() && !findSpawn(tRow + 1, tCol).hasItem()){
 		newVec.emplace_back(findSpawn(tRow + 1, tCol));
 		}
 		++amount;

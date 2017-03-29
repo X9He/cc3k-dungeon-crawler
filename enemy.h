@@ -10,7 +10,7 @@
 
 class Enemy: public Character {
     PC * Target;
-    bool isFrozon;
+    bool isFrozen;
     bool moved;
 public:
     ~Enemy();
@@ -21,11 +21,17 @@ public:
     void changeFrozen();
     void changeMoved();
     bool getMoved();
+    void hurt(Troll *p);
+    void hurt(Vampire *p);
+    void hurt(Goblin *p);
+    void hurt(Drow *p);
 };
 
 class NormalEnemy: public Enemy {
     bool IsHostile;
     virtual void attack (PC *target) = 0;
+public:
+    NormalEnemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool isFrozen = false, bool moved = false);
 };
 
 class Elf: public NormalEnemy {

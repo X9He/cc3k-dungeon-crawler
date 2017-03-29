@@ -13,20 +13,21 @@ void Spawn::prettyPrint(){
 	if (charTarget != nullptr) {
 		cout << "@" << endl;
 	} else if (item != nullptr) {
-		cout << item.getType() << endl;
+		cout << item->getType() << endl;
 	} else {
 		cout << "." << endl;
 	}
 }
 
 int Spawn::canPass(Cell *c){
-	if(c->charTarget->getName() == '')
+	if(c->charTarget->getName() == '';
 
 }
 
-void Spawn::putItem(item *i){
+void Spawn::putItem(Item *i){
 	item = i;
 }
+
 
 
 
@@ -35,7 +36,7 @@ void Spawn::removeItem(){
 }
 
 
-Item* Spawn::getItem(){
+Item * Spawn::getItem(){
 	return item;
 }
 

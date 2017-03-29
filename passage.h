@@ -14,7 +14,7 @@ public:
 
 	void prettyPrint() override;
 
-	void canPass() override;	
+	int canPass(char c) override;
 };
 
 #endif

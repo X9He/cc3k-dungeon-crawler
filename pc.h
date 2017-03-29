@@ -7,9 +7,10 @@
 #include "enemy.h"
 
 class Enemy;
-class Human;
 class Merchant;
+class Human;
 class Dragon;
+class Elf;
 class Halfing;
 class Elf;
 class Dwarf;

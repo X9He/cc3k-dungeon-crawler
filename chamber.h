@@ -5,6 +5,8 @@
 #include <utility>
 #include "spawn.h"
 #include "potion.h"
+#include "item.h"
+#include "enemy.h"
 
 class Chamber {
 	std::vector<Spawn *> emptySpawn;
@@ -19,7 +21,7 @@ public:
 	~Chamber();
 	Spawn* findSpawn(int row, int col);
 	void addSpawn(Spawn *);
-	void assignItem(Potion *);
+	void assignItem(Item *);
 	void assignCharacter(Character *);
 	void assignTreasure(Treasure *, Dragon *);
 	void setHasPlayer();
