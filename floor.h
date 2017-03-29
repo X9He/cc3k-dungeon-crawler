@@ -3,9 +3,16 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include "cell.h"
+#include "display.h"
+#include "enemy.h"
+#include "pc.h"
+#include "chamber.h"
+#include "treasure.h"
+#include "potion.h"
 
 class Floor {
-	std::vector<vector<Cell *>> cellList;
+	std::vector<std::vector<Cell *>> cellList;
 	Display *td;
 	int level;
 	std::vector<Enemy *> enemyList;
@@ -38,7 +45,7 @@ public:
 
 	void createStair();
 
-	bool movePlayer(PC *);
+	bool movePlayer(std::string dir);
 
 	void updateEnemy();
 
@@ -46,7 +53,7 @@ public:
 
 	void simpleMoveCharacter(int, int, int, int);
 
-	vector<Cell*> produceSurroundEmpty(int, int);
+	std::vector<Cell*> produceSurroundEmpty(int, int);
 
 	Cell* checkPC(int, int);
 };

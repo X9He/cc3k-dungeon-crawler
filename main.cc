@@ -10,7 +10,6 @@ using namespace std;
 int main() {
     cin.exceptions(ios::eofbit|ios::failbit);
     string cmd;
-    Floor f;
     int level = 1;
     cout << "choose your role" << endl;
     cout << "s for shade" << endl;
@@ -21,6 +20,7 @@ int main() {
     cout << "q for quit" << endl;
     
     string role;
+    PC *player = nullptr;
     while (cin >> role) {
     if (role == "s") {
         PC * player;
@@ -29,7 +29,7 @@ int main() {
         Drow * player;
         break;
     } else if (role == "v") {
-        Vampire * player;
+        Vampire * player ;
         break;
     } else if (role == "t") {
         Troll * player;
@@ -39,7 +39,7 @@ int main() {
         break;
     } else if (role == "q"){
         cout << "Quiting" << endl;
-        return;
+        return 0;
     } else {
         cout << "Invalid role" << endl;
     }
@@ -48,29 +48,30 @@ int main() {
     
     
     while (level < 6) {
-        Floor f{PC};
+        Floor f(player);
         string direction;
         while (cin >> direction) {
             if (direction == "q") {
                 cout << "Quiting" << endl;
                 return 0;
             }
-            if (floor.moveplayer(direction) == false) {
+            if (f.movePlayer(direction) == false) {
                 level++;
-                PC.initAtkDef();
+                player->initAtkDef();
                 cout << "Entering level " << level << endl;
                 break;
             }
             if (player->die()) {
                 cout << "Lost" << endl;
-                return;
+                return 0;
             }
-            floor.updateEnemy();
-            floor.prettyprint();
+            f.updateEnemy();
+            f.prettyPrint();
         }
+  }
     
     
     cout << "Won" << endl;
-    cout << "Gold Amount: " << PC.getGold() << endl;
+    cout << "Gold Amount: " << player->getGold() << endl;
 }
 

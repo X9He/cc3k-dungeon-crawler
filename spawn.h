@@ -17,7 +17,7 @@ public:
 
 	void prettyPrint() override;
 
-	int canPass() override;
+	int canPass();
 
 	void putItem();
 

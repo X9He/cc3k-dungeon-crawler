@@ -17,14 +17,14 @@ class Character {
   virtual void changeHP(int effect);
   virtual void changeAtk(int effect);
   virtual void changeDef(int effect);
-  virtual int getHp();
+  virtual int getHP();
   virtual int getAtk();
   virtual int getDef();
   virtual int getGold();
   int getrow();
   int getcol();
-  char getName();
-  void initHPAtkDef(); 
+  char getName(); 
+  void initAtkDef();
 };  
 
 #endif

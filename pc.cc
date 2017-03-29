@@ -16,7 +16,7 @@ PC::PC(int initHP, int initAtk, int initDef):
 
 PC::~PC() {}
 
-void PC::pickUpItem(Item &i) {
+void PC::pickUpItem(Item *i) {
   i.useItem();
 }
 

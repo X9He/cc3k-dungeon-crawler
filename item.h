@@ -13,7 +13,7 @@ class Item {
     int col;
     
 public:
-    virtual void UseItem(int mag=1) = 0;
+    virtual void useItem(int mag=1) = 0;
     
 protected:
     PC * target;

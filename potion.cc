@@ -1,9 +1,10 @@
 
 #include "potion.h"
 #include "pc.h"
+#include "character.h"
 
 void RH::useItem(int mag) {
-    int max_HP = target->getmax();
+    int max_HP = target->getMax();
     int cur_HP = target->getHP();
     
     if (cur_HP+mag*10 <= max_HP) {

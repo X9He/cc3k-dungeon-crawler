@@ -4,10 +4,11 @@
 #include <vector>
 #include <utility>
 #include "spawn.h"
+#include "potion.h"
 
 class Chamber {
-	vector<Spawn *> emptySpawn;
-	vector<Spawn *> fullSpawn;
+	std::vector<Spawn *> emptySpawn;
+	std::vector<Spawn *> fullSpawn;
 	int chamberNumber;
 	int capacity;
 	int emptyAmount;

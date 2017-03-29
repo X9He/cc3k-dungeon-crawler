@@ -6,6 +6,15 @@
 #include "item.h"
 #include "enemy.h"
 
+class Enemy;
+class Human;
+class Merchant;
+class Dragon;
+class Halfing;
+class Elf;
+class Dwarf;
+class Orcs;
+
 class PC: public Character {
   int max;
   std::string message;
@@ -22,7 +31,6 @@ class PC: public Character {
   void hurt(Halfing &l);
   void hurt(Dwarf &w);
   void hurt(Orcs &o);
-
 };
 
 
@@ -62,7 +70,7 @@ class Goblin: public PC{
   public:
   Goblin();
   ~Goblin();
-  void stealGold();
+  void steal();
   void attack(Enemy *target);
   void hurt(Merchant &m);
   void hurt(Human &h);

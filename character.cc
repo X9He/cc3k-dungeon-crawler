@@ -62,4 +62,9 @@ int Character::getGold(){
   return Gold;
 }
 
+void initAtkDef() {
+  curAtk = initAtk;
+  curDef = initDef;
+}
+
 
