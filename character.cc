@@ -32,22 +32,24 @@ void Character::changePosition(int x, int y) {
     col = y;
 }
 
-void Character::changeHP(int effect) {
+void Character::changeHP(int effect, int max) {
     int afterChange = curHp + effect;
     if (afterChange  <=0) curHp = 0;
-    else if (afterChange >= initHP) curHp = initHP;
+    else if (afterChange >= max) curHp = max;
     else curHp = afterChange;
 }
 
-void Character::changeAtk(int effect) {
+void Character::changeAtk(int effect, int max) {
     int afterChange = curAtk + effect;
     if (afterChange <= 0) curAtk = 0;
+    else if (afterChange >= max) curAtk = max;
     else curHp = afterChange;
 }
 
 void Character::changeDef(int effect){
     int afterChange = curDef + effect;
     if (afterChange  <=0) curDef = 0;
+    else if (afterChange >= max) curDef = max;
     else curDef = afterChange;
 }
 
