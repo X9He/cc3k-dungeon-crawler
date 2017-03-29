@@ -5,27 +5,20 @@
 #include <utility>
 #include "item.h"
 class Cell {
-
 	char type;
-
 	int row;
-
 	int col;
-	// xu hao
-	int num;
 
 
 public:
-	Cell(char type, int row, int col, int num);
+	Cell(char type, int row, int col);
 
 	~Cell();
 
 	virtual void prettyPrint()=0;
 
-	// decide if 
-	virtual int canPass(char type)=0;
+	// virtual int canPass(char type)=0;
 
-	//
 	int getRow();
 
 	int getCol();

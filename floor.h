@@ -4,7 +4,6 @@
 #include <vector>
 #include <utility>
 #include "cell.h"
-#include "display.h"
 #include "enemy.h"
 #include "pc.h"
 #include "chamber.h"
@@ -13,7 +12,6 @@
 
 class Floor {
 	std::vector<std::vector<Cell *>> cellList;
-	Display *td;
 	int level;
 	std::vector<Enemy *> enemyList;
 	PC *player;
@@ -29,7 +27,7 @@ public:
 
 	void clearFloor();
 
-	void init();
+	void init(PC*);
 
 	void initPC(char);
 

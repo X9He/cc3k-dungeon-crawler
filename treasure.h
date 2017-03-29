@@ -1,4 +1,3 @@
-
 #ifndef Treasure_hpp
 #define Treasure_hpp
 

@@ -36,16 +36,16 @@ void Chamber::assignItem(Item *i){
 	int ran = random(0, emptyAmount-1);
 	emptySpawn[ran]->putItem(i);
 	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn.erase(ran);
+	emptySpawn.erase(emptySpawn.begin()+ran);
 }
 
 
 void Chamber::assignCharacter(Character *c){
 	int ran = random(0, emptyAmount-1);
-	emptySpawn[ran]->putChar(pc);
+	emptySpawn[ran]->putCharacter(c);
 	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn.erase(ran);
-	if (PC *pc = dynamic_cast<PC*>(c)) {
+	emptySpawn.erase(emptySpawn.begin()+ran);
+	if (c->getName() == '@') {
 		hasP = true;
 	}
 }
@@ -53,59 +53,60 @@ void Chamber::assignCharacter(Character *c){
 
 void Chamber::assignTreasure(Treasure *t, Dragon *d){
 	int ran = random(0, emptyAmount-1);
-	emptySpawn[ran]->attach(t);
+	Spawn *newS = emptySpawn[ran];
+	emptySpawn[ran]->putItem(t);
 	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn.erase(ran);
+	emptySpawn.erase(emptySpawn.begin()+ran);
 
-	int tRow = t->getRow();
-	int tCol = t->getCol();
+	int tRow = newS->getRow();
+	int tCol = newS->getCol();
 
-	vector<Cell*> newVec;
+	vector<Spawn*> newVec;
 	int amount = 0;
 	if (findSpawn(tRow, tCol + 1)!=nullptr){
-		if (!findSpawn(tRow, tCol + 1)->hasChar() && !findSpawn(tRow, tCol + 1)->hasItem()){
+		if (!findSpawn(tRow, tCol + 1)->hasCharacter() && !findSpawn(tRow, tCol + 1)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow, tCol + 1));
 		}
 		++amount;
 	} 
 	if (findSpawn(tRow + 1, tCol + 1)!=nullptr) {
-		if (!findSpawn(tRow + 1, tCol + 1)->hasChar() && !findSpawn(tRow + 1, tCol + 1)->hasItem()){
+		if (!findSpawn(tRow + 1, tCol + 1)->hasCharacter() && !findSpawn(tRow + 1, tCol + 1)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow + 1, tCol + 1));
 		}
 		++amount;
 	}
 	if (findSpawn(tRow + 1, tCol)!=nullptr) {
-		if (!findSpawn(tRow + 1, tCol)->hasChar() && !findSpawn(tRow + 1, tCol).hasItem()){
+		if (!findSpawn(tRow + 1, tCol)->hasCharacter() && !findSpawn(tRow + 1, tCol)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow + 1, tCol));
 		}
 		++amount;
 	}
 	if (findSpawn(tRow + 1, tCol - 1)!=nullptr) {
-		if (!findSpawn(tRow + 1, tCol - 1).hasChar() && !findSpawn(tRow + 1, tCol - 1).hasItem()){
+		if (!findSpawn(tRow + 1, tCol - 1)->hasCharacter() && !findSpawn(tRow + 1, tCol - 1)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow + 1, tCol - 1));
 		}
 		++amount;
 	}
 	if (findSpawn(tRow, tCol - 1)!=nullptr) {
-		if (!findSpawn(tRow, tCol - 1).hasChar() && !findSpawn(tRow, tCol - 1).hasItem()){
+		if (!findSpawn(tRow, tCol - 1)->hasCharacter() && !findSpawn(tRow, tCol - 1)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow, tCol - 1));
 		}
 		++amount;
 	}
 	if (findSpawn(tRow - 1, tCol - 1)!=nullptr) {
-		if (!findSpawn(tRow - 1, tCol - 1).hasChar() && !findSpawn(tRow - 1, tCol - 1).hasItem()){
+		if (!findSpawn(tRow - 1, tCol - 1)->hasCharacter() && !findSpawn(tRow - 1, tCol - 1)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow - 1, tCol - 1));
 		}
 		++amount;
 	}
 	if (findSpawn(tRow - 1, tCol)!=nullptr) {
-		if (!findSpawn(tRow - 1, tCol).hasChar() && !findSpawn(tRow - 1, tCol).hasItem()){
+		if (!findSpawn(tRow - 1, tCol)->hasCharacter() && !findSpawn(tRow - 1, tCol)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow + 1, tCol + 1));
 		}
 		++amount;
 	}
 	if (findSpawn(tRow - 1, tCol + 1)!=nullptr) {
-		if (!findSpawn(tRow - 1, tCol + 1).hasChar() && !findSpawn(tRow - 1, tCol + 1).hasItem()){
+		if (!findSpawn(tRow - 1, tCol + 1)->hasCharacter() && !findSpawn(tRow - 1, tCol + 1)->hasItem()){
 		newVec.emplace_back(findSpawn(tRow - 1, tCol + 1));
 		}
 		++amount;
@@ -113,9 +114,9 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 
 
 	int ranD = random(1, amount);
-	newVec[ranD]->attach(d);	
+	newVec[ranD]->putCharacter(d);	
 	fullSpawn.emplace_back(emptySpawn[ranD]);
-	emptySpawn.erase(ranD);
+	emptySpawn.erase(emptySpawn.begin()+ranD);
 
 }
 

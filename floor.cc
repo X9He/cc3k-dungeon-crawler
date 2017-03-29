@@ -1,10 +1,17 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <utility>
 #include <cstdlib>
 #include <typeinfo>
 #include "floor.h"
-#include "predefined.h"
+#include "wall.h"
+#include "passage.h"
+#include "door.h"
+#include "stair.h"
+#include "spawn.h"
+
+
 using namespace std;
 
 // Probability cur{2/9, 3/18, 5/18, 1/9, 1/9, 1/9};
@@ -16,38 +23,74 @@ int random(int x, int y){
 	return ran;
 }
 
+vector<vector<int>> genEightCord(int i, int j) {
+	vector<vector<int>> v;
+	vector<int> v1;
+	v1.emplace_back(i+1);
+	v1.emplace_back(j);
+	v.emplace_back(v1);
+	vector<int> v2;
+	v1.emplace_back(i-1);
+	v1.emplace_back(j);
+	v.emplace_back(v2);
+	vector<int> v3;
+	v1.emplace_back(i);
+	v1.emplace_back(j+1);
+	v.emplace_back(v3);
+	vector<int> v4;
+	v1.emplace_back(i);
+	v1.emplace_back(j-1);
+	v.emplace_back(v4);
+	vector<int> v5;
+	v1.emplace_back(i+1);
+	v1.emplace_back(j+1);
+	v.emplace_back(v5);
+	vector<int> v6;
+	v1.emplace_back(i-1);
+	v1.emplace_back(j+1);
+	v.emplace_back(v6);
+	vector<int> v7;
+	v1.emplace_back(i+1);
+	v1.emplace_back(j-1);
+	v.emplace_back(v7);
+	vector<int> v8;
+	v1.emplace_back(i-1);
+	v1.emplace_back(j-1);
+	v.emplace_back(v8);
+	return v;	
+}
 
 void Floor::prettyPrint(){
 	for (int i = 0; i < cellList.size() ; ++i){
 		for (int j = 0; j < cellList[i].size(); ++j){
-		char type  = cellList[i][j].getType();
-			if (type == ' '|| type == '|' || type == '-') {
-				cout << type;
-			} else if (cellList[i][j].hasCharacter()) {
-				cout << cellList[i][j].getCharacter.getName();
-			} else if (Spawn *s=dynamic_cast<Spawn *>(cellList[i][j])) {
-				if (cellList[i][j]->hasItem()) {
-					if (Potion *p=dynamic_cast<Potion *>(cellList[i][j]->getItem())) {
-						cout << 'P';
-					} else {
-						cout << 'G';
-					}
-				}
-			}
-			cout << endl;
+			cellList[i][j]->prettyPrint();
+		// char type  = cellList[i][j]->getType();
+		// 	if (type == ' '|| type == '|' || type == '-') {
+		// 		cout << type;
+		// 	} else if (cellList[i][j]->hasCharacter()) {
+		// 		cout << cellList[i][j]->getCharacter->getName();
+		// 	} else if (Spawn *s=dynamic_cast<Spawn *>(cellList[i][j])) {
+		// 		if (cellList[i][j]->hasItem()) {
+		// 			if (Potion *p=dynamic_cast<Potion *>(cellList[i][j]->getItem())) {
+		// 				cout << 'P';
+		// 			} else {
+		// 				cout << 'G';
+		// 			}
+		// 		}
+		// 	}
 		}
+		cout << endl;
 	}
 }
 
 void Floor::clearFloor(){
-	td = nullptr;
 	for (auto e: enemyList) {
 		delete e;
 	}
 	enemyList.clear();
 	for (int i = 0; i < cellList.size() ; ++i){
 		for (int j = 0; j < cellList[i].size(); ++j){
-			delete cellList[i].[j];
+			delete cellList[i][j];
 		}
 	}
 
@@ -61,9 +104,8 @@ void Floor::clearFloor(){
 }
 
 void Floor::init(PC *p){
-	td = Display{n};
-
-	fstream fs{"cc3k.txt"};
+	ifstream fs;
+	fs.open("cc3k.txt");
 	string s;
 	int i = 0;
 	while(getline(fs, s))
@@ -98,6 +140,7 @@ void Floor::init(PC *p){
 		cellList.emplace_back(newVec);
 		++i;
 	}
+	fs.close();
 
 	//Chamber 1
 	for (int i = 3; i <= 6; ++i){
@@ -112,14 +155,14 @@ void Floor::init(PC *p){
 	Chamber *chamberTwo = new Chamber{2};
 	for (int i = 3; i <= 6; ++i){
 		for (int j = 39; j <= 72; ++j){
-			if (cellList[i][j]->getType == '.'){
+			if (cellList[i][j]->getType() == '.'){
 				chamberTwo->addSpawn(cellList[i][j]);
 			}
 		}
 	}
 	for (int i = 7; i <= 12; ++i){
 		for (int j = 61; j <= 75; ++j){
-			if (cellList[i][j]->getType == '.'){
+			if (cellList[i][j]->getType() == '.'){
 				chamberTwo->addSpawn(cellList[i][j]);
 			}
 		}
@@ -161,7 +204,7 @@ void Floor::init(PC *p){
 	roomList.emplace_back(chamberFive);
 
 	int rP = random(0,4);
-	roomList[rP]->assignCharacter
+	roomList[rP]->assignCharacter(p);
 	createEnemy(20);
 	createTreasure(10);
 	createPotion(10);
@@ -335,7 +378,7 @@ bool Floor::movePlayer(string dir){
 
 	//WALL
 	if (c == ' ' || c == '-' || c == '|') {
-		return;
+		return true;
 	} 
 	//SPAWN
 	else if (c == '.')
@@ -517,60 +560,73 @@ void Floor::simpleMoveCharacter(int oldRow, int oldCol, int row, int col, Charac
 
 
 
-vector<Cell *> Floor::produceSurroundEmpty(int i, int j){
-	vector<Cell *> newVec;
-	if (!(cellList[i+1][j]->hasItem) && (!cellList[i+1][j]->hasChar) && (cellList[i+1][j]->getType) == '.') {
-		newVec.emplace_back(cellList[i+1][j]);
-	} 
-	if (!(cellList[i+1][j+1]->hasItem) && (!cellList[i+1][j+1]->hasChar) && (cellList[i+1][j+1]->getType) == '.') {
-		newVec.emplace_back(cellList[i+1][j+1]);
-	} 
-	if (!(cellList[i][j+1]->hasItem) && (!cellList[i][j+1]->hasChar) && (cellList[i][j+1]->getType) == '.') {
-		newVec.emplace_back(cellList[i][j+1]);
-	} 
-	if (!(cellList[i-1][j]->hasItem) && (!cellList[i-1][j]->hasChar) && (cellList[i-1][j]->getType) == '.'){
-		newVec.emplace_back(cellList[i-1][j]);
-	} 
-	if (!(cellList[i-1][j-1]->hasItem) && (!cellList[i-1][j-1]->hasChar)  && (cellList[i-1][j-1]->getType) == '.') {
-		newVec.emplace_back(cellList[i-1][j-1]);
-	} 
-	if (!(cellList[i][j-1]->hasItem) && (!cellList[i][j-1]->hasChar) && (cellList[i][j-1]->getType) == '.') {
-		newVec.emplace_back(cellList[i][j-1]);
-	} 
-	if (!(cellList[i+1][j-1]->hasItem) && (!cellList[i+1][j-1]->hasChar) && (cellList[i+1][j-1]->getType) == '.') {
-		newVec.emplace_back(cellList[i+1][j-1]);
-	} 
-	if (!(cellList[i-1][j+1]->hasItem) && (!cellList[i-1][j+1]->hasChar) && (cellList[i-1][j+1]->getType) == '.'){
-		newVec.emplace_back(cellList[i-1][j+1]);
-	} 
+vector<Spawn *> Floor::scanEmptyEnemy(int i, int j){
+	vector<vector<int>> newCords = genEightCord(i,j);
+	vector<Spawn *> newVec;
+	for (int i = 0; i < 8; ++i) {
+		int newR = newCords[i][0];
+		int newC = newCords[i][1];
+		Cell *curCell = cellList[newR][newC];
+		if(curCell->getType() == '.'){
+			Spawn *curSpawn = curCell;
+			if(!curSpawn->hasItem() && !curSpawn->hasCharacter()){
+				newVec.emplace_back(curSpawn);
+			}
+		}
+	}
+	// vector<Cell *> newVec;
+	// if ((cellList[i+1][j]->getType()) == '.' && !(cellList[i+1][j]->hasItem) && (!cellList[i+1][j]->hasChar)) {
+	// 	newVec.emplace_back(cellList[i+1][j]);
+	// } 
+	// if ((cellList[i+1][j+1]->getType()) == '.' && !(cellList[i+1][j+1]->hasItem) && (!cellList[i+1][j+1]->hasChar)) {
+	// 	newVec.emplace_back(cellList[i+1][j+1]);
+	// } 
+	// if ((cellList[i][j+1]->getType()) == '.' && !(cellList[i][j+1]->hasItem) && (!cellList[i][j+1]->hasChar)) {
+	// 	newVec.emplace_back(cellList[i][j+1]);
+	// } 
+	// if ((cellList[i][j+1]->getType()) == '.' && !(cellList[i-1][j]->hasItem) && (!cellList[i-1][j]->hasChar)){
+	// 	newVec.emplace_back(cellList[i-1][j]);
+	// } 
+	// if ((cellList[i-1][j-1]->getType()) == '.' && !(cellList[i-1][j-1]->hasItem) && (!cellList[i-1][j-1]->hasChar)) {
+	// 	newVec.emplace_back(cellList[i-1][j-1]);
+	// } 
+	// if ((cellList[i][j-1]->getType()) == '.' && !(cellList[i][j-1]->hasItem) && (!cellList[i][j-1]->hasChar)) {
+	// 	newVec.emplace_back(cellList[i][j-1]);
+	// } 
+	// if ((cellList[i+1][j-1]->getType()) == '.' && !(cellList[i+1][j-1]->hasItem) && (!cellList[i+1][j-1]->hasChar)) {
+	// 	newVec.emplace_back(cellList[i+1][j-1]);
+	// } 
+	// if ((cellList[i-1][j+1]->getType()) == '.' && !(cellList[i-1][j+1]->hasItem) && (!cellList[i-1][j+1]->hasChar)){
+	// 	newVec.emplace_back(cellList[i-1][j+1]);
+	// } 
 
 	return newVec;
 }
 
 
 Cell * Floor::checkPC(int i, int j){
-	if (((cellList[i+1][j]->getChar())->getName() == '@') && (!cellList[i+1][j]->hasChar) && (cellList[i+1][j]->getType) == '.') {
+	if (((cellList[i+1][j]->getChar())->getName() == '@') && (!cellList[i+1][j]->hasChar) && (cellList[i+1][j]->getType()) == '.') {
 		return cellList[i+1][j];
 	} 
-	if (((cellList[i+1][j+1]->getChar())->getName() == '@') && (!cellList[i+1][j+1]->hasChar) && (cellList[i+1][j+1]->getType) == '.') {
+	if (((cellList[i+1][j+1]->getChar())->getName() == '@') && (!cellList[i+1][j+1]->hasChar) && (cellList[i+1][j+1]->getType()) == '.') {
 		return cellList[i+1][j+1];
 	} 
-	if (((cellList[i][j+1]->getChar())->getName() == '@') && (cellList[i][j+1]->getType) == '.') {
+	if (((cellList[i][j+1]->getChar())->getName() == '@') && (cellList[i][j+1]->getType()) == '.') {
 		return cellList[i][j+1];
 	} 
-	if (((cellList[i-1][j]->getChar())->getName() == '@') && (!cellList[i-1][j]->hasChar) && (cellList[i-1][j]->getType) == '.'){
+	if (((cellList[i-1][j]->getChar())->getName() == '@') && (!cellList[i-1][j]->hasChar) && (cellList[i-1][j]->getType()) == '.'){
 		return cellList[i-1][j];
 	} 
-	if (((cellList[i-1][j-1]->getChar())->getName() == '@') && (!cellList[i-1][j-1]->hasChar)  && (cellList[i-1][j-1]->getType) == '.') {
+	if (((cellList[i-1][j-1]->getChar())->getName() == '@') && (!cellList[i-1][j-1]->hasChar)  && (cellList[i-1][j-1]->getType()) == '.') {
 		return cellList[i-1][j-1];
 	} 
-	if (((cellList[i][j-1]->getChar())->getName() == '@') && (!cellList[i][j-1]->hasChar) && (cellList[i][j-1]->getType) == '.') {
+	if (((cellList[i][j-1]->getChar())->getName() == '@') && (!cellList[i][j-1]->hasChar) && (cellList[i][j-1]->getType()) == '.') {
 		return cellList[i][j-1];
 	} 
-	if (((cellList[i+1][j-1]->getChar())->getName() == '@') && (!cellList[i+1][j-1]->hasChar) && (cellList[i+1][j-1]->getType) == '.') {
+	if (((cellList[i+1][j-1]->getChar())->getName() == '@') && (!cellList[i+1][j-1]->hasChar) && (cellList[i+1][j-1]->getType()) == '.') {
 		return cellList[i+1][j-1];
 	} 
-	if (((cellList[i-1][j+1]->getChar())->getName() == '@') && (!cellList[i-1][j+1]->hasChar) && (cellList[i-1][j+1]->getType) == '.'){
+	if (((cellList[i-1][j+1]->getChar())->getName() == '@') && (!cellList[i-1][j+1]->hasChar) && (cellList[i-1][j+1]->getType()) == '.'){
 		return cellList[i-1][j+1];
 	} 
 	return nullptr;

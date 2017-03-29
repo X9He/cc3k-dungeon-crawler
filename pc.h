@@ -3,15 +3,17 @@
 #include <string>
 #include <iostream>
 #include "character.h"
-#include "item.h"
+// #include "item.h"
 #include "enemy.h"
+
+class Item;
 
 class Enemy;
 class Merchant;
 class Human;
 class Dragon;
 class Elf;
-class Halfing;
+class Halfling;
 class Elf;
 class Dwarf;
 class Orcs;
@@ -22,14 +24,14 @@ class PC: public Character {
   public:
   PC(int initHP=125, int initAtk=25, int initDef=25);
   virtual ~PC();
-  void pickUpItem(Item *i);
+  void pickUpItem(Item &i);
   int getMax();
   void attack(Enemy *target);
   void hurt(Merchant &m);
   void hurt(Human &h);
   void hurt(Dragon &d);
   void hurt(Elf &e);
-  void hurt(Halfing &l);
+  void hurt(Halfling &l);
   void hurt(Dwarf &w);
   void hurt(Orcs &o);
 };
@@ -45,7 +47,7 @@ class Troll: public PC{
   void hurt(Human &h);
   void hurt(Dragon &d);
   void hurt(Elf &e);
-  void hurt(Halfing &l);
+  void hurt(Halfling &l);
   void hurt(Dwarf &w);
   void hurt(Orcs &o);
 };
@@ -60,7 +62,7 @@ class Vampire: public PC{
   void hurt(Human &h);
   void hurt(Dragon &d);
   void hurt(Elf &e);
-  void hurt(Halfing &l);
+  void hurt(Halfling &l);
   void hurt(Dwarf &w);
   void hurt(Orcs &o);
 
@@ -77,7 +79,7 @@ class Goblin: public PC{
   void hurt(Human &h);
   void hurt(Dragon &d);
   void hurt(Elf &e);
-  void hurt(Halfing &l);
+  void hurt(Halfling &l);
   void hurt(Dwarf &w);
   void hurt(Orcs &o);
 
@@ -93,7 +95,7 @@ class Drow: public PC{
   void hurt(Human &h);
   void hurt(Dragon &d);
   void hurt(Elf &e);
-  void hurt(Halfing &l);
+  void hurt(Halfling &l);
   void hurt(Dwarf &w);
   void hurt(Orcs &o);
 };

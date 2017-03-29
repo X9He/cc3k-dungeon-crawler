@@ -1,10 +1,7 @@
-
-
 #ifndef item_hpp
 #define item_hpp
-
-#include <stdio.h>
-
+#include <string>
+#include <iostream>
 
 class PC;
 

@@ -24,8 +24,8 @@ public:
 	void assignItem(Item *);
 	void assignCharacter(Character *);
 	void assignTreasure(Treasure *, Dragon *);
-	void setHasPlayer();
-	bool hasPlayer(bool);
+	void setHasPlayer(bool);
+	bool hasPlayer();
 	int getNum();
 };
 

@@ -4,18 +4,18 @@
 #include "Stair.h"
 using namespace std;
 
-Stair::Stair(char type, int row, int col, int num): Cell(type, row, col, num) {}
+Stair::Stair(char type, int row, int col, int num, Character *c): NormalCell{type, row, col, c}{}
 
 Stair::~Stair() {}
 
 void Stair::prettyPrint(){
-	cout << type << endl;
+	cout << getType();
 }
 
-int Stair::canPass(char *c){
-	if (c == '@') {
-		return 0;
-	} else {
-		return 3;
-	}
-}
+// int Stair::canPass(char *c){
+// 	if (c == '@') {
+// 		return 0;
+// 	} else {
+// 		return 3;
+// 	}
+// }

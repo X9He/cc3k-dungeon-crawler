@@ -1,4 +1,3 @@
-
 #include "enemy.h"
 #include "pc.h"
 
@@ -54,7 +53,7 @@ Enemy{150, 20, 20, 0, target}{
     name = 'D';
 }
 
-Halfing::Halfing(PC * target):
+Halfling::Halfling(PC * target):
 NormalEnemy{100, 15, 20, random_gold(), target} {
     name = 'L';
 }
@@ -112,7 +111,7 @@ void Dwarf::attack(PC * player) {
     }
 }
 
-void Halfing::attack(PC * player) {
+void Halfling::attack(PC * player) {
     int rad = random(0, 1);
     if (rad == 0) {
         player->hurt(*this);

@@ -16,7 +16,7 @@ PC::PC(int initHP, int initAtk, int initDef):
 
 PC::~PC() {}
 
-void PC::pickUpItem(Item *i) {
+void PC::pickUpItem(Item &i) {
   i.useItem();
 }
 
@@ -73,7 +73,7 @@ void PC::attack(Dward  *target) {
    }
 }
 
-void PC::attack(Halfing  *target) {
+void PC::attack(Halfling  *target) {
    target->hurt(*this);
    if (target->getHP() == 0) {
      changeGold(target->getGold());
@@ -217,7 +217,7 @@ integer Character::damage(Character &other, float mag = 1) {
   return 0 - ceiling((100 / (100 + Def))) * (mag * other.Atk);
 }
 
-void PC::hurt(Halfing &l){
+void PC::hurt(Halfling &l){
   int effect = l.damage(*this);
   l.changetHP(effect);
 }
@@ -255,7 +255,7 @@ void PC::hurt(Dwarf & d) {
     changeHP(effect);
 }
 
-void PC::hurt(Halfing & h) {
+void PC::hurt(Halfling & h) {
    int effect = damage(h);
     changeHP(effect);
 }
@@ -362,7 +362,7 @@ void Troll::hurt(Elf &e) {
   int effect = damage(e,2);
   changeHP(effect);
 }
-void Troll::hurt(Halfing &l) {
+void Troll::hurt(Halfling &l) {
   int effect = damage(l);
   changeHP(effect);
 }
@@ -391,7 +391,7 @@ void Vampire::hurt(Elf &e) {
   int effect = damage(e,2);
   changeHP(effect);
 }
-void Vampire::hurt(Halfing &l) {
+void Vampire::hurt(Halfling &l) {
   int effect = damage(l);
   changeHP(effect);
 }
@@ -420,7 +420,7 @@ void Goblin::hurt(Elf &e) {
   int effect = damage(e,2);
   changeHP(effect);
 }
-void Goblin::hurt(Halfing &l) {
+void Goblin::hurt(Halfling &l) {
   int effect = damage(l);
   changeHP(effect);
 }
@@ -449,7 +449,7 @@ void Drow::hurt(Elf &e) {
   int effect = damage(e);
   changeHP(effect);
 }
-void Drow::hurt(Halfing &l) {
+void Drow::hurt(Halfling &l) {
   int effect = damage(l);
   changeHP(effect);
 }

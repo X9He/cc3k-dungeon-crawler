@@ -7,6 +7,10 @@
 #include "treasure.h"
 #include <vector>
 
+class Troll;
+class Vampire;
+class Goblin;
+class Drow;
 
 class Enemy: public Character {
     PC * Target;
@@ -46,10 +50,10 @@ public:
     Dwarf(PC *target);
 };
 
-class Halfing: public NormalEnemy {
+class Halfling: public NormalEnemy {
 public:
     void attack(PC *target) override;
-    Halfing(PC *target);
+    Halfling(PC *target);
 };
 
 class Orcs: public NormalEnemy {

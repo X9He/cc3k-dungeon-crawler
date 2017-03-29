@@ -1,6 +1,8 @@
-
-
+#include <iostream>
+#include <vector>
+#include <utility>
 #include "treasure.h"
+#include "pc.h"
 
 
 Treasure::Treasure(int value, bool protect):

@@ -6,16 +6,16 @@
 #include "cell.h"
 
 class Wall: public Cell {
-	char wallType;
+	// char wallType;
 
 public:
-	Wall(char type, int row, int col, int num);
+	Wall(char type, int row, int col);
 
 	~Wall();
 
 	void prettyPrint() override;
 
-	bool canPass();
+	// bool canPass();
 
 };
 
