@@ -36,7 +36,10 @@ void PC::attack(Enemy  *target) {
 }
 */
 
-    
+void PC::attack(Enemy *target) {
+    target->hurt(this);
+}
+
 void PC::attack(Elf  *target) {
    target->hurt(this);
    if (target->getHP() == 0) {

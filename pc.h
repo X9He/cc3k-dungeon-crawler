@@ -27,6 +27,7 @@ public:
     virtual ~PC();
     void pickUpItem(Item &i);
     int getMax();
+    void attack(Enemy *target);
     void attack(Elf *target);
     void attack(Dwarf  *target);
     void attack(Halfling  *target);
