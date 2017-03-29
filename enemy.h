@@ -26,12 +26,11 @@ public:
     void changeFrozen();
     void changeMoved();
     bool getMoved();
-    void hurt(Troll *p);
-    void hurt(Vampire *p);
-    void hurt(Goblin *p);
-    void hurt(Drow *p);
-    void hurt(Elf *p); // to implement
-    void hurt(PC * p); // to implement
+    virtual void hurt(Troll *p);
+    virtual void hurt(Vampire *p);
+    virtual void hurt(Goblin *p);
+    virtual void hurt(Drow *p);
+    virtual void hurt(PC *p);
 };
 
 class NormalEnemy: public Enemy {
@@ -57,6 +56,12 @@ class Halfling: public NormalEnemy {
 public:
     void attack(PC *target) override;
     Halfling(PC *target);
+    void hurt(Troll *p) override;
+    void hurt(Drow *p) override;
+    void hurt(Vampire *p) override;
+    void hurt(PC *p) override;
+    void hurt(Goblin *p) override;
+       
 };
 
 class Orcs: public NormalEnemy {

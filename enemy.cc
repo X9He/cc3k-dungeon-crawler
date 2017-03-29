@@ -5,7 +5,7 @@
 // generate random number
 int random(int x, int y){
     int ran;
-    srand((unsigned int) time(0));
+    srand(time(0));
     ran = x + (rand() % (y - x + 1));
     return ran;
 }
@@ -13,7 +13,7 @@ int random(int x, int y){
 // generate random gold
 int random_gold(){
     int ran;
-    srand((unsigned int) time(0));
+    srand(time(0));
     ran = 0 + (rand() % (1 - 0 + 1));
     if (ran == 0) return 1;
     return 2;
@@ -68,6 +68,7 @@ void Enemy::changeFrozen() {
     isFrozen = !isFrozen;
 }
 
+// hurt
 void Enemy::hurt(Troll *p) {
     int effect = damage(*p);
     changeHP(effect);
@@ -88,6 +89,56 @@ void Enemy::hurt(Drow *p) {
     changeHP(effect);
 }
 
+void Enemy::hurt(PC *p) {
+    int effect = damage(*p);
+    int r = random(0, 1);
+    if (r == 0) {
+        changeHP(effect);
+    }
+}
+
+void Halfling::hurt(Troll *p) {
+    int effect = damage(*p);
+    int r = random(0, 1);
+    if (r == 0) {
+        changeHP(effect);
+    }
+}
+
+void Halfling::hurt(Vampire *p) {
+    int effect = damage(*p);
+    int r = random(0, 1);
+    if (r == 0) {
+        changeHP(effect);
+    }
+}
+
+void Halfling::hurt(Goblin *p) {
+    int effect = damage(*p);
+    int r = random(0, 1);
+    if (r == 0) {
+        changeHP(effect);
+    }
+}
+
+void Halfling::hurt(Drow *p) {
+    int effect = damage(*p);
+    int r = random(0, 1);
+    if (r == 0) {
+        changeHP(effect);
+    }
+}
+
+
+void Halfling::hurt(PC *p) {
+    int effect = damage(*p);
+    int r = random(0, 1);
+    if (r == 0) {
+        changeHP(effect);
+    }
+}
+
+//
 void Enemy::changeMoved() {
     moved = !moved;
 }
@@ -96,6 +147,7 @@ bool Enemy::getMoved() {
     return moved;
 }
 
+// attack
 void Elf::attack(PC * player) {
     int rad = random(0, 1);
     if (rad == 0) {
