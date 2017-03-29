@@ -29,8 +29,6 @@ public:
 
 	void init(PC*);
 
-	void initPC(char);
-
 	int getLevel();
 
 	bool gameOver();

@@ -23,19 +23,24 @@ int main() {
     PC *player = nullptr;
     while (cin >> role) {
     if (role == "s") {
-        PC * player;
+        PC p;
+        player = &p;
         break;
     } else if (role == "d") {
-        Drow * player;
+        Drow d;
+        player = &d;
         break;
     } else if (role == "v") {
-        Vampire * player ;
+        Vampire v;
+        player = &v;
         break;
     } else if (role == "t") {
-        Troll * player;
+        Troll t;
+        player = &t;
         break;
     } else if (role == "g"){
-        Goblin * player;
+        Goblin g;
+        player = &g;
         break;
     } else if (role == "q"){
         cout << "Quiting" << endl;
@@ -49,6 +54,7 @@ int main() {
     
     while (level < 6) {
         Floor f(player);
+        f.init(player);
         string direction;
         while (cin >> direction) {
             if (direction == "q") {
@@ -68,6 +74,7 @@ int main() {
             f.updateEnemy();
             f.prettyPrint();
         }
+        f.clearFloor();
   }
     
     
