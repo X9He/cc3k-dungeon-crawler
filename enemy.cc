@@ -5,7 +5,7 @@
 // generate random number
 int random(int x, int y){
     int ran;
-    srand(time(0));
+    srand((unsigned int) time(0));
     ran = x + (rand() % (y - x + 1));
     return ran;
 }
@@ -13,7 +13,7 @@ int random(int x, int y){
 // generate random gold
 int random_gold(){
     int ran;
-    srand(time(0));
+    srand((unsigned int) time(0));
     ran = 0 + (rand() % (1 - 0 + 1));
     if (ran == 0) return 1;
     return 2;
