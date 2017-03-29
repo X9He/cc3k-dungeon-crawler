@@ -326,10 +326,10 @@ void Floor::createStair(){
         stair_room++;
     }
     
-    int num = roomList[stair_room]->getemptyAmount();
+    int num = roomList[stair_room]->getEmptyAmount();
     int r2 = random(1, num);
 
-    Spawn * tar = roomList[stair_room]->getemptySpawn()[r2];
+    Spawn * tar = roomList[stair_room]->getEmptySpawn()[r2];
     int row = tar->getRow();
     int col = tar->getCol();
     
@@ -337,7 +337,7 @@ void Floor::createStair(){
     
     cellList[row][col] = &new_stair;
     
-    roomList[stair_room]->erase_emptySpawn(r2);
+    roomList[stair_room]->eraseEmptySpawn(r2);
     
     delete tar;
     
@@ -400,7 +400,7 @@ bool Floor::movePlayer(string dir){
 		// Spawn has an enemy
 		if (curCell->hasCharacter())
 		{
-			Enemy *curE = curCell->getCharacter();
+			Enemy *curE = dynamic_cast<Enemy *>(curCell->getCharacter());
 			player->attack(curE);
 
 			if (curE->getHP() <= 0) 
@@ -457,76 +457,78 @@ void Floor::updateEnemy(){
 				continue;
 			}
 
+		
+			//cell has enemy, 
+			else {
+				Enemy *curE = dynamic_cast<Enemy*>(c);
 
-			//cell has enemy, and it has not moved this round
-			else if (!c->getMoved()) {
-				//cell has dragon
-				if (curE->getName() == 'D') {
-					Dragon *d = dynamic_cast<Dragon *>(c);
-					Treasure *t = d->getHoard();
-					int tRow = t->getRow();
-					int tCol = t->getCol();
+				//enemy has not moved this round
+				if (!curE->getMoved()) {
+					//cell has dragon
 
-					PC *tar = checkPC(tRow, tCol);
+					if (curE->getName() == 'D') {
+						Dragon *d = dynamic_cast<Dragon *>(c);
+						Treasure *t = d->getHoard();
+						int tRow = t->getRow();
+						int tCol = t->getCol();
 
-					if (tar != nullptr) {
-						d->attack(tar);
+						PC *tar = checkPC(tRow, tCol);
+
+						if (tar != nullptr) {
+							d->attack(tar);
+						}
 					} 
-				// cell has merchant
-				} 
 
-
-				else if (curE->getName() == 'M') {				
-					Merchant *m = dynamic_cast<Merchant *>(c);					
-					PC *tar = checkPC(i, j);
-					if (m->isHostile()) {
-						if (tar != nullptr){
-							m->attack(tar);
-						} 
-					} else {
-						vector<Cell *> surround = produceSurroundEmpty(i, j);
-						if (surround.size() != 0) {
-							int size = surround.size();
-							int r = random(0, size - 1);
-							int newR = surround[r]->getRow;
-							int newC = surround[r]->getCol;
-							simpleMoveCharacter(i, j, newR, newC, c);
+					// cell has merchant
+					else if (curE->getName() == 'M') {				
+						Merchant *m = dynamic_cast<Merchant *>(c);					
+						PC *tar = checkPC(i, j);
+						if (m->IsHostile()) {
+							if (tar != nullptr){
+								m->attack(tar);
+							} 
 						} else {
+							vector<Spawn *> surround = scanEmptyEnemy(i, j);
+							if (surround.size() != 0) {
+								int size = surround.size();
+								int r = random(0, size - 1);
+								int newR = surround[r]->getRow();
+								int newC = surround[r]->getCol();
+								simpleMoveCharacter(i, j, newR, newC, c);
+							} else {
+								continue;
+							}
+						}
+					}
+
+
+					// cell has normal enemy
+					else {
+						Enemy *curE = dynamic_cast<Enemy *>(c);
+						PC *tar = checkPC(i, j);
+						if (tar != nullptr) 
+						{
+							curE->attack(tar);
 							continue;
+						} 
+						else 
+						{
+							vector<Spawn *> surround = scanEmptyEnemy(i, j);
+							if (surround.size() != 0) {
+								int size = surround.size();
+								int r = random(0, size - 1);
+								int newR = surround[r]->getRow();
+								int newC = surround[r]->getCol();
+								simpleMoveCharacter(i, j, newR, newC, c);
+							}
 						}
 					}
 				}
 
-
-				// cell has normal enemy
+				//enemy has moved already
 				else {
-					Enemy *curE = dynamic_cast<Enemy *>(c);
-					PC *tar = checkPC(i, j);
-					if (tar != nullptr) 
-					{
-						curE->attack(tar);
-						continue;
-					} 
-					else 
-					{
-						vector<Cell *> surround = produceSurroundEmpty(i, j);
-						if (surround.size() != 0) {
-							int size = surround.size();
-							int r = random(0, size - 1);
-							int newR = surround[r]->getRow;
-							int newC = surround[r]->getCol;
-							simpleMoveCharacter(i, j, newR, newC, c);
-
-						} else {
-							continue;
-						}
-					}						
+					continue;
 				}
-			}
-
-			//enemy has moved already
-			else {
-				continue;
 			}
 		}
 	}
@@ -535,19 +537,16 @@ void Floor::updateEnemy(){
 	// resset all enemies moved state to false
 	for(int i = 0; i < x; ++i){
 		for(int j = 0; j < y; ++j){
-
-			//check if cell has character
-			Character *c = cellList[i][j]->getCharacter;
-
-			//cell does not have character
-			if (c == nullptr){
-				continue;
-			} 
-
-			//cell has character
-			else {
-				if (c->getMoved()){
-					c->changeMoved();
+			if (cellList[i][j]->getType() == '.'){
+				Spawn *s = dynamic_cast<Spawn*>(cellList[i][j]);
+				Character *c = s->getCharacter();	
+				if (c == nullptr){
+					continue;
+				} else {
+					Enemy *e = dynamic_cast<Enemy *>(c);
+					if (e->getMoved()){
+						e->changeMoved();
+					}
 				}
 			}
 		}
@@ -563,13 +562,15 @@ void Floor::deleteEnemy(int row, int col){
 		++i;
 	}
 	delete enemyList[i];
-	enemyList.erase(i);
+	enemyList.erase(enemyList.begin() + i);
 }
 
 void Floor::simpleMoveCharacter(int oldRow, int oldCol, int row, int col, Character *c){
-	cellList[oldRow][oldCol]->putChar(nullptr);
+	NormalCell *oldCell = dynamic_cast<NormalCell*>(cellList[oldRow][oldCol]);
+	oldCell->putCharacter(nullptr);
+	NormalCell *newCell = dynamic_cast<NormalCell*>(cellList[row][col]);
 	c->changePosition(row, col);
-	cellList[row][col]->putChar(c);
+	newCell->putCharacter(c);
 }
 
 
@@ -629,7 +630,8 @@ PC* Floor::checkPC(int i, int j){
 		if(curCell->getType() == '.'){
 			Spawn *curSpawn = dynamic_cast<Spawn *>(curCell);
 			if(curSpawn->hasCharacter() && (curSpawn->getCharacter()->getName()) == '@'){
-				return curSpawn->getCharacter();
+				PC *p = dynamic_cast<PC*>(curSpawn->getCharacter());
+				return p;
 			}
 		}
 	}

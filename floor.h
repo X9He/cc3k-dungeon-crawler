@@ -47,7 +47,7 @@ public:
 
 	void updateEnemy();
 
-	void deleteEnemy();
+	void deleteEnemy(int, int);
 
 	void simpleMoveCharacter(int, int, int, int, Character *c);
 

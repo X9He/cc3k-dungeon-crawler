@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "Stair.h"
+#include "stair.h"
 using namespace std;
 
-Stair::Stair(char type, int row, int col, int num, Character *c): NormalCell{type, row, col, c}{}
+Stair::Stair(char type, int row, int col, Character *c): NormalCell{type, row, col, c}{}
 
 Stair::~Stair() {}
 
