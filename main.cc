@@ -2,6 +2,8 @@
 #include <vector>
 #include <utility>
 #include "floor.h"
+#include "pc.h"
+#include "character.h"
 
 using namespace std;
 
@@ -51,7 +53,7 @@ int main() {
         while (cin >> direction) {
             if (direction == "q") {
                 cout << "Quiting" << endl;
-                return;
+                return 0;
             }
             if (floor.moveplayer(direction) == false) {
                 level++;
