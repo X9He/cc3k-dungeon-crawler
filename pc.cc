@@ -103,7 +103,7 @@ void PC::attack(Halfling  *target) {
 
 int random(int x, int y){
  int ran;
- srand(time(0));
+ srand((unsigned int)time(0));
  ran = x + (rand() % (y - x + 1));
  return ran;
 }
