@@ -21,9 +21,9 @@ int Character::damage(Character &other, float mag) {
 
 bool Character::die() {return curHp == 0;}
 
-int Character::getrow() {return row;}
+int Character::getRow() {return row;}
 
-int Character::getcol() {return col;}
+int Character::getCol() {return col;}
 
 char Character::getName() {return name;}
 

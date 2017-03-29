@@ -21,8 +21,8 @@ class Character {
   virtual int getAtk();
   virtual int getDef();
   virtual int getGold();
-  int getrow();
-  int getcol();
+  int getRow();
+  int getCol();
   char getName(); 
   void initAtkDef();
     void changeGold(int);

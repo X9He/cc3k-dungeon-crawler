@@ -31,6 +31,12 @@ void Chamber::addSpawn(Spawn *s) {
 	++capacity;
 }
 
+int Chamber::getemptyAmount() {
+    return emptyAmount;
+}
+vector<Spawn *> Chamber::getemptySpawn() {
+    return emptySpawn;
+}
 
 void Chamber::assignItem(Item *i){
 	int ran = random(0, emptyAmount-1);
@@ -135,3 +141,12 @@ bool Chamber::hasPlayer(){
 int Chamber::getNum(){
 	return chamberNumber;
 }
+
+
+void Chamber::erase_emptySpawn(int i) {
+    emptySpawn.erase(i);
+}
+
+
+
+

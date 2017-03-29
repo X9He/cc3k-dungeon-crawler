@@ -322,22 +322,22 @@ void Goblin::steal(){
 }
 
 void Goblin::attack(Enemy *target) {
-  target->hurt(this);
-  if (target->getHP() == 0) {
-    changeGold(target->getGold()); //
-    steal();
-    message = "PC steals 5 gold from " + to_string(target->getName());
-  }  
-  else {
-    int effect1= target->damage(*this);
-    int effect2 = damage(*target);
-    stringstream a1;
-    stringstream a2;
-    a1 << effect1;
-    a2 << effect2;
-    message = "PC deals " + effect1 + "damages to (" + to_string(target->getName()) +
-      "). " + to_string(target->getName()) + " deals " + effect2 + " to PC.";
-  }
+    target->hurt(this);
+    if (target->getHP() == 0) {
+        changeGold(target->getGold()); //
+        steal();
+        message = "PC steals 5 gold from " + to_string(target->getName());
+    }
+    else {
+        int effect1 = target->damage(*this);
+        int effect2 = damage(*target);
+        stringstream a1;
+        stringstream a2;
+        a1 << effect1;
+        a2 << effect2;
+        message = "PC deals " + a1.str() + "damages to (" + to_string(target->getName()) +
+        "). " + to_string(target->getName()) + " deals " + a2.str() + " to PC."; //////////
+    }
 }
 
 Drow::Drow():

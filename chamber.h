@@ -7,15 +7,16 @@
 #include "potion.h"
 #include "item.h"
 #include "enemy.h"
+#include <vector>
 
 class Chamber {
-	std::vector<Spawn *> emptySpawn;
-	std::vector<Spawn *> fullSpawn;
+	
 	int chamberNumber;
 	int capacity;
 	int emptyAmount;
 	bool hasP;
-
+    std::vector<Spawn *> emptySpawn;
+    std::vector<Spawn *> fullSpawn;
 public:
 	Chamber(int, bool hasP = true);
 	~Chamber();
@@ -26,7 +27,10 @@ public:
 	void assignTreasure(Treasure *, Dragon *);
 	void setHasPlayer(bool);
 	bool hasPlayer();
+    int getemptyAmount();
 	int getNum();
+    std::vector<Spawn *> getemptySpawn();
+    void erase_emptySpawn(int);
 };
 
 
