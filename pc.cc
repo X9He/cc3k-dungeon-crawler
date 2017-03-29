@@ -305,7 +305,8 @@ Vampire::~Vampire() {}
 
 void Vampire::VchangHP(int effect) {
    int current = getHP();
-  changeHP(effect, current + effect);
+   int max = current + effect;
+  changeHP(effect, max);
 }
 
 
