@@ -24,15 +24,27 @@ int PC::getMax() {
   return max;
 }
 
-/*
 void PC::attack(Enemy  *target) {
    target->hurt(*this);
    if (target->getHP() == 0) {
      changeGold(target->getGold());
+     stringstream a;
+     int amount = targey->getGold();
+     a << amount
+     message = "PC steals " + a.str() + " from " + to_string(target->name);
+   } else {
+     int effect1= target->damage(*this, 2);
+     int effect2 = damage(target);
+     stringstream a1;
+     stringstream a2;
+     a1 << effect1;
+     a2 << effect2;
+     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
+       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
    }
 }
-*/
 
+/*
 void PC::attack(Elf  *target) {
    target->hurt(*this);
    if (target->getHP() == 0) {
@@ -92,6 +104,7 @@ void PC::attack(Halfing  *target) {
        "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
    }
 }
+*/
 
 
 int random(int x, int y){
@@ -102,7 +115,7 @@ int random(int x, int y){
 }
 
 
-void PC::attack(Orcs  *target) {
+/*void PC::attack(Orcs  *target) {
   // 50% miss
   int ran = random(0, 1);
   if (ran == 0) {
@@ -188,6 +201,7 @@ void PC::attack(Human  *target) {
       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
   }
 }
+*/
 
 
 /*
@@ -464,6 +478,7 @@ void Drow::hurt(Orcs &o) {
 
 
 //////////////////////////////////////
+/*
 void Troll::attack(Enemy *target) {
   target->hurt(*this);
   if (target->getHP() == 0) {
@@ -531,3 +546,4 @@ void Drow::attaCK(Enemey *target) {
       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
   }
 }
+*/
