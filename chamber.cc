@@ -25,16 +25,22 @@ Spawn* Chamber::findSpawn(int row, int col){
 	return nullptr;
 }
 
+
+
 void Chamber::addSpawn(Spawn *s) {
 	emptySpawn.emplace_back(s);
 	++emptyAmount;
 	++capacity;
 }
 
+
+
 int Chamber::getemptyAmount() {
     return emptyAmount;
 }
-vector<Spawn *> Chamber::getemptySpawn() {
+
+
+vector<Spawn *> Chamber::getEmptySpawn() {
     return emptySpawn;
 }
 
@@ -143,8 +149,8 @@ int Chamber::getNum(){
 }
 
 
-void Chamber::erase_emptySpawn(int i) {
-    emptySpawn.erase(i);
+void Chamber::eraseEmptySpawn(int i) {
+    emptySpawn.erase(emptySpawn.begin() + i);
 }
 
 

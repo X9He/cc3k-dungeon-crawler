@@ -29,8 +29,8 @@ public:
 	bool hasPlayer();
     int getemptyAmount();
 	int getNum();
-    std::vector<Spawn *> getemptySpawn();
-    void erase_emptySpawn(int);
+    std::vector<Spawn *> getEmptySpawn();
+    void eraseEmptySpawn(int);
 };
 
 
