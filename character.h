@@ -14,9 +14,9 @@ class Character {
   virtual  ~Character();
   int damage(Character &other, float mag = 1);
   bool die();
-  virtual void changeHP(int effect,int max = initHP);
-  virtual void changeAtk(int effect,int max = initAtk);
-  virtual void changeDef(int effect, int max = initDef);
+  virtual void changeHP(int effect);
+  virtual void changeAtk(int effect);
+  virtual void changeDef(int effect);
   virtual int getHP();
   virtual int getAtk();
   virtual int getDef();
@@ -26,6 +26,8 @@ class Character {
   char getName(); 
   void initAtkDef();
     void changeGold(int);
+    int getinitHp();
+    void changeCurHP(int);
 };  
 
 #endif

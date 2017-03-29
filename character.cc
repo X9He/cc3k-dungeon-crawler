@@ -32,24 +32,23 @@ void Character::changePosition(int x, int y) {
     col = y;
 }
 
-void Character::changeHP(int effect, int max) {
+void Character::changeHP(int effect) {
+    int max = getinitHp();
     int afterChange = curHp + effect;
     if (afterChange  <=0) curHp = 0;
     else if (afterChange >= max) curHp = max;
     else curHp = afterChange;
 }
 
-void Character::changeAtk(int effect, int max) {
+void Character::changeAtk(int effect) {
     int afterChange = curAtk + effect;
     if (afterChange <= 0) curAtk = 0;
-    else if (afterChange >= max) curAtk = max;
     else curHp = afterChange;
 }
 
 void Character::changeDef(int effect){
     int afterChange = curDef + effect;
     if (afterChange  <=0) curDef = 0;
-    else if (afterChange >= max) curDef = max;
     else curDef = afterChange;
 }
 
@@ -72,6 +71,14 @@ int Character::getGold(){
 void Character::initAtkDef() {
     curAtk = initAtk;
     curDef = initDef;
+}
+
+int Character::getinitHp() {
+    return initHP;
+}
+
+void Character::changeCurHP(int i) {
+    curHp = i;
 }
 
 
