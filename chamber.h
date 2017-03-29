@@ -27,7 +27,7 @@ public:
 	void assignTreasure(Treasure *, Dragon *);
 	void setHasPlayer(bool);
 	bool hasPlayer();
-    int getemptyAmount();
+    int getEmptyAmount();
 	int getNum();
     std::vector<Spawn *> getEmptySpawn();
     void eraseEmptySpawn(int);

@@ -35,7 +35,7 @@ void Chamber::addSpawn(Spawn *s) {
 
 
 
-int Chamber::getemptyAmount() {
+int Chamber::getEmptyAmount() {
     return emptyAmount;
 }
 
