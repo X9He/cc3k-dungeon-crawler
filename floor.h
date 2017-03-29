@@ -54,6 +54,7 @@ public:
 	std::vector<Spawn *> scanEmptyEnemy(int, int);
 
 	PC* checkPC(int, int);
+    
 };
 
 #endif

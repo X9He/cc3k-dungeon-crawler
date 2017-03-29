@@ -23,6 +23,14 @@ int random(int x, int y){
 	return ran;
 }
 
+Floor::~Floor() {
+    delete player;
+}
+
+Floor::Floor(PC *player):
+player{player}{}
+
+
 vector<vector<int>> genEightCord(int i, int j) {
 	vector<vector<int>> v;
 	vector<int> v1;
@@ -483,7 +491,7 @@ void Floor::updateEnemy(){
 					else if (curE->getName() == 'M') {				
 						Merchant *m = dynamic_cast<Merchant *>(c);					
 						PC *tar = checkPC(i, j);
-						if (m->IsHostile()) {
+						if (m->isHostile()) {
 							if (tar != nullptr){
 								m->attack(tar);
 							} 

@@ -75,7 +75,7 @@ class Merchant: public Enemy {
     std::vector<Item *> store;
 public:
     void attack(PC *target) override;
-    bool IsHostile();
+    bool isHostile();
     void changeStatus();
     Merchant(PC *target);
 };

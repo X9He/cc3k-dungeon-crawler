@@ -5,7 +5,7 @@
 #include "chamber.h"
 using namespace std;
 
-int random(int x, int y){
+int random1(int x, int y){
 	int ran;
 	srand(time(0));
 	ran = x + (rand() % (y - x + 1));
@@ -45,7 +45,7 @@ vector<Spawn *> Chamber::getEmptySpawn() {
 }
 
 void Chamber::assignItem(Item *i){
-	int ran = random(0, emptyAmount-1);
+	int ran = random1(0, emptyAmount-1);
 	emptySpawn[ran]->putItem(i);
 	fullSpawn.emplace_back(emptySpawn[ran]);
 	emptySpawn.erase(emptySpawn.begin()+ran);
@@ -53,7 +53,7 @@ void Chamber::assignItem(Item *i){
 
 
 void Chamber::assignCharacter(Character *c){
-	int ran = random(0, emptyAmount-1);
+	int ran = random1(0, emptyAmount-1);
 	emptySpawn[ran]->putCharacter(c);
 	fullSpawn.emplace_back(emptySpawn[ran]);
 	emptySpawn.erase(emptySpawn.begin()+ran);
@@ -64,7 +64,7 @@ void Chamber::assignCharacter(Character *c){
 
 
 void Chamber::assignTreasure(Treasure *t, Dragon *d){
-	int ran = random(0, emptyAmount-1);
+	int ran = random1(0, emptyAmount-1);
 	Spawn *newS = emptySpawn[ran];
 	emptySpawn[ran]->putItem(t);
 	fullSpawn.emplace_back(emptySpawn[ran]);
@@ -125,7 +125,7 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 	}
 
 
-	int ranD = random(1, amount);
+	int ranD = random1(1, amount);
 	newVec[ranD]->putCharacter(d);	
 	fullSpawn.emplace_back(emptySpawn[ranD]);
 	emptySpawn.erase(emptySpawn.begin()+ranD);
