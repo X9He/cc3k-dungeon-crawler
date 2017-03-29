@@ -25,6 +25,8 @@ public:
 	void removeCharacter();
 
 	Character *getCharacter();
+
+	bool hasCharacter();
 };
 
 

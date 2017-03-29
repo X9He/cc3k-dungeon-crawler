@@ -32,7 +32,7 @@ void Chamber::addSpawn(Spawn *s) {
 }
 
 void Chamber::assignItem(Item *i){
-	int ran = random(1, emptyAmount);
+	int ran = random(0, emptyAmount-1);
 	emptySpawn[ran]->putItem(i);
 	fullSpawn.emplace_back(emptySpawn[ran]);
 	emptySpawn.erase(ran);
@@ -40,7 +40,7 @@ void Chamber::assignItem(Item *i){
 
 
 void Chamber::assignCharacter(Character *c){
-	int ran = random(1, emptyAmount);
+	int ran = random(0, emptyAmount-1);
 	emptySpawn[ran]->putChar(pc);
 	fullSpawn.emplace_back(emptySpawn[ran]);
 	emptySpawn.erase(ran);
@@ -51,7 +51,7 @@ void Chamber::assignCharacter(Character *c){
 
 
 void Chamber::assignTreasure(Treasure *t, Dragon *d){
-	int ran = random(1, emptyAmount);
+	int ran = random(0, emptyAmount-1);
 	emptySpawn[ran]->attach(t);
 	fullSpawn.emplace_back(emptySpawn[ran]);
 	emptySpawn.erase(ran);
@@ -117,6 +117,12 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 	emptySpawn.erase(ranD);
 
 }
+
+
+void Chamber::setHasPlayer(bool t){
+	hasP = t;
+}
+
 
 bool Chamber::hasPlayer(){
 	return hasP;

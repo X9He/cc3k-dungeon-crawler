@@ -4,7 +4,7 @@
 #include "spawn.h"
 using namespace std;
 
-Spawn::Spawn(char type, int row, int col, int num, int chamberNum): Cell(type, row, col, num), chamberNum{chamberNum} {}
+Spawn::Spawn(char type, int row, int col, int num, int chamberNum, Item *item): Cell(type, row, col, num), chamberNum{chamberNum}, item{item} {}
 
 Spawn::~Spawn() {}
 
@@ -37,5 +37,10 @@ void Spawn::removeItem(){
 
 Item* Spawn::getItem(){
 	return item;
+}
+
+
+bool Spawn::hasItem(){
+	return (item != nullptr);
 }
 

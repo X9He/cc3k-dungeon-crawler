@@ -11,7 +11,7 @@ class Spawn: public Cell {
 	Item *item;
 
 public:
-	Spawn(char type, int row, int col, int num, int chamberNum);
+	Spawn(char type, int row, int col, int num, int chamberNum, Item* item = nullptr);
 
 	~Spawn();
 
@@ -24,6 +24,8 @@ public:
 	void removeItem();
 
 	void getItem();
+
+	bool hasItem();
 };
 
 #endif

@@ -54,9 +54,13 @@ void Floor::clearFloor(){
 	for (int i = 0; i < roomList.size(); ++i){
 		delete roomList[i];
 	}
+
+	for (int i = 0; i < itemList.size(); ++i){
+		delete itemList[i];
+	}
 }
 
-void Floor::init(){
+void Floor::init(PC *p){
 	td = Display{n};
 
 	fstream fs{"cc3k.txt"};
@@ -108,12 +112,16 @@ void Floor::init(){
 	Chamber *chamberTwo = new Chamber{2};
 	for (int i = 3; i <= 6; ++i){
 		for (int j = 39; j <= 72; ++j){
-			chamberTwo->addSpawn(cellList[i][j]);
+			if (cellList[i][j]->getType == '.'){
+				chamberTwo->addSpawn(cellList[i][j]);
+			}
 		}
 	}
 	for (int i = 7; i <= 12; ++i){
 		for (int j = 61; j <= 75; ++j){
-			chamberTwo->addSpawn(cellList[i][j]);
+			if (cellList[i][j]->getType == '.'){
+				chamberTwo->addSpawn(cellList[i][j]);
+			}
 		}
 	}
 	roomList.emplace_back(chamberTwo);
@@ -152,7 +160,12 @@ void Floor::init(){
 	}
 	roomList.emplace_back(chamberFive);
 
-
+	int rP = random(0,4);
+	roomList[rP]->assignCharacter
+	createEnemy(20);
+	createTreasure(10);
+	createPotion(10);
+	createStair();
 }
 
 
@@ -171,21 +184,25 @@ bool Floor::gameOver(){
 void Floor::createEnemy(int num){
 	while (num > 0){
 		int r = random(1, 18);
-		Enemy *newE;
 		if (r >= 1 && r <= 4) {
-			newE = new Human{player};
+			Enemy *newE = new Human{player};
+			enemyList.emplace_back(newE);
 		} else if (r >= 5 && r <= 7) {
-			newE = new Dwarf{player};
+			Enemy *newE = new Dwarf{player};
+			enemyList.emplace_back(newE);
 		} else if (r >= 8 && r <= 12){
-			newE = new Halfling{player};
+			Enemy *newE = new Halfling{player};
+			enemyList.emplace_back(newE);
 		} else if (r >= 13 && r <= 14) {
-			newE = new Elf{player};
+			Enemy *newE = new Elf{player};
+			enemyList.emplace_back(newE);
 		} else if (r >= 15 && r <= 16) {
-			newE = new Orc{player};
+			Enemy *newE = new Orc{player};
+			enemyList.emplace_back(newE);
 		} else {
-			newE = new Merchant{player};
+			Enemy *newE = new Merchant{player};
+			enemyList.emplace_back(newE);
 		}
-		enemyList.emplace_back(newE);
 		--num;
 	}
 }
@@ -194,19 +211,24 @@ void Floor::createEnemy(int num){
 void Floor::createPotion(int num){
 	while(num > 0) {
 		int r = random(1, 6);
-		Item *newP;
 		if (r == 1) {
-			newP = new ;
+			Item *newP = new RH{};
+			itemList.emplace_back(newP);
 		} else if (r == 2) {
-			newP = new ;
+			Item *newP = new BA{};
+			itemList.emplace_back(newP);
 		} else if (r == 3){
-			newP = new ;
+			Item *newP = new BD{};
+			itemList.emplace_back(newP);
 		} else if (r == 4) {
-			newP = new ; 
+			Item *newP = new PH{}; 
+			itemList.emplace_back(newP);
 		} else if (r == 5) {
-			newP = new ;
+			Item *newP = new WA{};
+			itemList.emplace_back(newP);
 		} else {
-			newP = new ;
+			Item *newP = new WD{};
+			itemList.emplace_back(newP);
 		}
 		--num;
 	}
@@ -217,22 +239,24 @@ void Floor::createTreasure(int num){
 	while(num > 0){
 		int r = random(1, 8);
 		int chamberR = random(1,5);
-		Item *newT;
 		// Dragon Hoard
 		if (r == 1) {
-			newT = new Treasure; //psudeo
-			Character *newD = new Dragon; //psudeo
+			Item *newT = new DH{};
+			itemList.emplace_back(newT);
+			Character *newD = new Dragon{player, newT};
 			enemyList.emplace_back(newD);
 			roomList[chamberR]->assignTreasure(newT, newD);
 		}
 		// Small Hoard
 		 else if (r >=2 && r <= 4) {
-			newT = new Treasure; //psudeo
+			Item *newT = new Small{};
+			itemList.emplace_back(newT);
 			roomList[chamberR]->assignItem(newT);
 		} 
 		// Normal Hoard
 		else {
-			newT = new NormalTreasure; //psudeo
+			Item *newT = new Normal{};
+			itemList.emplace_back(newT);
 			roomList[chamberR]->assignItem(newT);
 		}
 		--num;
@@ -257,7 +281,7 @@ void Floor::createStair(){
     Spawn * tar = emptySpawn[r2];
       
     static_cast<Stair>(*tar);
-    std::vector<Spawn*>::iterator pos = std::find(myVector.begin(), myVector.end(), tar);
+    vector<Spawn*>::iterator pos = find(myVector.begin(), myVector.end(), tar);
     emptySpawn.erase(pos);
     fullSpawn.emplace_back(tar);
       
@@ -335,6 +359,7 @@ bool Floor::movePlayer(string dir){
 			Item *curI = curCell->getItem();
 			curI->useItem();
 			simpleMoveCharacter(newRow, newCol);
+			curCell.putItem(nullptr);
 		} 
 
 		// Spawn is empty

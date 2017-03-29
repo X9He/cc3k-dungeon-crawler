@@ -21,7 +21,8 @@ public:
 	void assignItem(Potion *);
 	void assignCharacter(Character *);
 	void assignTreasure(Treasure *, Dragon *);
-	bool hasPlayer();
+	void setHasPlayer();
+	bool hasPlayer(bool);
 	int getNum();
 };
 

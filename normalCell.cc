@@ -22,5 +22,9 @@ void NormalCell::removeCharacter(){
 }
 
 Character* NormalCell::getCharacter(){
-	return Character;
+	return charTarget;
+}
+
+bool NormalCell::hasCharacter(){
+	return (charTarget != nullptr);
 }

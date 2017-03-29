@@ -8,9 +8,10 @@ class Floor {
 	std::vector<vector<Cell *>> cellList;
 	Display *td;
 	int level;
-	vector<Enemy *> enemyList;
+	std::vector<Enemy *> enemyList;
 	PC *player;
-	vector<Chamber *> roomList;
+	std::vector<Chamber *> roomList;
+	std::vector<Item *> itemList;
 
 public:
 	Floor(PC*);
