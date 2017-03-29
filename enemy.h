@@ -22,7 +22,7 @@ public:
 };
 
 class NormalEnemy: public Enemy {
-    bool IsHostile;
+    bool isHostile;
     virtual void attack (PC *) = 0;
 };
 
