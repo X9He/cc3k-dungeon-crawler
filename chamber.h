@@ -10,15 +10,12 @@
 #include <vector>
 
 class Chamber {
-	
 	int chamberNumber;
-	int capacity;
-	int emptyAmount;
 	bool hasP;
     std::vector<Spawn *> emptySpawn;
     std::vector<Spawn *> fullSpawn;
 public:
-	Chamber(int, bool hasP = false, int=0, int=0);
+	Chamber(int, bool hasP = false);
 	~Chamber();
 	Spawn* findSpawn(int row, int col);
 	void addSpawn(Spawn *);
