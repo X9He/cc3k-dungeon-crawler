@@ -7,7 +7,6 @@ using namespace std;
 
 int random1(int x, int y){
 	int ran;
-	srand(time(0));
 	ran = x + (rand() % (y - x + 1));
 	return ran;
 }

@@ -110,7 +110,6 @@ void PC::attack(Halfing  *target) {
 
 int random3(int x, int y){
  int ran;
- srand(time(0));
  ran = x + (rand() % (y - x + 1));
  return ran;
 }

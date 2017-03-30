@@ -236,16 +236,15 @@ void Floor::init(PC *p){
 
 	createStair();
 	cout << "finished created stairs" <<endl;
-	createTreasure(10);
-	cout << "finished created treasures" <<endl;
-	createPotion(10);
+	// createPotion(10);
 	cout << "finished created potions" <<endl;
+	// createTreasure(10);
+	cout << "finished created treasures" <<endl;
 	createEnemy(20);
 	cout << "finished created enemies" <<endl;
 	prettyPrint();
 
 }
-
 
 
 int Floor::getLevel(){
@@ -260,13 +259,11 @@ bool Floor::gameOver(){
 }
 
 void Floor::createEnemy(int num){
-
-	srand(time(0));
 	while (num > 0){
 
 		Enemy *newE = nullptr;
-		int r = rand()%18+1;
-		int r2 = rand() % 5;
+		int r = random(1, 18);
+		int r2 = rand()%5;
 
 		while(roomList[r2]->getEmptyAmount() < 1){
 			r2 = rand()%5;

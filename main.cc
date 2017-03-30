@@ -11,7 +11,7 @@ using namespace std;
 
 
 int main() {
-	srand(time(0));
+    srand(time(0));
     cin.exceptions(ios::eofbit|ios::failbit);
     string cmd;
     int level = 1;
