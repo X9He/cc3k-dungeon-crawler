@@ -6,8 +6,8 @@
 
 class Potion: public Item {
 public:
-    potion(char itemType = 'P')£»
-  ~potion();
+    Potion(char itemType = 'P');
+  ~Potion();
     virtual void useItem(int mag) = 0;
 };
 
@@ -35,7 +35,7 @@ public:
 class PH: public Potion {
 public:
      PH();
-    ~PD();
+    ~PH();
     void useItem(int mag) override;
 };
 

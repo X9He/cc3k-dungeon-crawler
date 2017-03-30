@@ -6,7 +6,7 @@
 
 
 Treasure::Treasure(int value, bool protect, char itemType):
-item(itemType),value{value}, protect{protect} {}
+Item(itemType),value{value}, protect{protect} {}
 
 Treasure::~Treasure() {}
 
