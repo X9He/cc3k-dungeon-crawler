@@ -15,3 +15,8 @@ int Item::getCol() {
 Item::Item(char itemType): row{0}, col{0}, itemType{itemType} {}
 
 Item::~Item() { delete target; }
+
+void Item::changePosition(int x, int y) {
+    row = x;
+    col = y;
+}

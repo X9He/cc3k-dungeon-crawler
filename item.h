@@ -17,6 +17,7 @@ public:
     char getType();
     int getRow();
     int getCol();
+    void changePosition(int, int);
     
 protected:
     PC * target;
