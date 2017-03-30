@@ -781,6 +781,7 @@ void Floor::playerUsePotion(string dir) {
 }
 
 
+
 void Floor::playerAttack(string dir) {
     int newCol = player->getCol();
     int newRow = player->getRow();
@@ -812,12 +813,15 @@ void Floor::playerAttack(string dir) {
         ++newRow;
         ++newCol;
     }
-    
-    for (auto i: enemyList) {
-        if (i->getRow() == newRow &&
-            i->getCol() == newCol) {
-            player->attack(i);
-        }
+
+    if (cellList[newRow][newCol]->getType == '.'){
+      Spawn *s = dynamic_cast<Spawn*>(cellList[newRoe][newCol]);
     }
+    if (s->hasCharacter()) {
+        player->attack(s->getCharacter());
+	    if (s->getCharacter()->getHP() == 0) {
+             s->putCharacer(nullptr);
+        }
+    }    
 }
 
