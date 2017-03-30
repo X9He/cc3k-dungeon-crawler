@@ -5,8 +5,10 @@
 #include "pc.h"
 
 
-Treasure::Treasure(int value, bool protect):
-value{value}, protect{protect} {}
+Treasure::Treasure(int value, bool protect, char itemType):
+item(itemType),value{value}, protect{protect} {}
+
+Treasure::~Treasure() {}
 
 int Treasure::getValue() {
     return value;

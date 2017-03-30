@@ -11,3 +11,7 @@ int Item::getRow() {
 int Item::getCol() {
     return col;
 }
+
+item::item(char itemType): row{0}, col{0}, itemType{itemType} {}
+
+~item::item() { delete target; }

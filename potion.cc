@@ -3,6 +3,25 @@
 #include "pc.h"
 #include "character.h"
 
+
+potion::potion(char itemType): item(itemTyper) {}
+
+potion::~potion() {}
+  
+RH::RH(): potion() {}
+BA::BA(): potion() {}
+BD::BD(): potion() {}
+PH::PH(): potion() {}
+WD::WD(): potion() {}
+WA::WA(): potion() {}
+
+RH::~RH() {}
+BA::~BA() {}
+BD::~BD() {}
+PH::~PH() {}
+WD::~WD() {}
+WA::~WA() {}
+
 void RH::useItem(int mag) {
     int max_HP = target->getMax();
     int cur_HP = target->getHP();

@@ -11,6 +11,8 @@ class Item {
     char itemType;
     
 public:
+    item(char itemType);
+    ~item();
     virtual void useItem(int mag=1) = 0;
     char getType();
     int getRow();

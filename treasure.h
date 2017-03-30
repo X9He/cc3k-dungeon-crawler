@@ -7,7 +7,8 @@ class Treasure: public Item {
     int value;
     bool protect;
 public:
-    Treasure(int, bool);
+   ~Treasure();
+    Treasure(int, bool, char itemType = 'G');
     int getValue();
     bool isProtect();
     void useItem(int mag=1) override;
