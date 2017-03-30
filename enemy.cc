@@ -29,7 +29,7 @@ Enemy{140, 20, 20, 0, target}{
 
 Dwarf::Dwarf(PC * target):
 NormalEnemy{100, 20, 30, random_gold(), target}{
-    name = 'D';
+    name = 'W';
 }
 
 Elf::Elf(PC * target):
