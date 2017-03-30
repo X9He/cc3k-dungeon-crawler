@@ -26,66 +26,77 @@ int main() {
     string role;
     PC *player = nullptr;
     while (cin >> role) {
-    if (role == "s") {
-        PC p;
-        player = &p;
-        break;
-    } else if (role == "d") {
-        Drow d;
-        player = &d;
-        break;
-    } else if (role == "v") {
-        Vampire v;
-        player = &v;
-        break;
-    } else if (role == "t") {
-        Troll t;
-        player = &t;
-        break;
-    } else if (role == "g"){
-        Goblin g;
-        player = &g;
-        break;
-    } else if (role == "q"){
-        cout << "Quiting" << endl;
-        return 0;
-    } else {
-        cout << "Invalid role" << endl;
+        if (role == "s") {
+            PC p;
+            player = &p;
+            break;
+        } else if (role == "d") {
+            Drow d;
+            player = &d;
+            break;
+        } else if (role == "v") {
+            Vampire v;
+            player = &v;
+            break;
+        } else if (role == "t") {
+            Troll t;
+            player = &t;
+            break;
+        } else if (role == "g"){
+            Goblin g;
+            player = &g;
+            break;
+        } else if (role == "q"){
+            cout << "Quiting" << endl;
+            return 0;
+        } else {
+            cout << "Invalid role" << endl;
+        }
     }
-    }
-
+    
     cout << "printing palyer stuff: "<<player->getMax() << player->getAtk() << player->getDef() << endl;
     
     
-
+    
     while (level < 6) {
         Floor f(player);
         f.init(player);
         cout << "finished initializing" << endl;
-        string direction;
+        string cmd;
         cout<< "Enter a direction: " <<endl;
         while (cin >> direction) {
             if (direction == "q") {
                 cout << "Quiting" << endl;
                 return 0;
             }
-            if (f.movePlayer(direction) == false) {
-                level++;
-                player->initAtkDef();
-                cout << "Entering level " << level << endl;
-                break;
-            }
-            if (player->die()) {
-                cout << "Lost" << endl;
-                return 0;
+            if (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
+                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ) {
+                if (f.movePlayer(cmd) == false) {
+                    level++;
+                    player->initAtkDef();
+                    cout << "Entering level " << level << endl;
+                    break;
+                }
+            } else if (cmd == "a") {
+                string dir;
+                cin >> dir;
+                f.playerAttack(dir);
+                if (player->die()) {
+                    cout << "Lost" << endl;
+                    return 0;
+                }
+            } else if (cmd == "u") {
+                string dir;
+                cin >> dir;
+                f.playerUsePotion(dir);
             }
             cout << "finished one round" << endl;
             // f.updateEnemy();
-            f.prettyPrint();            
-        	cout<< "Enter a direction: " <<endl;
+            f.prettyPrint();
+            cout<< "Enter a direction: " <<endl;
         }
         f.clearFloor();
-  }
+    }
     
     
     cout << "Won" << endl;
