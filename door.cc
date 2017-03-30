@@ -10,6 +10,7 @@ Door::~Door() {}
 
 void Door::prettyPrint(){
 	if(hasCharacter()){
+		// cout << '.c';
 		cout << getCharacter()->getName();
 	} else {
 		cout << getType();

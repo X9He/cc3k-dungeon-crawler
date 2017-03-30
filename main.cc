@@ -1,13 +1,17 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <cstdlib>
+#include <ctime>
 #include "floor.h"
 #include "pc.h"
 #include "character.h"
 
 using namespace std;
 
+
 int main() {
+	srand(time(0));
     cin.exceptions(ios::eofbit|ios::failbit);
     string cmd;
     int level = 1;
@@ -51,11 +55,13 @@ int main() {
     }
     
     
-    
+
     while (level < 6) {
         Floor f(player);
         f.init(player);
+        cout << "finished initializing" << endl;
         string direction;
+        cout<< "Enter a direction: " <<endl;
         while (cin >> direction) {
             if (direction == "q") {
                 cout << "Quiting" << endl;
@@ -72,7 +78,8 @@ int main() {
                 return 0;
             }
             f.updateEnemy();
-            f.prettyPrint();
+            f.prettyPrint();            
+        	cout<< "Enter a direction: " <<endl;
         }
         f.clearFloor();
   }

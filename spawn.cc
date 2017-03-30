@@ -10,9 +10,12 @@ Spawn::~Spawn() {}
 
 
 void Spawn::prettyPrint(){
+	// cout << '.';
 	if(hasCharacter()){
+		// cout << 'c';
 		cout << getCharacter()->getName();
 	} else if (hasItem()) {		
+		// cout << 'i';
 		cout << getItem()->getType();
 	} else {
 		cout << getType();		
@@ -27,8 +30,6 @@ void Spawn::prettyPrint(){
 void Spawn::putItem(Item *i){
 	item = i;
 }
-
-
 
 
 void Spawn::removeItem(){

@@ -12,7 +12,7 @@ int random1(int x, int y){
 	return ran;
 }
 
-Chamber::Chamber(int chamberNumber, bool hasP): chamberNumber{chamberNumber}, hasP{hasP}{}
+Chamber::Chamber(int chamberNumber, bool hasP, int capacity, int emptyAmount): chamberNumber{chamberNumber}, hasP{hasP}, capacity{capacity}, emptyAmount{emptyAmount}{}
 
 Chamber::~Chamber() {}
 
@@ -30,7 +30,6 @@ Spawn* Chamber::findSpawn(int row, int col){
 void Chamber::addSpawn(Spawn *s) {
 	emptySpawn.emplace_back(s);
 	++emptyAmount;
-	++capacity;
 }
 
 
@@ -49,16 +48,24 @@ void Chamber::assignItem(Item *i){
 	emptySpawn[ran]->putItem(i);
 	fullSpawn.emplace_back(emptySpawn[ran]);
 	emptySpawn.erase(emptySpawn.begin()+ran);
+	--emptyAmount;
 }
 
 
 void Chamber::assignCharacter(Character *c){
-	int ran = random1(0, emptyAmount-1);
-	emptySpawn[ran]->putCharacter(c);
-	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn.erase(emptySpawn.begin()+ran);
-	if (c->getName() == '@') {
-		hasP = true;
+	if (emptyAmount <= 0){
+		cout << "no more empty spawns!" << endl;
+	} else {
+		int ran = random1(0, emptyAmount-1);
+		emptySpawn[ran]->putCharacter(c);
+		// cout << "assignedCharacter" << endl;
+		fullSpawn.emplace_back(emptySpawn[ran]);
+		emptySpawn.erase(emptySpawn.begin()+ran);
+		if (c->getName() == '@') {
+			hasP = true;
+			cout << "assignedPC" << endl;
+		}
+		--emptyAmount;		
 	}
 }
 
@@ -125,17 +132,21 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 	}
 
 
-	int ranD = random1(1, amount);
-	newVec[ranD]->putCharacter(d);	
-	fullSpawn.emplace_back(emptySpawn[ranD]);
-	emptySpawn.erase(emptySpawn.begin()+ranD);
-
+	int ranD = random1(0, amount-1);
+	Spawn *dragonSpawn = newVec[ranD];
+	dragonSpawn->putCharacter(d);	
+	int dRow = dragonSpawn->getRow();
+	int dCol = dragonSpawn->getCol();
+	fullSpawn.emplace_back(newVec[ranD]);
+	eraseEmptySpawn(dRow, dCol);
+	--emptyAmount;
+	--emptyAmount;
 }
 
 
-void Chamber::setHasPlayer(bool t){
-	hasP = t;
-}
+// void Chamber::setHasPlayer(bool t){
+// 	hasP = t;
+// }
 
 
 bool Chamber::hasPlayer(){
@@ -154,5 +165,14 @@ void Chamber::eraseEmptySpawn(int i) {
 }
 
 
+void Chamber::eraseEmptySpawn(int x, int y) {
+	int index;
+	for(int i = 0; i < emptyAmount; ++i){
+		if (emptySpawn[i]->getRow() == x && emptySpawn[i]->getCol() == y){
+			index = i;
+		}
+	}
+    emptySpawn.erase(emptySpawn.begin() + index);
+}
 
 

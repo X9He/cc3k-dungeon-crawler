@@ -10,6 +10,7 @@
 #include "door.h"
 #include "stair.h"
 #include "spawn.h"
+#include "item.h"
 
 
 using namespace std;
@@ -18,7 +19,6 @@ using namespace std;
 
 int random(int x, int y){
 	int ran;
-	srand(time(0));
 	ran = x + (rand() % (y - x + 1));
 	return ran;
 }
@@ -72,6 +72,7 @@ void Floor::prettyPrint(){
 	for (int i = 0; i < cellList.size() ; ++i){
 		for (int j = 0; j < cellList[i].size(); ++j){
 			cellList[i][j]->prettyPrint();
+			// cout<< cellList[i][j]->getType();
 		// char type  = cellList[i][j]->getType();
 		// 	if (type == ' '|| type == '|' || type == '-') {
 		// 		cout << type;
@@ -114,8 +115,10 @@ void Floor::clearFloor(){
 void Floor::init(PC *p){
 	ifstream fs;
 	fs.open("cc3k.txt");
+
 	string s;
 	int i = 0;
+
 	while(getline(fs, s))
 	{
 
@@ -125,7 +128,8 @@ void Floor::init(PC *p){
 		for(int j = 0; j < s.size(); ++j)
 		{
 			c = s[j];
-			Cell *newC;
+			// cout << c;
+			Cell *newC= nullptr;
 
 			if (c == ' ' || c == '-' || c == '|') 
 			{
@@ -133,7 +137,7 @@ void Floor::init(PC *p){
 			} 
 			else if (c == '#') 
 			{
-				newC = new Passage{c, i , j};
+				newC = new Passage{c, i, j};
 			} else if (c == '.') 
 			{
 				newC = new Spawn{c, i, j};
@@ -143,22 +147,26 @@ void Floor::init(PC *p){
 			} 
 			newVec.emplace_back(newC);
 		}
-
+		// cout << endl;
 
 		cellList.emplace_back(newVec);
 		++i;
+		// cout << i << endl;
 	}
 	fs.close();
+	// prettyPrint();
 
 	//Chamber 1
+	Chamber *chamberOne = new Chamber{1};
 	for (int i = 3; i <= 6; ++i){
-		Chamber *newChamber = new Chamber{1};
 		for (int j = 3; j <= 28; ++j){
 			Spawn *cur=dynamic_cast<Spawn *>(cellList[i][j]);
-			newChamber->addSpawn(cur);
+			chamberOne->addSpawn(cur);
 		}
-		roomList.emplace_back(newChamber);
 	}
+	roomList.emplace_back(chamberOne);
+	cout << chamberOne->getEmptyAmount() << endl;
+
 
 	//Chamber 2
 	Chamber *chamberTwo = new Chamber{2};
@@ -179,6 +187,8 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberTwo);
+	cout << chamberTwo->getEmptyAmount() << endl;
+
 
 	//Chamber 3
 	Chamber *chamberThree = new Chamber{3};
@@ -189,6 +199,7 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberThree);
+	cout << chamberThree->getEmptyAmount() << endl;
 
 
 	//Chamber 4	
@@ -200,6 +211,7 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberFour);
+	cout << chamberFour->getEmptyAmount() << endl;
 
 
 	//Chamber 5
@@ -217,13 +229,21 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberFive);
+	cout << chamberFive->getEmptyAmount() << endl;
 
 	int rP = random(0,4);
 	roomList[rP]->assignCharacter(p);
-	createEnemy(20);
-	createTreasure(10);
-	createPotion(10);
+
 	createStair();
+	cout << "finished created stairs" <<endl;
+	createTreasure(10);
+	cout << "finished created treasures" <<endl;
+	createPotion(10);
+	cout << "finished created potions" <<endl;
+	createEnemy(20);
+	cout << "finished created enemies" <<endl;
+	prettyPrint();
+
 }
 
 
@@ -240,27 +260,36 @@ bool Floor::gameOver(){
 }
 
 void Floor::createEnemy(int num){
+
+	srand(time(0));
 	while (num > 0){
-		int r = random(1, 18);
-		if (r >= 1 && r <= 4) {
-			Enemy *newE = new Human{player};
-			enemyList.emplace_back(newE);
-		} else if (r >= 5 && r <= 7) {
-			Enemy *newE = new Dwarf{player};
-			enemyList.emplace_back(newE);
-		} else if (r >= 8 && r <= 12){
-			Enemy *newE = new Halfling{player};
-			enemyList.emplace_back(newE);
-		} else if (r >= 13 && r <= 14) {
-			Enemy *newE = new Elf{player};
-			enemyList.emplace_back(newE);
-		} else if (r >= 15 && r <= 16) {
-			Enemy *newE = new Orcs{player};
-			enemyList.emplace_back(newE);
-		} else {
-			Enemy *newE = new Merchant{player};
-			enemyList.emplace_back(newE);
+
+		Enemy *newE = nullptr;
+		int r = rand()%18+1;
+		int r2 = rand() % 5;
+
+		while(roomList[r2]->getEmptyAmount() < 1){
+			r2 = rand()%5;
 		}
+
+		cout << "assigned enemy to chamber " << r2 << endl;
+
+		if (r >= 1 && r <= 4) {
+			newE = new Human{player};
+		} else if (r >= 5 && r <= 7) {
+			newE = new Dwarf{player};
+		} else if (r >= 8 && r <= 12){
+			newE = new Halfling{player};
+		} else if (r >= 13 && r <= 14) {
+			newE = new Elf{player};
+		} else if (r >= 15 && r <= 16) {
+			newE = new Orcs{player};
+		} else {
+			newE = new Merchant{player};
+		}
+
+		enemyList.emplace_back(newE);
+		roomList[r2]->assignCharacter(newE);
 		--num;
 	}
 }
@@ -268,26 +297,30 @@ void Floor::createEnemy(int num){
 
 void Floor::createPotion(int num){
 	while(num > 0) {
+		Item *newP = nullptr;
 		int r = random(1, 6);
-		if (r == 1) {
-			Item *newP = new RH{};
-			itemList.emplace_back(newP);
-		} else if (r == 2) {
-			Item *newP = new BA{};
-			itemList.emplace_back(newP);
-		} else if (r == 3){
-			Item *newP = new BD{};
-			itemList.emplace_back(newP);
-		} else if (r == 4) {
-			Item *newP = new PH{}; 
-			itemList.emplace_back(newP);
-		} else if (r == 5) {
-			Item *newP = new WA{};
-			itemList.emplace_back(newP);
-		} else {
-			Item *newP = new WD{};
-			itemList.emplace_back(newP);
+		int r2 = random(0, 4);
+
+		while(roomList[r2]->getEmptyAmount() < 1){
+			r2 = random(0, 4);
 		}
+
+		cout << "assigned potion to chamber " << r2 << endl;
+		if (r == 1) {
+			newP = new RH{};
+		} else if (r == 2) {
+			newP = new BA{};
+		} else if (r == 3){
+			newP = new BD{};
+		} else if (r == 4) {
+			newP = new PH{}; 
+		} else if (r == 5) {
+			newP = new WA{};
+		} else {
+			newP = new WD{};
+		}
+		itemList.emplace_back(newP);
+		roomList[r2]->assignItem(newP);
 		--num;
 	}
 }
@@ -296,21 +329,34 @@ void Floor::createPotion(int num){
 void Floor::createTreasure(int num){
 	while(num > 0){
 		int r = random(1, 8);
-		int chamberR = random(1,5);
+		int chamberR = random(0,4);
+
+		while(roomList[chamberR]->getEmptyAmount() < 1){
+			chamberR = random(0, 4);
+		}
+
+		cout << "assigned treasure to chamber " << chamberR << endl;
+
 		// Dragon Hoard
 		if (r == 1) {
+			while(roomList[chamberR]->getEmptyAmount() < 2){
+				cout << "deciding dragon room" << endl;
+				chamberR = random(0, 4);
+			}
 			Treasure *newT = new DH{};
 			itemList.emplace_back(newT);
 			Dragon *newD = new Dragon{player, newT};
 			enemyList.emplace_back(newD);
 			roomList[chamberR]->assignTreasure(newT, newD);
 		}
+
 		// Small Hoard
 		 else if (r >=2 && r <= 4) {
 			Item *newT = new Small{};
 			itemList.emplace_back(newT);
 			roomList[chamberR]->assignItem(newT);
 		} 
+
 		// Normal Hoard
 		else {
 			Item *newT = new Normal{};
@@ -322,35 +368,42 @@ void Floor::createTreasure(int num){
 }
 
 void Floor::createStair(){
-    
-    int room_hasplayer;
-    for (int i = 1; i < 6; i++) {
+    // find the number of chamber room that has the player
+    int fullRoom;
+    for (int i = 0; i < 5; i++) {
         roomList[i]->hasPlayer();
-        room_hasplayer = i;
+        fullRoom = i;
     }
-    int r1 = random(1,4);
-    int stair_room = r1;
-    if (r1 > room_hasplayer) {
-        stair_room++;
-    }
-    
-    int num = roomList[stair_room]->getEmptyAmount();
-    int r2 = random(1, num);
 
-    Spawn * tar = roomList[stair_room]->getEmptySpawn()[r2];
+    // randomly generate a chamber room number that does not have the player inside
+    int r1 = random(0,4);
+    while(r1 == fullRoom){
+    	r1 = random(0,4);
+    }
+    int stairRoom = r1;
+    
+    // randomly generate index of vector of empty spawns to assign the stair 
+    int num = roomList[stairRoom]->getEmptyAmount();
+    int r2 = random(0, num-1);
+
+    // find the spawn cell that we are going to replace
+    Spawn *tar = (roomList[stairRoom]->getEmptySpawn())[r2];
+    // get the row and col indices of the spawn cell we are going to replace
     int row = tar->getRow();
     int col = tar->getCol();
     
-    Stair new_stair{'/', row, col};
+    // create the stair cell
+    Stair *newStair = new Stair{'/', row, col};
+    // assign 
+    cellList[row][col] = newStair;
+    // erase replaced cell from empty spawn list
+    roomList[stairRoom]->eraseEmptySpawn(r2);
     
-    cellList[row][col] = &new_stair;
-    
-    roomList[stair_room]->eraseEmptySpawn(r2);
-    
-    delete tar;
-    
-    
+
+    delete tar;   
 }
+
+
 
 bool Floor::movePlayer(string dir){
 	// get current position of player
