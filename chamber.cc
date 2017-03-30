@@ -43,32 +43,66 @@ vector<Spawn *> Chamber::getEmptySpawn() {
 }
 
 void Chamber::assignItem(Item *i){
-	int ran = random1(0, emptyAmount-1);
+	cout << "called assign" << endl;
+	int ran;
+	if (emptyAmount == 0) {
+			ran = 0; 
+		}else {
+			ran= random1(0, emptyAmount-1);
+		}
 	emptySpawn[ran]->putItem(i);
-	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn.erase(emptySpawn.begin()+ran);
+
+	cout << "reached 1" << endl;
+	int row = emptySpawn[ran]->getRow();
+	int col = emptySpawn[ran]->getCol();
+	i->changePosition(row, col);
+
+	cout << "reached 2" << endl;
+	cout << "ran is " << ran << endl;
+	cout << "empty amount is " << emptyAmount << endl;
+	cout << "actual vector length is " << emptySpawn.size() << endl;
+	cout << "to be assigned to cell type: " << emptySpawn[ran]->getType() << endl;
+	emptySpawn.erase(emptySpawn.begin()+ran-1);
+
+	cout << "reached 3" << endl;
 	--emptyAmount;
 }
 
 
 void Chamber::assignCharacter(Character *c){
+	int ran;
+	cout << "called assign" << endl;
 	if (emptyAmount <= 0){
 		cout << "no more empty spawns!" << endl;
 	}
 	else 
 	{
-
-		int ran = random1(0, emptyAmount-1);
+		if (emptyAmount == 0) {
+			ran = 0; 
+		}else {
+			ran= random1(0, emptyAmount-1);
+		}
 		Spawn *s = emptySpawn[ran];
+
+		cout << "reached 1" << endl;
 
 		int row = s->getRow();
 		int col = s->getCol();
 		c->changePosition(row, col);
 
+		cout << "reached 2" << endl;
+
 		s->putCharacter(c);
+		cout << "ran is " << ran << endl;
+		cout << "empty amount is " << emptyAmount << endl;
+		cout << "actual vector length is " << emptySpawn.size() << endl;
+		cout << "to be assigned to cell type: " << emptySpawn[ran]->getType() << endl;
+		cout << "reached 2.5" << endl;
 		// cout << "assignedCharacter" << endl;
-		fullSpawn.emplace_back(emptySpawn[ran]);
-		emptySpawn.erase(emptySpawn.begin()+ran);
+		// fullSpawn.emplace_back(emptySpawn[ran]);
+		emptySpawn.erase(emptySpawn.begin()+ran-1);
+
+		cout << "reached 3" << endl;
 
 		if (c->getName() == '@') {
 			hasP = true;
@@ -80,14 +114,27 @@ void Chamber::assignCharacter(Character *c){
 
 
 void Chamber::assignTreasure(Treasure *t, Dragon *d){
-	int ran = random1(0, emptyAmount-1);
-	Spawn *newS = emptySpawn[ran];
-	emptySpawn[ran]->putItem(t);
-	fullSpawn.emplace_back(emptySpawn[ran]);
-	emptySpawn.erase(emptySpawn.begin()+ran);
+	cout << "called assign" << endl;
+	int ran;
+	if (emptyAmount == 0) {
+		ran = 0; 
+	}else {
+		ran= random1(0, emptyAmount-1);
+	}
 
+	Spawn *newS = emptySpawn[ran];
+
+	newS->putItem(t);
+
+	// fullSpawn.emplace_back(emptySpawn[ran]);
+	emptySpawn.erase(emptySpawn.begin()+ran-1);
+	cout << "reached 1" << endl;
 	int tRow = newS->getRow();
 	int tCol = newS->getCol();
+	t->changePosition(tRow, tCol);
+	--emptyAmount;
+
+	cout << "reached 2" << endl;
 
 	vector<Spawn*> newVec;
 	int amount = 0;
@@ -139,16 +186,32 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 		}
 		++amount;
 	}
+	cout << "reached 2.2" << endl;
 
-
-	int ranD = random1(0, amount-1);
+	int ranD;
+	if (amount == 0) {
+		ranD = 0; 
+	}else {
+		ranD= random1(0, amount-1);
+	}
+	cout << "reached 2.3" << endl;
+	cout << "ranD is " << ranD << endl;
+	cout << "empty amount is " << emptyAmount << endl;
+	cout << "actual vector length is " << emptySpawn.size() << endl;
+	cout << "to be assigned to cell type: " << newVec[ranD]->getType() << endl;
 	Spawn *dragonSpawn = newVec[ranD];
-	dragonSpawn->putCharacter(d);	
+	cout << "reached 2.4" << endl;
+	dragonSpawn->putCharacter(d);
+
+	cout << "reached 2.5" << endl;	
 	int dRow = dragonSpawn->getRow();
 	int dCol = dragonSpawn->getCol();
-	fullSpawn.emplace_back(newVec[ranD]);
+
+	cout << "reached 3" << endl;
+
+	d->changePosition(dRow, dCol);
+	// fullSpawn.emplace_back(newVec[ranD]);
 	eraseEmptySpawn(dRow, dCol);
-	--emptyAmount;
 	--emptyAmount;
 }
 
