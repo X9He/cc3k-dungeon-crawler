@@ -298,17 +298,17 @@ void Floor::createPotion(int num){
 
 		cout << "assigned potion to chamber " << r2 << endl;
 		if (r == 1) {
-			newP = new RH{};
+			newP = new RH{player};
 		} else if (r == 2) {
-			newP = new BA{};
+			newP = new BA{player};
 		} else if (r == 3){
-			newP = new BD{};
+			newP = new BD{player};
 		} else if (r == 4) {
-			newP = new PH{}; 
+			newP = new PH{player}; 
 		} else if (r == 5) {
-			newP = new WA{};
+			newP = new WA{player};
 		} else {
-			newP = new WD{};
+			newP = new WD{player};
 		}
 		itemList.emplace_back(newP);
 		cout << "failed before assign" << endl;
@@ -755,6 +755,7 @@ PC* Floor::checkPC(int i, int j){
 
 
 void Floor::playerUsePotion(string dir) {
+	cout << "start using potion" << endl;
     int curRow = player->getRow();
     int curCol = player->getCol();
     
@@ -792,15 +793,21 @@ void Floor::playerUsePotion(string dir) {
     
     
     if (cellList[newRow][newCol]->getType() == '.') {
+    	cout << "potion is in the right cell" << endl;
         Spawn *s = dynamic_cast<Spawn*>(cellList[newRow][newCol]);
         if(s->hasItem()) {
-            Potion * p = dynamic_cast<Potion *>(s->getItem());
-            if (p) {
-            p->useItem(1);
-            s->putItem(nullptr);
+        	cout << "has item" << endl;
+        	if (s->getItem()->getType() == 'P'){
+        		cout << "item is potion" << endl;
+        		Potion * p = dynamic_cast<Potion *>(s->getItem());
+        		cout << "potion cast complete" << endl;
+        		p->useItem(1);
+        		cout << "use potion complete" << endl;
+        		s->putItem(nullptr);
+        		cout << "put item success" << endl;
+        	}
         }
     }
-}
 }
 
 
@@ -846,17 +853,16 @@ void Floor::playerAttack(string dir) {
     }
     if (s->hasCharacter()) {
         Enemy * e = dynamic_cast<Enemy *> (s->getCharacter());
-        if (s) {
+        if (e) {
+        	cout << "start attack" << endl;
             player->attack(e);
-            int damage = player->damage(*e);////////////////////////////////////////////////
+            int damage = player->damage(*e);
             // message->addMessage("PC deals " + to_string(damage) + " damages to " + to_string(e->getName()) + ".");//////////////
             if (s->getCharacter()->getHP() == 0) {
                 s->putCharacter(nullptr);
-                
             }
         }
     }
-    //////////////////////////
 }
 
 
