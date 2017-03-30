@@ -9,6 +9,7 @@
 #include "chamber.h"
 #include "treasure.h"
 #include "potion.h"
+#include <string>
 
 class Floor {
 	std::vector<std::vector<Cell *>> cellList;
@@ -54,6 +55,10 @@ public:
 	std::vector<Spawn *> scanEmptyEnemy(int, int);
 
 	PC* checkPC(int, int);
+    
+    void playerUsePotion(std::string);
+    
+    void playerAttack(std::string dir);
     
 };
 
