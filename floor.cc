@@ -236,11 +236,11 @@ void Floor::init(PC *p){
 
 	createStair();
 	cout << "finished created stairs" <<endl;
-	// createPotion(10);
-	// cout << "finished created potions" <<endl;
-	// createTreasure(10);
+	createPotion(10);
+	cout << "finished created potions" <<endl;
+	createTreasure(10);
 	// cout << "finished created treasures" <<endl;
-	// createEnemy(20);
+	createEnemy(20);
 	// cout << "finished created enemies" <<endl;
 	prettyPrint();
 
