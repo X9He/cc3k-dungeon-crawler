@@ -64,8 +64,8 @@ int main() {
         cout << "finished initializing" << endl;
         string cmd;
         cout<< "Enter a direction: " <<endl;
-        while (cin >> direction) {
-            if (direction == "q") {
+        while (cin >> cmd) {
+            if (cmd == "q") {
                 cout << "Quiting" << endl;
                 return 0;
             }

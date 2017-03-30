@@ -735,3 +735,89 @@ PC* Floor::checkPC(int i, int j){
     return nullptr;
 }
 
+
+void Floor::playerUsePotion(string dir) {
+    int curRow = player->getRow();
+    int curCol = player->getCol();
+    
+    // compute new position x and y
+    int newRow = curRow;
+    int newCol = curCol;
+    if (dir == "no") {
+        --newRow;
+    }
+    if (dir == "so") {
+        ++newRow;
+    }
+    if (dir == "ea") {
+        ++newCol;
+    }
+    if (dir == "we") {
+        --newCol;
+    }
+    if (dir == "ne") {
+        --newRow;
+        ++newCol;
+    }
+    if (dir == "nw") {
+        --newCol;
+        --newRow;
+    }
+    if (dir == "se") {
+        ++newCol;
+        ++newRow;
+    }
+    if (dir == "sw") {
+        --newCol;
+        ++newRow;
+    }
+    
+    for (auto i: itemList) {
+        if (i->getRow() == newRow &&
+            i->getCol() == newCol) {
+            i->useItem();
+        }
+    }
+}
+
+
+void Floor::playerAttack(string dir) {
+    int newCol = player->getCol();
+    int newRow = player->getRow();
+    if (dir == "no"){
+        --newRow;
+    }
+    if (dir == "so") {
+        ++newRow;
+    }
+    if (dir == "ea") {
+        ++newCol;
+    }
+    if (dir == "ne") {
+        --newRow;
+        ++newCol;
+    }
+    if (dir == "we") {
+        --newCol;
+    }
+    if (dir == "nw") {
+        --newRow;
+        --newCol;
+    }
+    if (dir == "sw") {
+        --newCol;
+        ++newRow;
+    }
+    if (dir == "se") {
+        ++newRow;
+        ++newCol;
+    }
+    
+    for (auto i: enemyList) {
+        if (i->getRow() == newRow &&
+            i->getCol() == newCol) {
+            player->attack(i);
+        }
+    }
+}
+
