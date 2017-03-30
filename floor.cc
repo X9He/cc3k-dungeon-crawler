@@ -298,17 +298,17 @@ void Floor::createPotion(int num){
 
 		cout << "assigned potion to chamber " << r2 << endl;
 		if (r == 1) {
-			newP = new RH{player};
+			newP = new RH{};
 		} else if (r == 2) {
-			newP = new BA{player};
+			newP = new BA{};
 		} else if (r == 3){
-			newP = new BD{player};
+			newP = new BD{};
 		} else if (r == 4) {
-			newP = new PH{player}; 
+			newP = new PH{}; 
 		} else if (r == 5) {
-			newP = new WA{player};
+			newP = new WA{};
 		} else {
-			newP = new WD{player};
+			newP = new WD{};
 		}
 		itemList.emplace_back(newP);
 		cout << "failed before assign" << endl;
