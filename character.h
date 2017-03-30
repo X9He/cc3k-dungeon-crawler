@@ -9,7 +9,7 @@ class Character {
   protected:
   char name;
   public:
-  virtual void changePosition(int x, int y);
+  void changePosition(int x, int y);
   Character(int initHp, int initAtk, int initDef, int Gold);
   virtual  ~Character();
   int damage(Character &other, float mag = 1);
@@ -25,9 +25,9 @@ class Character {
   int getCol();
   char getName(); 
   void initAtkDef();
-    void changeGold(int);
-    int getinitHp();
-    void changeCurHP(int);
+  void changeGold(int);
+  int getinitHp();
+  void changeCurHP(int);
 };  
 
 #endif

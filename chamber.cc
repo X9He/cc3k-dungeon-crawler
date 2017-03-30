@@ -54,12 +54,22 @@ void Chamber::assignItem(Item *i){
 void Chamber::assignCharacter(Character *c){
 	if (emptyAmount <= 0){
 		cout << "no more empty spawns!" << endl;
-	} else {
+	}
+	else 
+	{
+
 		int ran = random1(0, emptyAmount-1);
-		emptySpawn[ran]->putCharacter(c);
+		Spawn *s = emptySpawn[ran];
+
+		int row = s->getRow();
+		int col = s->getCol();
+		c->changePosition(row, col);
+
+		s->putCharacter(c);
 		// cout << "assignedCharacter" << endl;
 		fullSpawn.emplace_back(emptySpawn[ran]);
 		emptySpawn.erase(emptySpawn.begin()+ran);
+
 		if (c->getName() == '@') {
 			hasP = true;
 			cout << "assignedPC" << endl;

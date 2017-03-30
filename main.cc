@@ -53,6 +53,8 @@ int main() {
         cout << "Invalid role" << endl;
     }
     }
+
+    cout << "printing palyer stuff: "<<player->getMax() << player->getAtk() << player->getDef() << endl;
     
     
 
@@ -77,7 +79,8 @@ int main() {
                 cout << "Lost" << endl;
                 return 0;
             }
-            f.updateEnemy();
+            cout << "finished one round" << endl;
+            // f.updateEnemy();
             f.prettyPrint();            
         	cout<< "Enter a direction: " <<endl;
         }

@@ -165,7 +165,7 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberOne);
-	cout << chamberOne->getEmptyAmount() << endl;
+	// cout << chamberOne->getEmptyAmount() << endl;
 
 
 	//Chamber 2
@@ -187,7 +187,7 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberTwo);
-	cout << chamberTwo->getEmptyAmount() << endl;
+	// cout << chamberTwo->getEmptyAmount() << endl;
 
 
 	//Chamber 3
@@ -199,7 +199,7 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberThree);
-	cout << chamberThree->getEmptyAmount() << endl;
+	// cout << chamberThree->getEmptyAmount() << endl;
 
 
 	//Chamber 4	
@@ -211,7 +211,7 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberFour);
-	cout << chamberFour->getEmptyAmount() << endl;
+	// cout << chamberFour->getEmptyAmount() << endl;
 
 
 	//Chamber 5
@@ -229,7 +229,7 @@ void Floor::init(PC *p){
 		}
 	}
 	roomList.emplace_back(chamberFive);
-	cout << chamberFive->getEmptyAmount() << endl;
+	// cout << chamberFive->getEmptyAmount() << endl;
 
 	int rP = random(0,4);
 	roomList[rP]->assignCharacter(p);
@@ -237,11 +237,11 @@ void Floor::init(PC *p){
 	createStair();
 	cout << "finished created stairs" <<endl;
 	// createPotion(10);
-	cout << "finished created potions" <<endl;
+	// cout << "finished created potions" <<endl;
 	// createTreasure(10);
-	cout << "finished created treasures" <<endl;
-	createEnemy(20);
-	cout << "finished created enemies" <<endl;
+	// cout << "finished created treasures" <<endl;
+	// createEnemy(20);
+	// cout << "finished created enemies" <<endl;
 	prettyPrint();
 
 }
@@ -411,38 +411,38 @@ bool Floor::movePlayer(string dir){
 	int newRow = curRow;
 	int newCol = curCol;
 	if (dir == "no") {
-		++newCol;
+		--newRow;
 	}
 	if (dir == "so") {
-		--newCol;		
+		++newRow;		
 	}
 	if (dir == "ea") {
-		++newRow;
+		++newCol;
 	}
 	if (dir == "we") {
-		--newRow;
+		--newCol;
 	}
 	if (dir == "ne") {
+		--newRow;
 		++newCol;
-		++newRow;
 	}
 	if (dir == "nw") {
+		--newCol;
 		--newRow;
-		++newCol;
 	}
 	if (dir == "se") {
+		++newCol;
 		++newRow;
-		--newCol;
 	}
 	if (dir == "sw") {
-		--newRow;
 		--newCol;
+		++newRow;
 	}
-
 
 	// find the cell player wants to move to
 	Cell* cur = cellList[newRow][newCol];
 	char c = cur->getType();
+	cout << "next cell type: " << c << endl;
 
 
 	// if the next cell is wall, spawn, passage, door, or stairs
@@ -470,30 +470,35 @@ bool Floor::movePlayer(string dir){
 		}
 
 		// Spawn has an item
-		else if (curCell->hasItem()) {
-			Item *curI = curCell->getItem();
-			curI->useItem();
-			simpleMoveCharacter(newRow, newCol, curRow, curCol, player);
-			curCell->putItem(nullptr);
-		} 
+		// else if (curCell->hasItem()) {
+		// 	Item *curI = curCell->getItem();
+		// 	curI->useItem();
+		// 	simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
+		// 	curCell->putItem(nullptr);
+		// } 
 
 		// Spawn is empty
 		else {
-			simpleMoveCharacter(newRow, newCol, curRow, curCol, player);
+			cout << "cordinates" << " "<<curRow << " "<< curCol << " "<< newRow << " "<< newCol<< endl;
+			simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
+			cout << "finished moving" << endl;
 		}
+		return true;
 	} 
 	//PASSAGE
 	else if (c == '#'){
-		simpleMoveCharacter(newRow, newCol, curRow, curCol, player);
+		simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
 		return true;
 	} 
 	//DOOR
 	else if (c == '+'){
-		simpleMoveCharacter(newRow, newCol, curRow, curCol, player);
+		simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
 		return true;
 	} 
 	//STAIRS
-	return false;
+	else {
+		return false;
+	}
 }
 
 
@@ -623,12 +628,19 @@ void Floor::deleteEnemy(int row, int col){
 	enemyList.erase(enemyList.begin() + i);
 }
 
+
 void Floor::simpleMoveCharacter(int oldRow, int oldCol, int row, int col, Character *c){
+	cout << "start simple move character" << endl;
 	NormalCell *oldCell = dynamic_cast<NormalCell*>(cellList[oldRow][oldCol]);
+	cout << "reached 1" << endl;
 	oldCell->putCharacter(nullptr);
+	cout << "reached 2" << endl;
 	NormalCell *newCell = dynamic_cast<NormalCell*>(cellList[row][col]);
+	cout << "reached 3" << endl;
 	c->changePosition(row, col);
+	cout << "reached 4" << endl;
 	newCell->putCharacter(c);
+	cout << "reached 5" << endl;
 }
 
 
