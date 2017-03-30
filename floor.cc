@@ -472,7 +472,7 @@ bool Floor::movePlayer(string dir){
         else if (curCell->hasItem()) {
             if (curCell->getItem()->getType() == 'G') {
                 Item *curI = curCell->getItem();
-                cout << (curI==nullptr) << endl;
+                
                 curI->useItem();
                 simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
                 curCell->putItem(nullptr);
@@ -772,13 +772,19 @@ void Floor::playerUsePotion(string dir) {
         ++newRow;
     }
     
-    for (auto i: itemList) {
-        if (i->getRow() == newRow &&
-            i->getCol() == newCol) {
-            i->useItem();
+    
+    if (cellList[newRow][newCol]->getType() == '.') {
+        Spawn *s = dynamic_cast<Spawn*>(cellList[newRow][newCol]);
+        if(s->hasItem()) {
+            Item * curItem = s->getItem();
+            curItem->useItem();
+            s->putItem(nullptr);
         }
     }
 }
+
+
+
 
 
 
@@ -813,15 +819,19 @@ void Floor::playerAttack(string dir) {
         ++newRow;
         ++newCol;
     }
-
-    if (cellList[newRow][newCol]->getType == '.'){
-      Spawn *s = dynamic_cast<Spawn*>(cellList[newRoe][newCol]);
+    
+    Spawn * s = nullptr;
+    if (cellList[newRow][newCol]->getType() == '.'){
+        s = dynamic_cast<Spawn*>(cellList[newRow][newCol]);
     }
     if (s->hasCharacter()) {
-        player->attack(s->getCharacter());
-	    if (s->getCharacter()->getHP() == 0) {
-             s->putCharacer(nullptr);
+        Enemy * e = dynamic_cast<Enemy *> (s->getCharacter());
+        if (s) {
+            player->attack(e);
+            if (s->getCharacter()->getHP() == 0) {
+                s->putCharacter(nullptr);
+            }
         }
-    }    
+    }
 }
 
