@@ -9,7 +9,7 @@
 #include "chamber.h"
 #include "treasure.h"
 #include "potion.h"
-#include <string>
+#include "message.h"
 
 class Floor {
 	std::vector<std::vector<Cell *>> cellList;
@@ -18,6 +18,7 @@ class Floor {
 	PC *player;
 	std::vector<Chamber *> roomList;
 	std::vector<Item *> itemList;
+	Message *message;
 
 public:
 	Floor(PC*);
@@ -56,10 +57,9 @@ public:
 
 	PC* checkPC(int, int);
     
+    void playerAttack(std::string);
+
     void playerUsePotion(std::string);
-    
-    void playerAttack(std::string dir);
-    
 };
 
 #endif

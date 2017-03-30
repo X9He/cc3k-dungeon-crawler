@@ -20,3 +20,6 @@ void Item::changePosition(int x, int y) {
     row = x;
     col = y;
 }
+
+
+void Item::useItem(int mag) {}

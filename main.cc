@@ -26,42 +26,43 @@ int main() {
     string role;
     PC *player = nullptr;
     while (cin >> role) {
-        if (role == "s") {
-            PC p;
-            player = &p;
-            break;
-        } else if (role == "d") {
-            Drow d;
-            player = &d;
-            break;
-        } else if (role == "v") {
-            Vampire v;
-            player = &v;
-            break;
-        } else if (role == "t") {
-            Troll t;
-            player = &t;
-            break;
-        } else if (role == "g"){
-            Goblin g;
-            player = &g;
-            break;
-        } else if (role == "q"){
-            cout << "Quiting" << endl;
-            return 0;
-        } else {
-            cout << "Invalid role" << endl;
-        }
+    if (role == "s") {
+        PC p;
+        player = &p;
+        break;
+    } else if (role == "d") {
+        Drow d;
+        player = &d;
+        break;
+    } else if (role == "v") {
+        Vampire v;
+        player = &v;
+        break;
+    } else if (role == "t") {
+        Troll t;
+        player = &t;
+        break;
+    } else if (role == "g"){
+        Goblin g;
+        player = &g;
+        break;
+    } else if (role == "q"){
+        cout << "Quiting" << endl;
+        return 0;
+    } else {
+        cout << "Invalid role" << endl;
     }
+    }
+
+    // cout << "printing palyer stuff: "<<player->getMax() << player->getAtk() << player->getDef() << endl;
     
-    cout << "printing palyer stuff: "<<player->getMax() << player->getAtk() << player->getDef() << endl;
     
-    
-    
+
     while (level < 6) {
         Floor f(player);
         f.init(player);
         cout << "finished initializing" << endl;
+        string direction;
         string cmd;
         cout<< "Enter a direction: " <<endl;
         while (cin >> cmd) {
@@ -96,7 +97,7 @@ int main() {
             cout<< "Enter a direction: " <<endl;
         }
         f.clearFloor();
-    }
+  }
     
     
     cout << "Won" << endl;

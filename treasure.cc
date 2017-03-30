@@ -18,7 +18,7 @@ bool Treasure::isProtect() {
 }
 
 void Treasure::useItem(int mag) {
-    target->changeGold(getValue());
+    target->pickUpItem(*this);
 }
 
 void Treasure::changeProtect() {
