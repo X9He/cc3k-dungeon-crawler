@@ -20,8 +20,8 @@ int random_gold(){
     return 2;
 }
 
-NormalEnemy::NormalEnemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool isFrozen, bool moved):
-Enemy{initHP, initAtk, initDef, Gold, target, isFrozen, moved}{}
+NormalEnemy::NormalEnemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved):
+Enemy{initHP, initAtk, initDef, Gold, target, moved}{}
 
 Human::Human(PC * target):
 Enemy{140, 20, 20, 0, target}{
@@ -61,13 +61,9 @@ NormalEnemy{100, 15, 20, random_gold(), target} {
 
 
 
-Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool isFrozen, bool moved)
-: Character{initHP, initAtk, initDef, Gold}, Target(target), isFrozen{isFrozen}, moved{moved} {}
+Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved)
+: Character{initHP, initAtk, initDef, Gold}, Target(target), moved{moved} {}
 
-
-void Enemy::changeFrozen() {
-    isFrozen = !isFrozen;
-}
 
 // hurt
 void Enemy::hurt(Troll *p) {

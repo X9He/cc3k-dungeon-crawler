@@ -19,9 +19,10 @@ class Floor {
 	std::vector<Chamber *> roomList;
 	std::vector<Item *> itemList;
 	Message *message;
+	bool isFrozen;
 
 public:
-	Floor(PC*);
+	Floor(PC*, bool isFrozen=false);
 
 	~Floor();
 	
@@ -60,6 +61,8 @@ public:
     void playerAttack(std::string);
 
     void playerUsePotion(std::string);
+
+    void setFrozen();
 };
 
 #endif

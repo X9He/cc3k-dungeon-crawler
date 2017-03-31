@@ -15,15 +15,13 @@ class Elf;
 
 class Enemy: public Character {
     PC * Target;
-    bool isFrozen;
     bool moved;
 public:
     ~Enemy();
-    Enemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool isFrozen = false, bool moved = false); 
+    Enemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false); 
     void move();
     virtual void attack(PC *target) = 0;
     Enemy(PC *target);
-    void changeFrozen();
     void changeMoved();
     bool getMoved();
     virtual void hurt(Troll *p);
@@ -37,7 +35,7 @@ class NormalEnemy: public Enemy {
     bool IsHostile;
     virtual void attack (PC *target) = 0;
 public:
-    NormalEnemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool isFrozen = false, bool moved = false);
+    NormalEnemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false);
 };
 
 class Elf: public NormalEnemy {

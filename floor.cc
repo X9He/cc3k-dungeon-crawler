@@ -25,15 +25,15 @@ int random(int x, int y){
 	return ran;
 }
 
+Floor::Floor(PC *player, bool isFrozen):player{player},isFrozen{isFrozen}{
+  message = new Message;
+}
+
+
 Floor::~Floor() {
 	player = nullptr;
 	delete message;
 }
-
-Floor::Floor(PC *player):player{player}{
-  message = new Message;
-}
-
 
 vector<vector<int>> genEightCord(int i, int j) {
 	vector<vector<int>> v;
@@ -72,6 +72,14 @@ vector<vector<int>> genEightCord(int i, int j) {
 	return v;	
 }
 
+void Floor::setFrozen(){
+	if(isFrozen){
+		isFrozen = false;
+	} else {
+		isFrozen = true;
+	}
+}
+
 void Floor::prettyPrint(){
 	for (int i = 0; i < cellList.size() ; ++i){
 		for (int j = 0; j < cellList[i].size(); ++j){
@@ -80,12 +88,8 @@ void Floor::prettyPrint(){
 		cout << endl;
 	}
 
-	// for (int i = 0; i < 5; ++i){
-	// 	roomList[i]->print();
-	// 	cout<< endl;
-	// }
     message->getMessage(); ////////////////////!!!!!!!!
-     message->clearMessage();///////////////////////////!!!!!
+    message->clearMessage();///////////////////////////!!!!!
 }
 
 void Floor::clearFloor(){
@@ -564,6 +568,10 @@ void Floor::updateEnemy(){
 	// int x = cellList.size();
 	// int y = cellList[0].size();
 	// cout << "begin updating enemy, cords of cell is " << "x: " << x << " y: " << y << endl;
+
+	if(isFrozen){
+		return;
+	}
 
 	for(int i = 0; i < 25; ++i){
 		for (int j = 0; j < 79; ++j){
