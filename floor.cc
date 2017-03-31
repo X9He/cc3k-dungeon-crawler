@@ -893,19 +893,63 @@ void Floor::playerAttack(string dir) {
     Spawn * s = nullptr;
     if (cellList[newRow][newCol]->getType() == '.'){
         s = dynamic_cast<Spawn*>(cellList[newRow][newCol]);
-    }
-    if (s->hasCharacter()) {
-        Enemy * e = dynamic_cast<Enemy *> (s->getCharacter());
-        if (e) {
-        	cout << "start attack" << endl;
-            player->attack(e);
-            int damage = player->damage(e);
-            message->addMessage("PC deals " + to_string(damage) + " damages to " + to_string(e->getName()) + ".");
-            if (s->getCharacter()->getHP() == 0) {
-                s->putCharacter(nullptr);
-            }
-        }
-    }
+	    if (s->hasCharacter()) {
+	        Enemy * e = dynamic_cast<Enemy *> (s->getCharacter());
+	        if (e) {
+	        	cout << "start attack" << endl;
+	            player->attack(e);
+	            int damage = player->damage(e);
+
+	            message->addMessage("PC deals " + to_string(damage) + " damages to " + to_string(e->getName()) + ".");
+	            
+	            if (e->getHP() <= 0) {
+	            	if (e->getName()=='M')
+	            	{
+	            		Item *h= new Normal{player};
+	            		itemList.emplace_back(h);
+
+	            		// assign treasure
+	            		s->putItem(h);
+	            		s->putCharacter(nullptr);
+
+	            	} 
+
+
+	            	else if (e->getName() == 'H')
+	            	{
+	            		Item *hoardOne = new Normal{player};
+	            		Item *hoardTwo = new Normal{player};
+	            		itemList.emplace_back(hoardOne);
+	            		itemList.emplace_back(hoardTwo);
+
+	            		int eRow = e->getRow();
+	            		int eCol = e->getCol();
+
+	            		vector<Spawn*> newVec = scanEmptyEnemy(eRow, eCol);
+
+	            		int size = newVec.size();
+	            		int ran = random(0,size-1);
+
+
+
+	            		//assign treasure one
+
+	            		s->putItem(hoardOne);
+	            		s->putCharacter(nullptr);
+
+	            		//assign treasure two
+
+	            		Spawn *chosen = newVec[ran];
+	            		chosen->putItem(hoardTwo);
+
+	            	} else {
+	            		return;
+
+	            	}
+	            }
+	        }
+	    }
+	}
 }
 
 
