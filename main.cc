@@ -1,13 +1,17 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <cstdlib>
+#include <ctime>
 #include "floor.h"
 #include "pc.h"
 #include "character.h"
 
 using namespace std;
 
+
 int main() {
+    srand(time(0));
     cin.exceptions(ios::eofbit|ios::failbit);
     string cmd;
     int level = 1;
@@ -49,34 +53,62 @@ int main() {
         cout << "Invalid role" << endl;
     }
     }
+
+    // cout << "printing palyer stuff: "<<player->getMax() << player->getAtk() << player->getDef() << endl;
     
     
-    
+
     while (level < 6) {
+        cout << "Entering level " << level << endl;
+        player->initAtkDef();
+        cout << "finished init atk def" << endl;
         Floor f(player);
+        cout << "finished floor construction" << endl;
+        f.init(player);
+        cout << "finished initializing" << endl;
+        // cout << "finished initializing" << endl;
         string direction;
-        while (cin >> direction) {
-            if (direction == "q") {
+        string cmd;
+        cout<< "Enter a direction: " <<endl;
+        while (cin >> cmd) {
+            if (cmd == "q") {
                 cout << "Quiting" << endl;
                 return 0;
             }
-            if (f.movePlayer(direction) == false) {
+            if (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
+                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ) {
+                if (f.movePlayer(cmd) == false) {
+                    level++;
+                    cout << "Entering level " << level << endl;
+                    break;
+                }
+            } else if (cmd == "a") {
+                string dir;
+                cin >> dir;
+                f.playerAttack(dir);
+                if (player->die()) {
+                    cout << "Lost" << endl;
+                    return 0;
+                }
+            } else if (cmd == "u") {
+                string dir;
+                cin >> dir;
+                f.playerUsePotion(dir);
+            } else if (cmd == "b") {
                 level++;
-                player->initAtkDef();
-                cout << "Entering level " << level << endl;
                 break;
             }
-            if (player->die()) {
-                cout << "Lost" << endl;
-                return 0;
-            }
-            f.updateEnemy();
+            cout << "finished one round" << endl;
+             f.updateEnemy();
             f.prettyPrint();
+            cout<< "Enter a direction: " <<endl;
         }
+        f.clearFloor();
   }
     
     
     cout << "Won" << endl;
     cout << "Gold Amount: " << player->getGold() << endl;
+    delete player;
 }
 

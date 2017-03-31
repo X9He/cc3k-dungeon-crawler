@@ -3,17 +3,17 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "NormalCell.h"
+#include "normalCell.h"
 
 class Stair : public NormalCell {	
 public:
-	Stair(char type, int row, int col, int num);
+	Stair(char type, int row, int col, Character *c=nullptr);
 
 	~Stair();
 	
 	void prettyPrint() override;
 
-	int canPass() override;
+	// int canPass() override;
 
 };
 

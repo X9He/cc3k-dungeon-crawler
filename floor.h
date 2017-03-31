@@ -3,14 +3,22 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include "cell.h"
+#include "enemy.h"
+#include "pc.h"
+#include "chamber.h"
+#include "treasure.h"
+#include "potion.h"
+#include "message.h"
 
 class Floor {
-	std::vector<vector<Cell *>> cellList;
-	Display *td;
+	std::vector<std::vector<Cell *>> cellList;
 	int level;
-	vector<Enemy *> enemyList;
+	std::vector<Enemy *> enemyList;
 	PC *player;
-	vector<Chamber *> roomList;
+	std::vector<Chamber *> roomList;
+	std::vector<Item *> itemList;
+	Message *message;
 
 public:
 	Floor(PC*);
@@ -21,11 +29,7 @@ public:
 
 	void clearFloor();
 
-	void init();
-
-	void notify();
-
-	void initPC(char);
+	void init(PC*);
 
 	int getLevel();
 
@@ -39,17 +43,23 @@ public:
 
 	void createStair();
 
-	bool movePlayer(PC *);
+	bool movePlayer(std::string dir);
 
 	void updateEnemy();
 
-	void deleteEnemy();
+	void deleteEnemy(int, int);
 
-	void simpleMoveCharacter(int, int, int, int);
+	void simpleMoveCharacter(int, int, int, int, Character *c);
 
-	vector<Cell*> produceSurroundEmpty(int, int);
+	// std::vector<Cell*> produceSurroundEmpty(int, int);
 
-	Cell* checkPC(int, int);
+	std::vector<Spawn *> scanEmptyEnemy(int, int);
+
+	PC* checkPC(int, int);
+    
+    void playerAttack(std::string);
+
+    void playerUsePotion(std::string);
 };
 
 #endif

@@ -1,11 +1,13 @@
 #include "enemy.h"
 #include "pc.h"
+using namespace std;
+
+Enemy::~Enemy() {}
 
 // enemy attack 50% miss
 // generate random number
-int random(int x, int y){
+int random2(int x, int y){
     int ran;
-    srand(time(0));
     ran = x + (rand() % (y - x + 1));
     return ran;
 }
@@ -13,7 +15,6 @@ int random(int x, int y){
 // generate random gold
 int random_gold(){
     int ran;
-    srand(time(0));
     ran = 0 + (rand() % (1 - 0 + 1));
     if (ran == 0) return 1;
     return 2;
@@ -29,7 +30,7 @@ Enemy{140, 20, 20, 0, target}{
 
 Dwarf::Dwarf(PC * target):
 NormalEnemy{100, 20, 30, random_gold(), target}{
-    name = 'D';
+    name = 'W';
 }
 
 Elf::Elf(PC * target):
@@ -70,60 +71,72 @@ void Enemy::changeFrozen() {
 
 // hurt
 void Enemy::hurt(Troll *p) {
-    int effect = damage(*p);
+    cout << "THERE" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
     changeHP(effect);
 }
 
 void Enemy::hurt(Vampire *p) {
-    int effect = damage(*p);
+    cout << "Four" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
     changeHP(effect);
 }
 
 void Enemy::hurt(Goblin *p) {
-    int effect = damage(*p);
+    cout << "FIVE" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
     changeHP(effect);
 }
 
 void Enemy::hurt(Drow *p) {
-    int effect = damage(*p);
+    cout << "SIX" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
     changeHP(effect);
 }
 
 void Enemy::hurt(PC *p) {
-    int effect = damage(*p);
-    int r = random(0, 1);
-    if (r == 0) {
+    cout << "SEVEN" << endl;
+    int effect = damage(p);
+cout << effect << endl;
         changeHP(effect);
-    }
+    
 }
 
 void Halfling::hurt(Troll *p) {
-    int effect = damage(*p);
-    int r = random(0, 1);
+    cout << "EIGHT" << endl;
+    int effect = damage(p);
+    int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
     }
 }
 
 void Halfling::hurt(Vampire *p) {
-    int effect = damage(*p);
-    int r = random(0, 1);
+    cout << "NINE" << endl;
+    int effect = damage(p);
+    int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
     }
 }
 
 void Halfling::hurt(Goblin *p) {
-    int effect = damage(*p);
-    int r = random(0, 1);
+    cout << "TEN" << endl;
+    int effect = damage(p);
+    int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
     }
 }
 
 void Halfling::hurt(Drow *p) {
-    int effect = damage(*p);
-    int r = random(0, 1);
+    cout << "ELEVEN" << endl;
+    int effect = damage(p);
+    int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
     }
@@ -131,8 +144,10 @@ void Halfling::hurt(Drow *p) {
 
 
 void Halfling::hurt(PC *p) {
-    int effect = damage(*p);
-    int r = random(0, 1);
+    cout << "TWELVE" << endl;
+    int effect = damage(p);
+    cout << "Thirteen" << endl;
+    int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
     }
@@ -149,7 +164,7 @@ bool Enemy::getMoved() {
 
 // attack
 void Elf::attack(PC * player) {
-    int rad = random(0, 1);
+    int rad = random2(0, 1);
     if (rad == 0) {
         player->hurt(*this);
     }
@@ -157,42 +172,42 @@ void Elf::attack(PC * player) {
 
 
 void Dwarf::attack(PC * player) {
-    int rad = random(0, 1);
+    int rad = random2(0, 1);
     if (rad == 0) {
         player->hurt(*this);
     }
 }
 
 void Halfling::attack(PC * player) {
-    int rad = random(0, 1);
+    int rad = random2(0, 1);
     if (rad == 0) {
         player->hurt(*this);
     }
 }
 
 void Orcs::attack(PC * player) {
-    int rad = random(0, 1);
+    int rad = random2(0, 1);
     if (rad == 0) {
         player->hurt(*this);
     }
 }
 
 void Merchant::attack(PC * player) {
-    int rad = random(0, 1);
+    int rad = random2(0, 1);
     if (rad == 0) {
         player->hurt(*this);
     }
 }
 
 void Dragon::attack(PC * player) {
-    int rad = random(0, 1);
+    int rad = random2(0, 1);
     if (rad == 0) {
         player->hurt(*this);
     }
 }
 
 void Human::attack(PC * player) {
-    int rad = random(0, 1);
+    int rad = random2(0, 1);
     if (rad == 0) {
         player->hurt(*this);
     }
@@ -203,3 +218,6 @@ Treasure * Dragon::getHoard(){
     return hoard;
 }
 
+bool Merchant::isHostile() {
+    return status;
+}

@@ -4,26 +4,27 @@
 #include <vector>
 #include <utility>
 #include "normalCell.h"
+#include "item.h"
 
-class Spawn: public Cell {
-	int chamberNum;
-
+class Spawn: public NormalCell {
 	Item *item;
 
 public:
-	Spawn(char type, int row, int col, int num, int chamberNum);
+	Spawn(char type, int row, int col, Character *c = nullptr, Item* item = nullptr);
 
 	~Spawn();
 
 	void prettyPrint() override;
 
-	int canPass() override;
+	// int canPass();
 
-	void putItem();
+	void putItem(Item *);
 
 	void removeItem();
 
-	void getItem();
+	Item * getItem();
+
+	bool hasItem();
 };
 
 #endif

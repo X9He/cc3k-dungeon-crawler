@@ -1,4 +1,3 @@
-
 #ifndef Treasure_hpp
 #define Treasure_hpp
 
@@ -8,7 +7,8 @@ class Treasure: public Item {
     int value;
     bool protect;
 public:
-    Treasure(int, bool);
+   ~Treasure();
+    Treasure(int, bool, PC* player, char itemType = 'G');
     int getValue();
     bool isProtect();
     void useItem(int mag=1) override;
@@ -17,22 +17,22 @@ public:
 
 class Small: public Treasure {
     public:
-    Small();
+    Small(PC* player);
 };
 
 class Normal: public Treasure {
     public:
-    Normal();
+    Normal(PC* player);
 };
 
 class MH: public Treasure {
     public:
-    MH();
+    MH(PC* player);
 };
 
 class DH: public Treasure {
     public:
-    DH();
+    DH(PC* player);
 };
 
 #endif /* Treasure_hpp */

@@ -4,18 +4,23 @@
 #include "door.h"
 using namespace std;
 
-Door::Door(char type, int row, int col, int num): Cell(type, row, col, num) {}
+Door::Door(char type, int row, int col, Character *c): NormalCell{type, row, col, c} {}
 
 Door::~Door() {}
 
 void Door::prettyPrint(){
-	cout << type << endl;
-}
-
-int Door::canPass(char *c){
-	if (c == '@') {
-		return 0;
+	if(hasCharacter()){
+		// cout << '.c';
+		cout << getCharacter()->getName();
 	} else {
-		return 3;
+		cout << getType();
 	}
 }
+
+// int Door::canPass(char *c){
+// 	if (c == '@') {
+// 		return 0;
+// 	} else {
+// 		return 3;
+// 	}
+// }

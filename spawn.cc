@@ -4,30 +4,32 @@
 #include "spawn.h"
 using namespace std;
 
-Spawn::Spawn(char type, int row, int col, int num, int chamberNum): Cell(type, row, col, num), chamberNum{chamberNum} {}
+Spawn::Spawn(char type, int row, int col, Character* c, Item *item): NormalCell{type, row, col, c}, item{item} {}
 
 Spawn::~Spawn() {}
 
 
 void Spawn::prettyPrint(){
-	if (charTarget != nullptr) {
-		cout << "@" << endl;
-	} else if (item != nullptr) {
-		cout << item.getType() << endl;
+	// cout << '.';
+	if(hasCharacter()){
+		// cout << 'c';
+		cout << getCharacter()->getName();
+	} else if (hasItem()) {		
+		// cout << 'i';
+		cout << getItem()->getType();
 	} else {
-		cout << "." << endl;
+		cout << getType();		
 	}
 }
 
-int Spawn::canPass(Cell *c){
-	if(c->charTarget->getName() == '')
+// int Spawn::canPass(Cell *c){
+// 	if(c->charTarget->getName() == '';
 
-}
+// }
 
-void Spawn::putItem(item *i){
+void Spawn::putItem(Item *i){
 	item = i;
 }
-
 
 
 void Spawn::removeItem(){
@@ -35,7 +37,12 @@ void Spawn::removeItem(){
 }
 
 
-Item* Spawn::getItem(){
+Item * Spawn::getItem(){
 	return item;
+}
+
+
+bool Spawn::hasItem(){
+	return (item != nullptr);
 }
 

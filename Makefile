@@ -1,6 +1,6 @@
-CXX=g++-5
+CXX=g++
 CXXFLAGS=-std=c++14 -Wall -MMD 
-OBJECTS=main.o item.o Potion.o Treasure.o cell.o chamber.o character.o door.o enemy.o floor.o normalCell.o passage.o pc.o spawn.o stair.o wall.o
+OBJECTS=main.o potion.o treasure.o cell.o chamber.o character.o door.o enemy.o floor.o normalCell.o passage.o pc.o spawn.o stair.o wall.o item.o message.o
 DEPENDS=${OBJECTS:.o=.d}
 EXEC=cc3k
 
@@ -10,5 +10,5 @@ ${EXEC}: ${OBJECTS}
 -include ${DEPENDS}
 
 clean:
-	rm *.o cc3k
+	rm *.o *.d cc3k
 .PHONY: clean
