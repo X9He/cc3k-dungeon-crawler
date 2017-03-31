@@ -509,18 +509,18 @@ bool Floor::movePlayer(string dir){
 		// Spawn has an enemy
 		if (curCell->hasCharacter())
 		{
-			Enemy *curE = dynamic_cast<Enemy *>(curCell->getCharacter());
-			int damage = curE->damage(player);
+			// Enemy *curE = dynamic_cast<Enemy *>(curCell->getCharacter());
+			// int damage = curE->damage(player);
 
-			message->addMessage(to_string(curE->getName()) + " deals " + to_string(damage) + " damages to PC.");
-			// player->attack(curE);
+			// message->addMessage(to_string(curE->getName()) + " deals " + to_string(damage) + " damages to PC.");
+			// // player->attack(curE);
 
-			if (curE->getHP() <= 0) 
-			{
-				player->changeGold(curE->getGold());
-				curCell->putCharacter(nullptr);
-				deleteEnemy(curE->getRow(), curE->getCol());
-			}
+			// if (curE->getHP() <= 0) 
+			// {
+			// 	player->changeGold(curE->getGold());
+			// 	curCell->putCharacter(nullptr);
+			// 	// deleteEnemy(curE->getRow(), curE->getCol());
+			// }
 		}
 
 		// Spawn has an item
@@ -907,8 +907,21 @@ void Floor::playerAttack(string dir) {
             player->attack(e);
             int damage = player->damage(e);
             message->addMessage("PC deals " + to_string(damage) + " damages to " + to_string(e->getName()) + ".");
-            if (s->getCharacter()->getHP() == 0) {
+            if (e->getHP() <= 0) {
                 s->putCharacter(nullptr);
+            	if (e->getName()=='M')
+            	{
+            		// fill in stuff
+
+            	} else if (e->getName() == 'H')
+            	{
+
+            		// fill in stuff
+            	} else {
+            		
+            		// fill in stuff
+
+            	}
             }
         }
     }
