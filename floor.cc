@@ -391,8 +391,9 @@ void Floor::createStair(){
     // find the number of chamber room that has the player
     int fullRoom;
     for (int i = 0; i < 5; i++) {
-        roomList[i]->hasPlayer();
-        fullRoom = i;
+        roomList[i]->hasPlayer(){
+        	fullRoom = i;
+        }
     }
 
     // randomly generate a chamber room number that does not have the player inside
