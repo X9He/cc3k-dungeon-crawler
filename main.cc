@@ -27,24 +27,19 @@ int main() {
     PC *player = nullptr;
     while (cin >> role) {
     if (role == "s") {
-        PC p;
-        player = &p;
+        player = new PC;
         break;
-    } else if (role == "d") {
-        Drow d;
-        player = &d;
+    } else if (role == "d") {        
+        player = new Drow;
         break;
     } else if (role == "v") {
-        Vampire v;
-        player = &v;
+        player = new Vampire;
         break;
     } else if (role == "t") {
-        Troll t;
-        player = &t;
+        player = new Troll;
         break;
     } else if (role == "g"){
-        Goblin g;
-        player = &g;
+        player = new Goblin;
         break;
     } else if (role == "q"){
         cout << "Quiting" << endl;

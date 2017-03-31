@@ -83,16 +83,10 @@ void Chamber::assignCharacter(Character *c){
 	}
 	else 
 	{
-		if (emptySpawn.size() == 0) 
-		{
-			ran = 0; 
-		}
-		else 
-		{
+		ran= random1(0, emptySpawn.size()-1);
+		while(emptySpawn[ran]->hasCharacter()){
 			ran= random1(0, emptySpawn.size()-1);
 		}
-
-
 		Spawn *s = emptySpawn[ran];
 
 		cout << "reached 1" << endl;
@@ -200,54 +194,6 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 			newVec.emplace_back(s);
 		}
 	}
-	// if (findSpawn(tRow, tCol + 1)!=nullptr){
-	// 	if (!findSpawn(tRow, tCol + 1)->hasCharacter() && !findSpawn(tRow, tCol + 1)->hasItem()){
-	// 	newVec.emplace_back(findSpawn(tRow, tCol + 1));
-	// 	}
-	// 	++amount;
-	// } 
-	// if (findSpawn(tRow + 1, tCol + 1)!=nullptr) {
-	// 	if (!findSpawn(tRow + 1, tCol + 1)->hasCharacter() && !findSpawn(tRow + 1, tCol + 1)->hasItem()){
-	// 	newVec.emplace_back(findSpawn(tRow + 1, tCol + 1));
-	// 	}
-	// 	++amount;
-	// }
-	// if (findSpawn(tRow + 1, tCol)!=nullptr) {
-	// 	if (!findSpawn(tRow + 1, tCol)->hasCharacter() && !findSpawn(tRow + 1, tCol)->hasItem()){
-	// 	newVec.emplace_back(findSpawn(tRow + 1, tCol));
-	// 	}
-	// 	++amount;
-	// }
-	// if (findSpawn(tRow + 1, tCol - 1)!=nullptr) {
-	// 	if (!findSpawn(tRow + 1, tCol - 1)->hasCharacter() && !findSpawn(tRow + 1, tCol - 1)->hasItem()){
-	// 	newVec.emplace_back(findSpawn(tRow + 1, tCol - 1));
-	// 	}
-	// 	++amount;
-	// }
-	// if (findSpawn(tRow, tCol - 1)!=nullptr) {
-	// 	if (!findSpawn(tRow, tCol - 1)->hasCharacter() && !findSpawn(tRow, tCol - 1)->hasItem()){
-	// 	newVec.emplace_back(findSpawn(tRow, tCol - 1));
-	// 	}
-	// 	++amount;
-	// }
-	// if (findSpawn(tRow - 1, tCol - 1)!=nullptr) {
-	// 	if (!findSpawn(tRow - 1, tCol - 1)->hasCharacter() && !findSpawn(tRow - 1, tCol - 1)->hasItem()){
-	// 	newVec.emplace_back(findSpawn(tRow - 1, tCol - 1));
-	// 	}
-	// 	++amount;
-	// }
-	// if (findSpawn(tRow - 1, tCol)!=nullptr) {
-	// 	if (!findSpawn(tRow - 1, tCol)->hasCharacter() && !findSpawn(tRow - 1, tCol)->hasItem()){
-	// 	newVec.emplace_back(findSpawn(tRow - 1, tCol));
-	// 	}
-	// 	++amount;
-	// }
-	// if (findSpawn(tRow - 1, tCol + 1)!=nullptr) {
-	// 	if (!findSpawn(tRow - 1, tCol + 1)->hasCharacter() && !findSpawn(tRow - 1, tCol + 1)->hasItem()){
-	// 	newVec.emplace_back(findSpawn(tRow - 1, tCol + 1));
-	// 	}
-	// 	++amount;
-	// }
 	cout << "reached 2.2" << endl;
 
 	int size = newVec.size();	
