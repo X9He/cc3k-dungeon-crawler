@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include "pc.h"
+using namespace std;
 
 Enemy::~Enemy() {}
 
@@ -70,34 +71,43 @@ void Enemy::changeFrozen() {
 
 // hurt
 void Enemy::hurt(Troll *p) {
+    cout << "THERE" << endl;
     int effect = damage(*p);
+    cout << effect << endl;
     changeHP(effect);
 }
 
 void Enemy::hurt(Vampire *p) {
+    cout << "Four" << endl;
     int effect = damage(*p);
+    cout << effect << endl;
     changeHP(effect);
 }
 
 void Enemy::hurt(Goblin *p) {
+    cout << "FIVE" << endl;
     int effect = damage(*p);
+    cout << effect << endl;
     changeHP(effect);
 }
 
 void Enemy::hurt(Drow *p) {
+    cout << "SIX" << endl;
     int effect = damage(*p);
+    cout << effect << endl;
     changeHP(effect);
 }
 
 void Enemy::hurt(PC *p) {
+    cout << "SEVEN" << endl;
     int effect = damage(*p);
-    int r = random2(0, 1);
-    if (r == 0) {
+cout << effect << endl;
         changeHP(effect);
-    }
+    
 }
 
 void Halfling::hurt(Troll *p) {
+    cout << "EIGHT" << endl;
     int effect = damage(*p);
     int r = random2(0, 1);
     if (r == 0) {
@@ -106,6 +116,7 @@ void Halfling::hurt(Troll *p) {
 }
 
 void Halfling::hurt(Vampire *p) {
+    cout << "NINE" << endl;
     int effect = damage(*p);
     int r = random2(0, 1);
     if (r == 0) {
@@ -114,6 +125,7 @@ void Halfling::hurt(Vampire *p) {
 }
 
 void Halfling::hurt(Goblin *p) {
+    cout << "TEN" << endl;
     int effect = damage(*p);
     int r = random2(0, 1);
     if (r == 0) {
@@ -122,6 +134,7 @@ void Halfling::hurt(Goblin *p) {
 }
 
 void Halfling::hurt(Drow *p) {
+    cout << "ELEVEN" << endl;
     int effect = damage(*p);
     int r = random2(0, 1);
     if (r == 0) {
@@ -131,6 +144,7 @@ void Halfling::hurt(Drow *p) {
 
 
 void Halfling::hurt(PC *p) {
+    cout << "TWELVE" << endl;
     int effect = damage(*p);
     int r = random2(0, 1);
     if (r == 0) {

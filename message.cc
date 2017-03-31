@@ -1,4 +1,5 @@
 #include "message.h"
+using namespace std;
 
 
 Message::Message(): action{""} {}

@@ -6,49 +6,49 @@
 
 class Potion: public Item {
 public:
-    Potion(char itemType = 'P');
-  ~Potion();
+    Potion(PC* = nullptr, char itemType = 'P');
+    ~Potion();
     virtual void useItem(int mag) = 0;
 };
 
 class RH: public Potion {
 public:
-    RH();
+    RH(PC*);
     ~RH();
     void useItem(int mag) override;
 };
 
 class BA: public Potion {
 public:
-    BA();
+    BA(PC*);
     ~BA();
     void useItem(int mag) override;
 };
 
 class BD: public Potion {
 public:
-    BD();
+    BD(PC*);
     ~BD();
     void useItem(int mag) override;
 };
 
 class PH: public Potion {
 public:
-     PH();
+     PH(PC*);
     ~PH();
     void useItem(int mag) override;
 };
 
 class WA: public Potion {
 public:
-     WA();
+     WA(PC*);
      ~WA();
     void useItem(int mag) override;
 };
 
 class WD: public Potion {
 public:
-     WD();
+     WD(PC*);
      ~WD();
     void useItem(int mag) override;
 };

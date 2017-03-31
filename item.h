@@ -11,7 +11,7 @@ class Item {
     char itemType;
     
 public:
-    Item(char itemType);
+    Item(char itemType, PC*);
     ~Item();
     virtual void useItem(int mag=1) = 0;
     char getType();

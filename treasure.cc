@@ -5,8 +5,8 @@
 #include "pc.h"
 
 
-Treasure::Treasure(int value, bool protect, char itemType):
-Item(itemType),value{value}, protect{protect} {}
+Treasure::Treasure(int value, bool protect, PC* player, char itemType):
+Item{itemType, player},value{value} {}
 
 Treasure::~Treasure() {}
 
@@ -25,15 +25,15 @@ void Treasure::changeProtect() {
     protect = !protect;
 }
 
-Small::Small():
-Treasure{1, false} {}
+Small::Small(PC* player):
+Treasure{1, false, player}{}
 
-Normal::Normal():
-Treasure{2, false} {}
+Normal::Normal(PC* player):
+Treasure{2, false, player} {}
 
-MH::MH():
-Treasure{4, false} {}
+MH::MH(PC* player):
+Treasure{4, false, player} {}
 
-DH::DH():
-Treasure{6, true} {}
+DH::DH(PC* player):
+Treasure{6, true, player} {}
 

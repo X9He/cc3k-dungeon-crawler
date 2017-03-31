@@ -4,7 +4,7 @@
 #include <string>
 
 class Message {
-  string action;
+    std::string action;
   public:
   Message();
   ~Message();

@@ -19,6 +19,7 @@ public:
 	~Chamber();
 	Spawn* findSpawn(int row, int col);
 	void addSpawn(Spawn *);
+	void print();
 	void assignItem(Item *);
 	void assignCharacter(Character *);
 	void assignTreasure(Treasure *, Dragon *);

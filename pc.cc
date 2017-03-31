@@ -1,6 +1,7 @@
 #include "pc.h"
 #include <sstream>
 using namespace std;
+
 /*
 Character::Character(int initHP, ini initAtk, int initDef, int Gold):
   initHP{initHP}, initAtk{initAtk}, initDef{initDef}, Gold{Gold}{
@@ -28,7 +29,9 @@ int PC::getMax() {
 }
 
 void PC::attack(Enemy  *target) {
+    cout << "ONE" << endl;
    target->hurt(this);
+    cout << "TWO" << endl;
    if (target->getHP() == 0) {
      changeGold(target->getGold());
      stringstream a;
@@ -45,6 +48,7 @@ void PC::attack(Enemy  *target) {
      message  = "PC deals " + a1.str() + "damages to (" + to_string(target->getName()) +
        "). " + to_string(target->getName()) + " deals " + a2.str()+ " to PC.";
    }
+    cout << target->getHP() << endl;
 }
 
 /*

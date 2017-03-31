@@ -4,16 +4,16 @@
 #include "character.h"
 
 
-Potion::Potion(char itemType): Item(itemType) {}
+Potion::Potion(PC* player, char itemType): Item{itemType, player} {}
 
 Potion::~Potion() {}
   
-RH::RH(): Potion() {}
-BA::BA(): Potion() {}
-BD::BD(): Potion() {}
-PH::PH(): Potion() {}
-WD::WD():Potion() {}
-WA::WA(): Potion() {}
+RH::RH(PC* player): Potion(player) {}
+BA::BA(PC* player): Potion(player) {}
+BD::BD(PC* player): Potion(player) {}
+PH::PH(PC* player): Potion(player) {}
+WD::WD(PC* player): Potion(player) {}
+WA::WA(PC* player): Potion(player) {}
 
 RH::~RH() {}
 BA::~BA() {}

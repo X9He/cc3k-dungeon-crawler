@@ -16,7 +16,7 @@ void Character::changeGold(int i) {
 }
 
 int Character::damage(Character &other, float mag) {
-    return 0 - ceil((100 / (100 + this->getDef()))) * (mag * other.getAtk());
+    return 0 - ceil((100 * (mag * other.getAtk()))/ (100 + this->getDef()));
 }
 
 bool Character::die() {return curHp == 0;}
