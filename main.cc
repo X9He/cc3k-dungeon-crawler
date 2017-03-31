@@ -66,6 +66,7 @@ int main() {
         string cmd;
         cout<< "Enter a direction: " <<endl;
         while (cin >> cmd) {
+
             if (cmd == "q") {
                 cout << "Quiting" << endl;
                 return 0;
@@ -95,6 +96,10 @@ int main() {
             }
             cout << "finished one round" << endl;
              f.updateEnemy();
+             if (player->die()) {
+                    cout << "Lost" << endl;
+                    return 0;
+                }
             f.prettyPrint();
             cout<< "Enter a direction: " <<endl;
         }

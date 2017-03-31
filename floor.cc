@@ -391,7 +391,7 @@ void Floor::createStair(){
     // find the number of chamber room that has the player
     int fullRoom;
     for (int i = 0; i < 5; i++) {
-        roomList[i]->hasPlayer(){
+        if(roomList[i]->hasPlayer()){
         	fullRoom = i;
         }
     }
@@ -784,15 +784,9 @@ PC* Floor::checkPC(int i, int j){
 
 			if (curSpawn->getCharacter()->getName() == '@')
 			{
-				continue;
+				PC *p = dynamic_cast<PC*>(curSpawn->getCharacter());
+				return p;
 			}
-
-
-
-			PC *p = dynamic_cast<PC*>(curSpawn->getCharacter());
-			return p;
-
-
 		}
 	}
 	return nullptr;
