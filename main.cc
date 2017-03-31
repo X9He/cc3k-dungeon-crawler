@@ -104,6 +104,7 @@ int main() {
     
     cout << "Won" << endl;
     cout << "Gold Amount: " << player->getGold() << endl;
+    cout << "HP, Atk and Def: " << player->getHP() << " " << player->getAtk() << " " << player->getDef() << endl;
     delete player;
 }
 

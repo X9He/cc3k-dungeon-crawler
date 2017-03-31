@@ -20,8 +20,6 @@ class Orcs;
 
 class PC: public Character {
     int max;
-protected:
-    std::string message;
 public:
     PC(int initHP=125, int initAtk=25, int initDef=25);
     virtual ~PC();

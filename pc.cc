@@ -15,7 +15,6 @@ Character::Character(int initHP, ini initAtk, int initDef, int Gold):
 PC::PC(int initHP, int initAtk, int initDef): 
   Character{initHP, initAtk, initDef,0}, max{initHP}{
   name = '@';
-  message = "";
   }
 
 PC::~PC() {}
@@ -37,7 +36,6 @@ void PC::attack(Enemy  *target) {
      stringstream a;
      int amount = target->getGold();
        a << amount;
-     message = "PC steals " + a.str() + " from " + to_string(target->getName());
    } else {
      int effect1= target->damage(this, 2);
      int effect2 = damage(target);
@@ -45,8 +43,6 @@ void PC::attack(Enemy  *target) {
      stringstream a2;
      a1 << effect1;
      a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->getName()) +
-       "). " + to_string(target->getName()) + " deals " + a2.str()+ " to PC.";
    }
     cout << target->getHP() << endl;
 }
@@ -326,7 +322,6 @@ void Goblin::attack(Enemy *target) {
   if (target->getHP() == 0) {
     changeGold(target->getGold());
     steal();
-    message = "PC steals 5 gold from " + to_string(target->getName());
   }  
   else {
     int effect1= target->damage(this);
@@ -335,8 +330,6 @@ void Goblin::attack(Enemy *target) {
     stringstream a2;
     a1 << effect1;
     a2 << effect2;
-    message = "PC deals " + a1.str() + "damages to (" + to_string(target->getName()) +
-      "). " + to_string(target->getName()) + " deals " + a2.str() + " to PC.";
   }
 }
 

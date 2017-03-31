@@ -27,11 +27,10 @@ int random(int x, int y){
 
 Floor::~Floor() {
 	player = nullptr;
-	message = nullptr;
+	delete message;
 }
 
-Floor::Floor(PC *player):
-player{player}{
+Floor::Floor(PC *player):player{player}{
   message = new Message;
 }
 
