@@ -533,10 +533,13 @@ bool Floor::movePlayer(string dir){
 		else if (curCell->hasItem()) {
             if (curCell->getItem()->getType() == 'G') {
                 Item *curI = curCell->getItem();
-                
-                curI->useItem();
-                simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
-                curCell->putItem(nullptr);
+                Treasure *t = dynamic_cast<Treasure*>(curI);
+                cout << "you tried to pickup a gold that is " <<t->isProtect() << " protected!"<< endl;
+                if(!t->isProtect()){
+	                curI->useItem();
+	                simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
+	                curCell->putItem(nullptr);
+                }
             }
         }
 		// Spawn is empty
@@ -614,7 +617,7 @@ void Floor::updateEnemy(){
 					// cout << "enemy in cell has not moved" << endl;
 
 					//cell has dragon
-					if (curE->getName() == 'D') 
+					if (curE->getName() == 'D')
 					{
 
 						// cout << "got dragon" << endl;
@@ -918,10 +921,14 @@ void Floor::playerAttack(string dir) {
     }
     
     Spawn * s = nullptr;
+
     if (cellList[newRow][newCol]->getType() == '.'){
         s = dynamic_cast<Spawn*>(cellList[newRow][newCol]);
+
 	    if (s->hasCharacter()) {
+
 	        Enemy * e = dynamic_cast<Enemy *> (s->getCharacter());
+
 	        if (e) {
 	        	if (e->getName() == 'M'){
 		        	if(!hostile){
@@ -976,7 +983,14 @@ void Floor::playerAttack(string dir) {
 	            		Spawn *chosen = newVec[ran];
 	            		chosen->putItem(hoardTwo);
 
-	            	} else {
+	            	} else if (e->getName() == 'D') {
+	            		Dragon *d = dynamic_cast<Dragon *>(e);
+	            		Treasure *t = d->getHoard();
+	            		t->changeProtect(false);
+
+	            	}
+
+	            	else {
 	            		return;
 
 	            	}

@@ -6,7 +6,7 @@
 
 
 Treasure::Treasure(int value, bool protect, PC* player, char itemType):
-Item{itemType, player},value{value} {}
+Item{itemType, player},protect{protect}, value{value} {}
 
 Treasure::~Treasure() {}
 
@@ -21,8 +21,8 @@ void Treasure::useItem(int mag) {
     target->changeGold(getValue());
 }
 
-void Treasure::changeProtect() {
-    protect = !protect;
+void Treasure::changeProtect(bool f) {
+    protect = f;
 }
 
 Small::Small(PC* player):
