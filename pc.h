@@ -20,8 +20,9 @@ class Orcs;
 
 class PC: public Character {
     int max;
+    int damageE;
 public:
-    PC(int, int, int);
+    PC(int, int, int, int);
     virtual ~PC();
     void pickUpItem(Item &i);
     int getMax();
@@ -40,7 +41,9 @@ public:
     virtual void hurt(Elf &e)=0;
     virtual void hurt(Halfling &l)=0;
     virtual void hurt(Dwarf &w)=0;
-    virtual void hurt(Orcs &o)=0;    
+    virtual void hurt(Orcs &o)=0;  
+    void changeDamageE(int amount);
+    int getDamageE();  
 };
 
 class Shade: public PC{

@@ -17,8 +17,9 @@ class Shade;
 class Enemy: public Character {
     PC * Target;
     bool moved;
+    int damagePC;
 public:
-    Enemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false); 
+    Enemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false, int damagePC = 0); 
     Enemy(PC *target);
     virtual ~Enemy();
 
@@ -31,12 +32,15 @@ public:
 
     void changeMoved();
     bool getMoved();
+
+    int getDamagePC();
+   void changeDamagePC(int amount);
 };
 
 class NormalEnemy: public Enemy {
     virtual void attack (PC *target) = 0;
 public:
-    NormalEnemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false);
+    NormalEnemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false, int damagePC = 0);
     virtual ~NormalEnemy();
 
     virtual void hurt(Troll *p);

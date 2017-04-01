@@ -3,8 +3,8 @@
 using namespace std;
 
 
-Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved)
-: Character{initHP, initAtk, initDef, Gold}, Target(target), moved{moved} {}
+Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved, int damagePC)
+  : Character{initHP, initAtk, initDef, Gold}, Target(target), moved{moved},damagePC{damagePC} {}
 
 
 Enemy::~Enemy() {
@@ -18,6 +18,16 @@ void Enemy::changeMoved() {
 bool Enemy::getMoved() {
     return moved;
 }
+
+
+void Enemy::changeDamagePC(int amount) {
+  damagePC = amount;
+}
+
+int Enemy::getDamagePC() {
+  return damagePC;
+}
+
 
 // enemy attack 50% miss
 // generate random number
@@ -35,8 +45,8 @@ int random_gold(){
     return 2;
 }
 
-NormalEnemy::NormalEnemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved):
-Enemy{initHP, initAtk, initDef, Gold, target, moved}{}
+NormalEnemy::NormalEnemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved, int damagePC):
+  Enemy{initHP, initAtk, initDef, Gold, target, moved, damagePC}{}
 
 NormalEnemy::~NormalEnemy() {}
 
@@ -98,172 +108,194 @@ Human::~Human(){}
 
 // normal enemy hurt
 void NormalEnemy::hurt(Troll *p) {
-    cout << "THERE" << endl;
+  //cout << "THERE" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void NormalEnemy::hurt(Vampire *p) {
-    cout << "Four" << endl;
+  //cout << "Four" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void NormalEnemy::hurt(Goblin *p) {
-    cout << "FIVE" << endl;
+  // cout << "FIVE" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    // cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void NormalEnemy::hurt(Drow *p) {
-    cout << "SIX" << endl;
+  // cout << "SIX" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    // cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void NormalEnemy::hurt(Shade *p) {
-    cout << "SEVEN" << endl;
+  // cout << "SEVEN" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    // cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
     
 }
 
 //dragon hurt
 
 void Dragon::hurt(Troll *p) {
-    cout << "THERE" << endl;
+  // cout << "THERE" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Dragon::hurt(Vampire *p) {
-    cout << "Four" << endl;
+  // cout << "Four" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Dragon::hurt(Goblin *p) {
-    cout << "FIVE" << endl;
+  // cout << "FIVE" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    // cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Dragon::hurt(Drow *p) {
-    cout << "SIX" << endl;
+  // cout << "SIX" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Dragon::hurt(Shade *p) {
-    cout << "SEVEN" << endl;
+  // cout << "SEVEN" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
     
 }
 
 //merchant hurt
 
 void Merchant::hurt(Troll *p) {
-    cout << "THERE" << endl;
+  //cout << "THERE" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Merchant::hurt(Vampire *p) {
-    cout << "Four" << endl;
+  //cout << "Four" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    // cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Merchant::hurt(Goblin *p) {
-    cout << "FIVE" << endl;
+  // cout << "FIVE" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Merchant::hurt(Drow *p) {
-    cout << "SIX" << endl;
+  // cout << "SIX" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Merchant::hurt(Shade *p) {
-    cout << "SEVEN" << endl;
+  // cout << "SEVEN" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    // cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
     
 }
 
 //human hurt
 
 void Human::hurt(Troll *p) {
-    cout << "THERE" << endl;
+  //cout << "THERE" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    // cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Human::hurt(Vampire *p) {
-    cout << "Four" << endl;
+  //cout << "Four" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Human::hurt(Goblin *p) {
-    cout << "FIVE" << endl;
+  //cout << "FIVE" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Human::hurt(Drow *p) {
-    cout << "SIX" << endl;
+  //cout << "SIX" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
 }
 
 void Human::hurt(Shade *p) {
-    cout << "SEVEN" << endl;
+  //cout << "SEVEN" << endl;
     int effect = damage(p);
-    cout << effect << endl;
+    //cout << effect << endl;
     changeHP(effect);
+    changeDamagePC(effect);
     
 }
 
 //halfing hurt
 
 void Halfling::hurt(Troll *p) {
-    cout << "EIGHT" << endl;
+  // cout << "EIGHT" << endl;
     int effect = damage(p);
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
+	changeDamagePC(effect);
     }
 }
 
 void Halfling::hurt(Vampire *p) {
-    cout << "NINE" << endl;
+  // cout << "NINE" << endl;
     int effect = damage(p);
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
+	changeDamagePC(effect);
     }
 }
 
@@ -277,22 +309,24 @@ void Halfling::hurt(Goblin *p) {
 }
 
 void Halfling::hurt(Drow *p) {
-    cout << "ELEVEN" << endl;
+  // cout << "ELEVEN" << endl;
     int effect = damage(p);
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
+	changeDamagePC(effect);
     }
 }
 
 
 void Halfling::hurt(Shade *p) {
-    cout << "TWELVE" << endl;
+  //cout << "TWELVE" << endl;
     int effect = damage(p);
-    cout << "Thirteen" << endl;
+    //cout << "Thirteen" << endl;
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
+	changeDamagePC(effect);
     }
 }
 
@@ -301,53 +335,32 @@ void Halfling::hurt(Shade *p) {
 
 // attack
 void Elf::attack(PC * player) {
-    int rad = random2(0, 1);
-    if (rad == 0) {
-        player->hurt(*this);
-    }
+    player->hurt(*this);
 }
 
 
 void Dwarf::attack(PC * player) {
-    int rad = random2(0, 1);
-    if (rad == 0) {
-        player->hurt(*this);
-    }
+     player->hurt(*this);
 }
 
 void Halfling::attack(PC * player) {
-    int rad = random2(0, 1);
-    if (rad == 0) {
-        player->hurt(*this);
-    }
+     player->hurt(*this);
 }
 
 void Orcs::attack(PC * player) {
-    int rad = random2(0, 1);
-    if (rad == 0) {
-        player->hurt(*this);
-    }
+     player->hurt(*this);
 }
 
 void Merchant::attack(PC * player) {
-    int rad = random2(0, 1);
-    if (rad == 0) {
-        player->hurt(*this);
-    }
+     player->hurt(*this);
 }
 
 void Dragon::attack(PC * player) {
-    int rad = random2(0, 1);
-    if (rad == 0) {
-        player->hurt(*this);
-    }
+     player->hurt(*this);
 }
 
 void Human::attack(PC * player) {
-    int rad = random2(0, 1);
-    if (rad == 0) {
-        player->hurt(*this);
-    }
+     player->hurt(*this);
 }
 
 

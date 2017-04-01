@@ -567,7 +567,7 @@ bool Floor::movePlayer(string dir){
 	//PASSAGE
 	else if (c == '#'){
 		simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
-		// message->addMessage("PC moves to " + dir + ".");
+		 message->addMessage("PC moves to " + direction + ".");
 		if(t){
 			t->changeHP(5);
 		}
@@ -576,7 +576,7 @@ bool Floor::movePlayer(string dir){
 	//DOOR
 	else if (c == '+'){
 		simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
-		// message->addMessage("PC moves to " + dir + ".");
+		message->addMessage("PC moves to " + direction + ".");
 		if(t){
 			t->changeHP(5);
 		}
@@ -657,6 +657,10 @@ void Floor::updateEnemy(){
 
 						if (tar) {
 							d->attack(tar);
+							int pchurt = player->getDamageE();
+string act;
+act += d->getName();
+message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
 						}
 					} 
 
@@ -670,6 +674,10 @@ void Floor::updateEnemy(){
 						if (hostile) {
 							if (tar != nullptr){
 								m->attack(tar);
+								int pchurt =player->getDamageE();
+string act;
+act += m->getName();
+message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
 							} else {
 
 								vector<Spawn *> surround = scanEmptyEnemy(i, j);
@@ -711,6 +719,11 @@ void Floor::updateEnemy(){
 						if (tar != nullptr) 
 						{
 							curE->attack(tar);
+							int pchurt = player->getDamageE();
+string act;
+act += curE->getName();
+message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
+
 							continue;
 						} 
 						else 
@@ -893,7 +906,7 @@ void Floor::playerUsePotion(string dir) {
         		if (p) {        			
 			  //cout << "potion cast complete" << endl;
 	        		p->useItem(1);
-				message->addMessage("PC uses " + p->getPotionType());
+				message->addMessage("PC uses " + p->getPotionType() +".");
 	        		//cout << "use potion complete" << endl;
 	        		s->putItem(nullptr);
 	        		//cout << "put item success" << endl;
@@ -958,9 +971,9 @@ void Floor::playerAttack(string dir) {
 	        	}
 	        	cout << "start attack" << endl;
 	            player->attack(e);
-	            int damage = player->damage(e);
+	            int damage = e->getDamagePC();
 
-	            message->addMessage("PC deals " + to_string(damage) + " damages to " + to_string(e->getName()) + ".");
+	            message->addMessage("PC deals " + to_string(0-damage) + " damages to " + e->getName() + ".");
 	            
 	            if (e->getHP() <= 0) {
 	            	if (e->getName()=='M')
