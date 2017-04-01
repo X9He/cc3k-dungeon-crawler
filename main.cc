@@ -70,6 +70,7 @@ int main() {
         while (cin >> cmd) {
             if (cmd == "q") {
                 cout << "Quiting" << endl;
+                f.clearFloor();
                 return 0;
             }
             if (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
@@ -116,10 +117,11 @@ int main() {
         if (player->die()) break;
   }
     
-    
-    cout << "Won" << endl;
-    cout << "Gold Amount: " << player->getGold() << endl;
-    cout << "HP, Atk and Def: " << player->getHP() << " " << player->getAtk() << " " << player->getDef() << endl;
+    if(!player->die()) {        
+        cout << "Won" << endl;
+        cout << "Gold Amount: " << player->getGold() << endl;
+        cout << "HP, Atk and Def: " << player->getHP() << " " << player->getAtk() << " " << player->getDef() << endl;
+    }
     delete player;
 }
 
