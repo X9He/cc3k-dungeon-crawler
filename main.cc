@@ -15,6 +15,8 @@ int main() {
     cin.exceptions(ios::eofbit|ios::failbit);
     string cmd;
     int level = 1;
+    bool isFrozen = false;
+    bool hostile = false;
     cout << "choose your role" << endl;
     cout << "s for shade" << endl;
     cout << "d for drow" << endl;
@@ -26,27 +28,27 @@ int main() {
     string role;
     PC *player = nullptr;
     while (cin >> role) {
-    if (role == "s") {
-        player = new PC;
-        break;
-    } else if (role == "d") {        
-        player = new Drow;
-        break;
-    } else if (role == "v") {
-        player = new Vampire;
-        break;
-    } else if (role == "t") {
-        player = new Troll;
-        break;
-    } else if (role == "g"){
-        player = new Goblin;
-        break;
-    } else if (role == "q"){
-        cout << "Quiting" << endl;
-        return 0;
-    } else {
-        cout << "Invalid role" << endl;
-    }
+	    if (role == "s") {
+	        player = new PC;
+	        break;
+	    } else if (role == "d") {        
+	        player = new Drow;
+	        break;
+	    } else if (role == "v") {
+	        player = new Vampire;
+	        break;
+	    } else if (role == "t") {
+	        player = new Troll;
+	        break;
+	    } else if (role == "g"){
+	        player = new Goblin;
+	        break;
+	    } else if (role == "q"){
+	        cout << "Quiting" << endl;
+	        return 0;
+	    } else {
+	        cout << "Invalid role" << endl;
+	    }
     }
 
     // cout << "printing palyer stuff: "<<player->getMax() << player->getAtk() << player->getDef() << endl;
@@ -57,7 +59,7 @@ int main() {
         cout << "Entering level " << level << endl;
         player->initAtkDef();
         cout << "finished init atk def" << endl;
-        Floor f(player);
+        Floor f(player, isFrozen, hostile);
         cout << "finished floor construction" << endl;
         f.init(player);
         cout << "finished initializing" << endl;
@@ -108,6 +110,8 @@ int main() {
             f.prettyPrint();
             cout<< "Enter a direction: " <<endl;
         }
+        isFrozen = f.getFrozen();
+        hostile = f.getHostile();
         f.clearFloor();
   }
     

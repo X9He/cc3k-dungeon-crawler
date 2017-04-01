@@ -214,6 +214,3 @@ Treasure * Dragon::getHoard(){
     return hoard;
 }
 
-bool Merchant::isHostile() {
-    return status;
-}

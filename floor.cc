@@ -25,7 +25,8 @@ int random(int x, int y){
 	return ran;
 }
 
-Floor::Floor(PC *player, bool isFrozen):player{player},isFrozen{isFrozen}{
+Floor::Floor(PC *player, bool isFrozen, bool hostile)
+:player{player},isFrozen{isFrozen}, hostile{hostile}{
   message = new Message;
 }
 
@@ -78,6 +79,19 @@ void Floor::setFrozen(){
 	} else {
 		isFrozen = true;
 	}
+}
+
+bool Floor::getFrozen(){
+	return isFrozen;
+}
+
+
+void Floor::setHostile(bool f){
+	hostile = f;
+}
+
+bool Floor::getHostile(){
+	return hostile;
 }
 
 void Floor::prettyPrint(){
@@ -492,7 +506,7 @@ bool Floor::movePlayer(string dir){
 	else if (c == '.')
 	{
 		message->addMessage("PC moves to " + direction + ".");
-	       vector<vector<int>> sets;
+		vector<vector<int>> sets;
 	       sets = genEightCord(newRow, newCol);
 	       for(int i = 0; i < 8; ++i){
 		 int newR = sets[i][0];
@@ -513,18 +527,6 @@ bool Floor::movePlayer(string dir){
 		// Spawn has an enemy
 		if (curCell->hasCharacter())
 		{
-			Enemy *curE = dynamic_cast<Enemy *>(curCell->getCharacter());
-			int damage = curE->damage(player);
-
-			message->addMessage(to_string(curE->getName()) + " deals " + to_string(damage) + " damages to PC.");
-			// player->attack(curE);
-
-			if (curE->getHP() <= 0) 
-			{
-				player->changeGold(curE->getGold());
-				curCell->putCharacter(nullptr);
-				deleteEnemy(curE->getRow(), curE->getCol());
-			}
 		}
 
 		// Spawn has an item
@@ -568,7 +570,7 @@ void Floor::updateEnemy(){
 	// int x = cellList.size();
 	// int y = cellList[0].size();
 	// cout << "begin updating enemy, cords of cell is " << "x: " << x << " y: " << y << endl;
-
+	cout << "begin updating enemy" << endl;
 	if(isFrozen){
 		return;
 	}
@@ -615,24 +617,24 @@ void Floor::updateEnemy(){
 					if (curE->getName() == 'D') 
 					{
 
-						cout << "got dragon" << endl;
-						// Dragon *d = dynamic_cast<Dragon *>(curE);
+						// cout << "got dragon" << endl;
+						Dragon *d = dynamic_cast<Dragon *>(curE);
 						
-						cout << "I'm not a dragon, I'm actually a " << c->getName() << endl;
+						// cout << "I'm not a dragon, I'm actually a " << c->getName() << endl;
 						continue;
 
 
-						// cout << "cast dragon success" << endl;
-						// Treasure *t = d->getHoard();
-						// cout << "got dragon hoard success" << endl;
-						// int tRow = t->getRow();
-						// int tCol = t->getCol();
+						cout << "cast dragon success" << endl;
+						Treasure *t = d->getHoard();
+						cout << "got dragon hoard success" << endl;
+						int tRow = t->getRow();
+						int tCol = t->getCol();
 
-						// PC *tar = checkPC(tRow, tCol);
+						PC *tar = checkPC(tRow, tCol);
 
-						// if (tar != nullptr) {
-						// 	d->attack(tar);
-						// }
+						if (tar != nullptr) {
+							d->attack(tar);
+						}
 					} 
 
 					// cell has merchant
@@ -642,10 +644,25 @@ void Floor::updateEnemy(){
 						Merchant *m = dynamic_cast<Merchant *>(c);	
 						// cout << "cast merchant success" << endl;			
 						PC *tar = checkPC(i, j);
-						if (m->isHostile()) {
+						if (hostile) {
 							if (tar != nullptr){
 								m->attack(tar);
-							} 
+							} else {
+
+								vector<Spawn *> surround = scanEmptyEnemy(i, j);
+								
+								if (surround.size() != 0) {
+									int size = surround.size();
+									int r = random(0, size - 1);
+									int newR = surround[r]->getRow();
+									int newC = surround[r]->getCol();
+									simpleMoveCharacter(i, j, newR, newC, c);
+								} else {
+									continue;
+								}
+
+
+							}
 						} else {
 							vector<Spawn *> surround = scanEmptyEnemy(i, j);
 							if (surround.size() != 0) {
@@ -904,6 +921,12 @@ void Floor::playerAttack(string dir) {
 	    if (s->hasCharacter()) {
 	        Enemy * e = dynamic_cast<Enemy *> (s->getCharacter());
 	        if (e) {
+	        	if (e->getName() == 'M'){
+		        	if(!hostile){
+		            			hostile=true;
+		            		}
+
+	        	}
 	        	cout << "start attack" << endl;
 	            player->attack(e);
 	            int damage = player->damage(e);
@@ -913,6 +936,7 @@ void Floor::playerAttack(string dir) {
 	            if (e->getHP() <= 0) {
 	            	if (e->getName()=='M')
 	            	{
+
 	            		Item *h= new Normal{player};
 	            		itemList.emplace_back(h);
 

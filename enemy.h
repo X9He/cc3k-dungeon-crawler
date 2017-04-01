@@ -32,7 +32,6 @@ public:
 };
 
 class NormalEnemy: public Enemy {
-    bool IsHostile;
     virtual void attack (PC *target) = 0;
 public:
     NormalEnemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false);
@@ -69,12 +68,9 @@ public:
 };
 
 class Merchant: public Enemy {
-    bool status;
     std::vector<Item *> store;
 public:
     void attack(PC *target) override;
-    bool isHostile();
-    void changeStatus();
     Merchant(PC *target);
 };
 
