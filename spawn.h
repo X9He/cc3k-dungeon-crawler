@@ -12,7 +12,7 @@ class Spawn: public NormalCell {
 public:
 	Spawn(char type, int row, int col, Character *c = nullptr, Item* item = nullptr);
 
-	~Spawn();
+	~Spawn() override;
 
 	void prettyPrint() override;
 

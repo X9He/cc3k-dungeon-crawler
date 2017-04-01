@@ -9,7 +9,7 @@ protected:
  std::string potionType;
 public:
     Potion(PC* = nullptr, char itemType = 'P');
-    ~Potion();
+    virtual ~Potion();
     std::string getPotionType();
     virtual void useItem(int mag) = 0;
 };
@@ -17,42 +17,42 @@ public:
 class RH: public Potion {
 public:
     RH(PC*);
-    ~RH();
+     ~RH() override;
     void useItem(int mag) override;
 };
 
 class BA: public Potion {
 public:
     BA(PC*);
-    ~BA();
+    ~BA() override;
     void useItem(int mag) override;
 };
 
 class BD: public Potion {
 public:
     BD(PC*);
-    ~BD();
+    ~BD() override;
     void useItem(int mag) override;
 };
 
 class PH: public Potion {
 public:
      PH(PC*);
-    ~PH();
+    ~PH() override;
     void useItem(int mag) override;
 };
 
 class WA: public Potion {
 public:
      WA(PC*);
-     ~WA();
+    ~WA() override;
     void useItem(int mag) override;
 };
 
 class WD: public Potion {
 public:
      WD(PC*);
-     ~WD();
+     ~WD() override;
     void useItem(int mag) override;
 };
 

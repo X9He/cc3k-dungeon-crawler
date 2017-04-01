@@ -10,7 +10,7 @@ class Passage : public NormalCell {
 public:
 	Passage(char type, int row, int col, Character *c=nullptr);
 
-	~Passage();
+	~Passage() override;
 
 	void prettyPrint() override;
 

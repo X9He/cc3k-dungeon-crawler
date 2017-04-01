@@ -17,7 +17,7 @@ class Enemy: public Character {
     PC * Target;
     bool moved;
 public:
-    ~Enemy();
+    ~Enemy() override;
     Enemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false); 
     void move();
     virtual void attack(PC *target) = 0;

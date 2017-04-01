@@ -7,7 +7,7 @@ class Treasure: public Item {
     int value;
     bool protect;
 public:
-   ~Treasure();
+   ~Treasure() override;
     Treasure(int, bool, PC* player, char itemType = 'G');
     int getValue();
     bool isProtect();

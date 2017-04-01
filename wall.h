@@ -11,7 +11,7 @@ class Wall: public Cell {
 public:
 	Wall(char type, int row, int col);
 
-	~Wall();
+	~Wall() override;
 
 	void prettyPrint() override;
 
