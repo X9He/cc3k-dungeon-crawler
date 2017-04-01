@@ -9,7 +9,7 @@ class Stair : public NormalCell {
 public:
 	Stair(char type, int row, int col, Character *c=nullptr);
 
-	~Stair();
+	~Stair() override;
 	
 	void prettyPrint() override;
 

@@ -14,7 +14,7 @@ public:
 
 	NormalCell(char type, int row, int col, Character* charTarget = nullptr);
 
-	~NormalCell();
+	virtual ~NormalCell();
 
 	// void attach(Cell *c);
 

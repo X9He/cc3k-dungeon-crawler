@@ -12,7 +12,7 @@ class Item {
     
 public:
     Item(char itemType, PC*);
-    ~Item();
+    virtual ~Item();
     virtual void useItem(int mag=1) = 0;
     char getType();
     int getRow();

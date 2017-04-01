@@ -13,7 +13,7 @@ class Cell {
 public:
 	Cell(char type, int row, int col);
 
-	~Cell();
+	virtual ~Cell();
 
 	virtual void prettyPrint()=0;
 

@@ -105,7 +105,7 @@ int main() {
 
             if (player->die()) {
             	cout << "Lost" << endl;
-            	return 0;
+            	break;
             }
             f.prettyPrint();
             cout<< "Enter a direction: " <<endl;
@@ -113,6 +113,7 @@ int main() {
         isFrozen = f.getFrozen();
         hostile = f.getHostile();
         f.clearFloor();
+        if (player->die()) break;
   }
     
     
