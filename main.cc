@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
     bool isFrozen = false;
     bool hostile = false;
     bool specialInit = false;
+    string race;
 
 
     ifstream fs;
@@ -163,18 +164,23 @@ int main(int argc, char* argv[]) {
     while (cin >> role) {
 	    if (role == "s") {
 	        player = new Shade;
+		race = "Shade";
 	        break;
 	    } else if (role == "d") {        
 	        player = new Drow;
+		race = "Drow";
 	        break;
 	    } else if (role == "v") {
 	        player = new Vampire;
+		race = "Vampire";
 	        break;
 	    } else if (role == "t") {
 	        player = new Troll;
+		race = "Troll";
 	        break;
 	    } else if (role == "g"){
 	        player = new Goblin;
+		race = "Goblin";
 	        break;
 	    } else if (role == "q"){
 	        cout << "Quiting" << endl;
@@ -208,11 +214,19 @@ int main(int argc, char* argv[]) {
         }
         
         cout << "finished initializing" << endl;
-        string direction;
+string direction;
         string cmd;
-        cout<< "Enter a direction: " <<endl;
+       
 
-
+	    cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " << level << endl;
+            cout << "HP: " << player->getHP() << endl;
+	    cout << "Atk: " << player->getAtk() << endl;
+	    cout << "Def: " << player->getDef() << endl;
+            //f.printEnemyHP();
+            cout << "Action: ";
+	    f.printMessage();
+	    
+            cout<< "Enter a direction: " <<endl;
         while (cin >> cmd) 
         {
         	if (cmd == "q") 
@@ -258,6 +272,13 @@ int main(int argc, char* argv[]) {
                 cout << "Enter a direction: " << endl;
                 continue;
             } else if (cmd == "r"){
+	          cout << "choose your role" << endl;
+    cout << "s for shade" << endl;
+    cout << "d for drow" << endl;
+    cout << "v for vampire" << endl;
+    cout << "t for troll" << endl;
+    cout << "g for goblin" << endl;
+    cout << "q for quit" << endl;
             	level = 1;
             	player->initAll();
             	break;
@@ -268,14 +289,21 @@ int main(int argc, char* argv[]) {
             f.updateEnemy();
 
             if (player->die()) {
-            	cout << "Lost" << endl;
+            	cout << "LOST" << endl;
             	break;
             }
 
-            f.prettyPrint();
-            cout << "player hp:" << player->getHP() << endl;
-            f.printEnemyHP();
+	    	
+	    f.prettyPrint();
 
+	    cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " <<level << endl;
+            cout << "HP: " << player->getHP() << endl;
+	    cout << "Atk: " << player->getAtk() << endl;
+	    cout << "Def: " << player->getDef() << endl;
+            //f.printEnemyHP();
+            cout << "Action: ";
+	    f.printMessage();
+	    
             cout<< "Enter a direction: " <<endl;
         }
         
@@ -286,7 +314,7 @@ int main(int argc, char* argv[]) {
   }
     
     if(!player->die()) {        
-        cout << "Won" << endl;
+        cout << "YOU WON!!!!!" << endl;
         cout << "Gold Amount: " << player->getGold() << endl;
         cout << "HP, Atk and Def: " << player->getHP() << " " << player->getAtk() << " " << player->getDef() << endl;
     }

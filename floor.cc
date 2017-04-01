@@ -26,7 +26,7 @@ int random(int x, int y){
 }
 
 Floor::Floor(PC *player, bool isFrozen, bool hostile)
-:player{player},isFrozen{isFrozen}, hostile{hostile}{
+  :player{player},isFrozen{isFrozen}, hostile{hostile}, level{1}{
   message = new Message;
 }
 
@@ -108,7 +108,10 @@ void Floor::prettyPrint(){
 		}
 		cout << endl;
 	}
+}
 
+void Floor::printMessage() {
+  
     message->getMessage(); 
     message->clearMessage();
 }
@@ -823,6 +826,7 @@ bool Floor::movePlayer(string dir){
 
 	//WALL
 	if (c == ' ' || c == '-' || c == '|') {
+	  message->addMessage("PC cannot move.");
 		if(t){
 			t->changeHP(5);
 		}
@@ -1288,7 +1292,7 @@ void Floor::playerAttack(string dir) {
 	            player->attack(e);
 	            int damage = e->getDamagePC();
 
-	            message->addMessage("PC deals " + to_string(0-damage) + " damages to " + e->getName() + ".");
+	            message->addMessage("PC deals " + to_string(0-damage) + " damages to " + e->getName() + "(" + to_string(e->getHP()) + " HP).");
 	            
 	            if (e->getHP() <= 0) {
 	            	if (e->getName()=='M')

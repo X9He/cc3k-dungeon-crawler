@@ -77,6 +77,8 @@ public:
     bool getHostile();
 
     void printEnemyHP();
+    
+    void printMessage();
 
 };
 
