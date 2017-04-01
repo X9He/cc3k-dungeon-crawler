@@ -86,6 +86,14 @@ void Character::initAtkDef() {
     curDef = initDef;
 }
 
+void Character::initAll(){
+    curAtk = initAtk;
+    curDef = initDef;
+    curHp = initHP;
+    Gold = 0;
+
+}
+
 int Character::getinitHp() {
     return initHP;
 }

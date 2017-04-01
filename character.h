@@ -25,6 +25,7 @@ class Character {
   int getCol();
   char getName(); 
   void initAtkDef();
+  void initAll();
   void changeGold(int);
   int getinitHp();
   void changeCurHP(int);

@@ -63,24 +63,29 @@ int main() {
         cout << "finished floor construction" << endl;
         f.init(player);
         cout << "finished initializing" << endl;
-        // cout << "finished initializing" << endl;
         string direction;
         string cmd;
         cout<< "Enter a direction: " <<endl;
-        while (cin >> cmd) {
-            if (cmd == "q") {
+        while (cin >> cmd) 
+        {
+        	if (cmd == "q") 
+        	{
                 cout << "Quiting" << endl;
                 f.clearFloor();
                 return 0;
             }
             if (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
-                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ) {
-                if (f.movePlayer(cmd) == false) {
+                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ) 
+            {
+            	if (f.movePlayer(cmd) == false) 
+            	{
                     level++;
                     cout << "Entering level " << level << endl;
                     break;
                 }
-            } else if (cmd == "a") {
+            } 
+            else if (cmd == "a") 
+            {
                 string dir;
                 cin >> dir;
                 f.playerAttack(dir);
@@ -88,19 +93,30 @@ int main() {
                     cout << "Lost" << endl;
                     return 0;
                 }
-            } else if (cmd == "u") {
+            } 
+            else if (cmd == "u") 
+            {
                 string dir;
                 cin >> dir;
                 f.playerUsePotion(dir);
-            } else if (cmd == "b") {
+            } 
+            else if (cmd == "b") 
+            {
                 level++;
                 break;
-            } else if (cmd == "f") {
+            }
+            else if (cmd == "f") 
+            {
                 f.setFrozen();
+                cout << "Enter a direction: " << endl;
                 continue;
+            } else if (cmd == "r"){
+            	level = 1;
+            	player->initAll();
+            	break;
             }
 
-            cout << "finished one round" << endl;
+            // cout << "finished one round" << endl;
 
             f.updateEnemy();
 
@@ -108,6 +124,7 @@ int main() {
             	cout << "Lost" << endl;
             	break;
             }
+
             f.prettyPrint();
             cout<< "Enter a direction: " <<endl;
         }
