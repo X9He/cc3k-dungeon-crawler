@@ -9,7 +9,7 @@ class Door : public NormalCell{
 public:
 	Door(char type, int row, int col, Character *c=nullptr);
 
-	~Door();
+	~Door() override;
 
 	void prettyPrint() override;
 

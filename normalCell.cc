@@ -6,7 +6,9 @@ using namespace std;
 
 NormalCell::NormalCell(char type, int row, int col, Character *charTarget): Cell(type, row, col), charTarget{charTarget} {}
 
-NormalCell::~NormalCell(){}
+NormalCell::~NormalCell(){
+	charTarget=nullptr;
+}
 
 
 // void NormalCell::attach(Cell *c){

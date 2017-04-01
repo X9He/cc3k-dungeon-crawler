@@ -49,7 +49,7 @@ class Troll: public PC{
   int stealHP;
   public:
   Troll();
-  ~Troll();
+  ~Troll() override;
   void regainHealth();
   void hurt(Merchant &m);
   void hurt(Human &h);
@@ -63,7 +63,7 @@ class Troll: public PC{
 
 class Vampire: public PC{ 
   public:
-  ~Vampire();
+  ~Vampire() override;
   Vampire();
   void VchangHP(int effet);
   void attack(Enemy *target);
@@ -81,7 +81,7 @@ class Goblin: public PC{
   int stealGold;
   public:
   Goblin();
-  ~Goblin();
+  ~Goblin() override;
   void steal();
   void attack(Enemy *target);
   void hurt(Merchant &m);
@@ -98,7 +98,7 @@ class Drow: public PC{
   int potionMagnify;
   public:
   Drow();
-  ~Drow();
+  ~Drow() override;
   void pickUpItem(Item &i, int effect);
   void hurt(Merchant &m);
   void hurt(Human &h);

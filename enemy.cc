@@ -2,7 +2,14 @@
 #include "pc.h"
 using namespace std;
 
-Enemy::~Enemy() {}
+
+Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved)
+: Character{initHP, initAtk, initDef, Gold}, Target(target), moved{moved} {}
+
+
+Enemy::~Enemy() {
+    Target = nullptr;
+}
 
 // enemy attack 50% miss
 // generate random number
@@ -23,6 +30,10 @@ int random_gold(){
 NormalEnemy::NormalEnemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved):
 Enemy{initHP, initAtk, initDef, Gold, target, moved}{}
 
+NormalEnemy::~NormalEnemy() {}
+
+
+//constructors
 Human::Human(PC * target):
 Enemy{140, 20, 20, 0, target}{
     name = 'H';
@@ -59,10 +70,22 @@ NormalEnemy{100, 15, 20, random_gold(), target} {
     name = 'L';
 }
 
+//destructors
 
+Dwarf::~Dwarf(){}
 
-Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved)
-: Character{initHP, initAtk, initDef, Gold}, Target(target), moved{moved} {}
+Elf::~Elf(){}
+
+Orcs::~Orcs(){}
+
+Merchant::~Merchant(){}
+
+Dragon::~Dragon(){}
+
+Halfling::~Halfling(){}
+
+Human::~Human(){}
+
 
 
 // hurt

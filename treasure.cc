@@ -37,3 +37,12 @@ Treasure{4, false, player} {}
 DH::DH(PC* player):
 Treasure{6, true, player} {}
 
+
+Small::~Small(){}
+
+Normal::~Normal(){}
+
+MH::~MH(){}
+
+DH::~DH(){}
+

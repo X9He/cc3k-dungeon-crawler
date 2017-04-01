@@ -14,7 +14,7 @@ int Item::getCol() {
 
 Item::Item(char itemType, PC* target): row{0}, col{0}, itemType{itemType}, target{target} {}
 
-Item::~Item() {}
+Item::~Item() {target=nullptr;}
 
 void Item::changePosition(int x, int y) {
     row = x;

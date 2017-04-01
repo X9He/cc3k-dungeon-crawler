@@ -6,7 +6,9 @@ using namespace std;
 
 Spawn::Spawn(char type, int row, int col, Character* c, Item *item): NormalCell{type, row, col, c}, item{item} {}
 
-Spawn::~Spawn() {}
+Spawn::~Spawn() {
+	item=nullptr;
+}
 
 
 void Spawn::prettyPrint(){
@@ -18,7 +20,7 @@ void Spawn::prettyPrint(){
 		// cout << 'i';
 		cout << getItem()->getType();
 	} else {
-		cout << getType();		
+		cout << getType();	
 	}
 }
 
