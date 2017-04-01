@@ -109,25 +109,25 @@ void Floor::prettyPrint(){
 		cout << endl;
 	}
 
-    message->getMessage(); ////////////////////!!!!!!!!
-    message->clearMessage();///////////////////////////!!!!!
+    message->getMessage(); 
+    message->clearMessage();
 }
 
 void Floor::clearFloor(){
-	cout << "start clearing floor" << endl;
+  //cout << "start clearing floor" << endl;
 	
 	for (auto i: enemyList){
 		delete i;
 	}
 
-	cout << "cleared enemy list" << endl;
+	//	cout << "cleared enemy list" << endl;
 
 	for (auto cellVec : cellList){
 		for (auto c: cellVec){
 			delete c;
 		}
 	}
-	cout << "cleared cell list" << endl;
+	//	cout << "cleared cell list" << endl;
 
 
 	for(auto j: roomList){
@@ -136,7 +136,7 @@ void Floor::clearFloor(){
 	// for (int i = 0; i < roomList.size(); ++i){
 	// 	delete roomList[i];
 	// }
-	cout << "cleared room list" << endl;
+	//cout << "cleared room list" << endl;
 
 	// for (int i = 0; i < itemList.size(); ++i){
 	// 	delete itemList[i];
@@ -144,7 +144,7 @@ void Floor::clearFloor(){
 	for(auto t: itemList){
 		delete t;
 	}
-	cout << "cleared item list" << endl;
+	//cout << "cleared item list" << endl;
 }
 
 void Floor::init(PC *p){
@@ -270,9 +270,9 @@ void Floor::init(PC *p){
 	roomList[rP]->assignCharacter(p);
 
 	createStair();
-	cout << "finished created stairs" <<endl;
+	//cout << "finished created stairs" <<endl;
 	createPotion(10);
-	cout << "finished created potions" <<endl;
+	//cout << "finished created potions" <<endl;
 	createTreasure(10);
 	// cout << "finished created treasures" <<endl;
 	createEnemy(20);
@@ -326,7 +326,7 @@ void Floor::createEnemy(int num){
 		}
 
 		enemyList.emplace_back(newE);
-		cout << "calling assign" << endl;
+		//cout << "calling assign" << endl;
 		roomList[r2]->assignCharacter(newE);
 		--num;
 	}
@@ -358,7 +358,7 @@ void Floor::createPotion(int num){
 			newP = new WD{player};
 		}
 		itemList.emplace_back(newP);
-		cout << "failed before assign" << endl;
+		//	cout << "failed before assign" << endl;
 		roomList[r2]->assignItem(newP);
 		--num;
 	}
@@ -380,32 +380,32 @@ void Floor::createTreasure(int num){
 			cout << "assigned dragon hoard to chamber " << chamberR << endl;
 
 			while(roomList[chamberR]->getEmptyAmount() < 2){
-				cout << "deciding dragon room" << endl;
+			  //	cout << "deciding dragon room" << endl;
 				chamberR = random(0, 4);
 			}
 			Treasure *newT = new DH{player};
 			itemList.emplace_back(newT);
 			Dragon *newD = new Dragon{player, newT};
 			enemyList.emplace_back(newD);
-			cout << "failed before assign" << endl;
+			//cout << "failed before assign" << endl;
 			roomList[chamberR]->assignTreasure(newT, newD);
 		}
 
 		// Small Hoard
 		 else if (r >=2 && r <= 4) {
-			cout << "assigned small hoard to chamber " << chamberR << endl;
+		   //cout << "assigned small hoard to chamber " << chamberR << endl;
 			Item *newT = new Small{player};
 			itemList.emplace_back(newT);
-			cout << "failed before assign" << endl;
+			//	cout << "failed before assign" << endl;
 			roomList[chamberR]->assignItem(newT);
 		} 
 
 		// Normal Hoard
 		else {
-			cout << "assigned normal hoard to chamber " << chamberR << endl;
+		  //cout << "assigned normal hoard to chamber " << chamberR << endl;
 			Item *newT = new Normal{player};
 			itemList.emplace_back(newT);
-			cout << "failed before assign" << endl;
+			//	cout << "failed before assign" << endl;
 			roomList[chamberR]->assignItem(newT);
 		}
 		--num;
@@ -545,7 +545,7 @@ bool Floor::movePlayer(string dir){
             if (curCell->getItem()->getType() == 'G') {
                 Item *curI = curCell->getItem();
                 Treasure *t = dynamic_cast<Treasure*>(curI);
-                cout << "you tried to pickup a gold that is " <<t->isProtect() << " protected!"<< endl;
+		// cout << "you tried to pickup a gold that is " <<t->isProtect() << " protected!"<< endl;
                 if(!t->isProtect()){
 	                curI->useItem();
 	                simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
@@ -593,7 +593,7 @@ void Floor::updateEnemy(){
 	// int x = cellList.size();
 	// int y = cellList[0].size();
 	// cout << "begin updating enemy, cords of cell is " << "x: " << x << " y: " << y << endl;
-	cout << "begin updating enemy" << endl;
+	//cout << "begin updating enemy" << endl;
 	if(isFrozen){
 		return;
 	}
@@ -647,9 +647,9 @@ void Floor::updateEnemy(){
 						
 
 
-						cout << "cast dragon success" << endl;
+						//cout << "cast dragon success" << endl;
 						Treasure *t = d->getHoard();
-						cout << "got dragon hoard success" << endl;
+						//cout << "got dragon hoard success" << endl;
 						int tRow = t->getRow();
 						int tCol = t->getCol();
 
@@ -969,7 +969,7 @@ void Floor::playerAttack(string dir) {
 		            		}
 
 	        	}
-	        	cout << "start attack" << endl;
+	        	//cout << "start attack" << endl;
 	            player->attack(e);
 	            int damage = e->getDamagePC();
 

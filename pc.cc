@@ -36,7 +36,7 @@ int PC::getMax() {
 }
 
 void PC::attack(Enemy  *target) {
-  cout << "ONE" << endl;
+  // cout << "ONE" << endl;
 
   Shade *s = dynamic_cast<Shade *>(this);
   if(s){
@@ -59,7 +59,7 @@ void PC::attack(Enemy  *target) {
     target->hurt(v);
   }
 
-  cout << "TWO" << endl;
+  // cout << "TWO" << endl;
   if (target->getHP() == 0) {
     changeGold(target->getGold());
     stringstream a;
