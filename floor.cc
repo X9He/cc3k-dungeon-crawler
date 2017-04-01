@@ -147,7 +147,7 @@ void Floor::clearFloor(){
 	//cout << "cleared item list" << endl;
 }
 
-void Floor::init(PC *p){
+void Floor::genEmptyFloor(){
 	ifstream fs;
 	fs.open("cc3k.txt");
 
@@ -190,6 +190,321 @@ void Floor::init(PC *p){
 	}
 	fs.close();
 	// prettyPrint();
+
+}
+
+void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
+	//get the current floor vec of vec of char
+	vector<vector<int>> curFloor = readFloorVec[level];
+	cout << "got floor vector " << endl;
+    for (int i = 0; i < 25; ++i) {
+    	cout << "start iterating list " << endl;
+
+        vector<Cell*> newVec;
+        int c;
+        
+        for(int j = 0; j < 79; ++j)
+        {
+        	cout << "starting cell: " << i << " " << j << " ";
+
+            c = curFloor[i][j];
+            // cout << "reached 1 " << endl;
+            // cout << c;
+            Cell *newC= nullptr;
+            Spawn * newS = nullptr;
+            Enemy *newE = nullptr;
+            Potion *newP = nullptr;
+            Treasure *newT = nullptr;
+
+            cout << "finished initliazing pointers, ";
+
+            cout << "current int is " << c << endl;
+            
+            
+            
+            if (c == 18)
+            {
+            	cout << "clause 1" << endl;
+                newC = new Wall{' ', i, j};
+                newVec.emplace_back(newC);
+            }
+            else if (c == 19)
+            {
+            	cout << "clause 1" << endl;
+                newC = new Wall{'-', i, j};
+                newVec.emplace_back(newC);
+            }
+            else if (c == 20)
+            {
+            	cout << "clause 1" << endl;
+                newC = new Wall{'|', i, j};
+                newVec.emplace_back(newC);
+            }
+            else if (c == 21)
+            {
+            	cout << "clause 2" << endl;
+            	cout << i << " "<< j << endl;
+                newC = new Passage{'#', i, j};
+                newVec.emplace_back(newC);
+            } 
+            else if (c == 22)
+            {
+            	cout << "clause 3" << endl;
+            	cout << i << " "<< j << endl;
+                newC = new Spawn{'.', i, j};
+                cout << "here" << endl;
+                newVec.emplace_back(newC);
+                cout << "there" << endl;
+            } 
+            else if (c == 23)
+            {
+            	cout << "clause 4" << endl;
+            	cout << i << " "<< j << endl;
+                newC = new Door{'+', i, j};
+                newVec.emplace_back(newC);
+            } 
+            else if (c == 24) 
+            {
+            	cout << "clause 5" << endl;
+            	cout << i << " "<< j << endl;
+                newC = new Stair{'\\', i, j};
+                newVec.emplace_back(newC);
+            }
+            else if (c == 0) 
+             {
+            	cout << "clause 14" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newP = new RH{player};
+                newP->changePosition(i, j);
+                newS->putItem(newP);
+                itemList.emplace_back(newP);
+            } else if (c == 1) 
+            {
+            	cout << "clause 15" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newP = new BA{player};
+                newP->changePosition(i, j);
+                newS->putItem(newP);
+                itemList.emplace_back(newP);
+            } else if (c == 2) 
+            {
+            	cout << "clause 16" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newP = new BD{player};
+                newP->changePosition(i, j);
+                newS->putItem(newP);
+                itemList.emplace_back(newP);
+            } else if (c == 3) 
+            {
+            	cout << "clause 17" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newP = new PH{player};
+                newP->changePosition(i, j);
+                newS->putItem(newP);
+                itemList.emplace_back(newP);
+            } else if (c == 4) 
+            {
+            	cout << "clause 18" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newP = new WA{player};
+                newP->changePosition(i, j);
+                newS->putItem(newP);
+                itemList.emplace_back(newP);
+            } else if (c == 5) 
+            {
+            	cout << "clause 19" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                cout << "1";
+                newP = new WD{player};
+                cout << "1";
+                newP->changePosition(i, j);
+                cout << "1";
+                newS->putItem(newP);
+                cout << "1";
+                itemList.emplace_back(newP);
+                cout << endl;
+            } 
+            // cell has treasure
+            else if (c == 6) 
+            {
+            	cout << "clause 20" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newT = new Normal{player};
+                newT->changePosition(i, j);
+                newS->putItem(newT);
+                itemList.emplace_back(newT);
+            } 
+            else if (c == 7) 
+            {
+            	cout << "clause 21" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newT = new Small{player};
+                newT->changePosition(i, j);
+                newS->putItem(newT);
+                itemList.emplace_back(newT);
+            } 
+            else if (c == 8) 
+            {
+            	cout << "clause 22" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newT = new MH{player};
+                newT->changePosition(i, j);
+                newS->putItem(newT);
+                itemList.emplace_back(newT);
+            } 
+            else if (c == 9) 
+            {
+            	cout << "clause 22" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newT = new DH{player};
+                newT->changePosition(i, j);
+                newS->putItem(newT);
+                itemList.emplace_back(newT);
+            } 
+        	
+            // cout << "reached 2 " << endl;
+            // cell has enemy
+            else if (c == 10) 
+            {
+            	cout << "clause 13" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newE = new Halfling{player};
+                newE->changePosition(i, j);
+                newS->putCharacter(newE);
+                enemyList.emplace_back(newE);
+            }
+            else if (c == 11) 
+            {
+            	cout << "clause 8" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newE = new Dwarf{player};
+                newE->changePosition(i, j);
+                enemyList.emplace_back(newE);
+                newS->putCharacter(newE);
+            } 
+            else if (c == 12) 
+            {
+            	cout << "clause 9" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newE = new Elf{player};
+                newE->changePosition(i, j);
+                newS->putCharacter(newE);
+                enemyList.emplace_back(newE);
+            }
+            else if (c == 13) 
+            {
+            	cout << "clause 7" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newE = new Human{player};
+                newE->changePosition(i, j);
+                enemyList.emplace_back(newE);
+                newS->putCharacter(newE);
+            } 
+            else if (c == 14) 
+            {
+            	cout << "clause 10" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newE = new Orcs{player};
+                newE->changePosition(i, j);
+                newS->putCharacter(newE);
+                enemyList.emplace_back(newE);
+            } 
+            else if (c == 15) 
+            {
+            	cout << "clause 12" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newE = new Merchant{player};
+                newE->changePosition(i, j);
+                newS->putCharacter(newE);
+                enemyList.emplace_back(newE);
+            } 
+            else if (c == 16) 
+            {
+            	cout << "clause 11" << endl;
+                newS = new Spawn{'.', i, j};
+                newVec.emplace_back(newS);
+                newE = new Dragon{player, nullptr};
+                newE->changePosition(i, j);
+                newS->putCharacter(newE);
+                enemyList.emplace_back(newE);
+            } 
+            // cell has player
+            else if (c == 17) 
+            {
+            	cout << "clause 6" << endl;
+            	cout << i << " "<< j << endl;
+                newS = new Spawn{'.', i, j};
+                newS->putCharacter(player);
+                player->changePosition(i,j);
+                newVec.emplace_back(newS);
+            }
+            else {
+            	cout << "what is this ?" << endl;
+            }
+
+        }
+    
+
+
+            
+        
+        cout << "finished line: " << i <<endl;
+        
+        cellList.emplace_back(newVec);
+        // cout << i << endl;
+    }
+   	cout << "finished constructing special cells" << endl;
+    
+    for (auto i : itemList) {
+    	cout << "iterating through item list, index: " << i << endl;
+    	DH *dHoard = dynamic_cast<DH *>(i);
+    	cout << "you cant just cast shit like no tomorrow" << endl;
+        if (dHoard) {
+        	int row = dHoard->getRow();
+        	int col = dHoard->getCol();
+            vector<vector<int>> surround= genEightCord(row, col);
+            for(int j = 0; j < 8; j++) {
+                int row = surround[j][0];
+                int col = surround[j][1];
+                Cell * curCell = cellList[row][col];
+                Spawn * s = dynamic_cast<Spawn *>(curCell);
+                if (s) {
+                       if (s->hasCharacter()) {
+                       	Character *cur = s->getCharacter();
+                       	Enemy *e = dynamic_cast<Enemy *>(cur);
+                    	Dragon *d = dynamic_cast<Dragon *>(e);
+                    	if (d){
+                    		Treasure *t = dynamic_cast<Treasure *>(i);
+                    		d->putHoard(t);
+                    	}
+                    }
+                }
+            }
+        }
+    }
+	prettyPrint();
+
+
+
+}
+
+void Floor::init(PC *p){
 
 	//Chamber 1
 	Chamber *chamberOne = new Chamber{1};

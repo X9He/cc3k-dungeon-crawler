@@ -55,7 +55,7 @@ void Character::changeHP(int effect) {
 void Character::changeAtk(int effect) {
     int afterChange = curAtk + effect;
     if (afterChange <= 0) curAtk = 0;
-    else curAtk = afterChange;
+    else curHp = afterChange;
 }
 
 void Character::changeDef(int effect){

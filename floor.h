@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <string>
 #include "cell.h"
 #include "enemy.h"
 #include "pc.h"
@@ -31,7 +32,11 @@ public:
 
 	void clearFloor();
 
+	void genEmptyFloor();
+
 	void init(PC*);
+
+    void sInit(PC*, std::vector<std::vector<std::vector<int>>>, int);
 
 	int getLevel();
 
@@ -72,6 +77,7 @@ public:
     bool getHostile();
 
     void printEnemyHP();
+
 };
 
 #endif

@@ -368,3 +368,7 @@ Treasure * Dragon::getHoard(){
     return hoard;
 }
 
+
+void Dragon::putHoard(Treasure *t){
+  hoard = t;
+}

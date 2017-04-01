@@ -3,6 +3,7 @@
 #include <utility>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 #include "floor.h"
 #include "pc.h"
 #include "character.h"
@@ -10,13 +11,145 @@
 using namespace std;
 
 
-int main() {
+int main(int argc, char* argv[]) {
     srand(time(0));
     cin.exceptions(ios::eofbit|ios::failbit);
     string cmd;
     int level = 1;
     bool isFrozen = false;
     bool hostile = false;
+    bool specialInit = false;
+
+
+    ifstream fs;
+    if(argc >= 2){
+    	cout << "number of argc is 2" << endl;
+        specialInit = true;
+        fs.open(argv[1]);
+    }
+    // cout << argv[0] << endl;
+    // cout << argv[1] << endl;
+    string s;
+    vector<vector<vector<int>>> v1;
+
+    for(int h = 0; h < 5; ++h){
+        vector<vector<int>> layerOneV;
+        for(int i = 0; i < 25; ++i){
+            vector<int> layerTwoV;
+            getline(fs,s);
+            for(int j = 0; j < 79; ++j){  
+                if (s[j] == ' ')
+                {
+                 layerTwoV.emplace_back(18);
+                }
+                else if (s[j] == '-')
+                {
+                 layerTwoV.emplace_back(19);
+                }
+                else if (s[j] == '|')
+                {
+                 layerTwoV.emplace_back(20);
+                }
+                else if (s[j] == '#')
+                {
+                 layerTwoV.emplace_back(21);
+                }
+                else if (s[j] == '.')
+                {
+                 layerTwoV.emplace_back(22);
+
+                }
+                else if (s[j] == '+')
+                {
+                 layerTwoV.emplace_back(23);
+
+                } 
+                else if (s[j] == '\\') 
+                {
+                 layerTwoV.emplace_back(24);
+
+                }
+                else if (s[j] == '0'){
+                 layerTwoV.emplace_back(0);
+                }              
+                else if (s[j] == '1'){
+                 layerTwoV.emplace_back(1);
+                }
+                else if (s[j] == '2'){                   
+                 layerTwoV.emplace_back(2);                  
+                }
+                else if (s[j] == '3'){
+                 layerTwoV.emplace_back(3);
+                }
+                else if (s[j] == '4'){
+                 layerTwoV.emplace_back(4);
+                }
+                else if (s[j] == '5'){
+                 layerTwoV.emplace_back(5);
+                }
+                else if (s[j] == '6'){
+                 layerTwoV.emplace_back(6);
+                }
+                else if (s[j] == '7'){
+                 layerTwoV.emplace_back(7);
+                }
+                else if (s[j] == '8'){
+                 layerTwoV.emplace_back(8);
+                }
+                else if (s[j] == '9'){
+                 layerTwoV.emplace_back(9);
+                }
+                else if (s[j] == 'L'){
+                 layerTwoV.emplace_back(10);
+                }
+                else if (s[j] == 'W'){
+                 layerTwoV.emplace_back(11);
+                }
+                else if (s[j] == 'E'){
+                 layerTwoV.emplace_back(12);
+                }
+                else if (s[j] == 'H'){
+                 layerTwoV.emplace_back(13);
+                }
+                else if (s[j] == 'O'){
+                 layerTwoV.emplace_back(14);
+                }
+                else if (s[j] == 'M'){
+                 layerTwoV.emplace_back(15);
+                }
+                else if (s[j] == 'D'){
+                 layerTwoV.emplace_back(16);
+                }
+                else if (s[j] == '@'){
+                 layerTwoV.emplace_back(17);
+                } else {
+                 layerTwoV.emplace_back(30);
+                }
+            }
+            layerOneV.emplace_back(layerTwoV);
+        }
+        v1.emplace_back(layerOneV);
+    }
+
+    for(int h = 0; h < 5; ++h){
+        for(int i = 0; i < 25; ++i){
+            for(int j = 0; j < 79; ++j){
+                cout << v1[h][i][j];
+            }
+            cout << endl;
+        }
+        cout << endl;
+        cout << endl;
+        cout << endl;
+    }
+
+    if(argc >= 2) {
+        cout << "closing file for special init" << endl;
+        fs.close();
+    }
+
+
+
     cout << "choose your role" << endl;
     cout << "s for shade" << endl;
     cout << "d for drow" << endl;
@@ -56,16 +189,30 @@ int main() {
     
 
     while (level < 6) {
+
         cout << "Entering level " << level << endl;
         player->initAtkDef();
         cout << "finished init atk def" << endl;
         Floor f(player, isFrozen, hostile);
         cout << "finished floor construction" << endl;
-        f.init(player);
+        
+
+        if(argc >= 2){
+        	cout << "initializing special" << endl;
+            f.sInit(player, v1, level-1); 
+        } else {
+        	cout << "initializing normal" << endl;
+            f.genEmptyFloor();
+            cout << "finished empty floor generation" << endl;
+            f.init(player);
+        }
+        
         cout << "finished initializing" << endl;
         string direction;
         string cmd;
         cout<< "Enter a direction: " <<endl;
+
+
         while (cin >> cmd) 
         {
         	if (cmd == "q") 
@@ -131,6 +278,7 @@ int main() {
 
             cout<< "Enter a direction: " <<endl;
         }
+        
         isFrozen = f.getFrozen();
         hostile = f.getHostile();
         f.clearFloor();

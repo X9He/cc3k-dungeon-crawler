@@ -103,6 +103,7 @@ class Dragon: public Enemy {
 public:
     void attack (PC *targte) override;
     Treasure * getHoard();
+    void putHoard(Treasure *);
     Dragon(PC * target, Treasure * t);
     ~Dragon() override;
     void hurt(Troll *p) override;
