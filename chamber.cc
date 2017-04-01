@@ -69,7 +69,7 @@ void Chamber::assignItem(Item *i){
 	cout << "empty amount is " << emptySpawn.size() << endl;
 	cout << "actual vector length is " << emptySpawn.size() << endl;
 	cout << "to be assigned to cell type: " << emptySpawn[ran]->getType() << endl;
-	emptySpawn.erase(emptySpawn.begin()+ran-1);
+	eraseEmptySpawn(row, col);
 
 	cout << "reached 3" << endl;
 }
@@ -105,7 +105,7 @@ void Chamber::assignCharacter(Character *c){
 		cout << "reached 2.5" << endl;
 		// cout << "assignedCharacter" << endl;
 		// fullSpawn.emplace_back(emptySpawn[ran]);
-		emptySpawn.erase(emptySpawn.begin()+ran-1);
+		eraseEmptySpawn(row, col);
 
 		cout << "reached 3" << endl;
 
@@ -166,17 +166,17 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 
 	//select empty spawn cell
 	Spawn *newS = emptySpawn[ran];
+	int tRow = newS->getRow();
+	int tCol = newS->getCol();
 
 	//put item in spawn cell
 	newS->putItem(t);
 
 	//erase spawned cell from list
-	emptySpawn.erase(emptySpawn.begin()+ran-1);
+	eraseEmptySpawn(tRow, tCol);
 
 
 	cout << "treasure assignment complete" << endl;
-	int tRow = newS->getRow();
-	int tCol = newS->getCol();
 
 	cout << "treasure cordinates: x " << tRow << " y " << tCol << endl;
 	t->changePosition(tRow, tCol);

@@ -13,7 +13,9 @@ Spawn::~Spawn() {
 
 void Spawn::prettyPrint(){
 	// cout << '.';
-	if(hasCharacter()){
+	if(hasCharacter() && hasItem()){
+		cout << '?';
+	} else if(hasCharacter()){
 		// cout << 'c';
 		cout << getCharacter()->getName();
 	} else if (hasItem()) {		
