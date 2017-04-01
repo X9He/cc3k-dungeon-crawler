@@ -11,6 +11,14 @@ Enemy::~Enemy() {
     Target = nullptr;
 }
 
+void Enemy::changeMoved() {
+    moved = !moved;
+}
+
+bool Enemy::getMoved() {
+    return moved;
+}
+
 // enemy attack 50% miss
 // generate random number
 int random2(int x, int y){
@@ -59,7 +67,7 @@ Enemy{30, 70, 5, 0, target}{
     name = 'M';
 }
 
-Dragon::Dragon(PC * target, Treasure * t):
+Dragon::Dragon(PC * target, Treasure *t):
 Enemy{150, 20, 20, 0, target}{
     hoard = t;
     name = 'D';
@@ -88,42 +96,158 @@ Human::~Human(){}
 
 
 
-// hurt
-void Enemy::hurt(Troll *p) {
+// normal enemy hurt
+void NormalEnemy::hurt(Troll *p) {
     cout << "THERE" << endl;
     int effect = damage(p);
     cout << effect << endl;
     changeHP(effect);
 }
 
-void Enemy::hurt(Vampire *p) {
+void NormalEnemy::hurt(Vampire *p) {
     cout << "Four" << endl;
     int effect = damage(p);
     cout << effect << endl;
     changeHP(effect);
 }
 
-void Enemy::hurt(Goblin *p) {
+void NormalEnemy::hurt(Goblin *p) {
     cout << "FIVE" << endl;
     int effect = damage(p);
     cout << effect << endl;
     changeHP(effect);
 }
 
-void Enemy::hurt(Drow *p) {
+void NormalEnemy::hurt(Drow *p) {
     cout << "SIX" << endl;
     int effect = damage(p);
     cout << effect << endl;
     changeHP(effect);
 }
 
-void Enemy::hurt(PC *p) {
+void NormalEnemy::hurt(Shade *p) {
     cout << "SEVEN" << endl;
     int effect = damage(p);
-cout << effect << endl;
-        changeHP(effect);
+    cout << effect << endl;
+    changeHP(effect);
     
 }
+
+//dragon hurt
+
+void Dragon::hurt(Troll *p) {
+    cout << "THERE" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Dragon::hurt(Vampire *p) {
+    cout << "Four" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Dragon::hurt(Goblin *p) {
+    cout << "FIVE" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Dragon::hurt(Drow *p) {
+    cout << "SIX" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Dragon::hurt(Shade *p) {
+    cout << "SEVEN" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+    
+}
+
+//merchant hurt
+
+void Merchant::hurt(Troll *p) {
+    cout << "THERE" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Merchant::hurt(Vampire *p) {
+    cout << "Four" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Merchant::hurt(Goblin *p) {
+    cout << "FIVE" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Merchant::hurt(Drow *p) {
+    cout << "SIX" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Merchant::hurt(Shade *p) {
+    cout << "SEVEN" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+    
+}
+
+//human hurt
+
+void Human::hurt(Troll *p) {
+    cout << "THERE" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Human::hurt(Vampire *p) {
+    cout << "Four" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Human::hurt(Goblin *p) {
+    cout << "FIVE" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Human::hurt(Drow *p) {
+    cout << "SIX" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+}
+
+void Human::hurt(Shade *p) {
+    cout << "SEVEN" << endl;
+    int effect = damage(p);
+    cout << effect << endl;
+    changeHP(effect);
+    
+}
+
+//halfing hurt
 
 void Halfling::hurt(Troll *p) {
     cout << "EIGHT" << endl;
@@ -162,7 +286,7 @@ void Halfling::hurt(Drow *p) {
 }
 
 
-void Halfling::hurt(PC *p) {
+void Halfling::hurt(Shade *p) {
     cout << "TWELVE" << endl;
     int effect = damage(p);
     cout << "Thirteen" << endl;
@@ -173,13 +297,7 @@ void Halfling::hurt(PC *p) {
 }
 
 //
-void Enemy::changeMoved() {
-    moved = !moved;
-}
 
-bool Enemy::getMoved() {
-    return moved;
-}
 
 // attack
 void Elf::attack(PC * player) {

@@ -12,23 +12,25 @@ class Vampire;
 class Goblin;
 class Drow;
 class Elf;
+class Shade;
 
 class Enemy: public Character {
     PC * Target;
     bool moved;
 public:
-    virtual ~Enemy();
     Enemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false); 
-    void move();
-    virtual void attack(PC *target) = 0;
     Enemy(PC *target);
+    virtual ~Enemy();
+
+    virtual void attack(PC *target) = 0;
+    virtual void hurt(Troll *p)=0;
+    virtual void hurt(Vampire *p)=0;
+    virtual void hurt(Goblin *p)=0;
+    virtual void hurt(Drow *p)=0;
+    virtual void hurt(Shade *p)=0;
+
     void changeMoved();
     bool getMoved();
-    virtual void hurt(Troll *p);
-    virtual void hurt(Vampire *p);
-    virtual void hurt(Goblin *p);
-    virtual void hurt(Drow *p);
-    virtual void hurt(PC *p);
 };
 
 class NormalEnemy: public Enemy {
@@ -36,6 +38,12 @@ class NormalEnemy: public Enemy {
 public:
     NormalEnemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false);
     virtual ~NormalEnemy();
+
+    virtual void hurt(Troll *p);
+    virtual void hurt(Vampire *p);
+    virtual void hurt(Goblin *p);
+    virtual void hurt(Drow *p);
+    virtual void hurt(Shade *p);
 };
 
 class Elf: public NormalEnemy {
@@ -61,7 +69,7 @@ public:
     void hurt(Troll *p) override;
     void hurt(Drow *p) override;
     void hurt(Vampire *p) override;
-    void hurt(PC *p) override;
+    void hurt(Shade *p) override;
     void hurt(Goblin *p) override;
        
 };
@@ -79,6 +87,11 @@ public:
     void attack(PC *target) override;
     Merchant(PC *target);
     ~Merchant() override;
+    void hurt(Troll *p) override;
+    void hurt(Drow *p) override;
+    void hurt(Vampire *p) override;
+    void hurt(Shade *p) override;
+    void hurt(Goblin *p) override;
 };
 
 class Dragon: public Enemy {
@@ -88,6 +101,11 @@ public:
     Treasure * getHoard();
     Dragon(PC * target, Treasure * t);
     ~Dragon() override;
+    void hurt(Troll *p) override;
+    void hurt(Drow *p) override;
+    void hurt(Vampire *p) override;
+    void hurt(Shade *p) override;
+    void hurt(Goblin *p) override;
 };
 
 class Human: public Enemy {
@@ -95,6 +113,11 @@ public:
     void attack (PC *target) override;
     Human(PC *target);
     ~Human() override;
+    void hurt(Troll *p) override;
+    void hurt(Drow *p) override;
+    void hurt(Vampire *p) override;
+    void hurt(Shade *p) override;
+    void hurt(Goblin *p) override;
 };
 
 #endif /* enemy_hpp */

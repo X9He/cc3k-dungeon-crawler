@@ -28,22 +28,43 @@ int PC::getMax() {
 }
 
 void PC::attack(Enemy  *target) {
-    cout << "ONE" << endl;
-   target->hurt(this);
-    cout << "TWO" << endl;
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = target->getGold();
-       a << amount;
-   } else {
-     int effect1= target->damage(this, 2);
-     int effect2 = damage(target);
-     stringstream a1;
-     stringstream a2;
-     a1 << effect1;
-     a2 << effect2;
-   }
+  cout << "ONE" << endl;
+
+  Shade *s = dynamic_cast<Shade *>(this);
+  if(s){
+    target->hurt(s);
+  }
+
+
+  Goblin *g = dynamic_cast<Goblin *>(this);
+  if(g){
+    target->hurt(g);
+  }
+
+  Drow *d = dynamic_cast<Drow *>(this);
+  if(d){
+    target->hurt(d);
+  }
+
+  Vampire *v = dynamic_cast<Vampire *>(this);
+  if(v){
+    target->hurt(v);
+  }
+
+  cout << "TWO" << endl;
+  if (target->getHP() == 0) {
+    changeGold(target->getGold());
+    stringstream a;
+    int amount = target->getGold();
+    a << amount;
+  } else {
+    int effect1= target->damage(this, 2);
+    int effect2 = damage(target);
+    stringstream a1;
+    stringstream a2;
+    a1 << effect1;
+    a2 << effect2;
+  }
     cout << target->getHP() << endl;
 }
 
@@ -239,13 +260,13 @@ void PC::hurt(Orcs &o){
 
 //
 void PC::hurt(Merchant & m) {
-    int effect = damage(&m);
+  int effect = damage(&m);
    changeHP(effect);
 }
 
 void PC::hurt(Dragon & d) {
-    int effect = damage(&d);
-    changeHP(effect);
+  int effect = damage(&d);
+  changeHP(effect);
 }
 
 void PC::hurt(Elf & e) {
@@ -287,6 +308,30 @@ void Drow::hurt(Elf & e) {
     changeHP(effect);
 }
 */
+void Shade::attack(Enemy *target){
+  target->hurt(this);
+}
+
+void Troll::attack(Enemy *target){
+  target->hurt(this);
+}
+
+void Vampire::attack(Enemy *target){
+  target->hurt(this);
+}
+
+
+void Drow::attack(Enemy *target){
+  target->hurt(this);
+}
+
+
+
+
+
+Shade::Shade(): PC{125,15,15} {}
+
+Shade::~Shade(){}
 
 Troll::Troll() :
   PC(120, 25, 15){}
@@ -305,7 +350,6 @@ Vampire::~Vampire() {}
 void Vampire::VchangHP(int effect) {
    changeCurHP(effect);
 }
-
 
 Goblin::Goblin() :
   PC(110, 15, 20) {}
@@ -460,6 +504,36 @@ void Drow::hurt(Orcs &o) {
   changeHP(effect);
 }
 
+
+void Shade::hurt(Merchant &m) {
+  int effect = damage(&m);
+  changeHP(effect);
+}
+void Shade::hurt(Human &h) {
+  int effect = damage(&h);
+  changeHP(effect);
+}
+void Shade::hurt(Dragon &d) {
+  int effect = damage(&d);
+  changeHP(effect);
+}
+
+void Shade::hurt(Elf &e) {
+  int effect = damage(&e);
+  changeHP(effect);
+}
+void Shade::hurt(Halfling &l) {
+  int effect = damage(&l);
+  changeHP(effect);
+}
+void Shade::hurt(Dwarf &w) {
+  int effect = damage(&w);
+  changeHP(effect);
+}
+void Shade::hurt(Orcs &o) {
+  int effect = damage(&o);
+  changeHP(effect);
+}
 
 //////////////////////////////////////
 /*

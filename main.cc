@@ -29,7 +29,7 @@ int main() {
     PC *player = nullptr;
     while (cin >> role) {
 	    if (role == "s") {
-	        player = new PC;
+	        player = new Shade;
 	        break;
 	    } else if (role == "d") {        
 	        player = new Drow;
@@ -126,6 +126,9 @@ int main() {
             }
 
             f.prettyPrint();
+            cout << "player hp:" << player->getHP() << endl;
+            f.printEnemyHP();
+
             cout<< "Enter a direction: " <<endl;
         }
         isFrozen = f.getFrozen();

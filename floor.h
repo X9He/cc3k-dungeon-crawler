@@ -70,6 +70,8 @@ public:
     void setHostile(bool);
 
     bool getHostile();
+
+    void printEnemyHP();
 };
 
 #endif

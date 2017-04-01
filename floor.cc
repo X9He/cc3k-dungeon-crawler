@@ -94,6 +94,13 @@ bool Floor::getHostile(){
 	return hostile;
 }
 
+void Floor::printEnemyHP(){
+	for (auto e: enemyList) {
+		cout << e->getHP() << " ";
+	}
+	cout << endl;
+}
+
 void Floor::prettyPrint(){
 	for (int i = 0; i < cellList.size() ; ++i){
 		for (int j = 0; j < cellList[i].size(); ++j){
@@ -445,6 +452,7 @@ void Floor::createStair(){
 
 
 bool Floor::movePlayer(string dir){
+	Troll *t = dynamic_cast<Troll*>(player);
     string direction;
   if(dir == "no") direction = "North";
   if(dir == "ea") direction = "East";
@@ -500,7 +508,10 @@ bool Floor::movePlayer(string dir){
 
 	//WALL
 	if (c == ' ' || c == '-' || c == '|') {
-		return true;
+		if(t){
+			t->changeHP(5);
+		}
+		return true;		
 	} 
 	//SPAWN
 	else if (c == '.')
@@ -548,18 +559,27 @@ bool Floor::movePlayer(string dir){
 			simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
 			// cout << "finished moving" << endl;
 		}
+		if(t){
+			t->changeHP(5);
+		}
 		return true;
 	} 
 	//PASSAGE
 	else if (c == '#'){
 		simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
 		// message->addMessage("PC moves to " + dir + ".");
+		if(t){
+			t->changeHP(5);
+		}
 		return true;
 	} 
 	//DOOR
 	else if (c == '+'){
 		simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
 		// message->addMessage("PC moves to " + dir + ".");
+		if(t){
+			t->changeHP(5);
+		}
 		return true;
 	} 
 	//STAIRS
@@ -624,7 +644,7 @@ void Floor::updateEnemy(){
 						Dragon *d = dynamic_cast<Dragon *>(curE);
 						
 						// cout << "I'm not a dragon, I'm actually a " << c->getName() << endl;
-						continue;
+						
 
 
 						cout << "cast dragon success" << endl;
@@ -635,7 +655,7 @@ void Floor::updateEnemy(){
 
 						PC *tar = checkPC(tRow, tCol);
 
-						if (tar != nullptr) {
+						if (tar) {
 							d->attack(tar);
 						}
 					} 
@@ -987,11 +1007,12 @@ void Floor::playerAttack(string dir) {
 	            		Dragon *d = dynamic_cast<Dragon *>(e);
 	            		Treasure *t = d->getHoard();
 	            		t->changeProtect(false);
+	            		s->putCharacter(nullptr);
 
 	            	}
 
 	            	else {
-	            		return;
+	            		s->putCharacter(nullptr);
 
 	            	}
 	            }
