@@ -634,6 +634,9 @@ void Floor::updateEnemy(){
 
 						if (tar != nullptr) {
 							d->attack(tar);
+							string result;
+							result += d->getName();
+							message->addMessage(result + " deals "+to_string(0 - player->damage(curE)) + " damages to PC.");
 						}
 					} 
 
@@ -647,6 +650,9 @@ void Floor::updateEnemy(){
 						if (hostile) {
 							if (tar != nullptr){
 								m->attack(tar);
+								string result;
+							result += curE->getName();
+							message->addMessage(result + " deals "+to_string(0 - player->damage(curE)) + " damages to PC.");
 							} else {
 
 								vector<Spawn *> surround = scanEmptyEnemy(i, j);
@@ -688,6 +694,9 @@ void Floor::updateEnemy(){
 						if (tar != nullptr) 
 						{
 							curE->attack(tar);
+							string result;
+							result += curE->getName();
+							message->addMessage(result + " deals "+to_string(0 - player->damage(curE)) + " damages to PC.");
 							continue;
 						} 
 						else 
@@ -929,9 +938,9 @@ void Floor::playerAttack(string dir) {
 	        	}
 	        	cout << "start attack" << endl;
 	            player->attack(e);
-	            int damage = player->damage(e);
+	            int damage = e->damage(player);
 
-	            message->addMessage("PC deals " + to_string(damage) + " damages to " + to_string(e->getName()) + ".");
+	            message->addMessage("PC deals " + to_string(0 - damage) + " damages to " + e->getName() + ".");
 	            
 	            if (e->getHP() <= 0) {
 	            	if (e->getName()=='M')
