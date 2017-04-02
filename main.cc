@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
     bool isFrozen = false;
     bool hostile = false;
     bool specialInit = false;
+    bool loop = false;
     string race;
     
 
@@ -202,20 +203,24 @@ int main(int argc, char* argv[]) {
         string direction;
         string cmd;
         
-        
         cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " << level << endl;
         cout << "HP: " << player->getHP() << endl;
         cout << "Atk: " << player->getAtk() << endl;
         cout << "Def: " << player->getDef() << endl;
         //f.printEnemyHP();
         cout << "Action: ";
-	if (level == 1 && cmd =="") {
-	  cout << "Player character has spawned." << endl;
-	} else {
-	  f.printMessage();
-	}
+        if (level == 1 && cmd =="") {
+            cout << "Player character has spawned." << endl;
+        } else {
+            f.printMessage();
+        }
         
         cout<< "Enter a direction: " <<endl;
+
+
+
+
+
         while (cin >> cmd)
         {
             if (cmd == "q")
@@ -226,8 +231,8 @@ int main(int argc, char* argv[]) {
                 delete player;
                 return 0;
             }
-            if (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
-                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" )
+            if (!loop && (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
+                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ))
             {
                 if (f.movePlayer(cmd) == false)
                 {
@@ -236,33 +241,36 @@ int main(int argc, char* argv[]) {
                     break;
                 }
             }
-            else if (cmd == "a")
+            else if (!loop && (cmd == "a"))
             {
                 string dir;
                 cin >> dir;
                 f.playerAttack(dir);
                 if (player->die()) {
                     cout << "Lost" << endl;
-                    return 0;
+                    cout << "To restart the game, enter in r, to quit, enter in q" << endl;
+                    loop = true;
                 }
             }
-            else if (cmd == "u")
+            else if (!loop && (cmd == "u"))
             {
                 string dir;
                 cin >> dir;
                 f.playerUsePotion(dir);
             }
-            else if (cmd == "b")
+            else if (!loop && (cmd == "b"))
             {
                 level++;
                 break;
             }
-            else if (cmd == "f")
+            else if (!loop && (cmd == "f"))
             {
                 f.setFrozen();
                 cout << "Enter a direction: " << endl;
                 continue;
-            } else if (cmd == "r"){
+            }
+            else if (cmd == "r"){
+                // f.clearFloor();
                 delete player;
                 cout << "choose your role" << endl;
                 cout << "s for shade" << endl;
@@ -294,7 +302,7 @@ int main(int argc, char* argv[]) {
                         break;
                     } else if (role == "q"){
                         cout << "Quiting" << endl;
-			delete player;
+                        delete player;
                         return 0;
                     } else {
                         cout << "Invalid role" << endl;
@@ -303,41 +311,49 @@ int main(int argc, char* argv[]) {
                 cmd = "";
                 level = 1;
                 player->initAll();
+                loop = false;
                 break;
             }
             
-            
-            
-            f.updateEnemy();
-            
-            if (player->die()) {
-                cout << "LOST" << endl;
-                break;
+            if(!loop){
+
+                f.updateEnemy();
+                
+                if (player->die()) {
+                    cout << "LOST" << endl;
+                    cout << "To restart the game, enter in r, to quit, enter in q" << endl;
+                    loop = true;
+                } else {
+                    f.prettyPrint();
+                    cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " <<level << endl;
+                    cout << "HP: " << player->getHP() << endl;
+                    cout << "Atk: " << player->getAtk() << endl;
+                    cout << "Def: " << player->getDef() << endl;
+                    cout << "Action: ";
+                    f.printMessage();
+                    cout<< "Enter a direction: " <<endl;
+                }
+                
+            } 
+
+            if(loop){
+                cout << "we're still in pugatory" << endl;
             }
             
-            
-            f.prettyPrint();
-            
-            cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " <<level << endl;
-            cout << "HP: " << player->getHP() << endl;
-            cout << "Atk: " << player->getAtk() << endl;
-            cout << "Def: " << player->getDef() << endl;
-            
-            cout << "Action: ";
-            f.printMessage();
-            
-            cout<< "Enter a direction: " <<endl;
         }
         
         isFrozen = f.getFrozen();
         hostile = f.getHostile();
         f.clearFloor();
-        if (player->die()) break;
     }
     
     if(!player->die()) {
         cout << "YOU WON!!!!!" << endl;
-        cout << "Gold Amount: " << player->getGold() << endl;
+        int gold = player->getGold();
+        if (role == "s") {
+            gold = gold * 2;
+        }
+        cout << "Gold Amount: " << gold << endl;
         cout << "HP, Atk and Def: " << player->getHP() << " " << player->getAtk() << " " << player->getDef() << endl;
     }
     delete player;
