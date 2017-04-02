@@ -208,7 +208,11 @@ int main(int argc, char* argv[]) {
         cout << "Def: " << player->getDef() << endl;
         //f.printEnemyHP();
         cout << "Action: ";
-        f.printMessage();
+	if (level == 1 && cmd =="") {
+	  cout << "Player character has spawned." << endl;
+	} else {
+	  f.printMessage();
+	}
         
         cout<< "Enter a direction: " <<endl;
         while (cin >> cmd)
@@ -292,7 +296,7 @@ int main(int argc, char* argv[]) {
                         cout << "Invalid role" << endl;
                     }
                 }
-                
+                cmd = "";
                 level = 1;
                 player->initAll();
                 break;
