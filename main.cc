@@ -146,8 +146,9 @@ int main(int argc, char* argv[]) {
     
     string role;
     PC *player = nullptr;
-    while (cin >> role) {
-        if (role == "s") {
+    while (getline(cin, role)) {
+
+        if (role == "s" || role == "") {
             player = new Shade;
             race = "Shade";
             break;
@@ -222,7 +223,7 @@ int main(int argc, char* argv[]) {
                 cout << "Quiting" << endl;
 	  
                 f.clearFloor();
-		delete player;
+                delete player;
                 return 0;
             }
             if (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
