@@ -45,7 +45,7 @@ int random6(int x, int y){
 
 void PC::attack(Enemy  *target) {
   // cout << "ONE" << endl;
-
+  cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
   Shade *s = dynamic_cast<Shade *>(this);
   if(s){
     target->hurt(s);
@@ -66,14 +66,21 @@ void PC::attack(Enemy  *target) {
   if(v){
     target->hurt(v);
   }
-
+  cout << "yuyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"<< endl;
   // cout << "TWO" << endl;
-  if (target->getHP() == 0) {
+  if (target->getHP() <= 0 && !g) {
+    cout << "JHHHHHHHHHHGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" << endl;
     changeGold(target->getGold());
     stringstream a;
     int amount = target->getGold();
     a << amount;
-  } else {
+  } else if (target->getHP() <= 0 && g) {
+    cout << "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" << endl;
+    changeGold(5);
+    stringstream a;
+    int amount = target->getGold();
+    a << amount;
+  }else {
     int effect1= target->damage(this, 2);
     int effect2 = damage(target);
     stringstream a1;
@@ -380,8 +387,7 @@ void Goblin::steal(){
 void Goblin::attack(Enemy *target) {
   target->hurt(this);
   if (target->getHP() == 0) {
-    changeGold(target->getGold());
-    steal();
+    changeGold(5);
   }
 }
 
