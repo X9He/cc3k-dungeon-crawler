@@ -964,7 +964,7 @@ void Floor::updateEnemy(){
 						
 						// cout << "I'm not a dragon, I'm actually a " << c->getName() << endl;
 						
-
+                        PC *tarD = checkPC(d->getRow(), d->getCol());
 
 						//cout << "cast dragon success" << endl;
 						Treasure *t = d->getHoard();
@@ -977,10 +977,16 @@ void Floor::updateEnemy(){
 						if (tar) {
 							d->attack(tar);
 							int pchurt = player->getDamageE();
-string act;
-act += d->getName();
-message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
-						}
+                            string act;
+                            act += d->getName();
+                            message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
+						} else if (tarD) {
+                            d->attack(tar);
+                            int pchurt = player->getDamageE();
+                            string act;
+                            act += d->getName();
+                            message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
+                        }
 					} 
 
 					// cell has merchant
@@ -994,9 +1000,9 @@ message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
 							if (tar != nullptr){
 								m->attack(tar);
 								int pchurt =player->getDamageE();
-string act;
-act += m->getName();
-message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
+                                string act;
+                                act += m->getName();
+                                message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
 							} else {
 
 								vector<Spawn *> surround = scanEmptyEnemy(i, j);
@@ -1039,9 +1045,9 @@ message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
 						{
 							curE->attack(tar);
 							int pchurt = player->getDamageE();
-string act;
-act += curE->getName();
-message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
+                            string act;
+                            act += curE->getName();
+                            message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
 
 							continue;
 						} 
