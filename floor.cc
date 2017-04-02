@@ -964,30 +964,25 @@ void Floor::updateEnemy(){
 						
 						// cout << "I'm not a dragon, I'm actually a " << c->getName() << endl;
 						
-                        PC *tarD = checkPC(d->getRow(), d->getCol());
+                                                PC *tarD = checkPC(d->getRow(), d->getCol());
 
 						//cout << "cast dragon success" << endl;
 						Treasure *t = d->getHoard();
 						//cout << "got dragon hoard success" << endl;
 						int tRow = t->getRow();
 						int tCol = t->getCol();
+                                                if (!tarD) {
+						tarD = checkPC(tRow, tCol);
+						}
 
-						PC *tar = checkPC(tRow, tCol);
-
-						if (tar) {
-							d->attack(tar);
+						if (tarD) {
+							d->attack(tarD);
 							int pchurt = player->getDamageE();
                             string act;
                             act += d->getName();
                             message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
-						} else if (tarD) {
-                            d->attack(tar);
-                            int pchurt = player->getDamageE();
-                            string act;
-                            act += d->getName();
-                            message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
-                        }
-					} 
+						} 
+					}
 
 					// cell has merchant
 					else if (curE->getName() == 'M') 
