@@ -24,7 +24,9 @@ void PC::changeDamageE(int amount) {
 }
 
 int PC::getDamageE() {
-  return damageE;
+  int result = damageE;
+  damageE = 0;
+  return result;
 }
 
 void PC::pickUpItem(Item &i) {
@@ -33,6 +35,12 @@ void PC::pickUpItem(Item &i) {
 
 int PC::getMax() {
   return max;
+}
+
+int random6(int x, int y){
+    int ran;
+    ran = x + (rand() % (y - x + 1));
+    return ran;
 }
 
 void PC::attack(Enemy  *target) {
@@ -389,185 +397,290 @@ void Drow::pickUpItem(Item &i, int effect){
 ////////////////////////////////////
 void Troll::hurt(Merchant &m) {
   int effect = damage(&m);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Troll::hurt(Human &h) {
   int effect = damage(&h);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Troll::hurt(Dragon &d) {
   int effect = damage(&d);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Troll::hurt(Elf &e) {
   int effect = damage(&e,2);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Troll::hurt(Halfling &l) {
   int effect = damage(&l);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Troll::hurt(Dwarf &w) {
   int effect = damage(&w);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Troll::hurt(Orcs &o) {
   int effect = damage(&o);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 
 void Vampire::hurt(Merchant &m) {
   int effect = damage(&m);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Vampire::hurt(Human &h) {
   int effect = damage(&h);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Vampire::hurt(Dragon &d) {
   int effect = damage(&d);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Vampire::hurt(Elf &e) {
   int effect = damage(&e,2);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Vampire::hurt(Halfling &l) {
   int effect = damage(&l);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Vampire::hurt(Dwarf &w) {
   int effect = damage(&w);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Vampire::hurt(Orcs &o) {
   int effect = damage(&o);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 
 void Goblin::hurt(Merchant &m) {
   int effect = damage(&m);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Goblin::hurt(Human &h) {
   int effect = damage(&h);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Goblin::hurt(Dragon &d) {
   int effect = damage(&d);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Goblin::hurt(Elf &e) {
   int effect = damage(&e,2);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Goblin::hurt(Halfling &l) {
   int effect = damage(&l);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Goblin::hurt(Dwarf &w) {
   int effect = damage(&w);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Goblin::hurt(Orcs &o) {
   int effect = damage(&o, 1.5);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 
 void Drow::hurt(Merchant &m) {
   int effect = damage(&m);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Drow::hurt(Human &h) {
   int effect = damage(&h);
-  changeHP(effect);
-  changeDamageE(effect);
+int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Drow::hurt(Dragon &d) {
   int effect = damage(&d);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 
 void Drow::hurt(Elf &e) {
   int effect = damage(&e);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Drow::hurt(Halfling &l) {
   int effect = damage(&l);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Drow::hurt(Dwarf &w) {
   int effect = damage(&w);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Drow::hurt(Orcs &o) {
   int effect = damage(&o);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 
 
 void Shade::hurt(Merchant &m) {
   int effect = damage(&m);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Shade::hurt(Human &h) {
   int effect = damage(&h);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Shade::hurt(Dragon &d) {
   int effect = damage(&d);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 
 void Shade::hurt(Elf &e) {
   int effect = damage(&e);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Shade::hurt(Halfling &l) {
   int effect = damage(&l);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Shade::hurt(Dwarf &w) {
   int effect = damage(&w);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 void Shade::hurt(Orcs &o) {
   int effect = damage(&o);
-  changeHP(effect);
-  changeDamageE(effect);
+  int r = random6(0, 1);
+  if (r == 0) {
+    changeHP(effect);
+    changeDamageE(effect);
+  }
 }
 
 //////////////////////////////////////

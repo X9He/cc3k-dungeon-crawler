@@ -25,7 +25,9 @@ void Enemy::changeDamagePC(int amount) {
 }
 
 int Enemy::getDamagePC() {
-  return damagePC;
+  int result = damagePC;
+  damagePC = 0;
+  return result;
 }
 
 
