@@ -333,19 +333,31 @@ void Drow::hurt(Elf & e) {
 */
 void Shade::attack(Enemy *target){
   target->hurt(this);
+  if (target->getHP() == 0) {
+    changeGold(target->getGold());
+  }
 }
 
 void Troll::attack(Enemy *target){
   target->hurt(this);
+  if (target->getHP() == 0) {
+    changeGold(target->getGold());
+  }
 }
 
 void Vampire::attack(Enemy *target){
   target->hurt(this);
+  if (target->getHP() == 0) {
+    changeGold(target->getGold());
+  }
 }
 
 
 void Drow::attack(Enemy *target){
   target->hurt(this);
+  if (target->getHP() == 0) {
+    changeGold(target->getGold());
+  }
 }
 
 

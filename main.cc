@@ -220,7 +220,9 @@ int main(int argc, char* argv[]) {
             if (cmd == "q")
             {
                 cout << "Quiting" << endl;
+	  
                 f.clearFloor();
+		delete player;
                 return 0;
             }
             if (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
@@ -291,6 +293,7 @@ int main(int argc, char* argv[]) {
                         break;
                     } else if (role == "q"){
                         cout << "Quiting" << endl;
+			delete player;
                         return 0;
                     } else {
                         cout << "Invalid role" << endl;
