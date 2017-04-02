@@ -307,6 +307,7 @@ void Halfling::hurt(Goblin *p) {
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
+	changeDamagePC(effect);
     }
 }
 
