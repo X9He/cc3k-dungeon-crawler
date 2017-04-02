@@ -20,118 +20,117 @@ int main(int argc, char* argv[]) {
     bool hostile = false;
     bool specialInit = false;
     string race;
-
-
+    
+    
     ifstream fs;
     if(argc >= 2){
-    	cout << "number of argc is 2" << endl;
+        cout << "number of argc is 2" << endl;
         specialInit = true;
         fs.open(argv[1]);
     }
-    // cout << argv[0] << endl;
-    // cout << argv[1] << endl;
+    
     string s;
     vector<vector<vector<int>>> v1;
-
+    
     for(int h = 0; h < 5; ++h){
         vector<vector<int>> layerOneV;
         for(int i = 0; i < 25; ++i){
             vector<int> layerTwoV;
             getline(fs,s);
-            for(int j = 0; j < 79; ++j){  
+            for(int j = 0; j < 79; ++j){
                 if (s[j] == ' ')
                 {
-                 layerTwoV.emplace_back(18);
+                    layerTwoV.emplace_back(18);
                 }
                 else if (s[j] == '-')
                 {
-                 layerTwoV.emplace_back(19);
+                    layerTwoV.emplace_back(19);
                 }
                 else if (s[j] == '|')
                 {
-                 layerTwoV.emplace_back(20);
+                    layerTwoV.emplace_back(20);
                 }
                 else if (s[j] == '#')
                 {
-                 layerTwoV.emplace_back(21);
+                    layerTwoV.emplace_back(21);
                 }
                 else if (s[j] == '.')
                 {
-                 layerTwoV.emplace_back(22);
-
+                    layerTwoV.emplace_back(22);
+                    
                 }
                 else if (s[j] == '+')
                 {
-                 layerTwoV.emplace_back(23);
-
-                } 
-                else if (s[j] == '\\') 
+                    layerTwoV.emplace_back(23);
+                    
+                }
+                else if (s[j] == '\\')
                 {
-                 layerTwoV.emplace_back(24);
-
+                    layerTwoV.emplace_back(24);
+                    
                 }
                 else if (s[j] == '0'){
-                 layerTwoV.emplace_back(0);
-                }              
-                else if (s[j] == '1'){
-                 layerTwoV.emplace_back(1);
+                    layerTwoV.emplace_back(0);
                 }
-                else if (s[j] == '2'){                   
-                 layerTwoV.emplace_back(2);                  
+                else if (s[j] == '1'){
+                    layerTwoV.emplace_back(1);
+                }
+                else if (s[j] == '2'){
+                    layerTwoV.emplace_back(2);
                 }
                 else if (s[j] == '3'){
-                 layerTwoV.emplace_back(3);
+                    layerTwoV.emplace_back(3);
                 }
                 else if (s[j] == '4'){
-                 layerTwoV.emplace_back(4);
+                    layerTwoV.emplace_back(4);
                 }
                 else if (s[j] == '5'){
-                 layerTwoV.emplace_back(5);
+                    layerTwoV.emplace_back(5);
                 }
                 else if (s[j] == '6'){
-                 layerTwoV.emplace_back(6);
+                    layerTwoV.emplace_back(6);
                 }
                 else if (s[j] == '7'){
-                 layerTwoV.emplace_back(7);
+                    layerTwoV.emplace_back(7);
                 }
                 else if (s[j] == '8'){
-                 layerTwoV.emplace_back(8);
+                    layerTwoV.emplace_back(8);
                 }
                 else if (s[j] == '9'){
-                 layerTwoV.emplace_back(9);
+                    layerTwoV.emplace_back(9);
                 }
                 else if (s[j] == 'L'){
-                 layerTwoV.emplace_back(10);
+                    layerTwoV.emplace_back(10);
                 }
                 else if (s[j] == 'W'){
-                 layerTwoV.emplace_back(11);
+                    layerTwoV.emplace_back(11);
                 }
                 else if (s[j] == 'E'){
-                 layerTwoV.emplace_back(12);
+                    layerTwoV.emplace_back(12);
                 }
                 else if (s[j] == 'H'){
-                 layerTwoV.emplace_back(13);
+                    layerTwoV.emplace_back(13);
                 }
                 else if (s[j] == 'O'){
-                 layerTwoV.emplace_back(14);
+                    layerTwoV.emplace_back(14);
                 }
                 else if (s[j] == 'M'){
-                 layerTwoV.emplace_back(15);
+                    layerTwoV.emplace_back(15);
                 }
                 else if (s[j] == 'D'){
-                 layerTwoV.emplace_back(16);
+                    layerTwoV.emplace_back(16);
                 }
                 else if (s[j] == '@'){
-                 layerTwoV.emplace_back(17);
+                    layerTwoV.emplace_back(17);
                 } else {
-                 layerTwoV.emplace_back(30);
+                    layerTwoV.emplace_back(30);
                 }
             }
             layerOneV.emplace_back(layerTwoV);
         }
         v1.emplace_back(layerOneV);
     }
-
+    
     for(int h = 0; h < 5; ++h){
         for(int i = 0; i < 25; ++i){
             for(int j = 0; j < 79; ++j){
@@ -143,14 +142,14 @@ int main(int argc, char* argv[]) {
         cout << endl;
         cout << endl;
     }
-
+    
     if(argc >= 2) {
         cout << "closing file for special init" << endl;
         fs.close();
     }
-
-
-
+    
+    
+    
     cout << "choose your role" << endl;
     cout << "s for shade" << endl;
     cout << "d for drow" << endl;
@@ -162,90 +161,89 @@ int main(int argc, char* argv[]) {
     string role;
     PC *player = nullptr;
     while (cin >> role) {
-	    if (role == "s") {
-	        player = new Shade;
-		race = "Shade";
-	        break;
-	    } else if (role == "d") {        
-	        player = new Drow;
-		race = "Drow";
-	        break;
-	    } else if (role == "v") {
-	        player = new Vampire;
-		race = "Vampire";
-	        break;
-	    } else if (role == "t") {
-	        player = new Troll;
-		race = "Troll";
-	        break;
-	    } else if (role == "g"){
-	        player = new Goblin;
-		race = "Goblin";
-	        break;
-	    } else if (role == "q"){
-	        cout << "Quiting" << endl;
-	        return 0;
-	    } else {
-	        cout << "Invalid role" << endl;
-	    }
+        if (role == "s") {
+            player = new Shade;
+            race = "Shade";
+            break;
+        } else if (role == "d") {
+            player = new Drow;
+            race = "Drow";
+            break;
+        } else if (role == "v") {
+            player = new Vampire;
+            race = "Vampire";
+            break;
+        } else if (role == "t") {
+            player = new Troll;
+            race = "Troll";
+            break;
+        } else if (role == "g"){
+            player = new Goblin;
+            race = "Goblin";
+            break;
+        } else if (role == "q"){
+            cout << "Quiting" << endl;
+            return 0;
+        } else {
+            cout << "Invalid role" << endl;
+        }
     }
-
-    // cout << "printing palyer stuff: "<<player->getMax() << player->getAtk() << player->getDef() << endl;
     
     
-
+    
+    
     while (level < 6) {
-
+        
         cout << "Entering level " << level << endl;
         player->initAtkDef();
         cout << "finished init atk def" << endl;
         Floor f(player, isFrozen, hostile);
         cout << "finished floor construction" << endl;
         
-
+        
         if(argc >= 2){
-        	cout << "initializing special" << endl;
-            f.sInit(player, v1, level-1); 
+            cout << "initializing special" << endl;
+            f.sInit(player, v1, level-1);
         } else {
-        	cout << "initializing normal" << endl;
+            cout << "initializing normal" << endl;
             f.genEmptyFloor();
             cout << "finished empty floor generation" << endl;
             f.init(player);
         }
         
         cout << "finished initializing" << endl;
-string direction;
+        string direction;
         string cmd;
-       
-
-	    cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " << level << endl;
-            cout << "HP: " << player->getHP() << endl;
-	    cout << "Atk: " << player->getAtk() << endl;
-	    cout << "Def: " << player->getDef() << endl;
-            //f.printEnemyHP();
-            cout << "Action: ";
-	    f.printMessage();
-	    
-            cout<< "Enter a direction: " <<endl;
-        while (cin >> cmd) 
+        
+        
+        cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " << level << endl;
+        cout << "HP: " << player->getHP() << endl;
+        cout << "Atk: " << player->getAtk() << endl;
+        cout << "Def: " << player->getDef() << endl;
+        //f.printEnemyHP();
+        cout << "Action: ";
+        f.printMessage();
+        
+        cout<< "Enter a direction: " <<endl;
+        while (cin >> cmd)
         {
-        	if (cmd == "q") 
-        	{
+            if (cmd == "q")
+            {
                 cout << "Quiting" << endl;
                 f.clearFloor();
                 return 0;
             }
             if (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
-                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ) 
+                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" )
             {
-            	if (f.movePlayer(cmd) == false) 
-            	{
+                if (f.movePlayer(cmd) == false)
+                {
                     level++;
                     cout << "Entering level " << level << endl;
                     break;
                 }
-            } 
-            else if (cmd == "a") 
+            }
+            else if (cmd == "a")
             {
                 string dir;
                 cin >> dir;
@@ -254,56 +252,85 @@ string direction;
                     cout << "Lost" << endl;
                     return 0;
                 }
-            } 
-            else if (cmd == "u") 
+            }
+            else if (cmd == "u")
             {
                 string dir;
                 cin >> dir;
                 f.playerUsePotion(dir);
-            } 
-            else if (cmd == "b") 
+            }
+            else if (cmd == "b")
             {
                 level++;
                 break;
             }
-            else if (cmd == "f") 
+            else if (cmd == "f")
             {
                 f.setFrozen();
                 cout << "Enter a direction: " << endl;
                 continue;
             } else if (cmd == "r"){
-	          cout << "choose your role" << endl;
-    cout << "s for shade" << endl;
-    cout << "d for drow" << endl;
-    cout << "v for vampire" << endl;
-    cout << "t for troll" << endl;
-    cout << "g for goblin" << endl;
-    cout << "q for quit" << endl;
-            	level = 1;
-            	player->initAll();
-            	break;
+                cout << "choose your role" << endl;
+                cout << "s for shade" << endl;
+                cout << "d for drow" << endl;
+                cout << "v for vampire" << endl;
+                cout << "t for troll" << endl;
+                cout << "g for goblin" << endl;
+                cout << "q for quit" << endl;
+                while (cin >> role) {
+                    if (role == "s") {
+                        player = new Shade;
+                        race = "Shade";
+                        break;
+                    } else if (role == "d") {
+                        player = new Drow;
+                        race = "Drow";
+                        break;
+                    } else if (role == "v") {
+                        player = new Vampire;
+                        race = "Vampire";
+                        break;
+                    } else if (role == "t") {
+                        player = new Troll;
+                        race = "Troll";
+                        break;
+                    } else if (role == "g"){
+                        player = new Goblin;
+                        race = "Goblin";
+                        break;
+                    } else if (role == "q"){
+                        cout << "Quiting" << endl;
+                        return 0;
+                    } else {
+                        cout << "Invalid role" << endl;
+                    }
+                }
+                
+                level = 1;
+                player->initAll();
+                break;
             }
-
-            // cout << "finished one round" << endl;
-
+            
+            
+            
             f.updateEnemy();
-
+            
             if (player->die()) {
-            	cout << "LOST" << endl;
-            	break;
+                cout << "LOST" << endl;
+                break;
             }
-
-	    	
-	    f.prettyPrint();
-
-	    cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " <<level << endl;
+            
+            
+            f.prettyPrint();
+            
+            cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " <<level << endl;
             cout << "HP: " << player->getHP() << endl;
-	    cout << "Atk: " << player->getAtk() << endl;
-	    cout << "Def: " << player->getDef() << endl;
-            //f.printEnemyHP();
+            cout << "Atk: " << player->getAtk() << endl;
+            cout << "Def: " << player->getDef() << endl;
+            
             cout << "Action: ";
-	    f.printMessage();
-	    
+            f.printMessage();
+            
             cout<< "Enter a direction: " <<endl;
         }
         
@@ -311,9 +338,9 @@ string direction;
         hostile = f.getHostile();
         f.clearFloor();
         if (player->die()) break;
-  }
+    }
     
-    if(!player->die()) {        
+    if(!player->die()) {
         cout << "YOU WON!!!!!" << endl;
         cout << "Gold Amount: " << player->getGold() << endl;
         cout << "HP, Atk and Def: " << player->getHP() << " " << player->getAtk() << " " << player->getDef() << endl;
