@@ -344,7 +344,7 @@ int main(int argc, char* argv[]) {
     if(!player->die()) {
         cout << "YOU WON!!!!!" << endl;
         int gold = player->getGold();
-        if (role == "s") {
+        if (role == "s" || role == "") {
             gold = gold * 2;
         }
         cout << "Gold Amount: " << gold << endl;
