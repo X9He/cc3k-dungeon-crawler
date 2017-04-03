@@ -178,7 +178,7 @@ int main(int argc, char* argv[]) {
     
     
     
-    frozen = 0;
+    int frozen = 0;
     while (level < 6) {
         
         cout << "Entering level " << level << endl;
