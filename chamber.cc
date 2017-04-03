@@ -81,11 +81,9 @@ void Chamber::assignCharacter(Character *c){
         s->putCharacter(c);
         eraseEmptySpawn(row, col);
         
-        cout << "reached 3" << endl;
         
         if (c->getName() == '@') {
             hasP = true;
-            cout << "assignedPC" << endl;
         }
     }
 }

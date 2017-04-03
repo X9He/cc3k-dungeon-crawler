@@ -117,37 +117,26 @@ void Floor::printMessage() {
 }
 
 void Floor::clearFloor(){
-    //cout << "start clearing floor" << endl;
     
     for (auto i: enemyList){
         delete i;
     }
     
-    //	cout << "cleared enemy list" << endl;
     
     for (auto cellVec : cellList){
         for (auto c: cellVec){
             delete c;
         }
     }
-    //	cout << "cleared cell list" << endl;
     
     
     for(auto j: roomList){
         delete j;
     }
-    // for (int i = 0; i < roomList.size(); ++i){
-    // 	delete roomList[i];
-    // }
-    //cout << "cleared room list" << endl;
     
-    // for (int i = 0; i < itemList.size(); ++i){
-    // 	delete itemList[i];
-    // }
     for(auto t: itemList){
         delete t;
     }
-    //cout << "cleared item list" << endl;
 }
 
 void Floor::genEmptyFloor(){
@@ -166,7 +155,6 @@ void Floor::genEmptyFloor(){
         for(int j = 0; j < s.size(); ++j)
         {
             c = s[j];
-            // cout << c;
             Cell *newC= nullptr;
             
             if (c == ' ' || c == '-' || c == '|')
@@ -185,97 +173,71 @@ void Floor::genEmptyFloor(){
             }
             newVec.emplace_back(newC);
         }
-        // cout << endl;
         
         cellList.emplace_back(newVec);
         ++i;
-        // cout << i << endl;
     }
     fs.close();
-    // prettyPrint();
     
 }
 
 void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
     //get the current floor vec of vec of char
     vector<vector<int>> curFloor = readFloorVec[level];
-    cout << "got floor vector " << endl;
     for (int i = 0; i < 25; ++i) {
-        cout << "start iterating list " << endl;
         
         vector<Cell*> newVec;
         int c;
         
         for(int j = 0; j < 79; ++j)
         {
-            cout << "starting cell: " << i << " " << j << " ";
             
             c = curFloor[i][j];
-            // cout << "reached 1 " << endl;
-            // cout << c;
             Cell *newC= nullptr;
             Spawn * newS = nullptr;
             Enemy *newE = nullptr;
             Potion *newP = nullptr;
             Treasure *newT = nullptr;
             
-            cout << "finished initliazing pointers, ";
-            
-            cout << "current int is " << c << endl;
-            
             
             
             if (c == 18)
             {
-                cout << "clause 1" << endl;
                 newC = new Wall{' ', i, j};
                 newVec.emplace_back(newC);
             }
             else if (c == 19)
             {
-                cout << "clause 1" << endl;
                 newC = new Wall{'-', i, j};
                 newVec.emplace_back(newC);
             }
             else if (c == 20)
             {
-                cout << "clause 1" << endl;
                 newC = new Wall{'|', i, j};
                 newVec.emplace_back(newC);
             }
             else if (c == 21)
             {
-                cout << "clause 2" << endl;
-                cout << i << " "<< j << endl;
                 newC = new Passage{'#', i, j};
                 newVec.emplace_back(newC);
             }
             else if (c == 22)
             {
-                cout << "clause 3" << endl;
-                cout << i << " "<< j << endl;
                 newC = new Spawn{'.', i, j};
-                cout << "here" << endl;
                 newVec.emplace_back(newC);
-                cout << "there" << endl;
             }
             else if (c == 23)
             {
-                cout << "clause 4" << endl;
-                cout << i << " "<< j << endl;
                 newC = new Door{'+', i, j};
                 newVec.emplace_back(newC);
             }
             else if (c == 24)
             {
-                cout << "clause 5" << endl;
-                cout << i << " "<< j << endl;
                 newC = new Stair{'\\', i, j};
                 newVec.emplace_back(newC);
             }
             else if (c == 0)
             {
-                cout << "clause 14" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newP = new RH{player};
@@ -284,7 +246,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
                 itemList.emplace_back(newP);
             } else if (c == 1)
             {
-                cout << "clause 15" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newP = new BA{player};
@@ -293,7 +254,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
                 itemList.emplace_back(newP);
             } else if (c == 2)
             {
-                cout << "clause 16" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newP = new BD{player};
@@ -302,7 +262,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
                 itemList.emplace_back(newP);
             } else if (c == 3)
             {
-                cout << "clause 17" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newP = new PH{player};
@@ -311,7 +270,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
                 itemList.emplace_back(newP);
             } else if (c == 4)
             {
-                cout << "clause 18" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newP = new WA{player};
@@ -320,23 +278,16 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
                 itemList.emplace_back(newP);
             } else if (c == 5)
             {
-                cout << "clause 19" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
-                cout << "1";
                 newP = new WD{player};
-                cout << "1";
                 newP->changePosition(i, j);
-                cout << "1";
                 newS->putItem(newP);
-                cout << "1";
                 itemList.emplace_back(newP);
-                cout << endl;
             }
             // cell has treasure
             else if (c == 6)
             {
-                cout << "clause 20" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newT = new Normal{player};
@@ -346,7 +297,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 7)
             {
-                cout << "clause 21" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newT = new Small{player};
@@ -356,7 +306,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 8)
             {
-                cout << "clause 22" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newT = new MH{player};
@@ -366,7 +315,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 9)
             {
-                cout << "clause 22" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newT = new DH{player};
@@ -375,11 +323,8 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
                 itemList.emplace_back(newT);
             }
             
-            // cout << "reached 2 " << endl;
-            // cell has enemy
             else if (c == 10)
             {
-                cout << "clause 13" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newE = new Halfling{player};
@@ -389,7 +334,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 11)
             {
-                cout << "clause 8" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newE = new Dwarf{player};
@@ -399,7 +343,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 12)
             {
-                cout << "clause 9" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newE = new Elf{player};
@@ -409,7 +352,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 13)
             {
-                cout << "clause 7" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newE = new Human{player};
@@ -419,7 +361,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 14)
             {
-                cout << "clause 10" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newE = new Orcs{player};
@@ -429,7 +370,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 15)
             {
-                cout << "clause 12" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newE = new Merchant{player};
@@ -439,7 +379,6 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             }
             else if (c == 16)
             {
-                cout << "clause 11" << endl;
                 newS = new Spawn{'.', i, j};
                 newVec.emplace_back(newS);
                 newE = new Dragon{player, nullptr};
@@ -450,34 +389,22 @@ void Floor::sInit(PC* p, vector<vector<vector<int>>> readFloorVec, int level){
             // cell has player
             else if (c == 17)
             {
-                cout << "clause 6" << endl;
-                cout << i << " "<< j << endl;
                 newS = new Spawn{'.', i, j};
                 newS->putCharacter(player);
                 player->changePosition(i,j);
                 newVec.emplace_back(newS);
             }
             else {
-                cout << "what is this ?" << endl;
             }
             
         }
         
         
-        
-        
-        
-        cout << "finished line: " << i <<endl;
-        
         cellList.emplace_back(newVec);
-        // cout << i << endl;
     }
-   	cout << "finished constructing special cells" << endl;
     
     for (auto i : itemList) {
-        cout << "iterating through item list, index: " << i << endl;
         DH *dHoard = dynamic_cast<DH *>(i);
-        cout << "you cant just cast shit like no tomorrow" << endl;
         if (dHoard) {
             int row = dHoard->getRow();
             int col = dHoard->getCol();
@@ -518,7 +445,6 @@ void Floor::init(PC *p){
         }
     }
     roomList.emplace_back(chamberOne);
-    cout << chamberOne->getEmptyAmount() << endl;
     
     
     //Chamber 2
@@ -540,7 +466,6 @@ void Floor::init(PC *p){
         }
     }
     roomList.emplace_back(chamberTwo);
-    cout << chamberTwo->getEmptyAmount() << endl;
     
     
     //Chamber 3
@@ -552,7 +477,6 @@ void Floor::init(PC *p){
         }
     }
     roomList.emplace_back(chamberThree);
-    cout << chamberThree->getEmptyAmount() << endl;
     
     
     //Chamber 4
@@ -564,7 +488,6 @@ void Floor::init(PC *p){
         }
     }
     roomList.emplace_back(chamberFour);
-    cout << chamberFour->getEmptyAmount() << endl;
     
     
     //Chamber 5
@@ -582,19 +505,15 @@ void Floor::init(PC *p){
         }
     }
     roomList.emplace_back(chamberFive);
-    cout << chamberFive->getEmptyAmount() << endl;
+
     
     int rP = random(0,4);
     roomList[rP]->assignCharacter(p);
     
     createStair();
-    //cout << "finished created stairs" <<endl;
     createPotion(10);
-    //cout << "finished created potions" <<endl;
     createTreasure(10);
-    // cout << "finished created treasures" <<endl;
     createEnemy(20);
-    // cout << "finished created enemies" <<endl;
     prettyPrint();
     
 }
@@ -624,27 +543,20 @@ void Floor::createEnemy(int num){
         
         
         if (r >= 1 && r <= 4) {
-            cout << "assigned human to chamber " << r2 << endl;
             newE = new Human{player};
         } else if (r >= 5 && r <= 7) {
-            cout << "assigned dwarf to chamber " << r2 << endl;
             newE = new Dwarf{player};
         } else if (r >= 8 && r <= 12){
-            cout << "assigned halfing to chamber " << r2 << endl;
             newE = new Halfling{player};
         } else if (r >= 13 && r <= 14) {
-            cout << "assigned elf to chamber " << r2 << endl;
             newE = new Elf{player};
         } else if (r >= 15 && r <= 16) {
-            cout << "assigned orc to chamber " << r2 << endl;
             newE = new Orcs{player};
         } else {
-            cout << "assigned merchant to chamber " << r2 << endl;
             newE = new Merchant{player};
         }
         
         enemyList.emplace_back(newE);
-        //cout << "calling assign" << endl;
         roomList[r2]->assignCharacter(newE);
         --num;
     }
@@ -661,7 +573,6 @@ void Floor::createPotion(int num){
             r2 = random(0, 4);
         }
         
-        cout << "assigned potion to chamber " << r2 << endl;
         if (r == 1) {
             newP = new RH{player};
         } else if (r == 2) {
@@ -676,7 +587,6 @@ void Floor::createPotion(int num){
             newP = new WD{player};
         }
         itemList.emplace_back(newP);
-        //	cout << "failed before assign" << endl;
         roomList[r2]->assignItem(newP);
         --num;
     }
@@ -695,35 +605,28 @@ void Floor::createTreasure(int num){
         
         // Dragon Hoard
         if (r == 1) {
-            cout << "assigned dragon hoard to chamber " << chamberR << endl;
             
             while(roomList[chamberR]->getEmptyAmount() < 2){
-                //	cout << "deciding dragon room" << endl;
                 chamberR = random(0, 4);
             }
             Treasure *newT = new DH{player};
             itemList.emplace_back(newT);
             Dragon *newD = new Dragon{player, newT};
             enemyList.emplace_back(newD);
-            //cout << "failed before assign" << endl;
             roomList[chamberR]->assignTreasure(newT, newD);
         }
         
         // Small Hoard
         else if (r >=2 && r <= 4) {
-            //cout << "assigned small hoard to chamber " << chamberR << endl;
             Item *newT = new Small{player};
             itemList.emplace_back(newT);
-            //	cout << "failed before assign" << endl;
             roomList[chamberR]->assignItem(newT);
         }
         
         // Normal Hoard
         else {
-            //cout << "assigned normal hoard to chamber " << chamberR << endl;
             Item *newT = new Normal{player};
             itemList.emplace_back(newT);
-            //	cout << "failed before assign" << endl;
             roomList[chamberR]->assignItem(newT);
         }
         --num;
@@ -819,7 +722,6 @@ bool Floor::movePlayer(string dir){
     // find the cell player wants to move to
     Cell* cur = cellList[newRow][newCol];
     char c = cur->getType();
-    // cout << "next cell type: " << c << endl;
     
     
     // if the next cell is wall, spawn, passage, door, or stairs
@@ -864,7 +766,6 @@ bool Floor::movePlayer(string dir){
             if (curCell->getItem()->getType() == 'G') {
                 Item *curI = curCell->getItem();
                 Treasure *t = dynamic_cast<Treasure*>(curI);
-                // cout << "you tried to pickup a gold that is " <<t->isProtect() << " protected!"<< endl;
                 if(!t->isProtect()){
                     curI->useItem();
                     simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
@@ -876,9 +777,7 @@ bool Floor::movePlayer(string dir){
         }
         // Spawn is empty
         else {
-            // cout << "cordinates" << " "<<curRow << " "<< curCol << " "<< newRow << " "<< newCol<< endl;
             simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
-            // cout << "finished moving" << endl;
         }
         if(t){
             t->changeHP(5);
@@ -911,19 +810,13 @@ bool Floor::movePlayer(string dir){
 
 
 void Floor::updateEnemy(){
-    // int x = cellList.size();
-    // int y = cellList[0].size();
-    // cout << "begin updating enemy, cords of cell is " << "x: " << x << " y: " << y << endl;
-    //cout << "begin updating enemy" << endl;
     if(isFrozen){
         return;
     }
     
     for(int i = 0; i < 25; ++i){
         for (int j = 0; j < 79; ++j){
-            // cout << "we got to x " <<i << " and y " << j << endl;
             if (cellList[i][j]->getType() != '.'){
-                // cout << "not spawn" << endl;
                 continue;
             }
             
@@ -932,7 +825,6 @@ void Floor::updateEnemy(){
             
             //check if cell has character
             if (!curSpawn->hasCharacter()){
-                // cout << "no character" << endl;
                 continue;
             }
             
@@ -941,36 +833,26 @@ void Floor::updateEnemy(){
             
             //cell has player
             if (c->getName() == '@') {
-                // cout << "has player" << endl;
                 continue;
             }
             
             
             //cell has enemy,
             else {
-                // cout <<"cell has enemy" << endl;
                 
                 Enemy *curE = dynamic_cast<Enemy*>(c);
                 
                 //enemy has not moved this round
                 if (!curE->getMoved())
                 {
-                    // cout << "enemy in cell has not moved" << endl;
-                    
-                    //cell has dragon
                     if (curE->getName() == 'D')
                     {
-                        
-                        // cout << "got dragon" << endl;
                         Dragon *d = dynamic_cast<Dragon *>(curE);
-                        
-                        // cout << "I'm not a dragon, I'm actually a " << c->getName() << endl;
                         
                         PC *tarD = checkPC(d->getRow(), d->getCol());
                         
-                        //cout << "cast dragon success" << endl;
                         Treasure *t = d->getHoard();
-                        //cout << "got dragon hoard success" << endl;
+                        
                         int tRow = t->getRow();
                         int tCol = t->getCol();
                         if (!tarD) {
@@ -982,16 +864,16 @@ void Floor::updateEnemy(){
                             int pchurt = player->getDamageE();
                             string act;
                             act += d->getName();
-                            message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
+                            message->addMessage
+                            (act + " deals " +
+                             to_string(0 -pchurt) + " damages to PC.");
                         }
                     }
                     
                     // cell has merchant
                     else if (curE->getName() == 'M')
                     {
-                        // cout << "got merchant" << endl;
                         Merchant *m = dynamic_cast<Merchant *>(c);
-                        // cout << "cast merchant success" << endl;
                         PC *tar = checkPC(i, j);
                         if (hostile) {
                             if (tar != nullptr){
@@ -999,7 +881,9 @@ void Floor::updateEnemy(){
                                 int pchurt =player->getDamageE();
                                 string act;
                                 act += m->getName();
-                                message->addMessage(act + " deals " + to_string(0 -pchurt) + " damages to PC.");
+                                message->addMessage
+                                (act + " deals " +
+                                 to_string(0 -pchurt) + " damages to PC.");
                             } else {
                                 
                                 vector<Spawn *> surround = scanEmptyEnemy(i, j);
@@ -1034,9 +918,7 @@ void Floor::updateEnemy(){
                     // cell has normal enemy
                     else
                     {
-                        // cout << "got normal enemy" << endl;
                         Enemy *curE = dynamic_cast<Enemy *>(c);
-                        // cout << "cast normal enemy success" << endl;
                         PC *tar = checkPC(i, j);
                         if (tar != nullptr)
                         {
@@ -1066,20 +948,16 @@ void Floor::updateEnemy(){
                 //enemy has moved already
                 else
                 {
-                    cout << "success" << endl;
                     continue;
                 }
             }
         }
     }
-    // cout << "semi finished updating enemy" << endl;
     
-    // resset all enemies moved state to false
     for(int i = 0; i < 25; ++i){
         for(int j = 0; j < 79; ++j){
             
             if (cellList[i][j]->getType() == '.'){
-                // cout << "we got to x " <<i << " and y " << j << endl;
                 
                 Spawn *s = dynamic_cast<Spawn*>(cellList[i][j]);
                 
@@ -1113,17 +991,11 @@ void Floor::deleteEnemy(int row, int col){
 
 
 void Floor::simpleMoveCharacter(int oldRow, int oldCol, int row, int col, Character *c){
-    // cout << "start simple move character" << endl;
     NormalCell *oldCell = dynamic_cast<NormalCell*>(cellList[oldRow][oldCol]);
-    // cout << "reached 1" << endl;
     oldCell->putCharacter(nullptr);
-    // cout << "reached 2" << endl;
     NormalCell *newCell = dynamic_cast<NormalCell*>(cellList[row][col]);
-    // cout << "reached 3" << endl;
     c->changePosition(row, col);
-    // cout << "reached 4" << endl;
     newCell->putCharacter(c);
-    // cout << "reached 5" << endl;
 }
 
 
@@ -1173,8 +1045,7 @@ PC* Floor::checkPC(int i, int j){
     for (int i = 0; i < 8; ++i) {
         int newR = newCords[i][0];
         int newC = newCords[i][1];
-        Cell *curCell = cellList[newR][newC];		
-        // cout << "checking if pc for in cell " << newR << " " << newC << endl;
+        Cell *curCell = cellList[newR][newC];
         
         if(curCell->getType() == '.')
         {
@@ -1184,7 +1055,7 @@ PC* Floor::checkPC(int i, int j){
             if(!(curSpawn->hasCharacter()))
             {
                 continue;
-            } 
+            }
             
             
             
@@ -1201,7 +1072,6 @@ PC* Floor::checkPC(int i, int j){
 
 
 void Floor::playerUsePotion(string dir) {
-    cout << "start using potion" << endl;
     int curRow = player->getRow();
     int curCol = player->getCol();
     
@@ -1239,15 +1109,11 @@ void Floor::playerUsePotion(string dir) {
     
     
     if (cellList[newRow][newCol]->getType() == '.') {
-        cout << "potion is in the right cell" << endl;
         Spawn *s = dynamic_cast<Spawn*>(cellList[newRow][newCol]);
         if(s->hasItem()) {
-            cout << "has item" << endl;
             if (s->getItem()->getType() == 'P'){
-                //cout << "item is potion" << endl;
                 Potion * p = dynamic_cast<Potion *>(s->getItem());
-                if (p) {        			
-                    //cout << "potion cast complete" << endl;
+                if (p) {
                     Drow *d = dynamic_cast<Drow *>(player);
                     if(d) {
                         p->useItem(150);
@@ -1255,9 +1121,7 @@ void Floor::playerUsePotion(string dir) {
                         p->useItem(100);
                     }
                     message->addMessage("PC uses " + p->getPotionType() +".");
-                    //cout << "use potion complete" << endl;
                     s->putItem(nullptr);
-                    //cout << "put item success" << endl;
                 }
             }
         }
@@ -1317,7 +1181,6 @@ void Floor::playerAttack(string dir) {
                     }
                     
                 }
-                //cout << "start attack" << endl;
                 player->attack(e);
                 int damage = e->getDamagePC();
                 
@@ -1334,7 +1197,7 @@ void Floor::playerAttack(string dir) {
                         s->putItem(h);
                         s->putCharacter(nullptr);
                         
-                    } 
+                    }
                     
                     
                     else if (e->getName() == 'H')

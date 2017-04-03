@@ -27,7 +27,6 @@ int main(int argc, char* argv[]) {
     string s;
     vector<vector<vector<int>>> v1;
     if(argc >= 2){
-        cout << "number of argc is 2" << endl;
         specialInit = true;
         fs.open(argv[1]);
         for(int h = 0; h < 5; ++h){
@@ -131,7 +130,6 @@ int main(int argc, char* argv[]) {
     }
     
     if(argc >= 2) {
-        cout << "closing file for special init" << endl;
         fs.close();
     }
     
@@ -184,22 +182,16 @@ int main(int argc, char* argv[]) {
         
         cout << "Entering level " << level << endl;
         player->initAtkDef();
-        cout << "finished init atk def" << endl;
         Floor f(player, isFrozen, hostile);
-        cout << "finished floor construction" << endl;
         
         
         if(argc >= 2){
-            cout << "initializing special" << endl;
             f.sInit(player, v1, level-1);
         } else {
-            cout << "initializing normal" << endl;
             f.genEmptyFloor();
-            cout << "finished empty floor generation" << endl;
             f.init(player);
         }
         
-        cout << "finished initializing" << endl;
         string direction;
         string cmd;
         
@@ -207,7 +199,6 @@ int main(int argc, char* argv[]) {
         cout << "HP: " << player->getHP() << endl;
         cout << "Atk: " << player->getAtk() << endl;
         cout << "Def: " << player->getDef() << endl;
-        //f.printEnemyHP();
         cout << "Action: ";
         if (level == 1 && cmd =="") {
             cout << "Player character has spawned." << endl;
@@ -245,7 +236,6 @@ int main(int argc, char* argv[]) {
                                (cmd == "a ne") || (cmd == "a se") || (cmd == "a sw")))
             {
                 string dir;
-                // cin >> dir;
                 dir = cmd.substr(2,3);
                 f.playerAttack(dir);
                 if (player->die()) {
@@ -259,7 +249,6 @@ int main(int argc, char* argv[]) {
             {
                 string dir;
                 dir = cmd.substr(2,3);
-                // cin >> dir;
                 f.playerUsePotion(dir);
             }
             else if (!loop && (cmd == "b"))
@@ -343,7 +332,6 @@ int main(int argc, char* argv[]) {
             }
             
             if(loop){
-                cout << "we're still in pugatory" << endl;
             }
             
         }
