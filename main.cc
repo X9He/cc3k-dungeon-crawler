@@ -211,7 +211,7 @@ int main(int argc, char* argv[]) {
         cout << "Action: ";
         if (level == 1 && cmd =="") {
             cout << "Player character has spawned." << endl;
-        } else {
+        }else {
             f.printMessage();
         }
         
@@ -241,10 +241,12 @@ int main(int argc, char* argv[]) {
                     break;
                 }
             }
-            else if (!loop && (cmd == "a"))
+            else if (!loop && ((cmd == "a no") || (cmd == "a so") || (cmd == "a ea") || (cmd == "a we") || (cmd == "a nw") || 
+                (cmd == "a ne") || (cmd == "a se") || (cmd == "a sw")))
             {
                 string dir;
-                cin >> dir;
+                // cin >> dir;
+                dir = cmd.substr(2,3);
                 f.playerAttack(dir);
                 if (player->die()) {
                     cout << "Lost" << endl;
@@ -252,10 +254,12 @@ int main(int argc, char* argv[]) {
                     loop = true;
                 }
             }
-            else if (!loop && (cmd == "u"))
+            else if (!loop && ((cmd == "u no") || (cmd == "u so") || (cmd == "u ea") || (cmd == "u we") || (cmd == "u nw") || 
+                (cmd == "u ne") || (cmd == "u se") || (cmd == "u sw")))
             {
                 string dir;
-                cin >> dir;
+                dir = cmd.substr(2,3);
+                // cin >> dir;
                 f.playerUsePotion(dir);
             }
             else if (!loop && (cmd == "b"))
@@ -266,6 +270,7 @@ int main(int argc, char* argv[]) {
             else if (!loop && (cmd == "f"))
             {
                 f.setFrozen();
+		cout << "Enemy frozen" << endl;
                 cout << "Enter a direction: " << endl;
                 continue;
             }
