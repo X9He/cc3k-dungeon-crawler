@@ -12,24 +12,16 @@ Spawn::~Spawn() {
 
 
 void Spawn::prettyPrint(){
-	// cout << '.';
 	if(hasCharacter() && hasItem()){
-		cout << '?';
 	} else if(hasCharacter()){
-		// cout << 'c';
 		cout << getCharacter()->getName();
-	} else if (hasItem()) {		
-		// cout << 'i';
+	} else if (hasItem()) { 
 		cout << getItem()->getType();
 	} else {
 		cout << getType();	
 	}
 }
 
-// int Spawn::canPass(Cell *c){
-// 	if(c->charTarget->getName() == '';
-
-// }
 
 void Spawn::putItem(Item *i){
 	item = i;
