@@ -12,6 +12,3 @@ void Wall::prettyPrint(){
 	cout << getType();
 }
 
-// bool Wall::canPass(){
-// 	return false;
-// }
