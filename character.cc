@@ -99,7 +99,12 @@ int Character::getinitHp() {
 }
 
 void Character::changeCurHP(int i) {
-    curHp = i;
+  if (curHp + i <= 0) {
+    curHp = 0;
+  } else {
+    curHp += i;
+  }
+    cout << " " << i <<"              " <<curHp << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 }
 
 
