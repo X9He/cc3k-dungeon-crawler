@@ -123,6 +123,8 @@ void NormalEnemy::hurt(Vampire *p) {
     //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
+    cout << ">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+    p->changeHP(5);
 }
 
 void NormalEnemy::hurt(Goblin *p) {
@@ -166,6 +168,7 @@ void Dragon::hurt(Vampire *p) {
     //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
+    p->changeHP(5);
     
 }
 
@@ -210,6 +213,7 @@ void Merchant::hurt(Vampire *p) {
     // cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
+    p->changeHP(5);
 }
 
 void Merchant::hurt(Goblin *p) {
@@ -253,6 +257,7 @@ void Human::hurt(Vampire *p) {
     //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
+    p->changeHP(5);
 }
 
 void Human::hurt(Goblin *p) {
@@ -299,6 +304,7 @@ void Halfling::hurt(Vampire *p) {
     if (r == 0) {
         changeHP(effect);
 	changeDamagePC(effect);
+	p->changeHP(5);
     }
 }
 
