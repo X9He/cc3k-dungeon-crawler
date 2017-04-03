@@ -242,7 +242,6 @@ int main(int argc, char* argv[]) {
                         goto LABEL;
                         
                     }
-                    cout << "Entering level " << level << endl;
                     break;
                 }
             }
