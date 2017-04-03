@@ -98,7 +98,6 @@ void Character::changeCurHP(int i) {
     } else {
         curHp += i;
     }
-    cout << " " << i <<"              " <<curHp << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 }
 
 
