@@ -80,6 +80,8 @@ public:
     
     void printMessage();
 
+    void jumpCharacter(int, int, int, int, Character *c);
+
 };
 
 #endif

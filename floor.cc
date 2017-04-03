@@ -869,6 +869,8 @@ bool Floor::movePlayer(string dir){
 	                curI->useItem();
 	                simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
 	                curCell->putItem(nullptr);
+                } else {
+                    jumpCharacter(curRow, curCol, newRow, newCol, player);
                 }
             }
         }
@@ -1122,6 +1124,27 @@ void Floor::simpleMoveCharacter(int oldRow, int oldCol, int row, int col, Charac
 	// cout << "reached 4" << endl;
 	newCell->putCharacter(c);
 	// cout << "reached 5" << endl;
+}
+
+
+void Floor::jumpCharacter(int oldRow, int oldCol, int row, int col, Character *c){
+    int deltaR = row - oldRow;
+    int deltaC = col - oldCol;
+    int newR = row + deltaR;
+    int newC = col + deltaC;
+    if (newR > 24 || newR < 0) {
+        return;
+    } else if (newC > 79 || newC < 0) {
+        return;
+    } else {
+        Cell *curCell = cellList[newR][newC];
+        Spawn *s = dynamic_cast<Spawn*>(curCell);
+        if (s) {
+            if (!s->hasCharacter() && !s->hasItem()){
+                simpleMoveCharacter(oldRow, oldCol, newR, newC, c);
+            }
+        }
+    }
 }
 
 
