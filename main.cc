@@ -239,7 +239,6 @@ int main(int argc, char* argv[]) {
                         }
                         cout << "Gold Amount: " << gold << endl;
                         cout << "HP, Atk and Def: " << player->getHP() << " " << player->getAtk() << " " << player->getDef() << endl;
-                        delete player;
                         goto LABEL;
                         
                     }
