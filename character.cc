@@ -17,7 +17,6 @@ void Character::changeGold(int i) {
 }
 
 int Character::damage(Character *other, float mag) {
-    cout << "FOurteen" << endl;
     this->getDef();
     
     if (&other) {
@@ -65,7 +64,6 @@ int Character::getHP() {
 }
 
 int Character::getAtk() {
-    cout << "getting atk" << endl;
     return curAtk;
 }
 
