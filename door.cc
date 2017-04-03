@@ -10,17 +10,9 @@ Door::~Door() {}
 
 void Door::prettyPrint(){
 	if(hasCharacter()){
-		// cout << '.c';
+		
 		cout << getCharacter()->getName();
 	} else {
 		cout << getType();
 	}
 }
-
-// int Door::canPass(char *c){
-// 	if (c == '@') {
-// 		return 0;
-// 	} else {
-// 		return 3;
-// 	}
-// }
