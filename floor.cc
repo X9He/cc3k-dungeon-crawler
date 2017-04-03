@@ -1331,7 +1331,7 @@ void Floor::playerAttack(string dir) {
                     if (e->getName()=='M')
                     {
                         
-                        Item *h= new Normal{player};
+                        Item *h= new MH{player};
                         itemList.emplace_back(h);
                         
                         // assign treasure
