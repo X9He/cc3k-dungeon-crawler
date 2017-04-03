@@ -451,7 +451,7 @@ void Shade::hurt(Dragon &d) {
 }
 
 void Shade::hurt(Elf &e) {
-    int effect = damage(&e);
+    int effect = damage(&e, 2);
     int r = random6(0, 1);
     if (r == 0) {
         changeHP(effect);
