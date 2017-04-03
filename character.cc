@@ -19,15 +19,11 @@ void Character::changeGold(int i) {
 int Character::damage(Character *other, float mag) {
   cout << "FOurteen" << endl;
   this->getDef();
-  //cout << "Fifteen" << endl;
   
   if (&other) {
-    // cout << "there" << endl;
   } else {
-    //cout << "here" << endl;
   }
   other->getAtk();
-  //cout << "Sixteen" << endl;
     return 0 - ceil((100 * (mag * other->getAtk()))/ (100 + this->getDef()));
 }
 
