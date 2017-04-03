@@ -340,6 +340,7 @@ int main(int argc, char* argv[]) {
                     if (player->die()) {
                         cout << "LOST" << endl;
                     LABEL:
+                        frozen = 0;
                         cout << "To restart the game, enter in r, to quit, enter in q" << endl;
                         loop = true;
                     } else {
