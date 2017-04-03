@@ -11,10 +11,6 @@ NormalCell::~NormalCell(){
 }
 
 
-// void NormalCell::attach(Cell *c){
-// 	neighbours.emplaceback(c);
-// }
-
 void NormalCell::putCharacter(Character *c) {
 	charTarget = c;
 }
