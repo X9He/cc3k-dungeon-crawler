@@ -11,17 +11,8 @@ Passage::~Passage(){}
 
 void Passage::prettyPrint(){
 	if(hasCharacter()){
-		// cout << 'c';
 		cout << getCharacter()->getName();
 	} else {
 		cout << getType();
 	}
 }
-
-// int Passage::canPass(char c){
-// 	if (c == '@') {
-// 		return 0;
-// 	} else {
-// 		return 3;
-// 	}
-// }
