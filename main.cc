@@ -318,7 +318,7 @@ int main(int argc, char* argv[]) {
                         break;
                     } else if (role == "q"){
                         f.clearFloor();
-                        cout << "Quiting2" << endl;
+                        cout << "Quiting" << endl;
                         return 0;
                     } else {
                         cout << "Invalid role" << endl;
