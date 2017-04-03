@@ -211,7 +211,7 @@ int main(int argc, char* argv[]) {
         
         
         
-        
+        int frozen = 0;
         while (getline(cin, cmd))
         {
             if (cmd == "q")
@@ -258,8 +258,13 @@ int main(int argc, char* argv[]) {
             }
             else if (!loop && (cmd == "f"))
             {
+                ++frozen;
                 f.setFrozen();
-                cout << "Enemy frozen" << endl;
+                if (frozen % 2 == 1) {
+                    cout << "Enemy freeze" << endl;
+                } else {
+                    cout << "Enemy unfreeze" << endl;
+                }
                 cout << "Enter a direction: " << endl;
                 continue;
             }
