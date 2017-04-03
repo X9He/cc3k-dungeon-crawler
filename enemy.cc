@@ -31,15 +31,13 @@ int Enemy::getDamagePC() {
 }
 
 
-// enemy attack 50% miss
-// generate random number
 int random2(int x, int y){
     int ran;
     ran = x + (rand() % (y - x + 1));
     return ran;
 }
 
-// generate random gold
+
 int random_gold(){
     int ran;
     ran = 0 + (rand() % (1 - 0 + 1));
@@ -90,7 +88,6 @@ NormalEnemy{100, 15, 20, random_gold(), target} {
     name = 'L';
 }
 
-//destructors
 
 Dwarf::~Dwarf(){}
 
@@ -107,183 +104,135 @@ Halfling::~Halfling(){}
 Human::~Human(){}
 
 
-
-// normal enemy hurt
 void NormalEnemy::hurt(Troll *p) {
-  //cout << "THERE" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void NormalEnemy::hurt(Vampire *p) {
-  //cout << "Four" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void NormalEnemy::hurt(Goblin *p) {
-  // cout << "FIVE" << endl;
     int effect = damage(p);
-    // cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void NormalEnemy::hurt(Drow *p) {
-  // cout << "SIX" << endl;
     int effect = damage(p);
-    // cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void NormalEnemy::hurt(Shade *p) {
-  // cout << "SEVEN" << endl;
     int effect = damage(p);
-    // cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
     
 }
 
-//dragon hurt
 
 void Dragon::hurt(Troll *p) {
-  // cout << "THERE" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Dragon::hurt(Vampire *p) {
-  // cout << "Four" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
     
 }
 
 void Dragon::hurt(Goblin *p) {
-  // cout << "FIVE" << endl;
     int effect = damage(p);
-    // cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Dragon::hurt(Drow *p) {
-  // cout << "SIX" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Dragon::hurt(Shade *p) {
-  // cout << "SEVEN" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
     
 }
 
-//merchant hurt
 
 void Merchant::hurt(Troll *p) {
-  //cout << "THERE" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Merchant::hurt(Vampire *p) {
-  //cout << "Four" << endl;
     int effect = damage(p);
-    // cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Merchant::hurt(Goblin *p) {
-  // cout << "FIVE" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Merchant::hurt(Drow *p) {
-  // cout << "SIX" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Merchant::hurt(Shade *p) {
-  // cout << "SEVEN" << endl;
     int effect = damage(p);
-    // cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
     
 }
 
-//human hurt
-
 void Human::hurt(Troll *p) {
-  //cout << "THERE" << endl;
     int effect = damage(p);
-    // cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Human::hurt(Vampire *p) {
-  //cout << "Four" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Human::hurt(Goblin *p) {
-  //cout << "FIVE" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Human::hurt(Drow *p) {
-  //cout << "SIX" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
 }
 
 void Human::hurt(Shade *p) {
-  //cout << "SEVEN" << endl;
     int effect = damage(p);
-    //cout << effect << endl;
     changeHP(effect);
     changeDamagePC(effect);
     
 }
 
-//halfing hurt
 
 void Halfling::hurt(Troll *p) {
-  // cout << "EIGHT" << endl;
     int effect = damage(p);
     int r = random2(0, 1);
     if (r == 0) {
@@ -293,7 +242,6 @@ void Halfling::hurt(Troll *p) {
 }
 
 void Halfling::hurt(Vampire *p) {
-  // cout << "NINE" << endl;
     int effect = damage(p);
     int r = random2(0, 1);
     if (r == 0) {
@@ -313,7 +261,6 @@ void Halfling::hurt(Goblin *p) {
 }
 
 void Halfling::hurt(Drow *p) {
-  // cout << "ELEVEN" << endl;
     int effect = damage(p);
     int r = random2(0, 1);
     if (r == 0) {
@@ -324,9 +271,7 @@ void Halfling::hurt(Drow *p) {
 
 
 void Halfling::hurt(Shade *p) {
-  //cout << "TWELVE" << endl;
     int effect = damage(p);
-    //cout << "Thirteen" << endl;
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
@@ -334,10 +279,6 @@ void Halfling::hurt(Shade *p) {
     }
 }
 
-//
-
-
-// attack
 void Elf::attack(PC * player) {
     player->hurt(*this);
 }
