@@ -80,7 +80,7 @@ class Vampire: public PC{
   public:
   ~Vampire() override;
   Vampire();
-  void VchangHP(int effet);
+  void VchangeHP(int effet);
   void attack(Enemy *target) override;
   void hurt(Merchant &m);
   void hurt(Human &h);

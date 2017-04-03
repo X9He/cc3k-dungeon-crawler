@@ -347,7 +347,15 @@ void Troll::attack(Enemy *target){
 
 void Vampire::attack(Enemy *target){
   target->hurt(this);
-  if (target->getHP() == 0) {
+  if (target->getName() == 'W') {
+    int min = -5;
+    VchangeHP(min);
+  } else if (target->getName() != 'W') {
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~`" <<endl;
+    int add = 5;
+    VchangeHP(add);
+  }
+  if (target->getHP() <= 0) {
     changeGold(target->getGold());
   }
 }
@@ -359,9 +367,6 @@ void Drow::attack(Enemy *target){
     changeGold(target->getGold());
   }
 }
-
-
-
 
 
 Shade::Shade(): PC{125,15,15,0} {}
@@ -382,7 +387,7 @@ Vampire::Vampire() :
 
 Vampire::~Vampire() {}
 
-void Vampire::VchangHP(int effect) {
+void Vampire::VchangeHP(int effect) {
    changeCurHP(effect);
 }
 
@@ -474,7 +479,7 @@ void Vampire::hurt(Merchant &m) {
   int effect = damage(&m);
   int r = random6(0, 1);
   if (r == 0) {
-    changeHP(effect);
+    VchangeHP(effect);
     changeDamageE(effect);
   }
 }
@@ -482,7 +487,7 @@ void Vampire::hurt(Human &h) {
   int effect = damage(&h);
   int r = random6(0, 1);
   if (r == 0) {
-    changeHP(effect);
+    VchangeHP(effect);
     changeDamageE(effect);
   }
 }
@@ -490,7 +495,7 @@ void Vampire::hurt(Dragon &d) {
   int effect = damage(&d);
   int r = random6(0, 1);
   if (r == 0) {
-    changeHP(effect);
+    VchangeHP(effect);
     changeDamageE(effect);
   }
 }
@@ -498,7 +503,7 @@ void Vampire::hurt(Elf &e) {
   int effect = damage(&e,2);
   int r = random6(0, 1);
   if (r == 0) {
-    changeHP(effect);
+    VchangeHP(effect);
     changeDamageE(effect);
   }
 }
@@ -506,7 +511,7 @@ void Vampire::hurt(Halfling &l) {
   int effect = damage(&l);
   int r = random6(0, 1);
   if (r == 0) {
-    changeHP(effect);
+    VchangeHP(effect);
     changeDamageE(effect);
   }
 }
@@ -514,7 +519,7 @@ void Vampire::hurt(Dwarf &w) {
   int effect = damage(&w);
   int r = random6(0, 1);
   if (r == 0) {
-    changeHP(effect);
+    VchangeHP(effect);
     changeDamageE(effect);
   }
 }
@@ -522,7 +527,7 @@ void Vampire::hurt(Orcs &o) {
   int effect = damage(&o);
   int r = random6(0, 1);
   if (r == 0) {
-    changeHP(effect);
+    VchangeHP(effect);
     changeDamageE(effect);
   }
 }
