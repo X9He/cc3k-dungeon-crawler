@@ -221,7 +221,7 @@ int main(int argc, char* argv[]) {
 
 
 
-        while (cin >> cmd)
+        while (getline(cin, cmd))
         {
             if (cmd == "q")
             {
@@ -279,8 +279,9 @@ int main(int argc, char* argv[]) {
                 cout << "t for troll" << endl;
                 cout << "g for goblin" << endl;
                 cout << "q for quit" << endl;
-                while (cin >> role) {
-                    if (role == "s") {
+                while (getline(cin, role)) {
+                    cout << role << endl;
+                    if (role == "s" || role == "") {
                         player = new Shade;
                         race = "Shade";
                         break;

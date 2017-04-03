@@ -33,7 +33,7 @@ void RH::useItem(int mag) {
     int cur_HP = target->getHP();
     
     if (cur_HP+mag*10 <= max_HP) {
-        target->changeHP(mag*10);
+        target->changeHP((mag*10)/100);
     } else {
         target->changeHP(max_HP);
     }
@@ -41,18 +41,18 @@ void RH::useItem(int mag) {
 
 void BA::useItem(int mag) {
     int cur_Atk = target->getAtk();
-    target->changeAtk(mag*5);
+    target->changeAtk((mag*5)/100);
 }
 
 void BD::useItem(int mag) {
     int cur_Def = target->getDef();
-    target->changeDef(mag*5);
+    target->changeDef((mag*5)/100);
 }
 
 void PH::useItem(int mag) {
     int cur_HP = target->getHP();
     if (cur_HP-mag*10 >= 0) {
-        target->changeHP(0-mag*10);
+        target->changeHP(0-(mag*10)/100);
     } else {
         target->changeHP(0);
     }
@@ -60,10 +60,10 @@ void PH::useItem(int mag) {
 
 void WA::useItem(int mag) {
     int cur_Atk = target->getAtk();
-    target->changeAtk(0-mag*5);
+    target->changeAtk(0-(mag*5)/100);
 }
 
 void WD::useItem(int mag) {
     int cur_Def = target->getDef();
-    target->changeAtk(0-mag*5);
+    target->changeAtk(0-(mag*5)/100);
 }

@@ -1248,8 +1248,13 @@ void Floor::playerUsePotion(string dir) {
         		Potion * p = dynamic_cast<Potion *>(s->getItem());
         		if (p) {        			
 			  //cout << "potion cast complete" << endl;
-	        		p->useItem(1);
-				message->addMessage("PC uses " + p->getPotionType() +".");
+                    Drow *d = dynamic_cast<Drow *>(player);
+                    if(d) {
+                        p->useItem(150);
+                    } else {
+                        p->useItem(100);
+                    }
+                    message->addMessage("PC uses " + p->getPotionType() +".");
 	        		//cout << "use potion complete" << endl;
 	        		s->putItem(nullptr);
 	        		//cout << "put item success" << endl;
