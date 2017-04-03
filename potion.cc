@@ -5,6 +5,13 @@
 
 using namespace std;
 
+
+int random7(int x, int y){
+    int ran;
+    ran = x + (rand() % (y - x + 1));
+    return ran;
+}
+
 Potion::Potion(PC* player, char itemType): Item{itemType, player} {}
 
 Potion::~Potion() {}
@@ -29,13 +36,16 @@ WD::~WD() {}
 WA::~WA() {}
 
 void RH::useItem(int mag) {
+    int rad = random7(1, 10);
+    
     int max_HP = target->getMax();
     int cur_HP = target->getHP();
-    
-    if (cur_HP+mag*10 <= max_HP) {
-        target->changeHP((mag*10)/100);
+    Vampire *v = dynamic_cast<Vampire *>(target);
+    if(v){
+        
+        v->VchangeHP(rad);
     } else {
-        target->changeHP(max_HP);
+        target->changeHP((rad*mag)/100);
     }
 }
 
@@ -50,13 +60,21 @@ void BD::useItem(int mag) {
 }
 
 void PH::useItem(int mag) {
+    int rad0 = random7(1, 10);
+    int rad = 0-rad0;
+    
+    int max_HP = target->getMax();
     int cur_HP = target->getHP();
-    if (cur_HP-mag*10 >= 0) {
-        target->changeHP(0-(mag*10)/100);
+    
+    Vampire *v = dynamic_cast<Vampire *>(target);
+    if(v){
+        
+        v->VchangeHP(rad);
     } else {
-        target->changeHP(0);
+        target->changeHP((rad*mag)/100);
     }
 }
+
 
 void WA::useItem(int mag) {
     int cur_Atk = target->getAtk();
