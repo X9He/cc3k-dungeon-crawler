@@ -83,5 +83,5 @@ void WA::useItem(int mag) {
 
 void WD::useItem(int mag) {
     int cur_Def = target->getDef();
-    target->changeAtk(0-(mag*5)/100);
+    target->changeDef(0-(mag*5)/100);
 }
