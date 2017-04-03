@@ -178,7 +178,7 @@ int main(int argc, char* argv[]) {
     
     
     
-    
+    frozen = 0;
     while (level < 6) {
         
         cout << "Entering level " << level << endl;
@@ -212,7 +212,6 @@ int main(int argc, char* argv[]) {
         
         
         
-        int frozen = 0;
         while (getline(cin, cmd))
         {
             validCommand = true;
@@ -285,7 +284,6 @@ int main(int argc, char* argv[]) {
                 continue;
             }
             else if (cmd == "r"){
-                // f.clearFloor();
                 delete player;
                 cout << "choose your role" << endl;
                 cout << "s for shade" << endl;
@@ -294,6 +292,7 @@ int main(int argc, char* argv[]) {
                 cout << "t for troll" << endl;
                 cout << "g for goblin" << endl;
                 cout << "q for quit" << endl;
+                frozen = 0;
                 while (getline(cin, role)) {
                     if (role == "s" || role == "") {
                         player = new Shade;
@@ -323,7 +322,6 @@ int main(int argc, char* argv[]) {
                         cout << "Invalid role" << endl;
                     }
                 }
-                // cmd = "";
                 level = 1;
                 player->initAll();
                 loop = false;
