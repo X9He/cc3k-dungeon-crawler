@@ -50,7 +50,6 @@ vector<Spawn *> Chamber::getEmptySpawn() {
 }
 
 void Chamber::assignItem(Item *i){
-  //cout << "called assign" << endl;
 	int ran;
 	if (emptySpawn.size() == 0) {
 			ran = 0; 
@@ -58,28 +57,16 @@ void Chamber::assignItem(Item *i){
 			ran= random1(0, emptySpawn.size()-1);
 		}
 	emptySpawn[ran]->putItem(i);
-
-	cout << "reached 1" << endl;
 	int row = emptySpawn[ran]->getRow();
 	int col = emptySpawn[ran]->getCol();
 	i->changePosition(row, col);
-
-	//cout << "reached 2" << endl;
-	//	cout << "ran is " << ran << endl;
-	//cout << "empty amount is " << emptySpawn.size() << endl;
-	//cout << "actual vector length is " << emptySpawn.size() << endl;
-	//cout << "to be assigned to cell type: " << emptySpawn[ran]->getType() << endl;
 	eraseEmptySpawn(row, col);
-
-	cout << "reached 3" << endl;
 }
 
 
 void Chamber::assignCharacter(Character *c){
 	int ran;
-	//cout << "called assign" << endl;
 	if (emptySpawn.size() <= 0){
-	  //cout << "no more empty spawns!" << endl;
 	}
 	else 
 	{
@@ -88,23 +75,10 @@ void Chamber::assignCharacter(Character *c){
 			ran= random1(0, emptySpawn.size()-1);
 		}
 		Spawn *s = emptySpawn[ran];
-
-		//cout << "reached 1" << endl;
-
 		int row = s->getRow();
 		int col = s->getCol();
 		c->changePosition(row, col);
-
-		//	cout << "reached 2" << endl;
-
 		s->putCharacter(c);
-		//	cout << "ran is " << ran << endl;
-		//cout << "empty amount is " << emptySpawn.size() << endl;
-		//cout << "actual vector length is " << emptySpawn.size() << endl;
-		//cout << "to be assigned to cell type: " << emptySpawn[ran]->getType() << endl;
-		//cout << "reached 2.5" << endl;
-		// cout << "assignedCharacter" << endl;
-		// fullSpawn.emplace_back(emptySpawn[ran]);
 		eraseEmptySpawn(row, col);
 
 		cout << "reached 3" << endl;
@@ -155,8 +129,6 @@ vector<vector<int>> generateEightCord(int i, int j) {
 }
 
 void Chamber::assignTreasure(Treasure *t, Dragon *d){
-  //cout << "called assign" << endl;
-	//generate random number
 	int ran;
 	if (emptySpawn.size() == 0) {
 		ran = 0; 
@@ -164,24 +136,13 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 		ran= random1(0, emptySpawn.size()-1);
 	}
 
-	//select empty spawn cell
 	Spawn *newS = emptySpawn[ran];
 	int tRow = newS->getRow();
 	int tCol = newS->getCol();
-
-	//put item in spawn cell
 	newS->putItem(t);
-
-	//erase spawned cell from list
 	eraseEmptySpawn(tRow, tCol);
 
-
-	//cout << "treasure assignment complete" << endl;
-
-	  //cout << "treasure cordinates: x " << tRow << " y " << tCol << endl;
 	t->changePosition(tRow, tCol);
-
-	//cout << "begin spawning dragon" << endl;
 
 	vector<Spawn*> newVec;
 	vector<vector<int>> intVec = generateEightCord(tRow, tCol);
@@ -194,35 +155,22 @@ void Chamber::assignTreasure(Treasure *t, Dragon *d){
 			newVec.emplace_back(s);
 		}
 	}
-	//	cout << "reached 2.2" << endl;
 
 	int size = newVec.size();	
 	int ranD= random1(0, size-1);
 	
 
-	//	cout << "reached 2.3" << endl;
-	//cout << "size is "<< size << " ranD is " << ranD << endl;
-	//cout << "empty amount is " << emptySpawn.size() << " and actual vector length is " << emptySpawn.size() << endl;
-	//cout << "to be assigned to cell type: " << newVec[ranD]->getType() << endl;
-	Spawn *dragonSpawn = newVec[ranD];
-	//cout << "reached 2.4" << endl;
-	dragonSpawn->putCharacter(d);
 
-	//cout << "reached 2.5" << endl;	
+	Spawn *dragonSpawn = newVec[ranD];
+	dragonSpawn->putCharacter(d);
+	
 	int dRow = dragonSpawn->getRow();
 	int dCol = dragonSpawn->getCol();
 
-	//cout << "reached 3" << endl;
 
 	d->changePosition(dRow, dCol);
-	//cout << "reached 4" << endl;
 	eraseEmptySpawn(dRow, dCol);
 }
-
-
-// void Chamber::setHasPlayer(bool t){
-// 	hasP = t;
-// }
 
 
 bool Chamber::hasPlayer(){
