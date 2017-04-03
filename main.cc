@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
     bool hostile = false;
     bool specialInit = false;
     bool loop = false;
+    bool validCommand = false;
     string race;
     
     
@@ -214,15 +215,16 @@ int main(int argc, char* argv[]) {
         int frozen = 0;
         while (getline(cin, cmd))
         {
+            validCommand = true;
             if (cmd == "q")
             {
-                cout << "Quiting" << endl;
+                cout << "Quiting1" << endl;
                 
                 f.clearFloor();
                 delete player;
                 return 0;
             }
-            if (!loop && (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
+            else if (!loop && (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
                           || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ))
             {
                 if (f.movePlayer(cmd) == false)
@@ -261,9 +263,9 @@ int main(int argc, char* argv[]) {
                 ++frozen;
                 f.setFrozen();
                 if (frozen % 2 == 1) {
-                    cout << "Enemy freeze" << endl;
+                    cout << "Enemy frozen" << endl;
                 } else {
-                    cout << "Enemy unfreeze" << endl;
+                    cout << "Enemy unfrozen" << endl;
                 }
                 cout << "Enter a direction: " << endl;
                 continue;
@@ -279,7 +281,6 @@ int main(int argc, char* argv[]) {
                 cout << "g for goblin" << endl;
                 cout << "q for quit" << endl;
                 while (getline(cin, role)) {
-                    cout << role << endl;
                     if (role == "s" || role == "") {
                         player = new Shade;
                         race = "Shade";
@@ -301,38 +302,46 @@ int main(int argc, char* argv[]) {
                         race = "Goblin";
                         break;
                     } else if (role == "q"){
-                        cout << "Quiting" << endl;
-                        delete player;
+                        f.clearFloor();
+                        cout << "Quiting2" << endl;
                         return 0;
                     } else {
                         cout << "Invalid role" << endl;
                     }
                 }
-                cmd = "";
+                // cmd = "";
                 level = 1;
                 player->initAll();
                 loop = false;
                 break;
+            }else {
+                validCommand = false;
             }
             
             if(!loop){
                 
-                f.updateEnemy();
-                
-                if (player->die()) {
-                    cout << "LOST" << endl;
-                    cout << "To restart the game, enter in r, to quit, enter in q" << endl;
-                    loop = true;
+                if(validCommand){
+                    f.updateEnemy();
+                    if (player->die()) {
+                        cout << "LOST" << endl;
+                        cout << "To restart the game, enter in r, to quit, enter in q" << endl;
+                        loop = true;
+                    } else {
+                        f.prettyPrint();
+                        cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " <<level << endl;
+                        cout << "HP: " << player->getHP() << endl;
+                        cout << "Atk: " << player->getAtk() << endl;
+                        cout << "Def: " << player->getDef() << endl;
+                        cout << "Action: ";
+                        f.printMessage();
+                        cout<< "Enter a direction: " <<endl;
+                    }
                 } else {
-                    f.prettyPrint();
-                    cout << "Race: " << race << " Gold: " << player->getGold() << "                                                  Floor " <<level << endl;
-                    cout << "HP: " << player->getHP() << endl;
-                    cout << "Atk: " << player->getAtk() << endl;
-                    cout << "Def: " << player->getDef() << endl;
-                    cout << "Action: ";
-                    f.printMessage();
-                    cout<< "Enter a direction: " <<endl;
+                    cout << "Invalid Command!" << endl;
                 }
+                
+
+
                 
             }
             
@@ -341,8 +350,14 @@ int main(int argc, char* argv[]) {
             
         }
         
-        isFrozen = f.getFrozen();
-        hostile = f.getHostile();
+        if(cmd != "r"){
+            isFrozen = f.getFrozen();
+            hostile = f.getHostile();
+        } else {
+            isFrozen = false;
+            hostile = false;
+        }
+
         f.clearFloor();
     }
     
