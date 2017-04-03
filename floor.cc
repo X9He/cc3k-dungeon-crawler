@@ -16,9 +16,6 @@
 
 using namespace std;
 
-
-// Probability cur{2/9, 3/18, 5/18, 1/9, 1/9, 1/9};
-
 int random(int x, int y){
     int ran;
     ran = x + (rand() % (y - x + 1));
@@ -738,22 +735,7 @@ bool Floor::movePlayer(string dir){
     else if (c == '.')
     {
         message->addMessage("PC moves to " + direction + ".");
-        vector<vector<int>> sets;
-	       sets = genEightCord(newRow, newCol);
-	       for(int i = 0; i < 8; ++i){
-               int newR = sets[i][0];
-               int newC = sets[i][1];
-               Cell *ce = cellList[newR][newC];
-               Spawn *s = nullptr;
-               if(ce->getType() == '.' ){
-                   s = dynamic_cast<Spawn*>(cellList[newR][newC]);
-                   if(s->getItem() != nullptr &&
-                      s->getItem()->getType() == 'P') {
-                       message->addMessage("PC sees an unknown potion.");
-                       break;
-                   }
-               }
-           }
+        
 	       
         Spawn *curCell =dynamic_cast<Spawn *>(cur);
         // Spawn has an enemy
@@ -771,7 +753,15 @@ bool Floor::movePlayer(string dir){
                     simpleMoveCharacter(curRow, curCol, newRow, newCol, player);
                     curCell->putItem(nullptr);
                 } else {
-                    jumpCharacter(curRow, curCol, newRow, newCol, player);
+                    int cond = jumpCharacter(curRow, curCol, newRow, newCol, player);
+                    if(cond == 0){
+                        return true;
+                    } else if (cond == 1){
+                        return false;
+                    } else if (cond == 2){
+                        cout << "This jump will send the player out of the map, please don't leave the dungeon. We have cake!" << endl;
+
+                    }
                 }
             }
         }
@@ -996,27 +986,56 @@ void Floor::simpleMoveCharacter(int oldRow, int oldCol, int row, int col, Charac
     NormalCell *newCell = dynamic_cast<NormalCell*>(cellList[row][col]);
     c->changePosition(row, col);
     newCell->putCharacter(c);
+
+    vector<vector<int>> sets;
+    sets = genEightCord(row, col);
+
+    if(dynamic_cast<PC*>(c)){
+        for(int i = 0; i < 8; ++i){
+            int newR = sets[i][0];
+            int newC = sets[i][1];
+            Cell *ce = cellList[newR][newC];
+            Spawn *s = nullptr;
+            if(ce->getType() == '.' ){
+                s = dynamic_cast<Spawn*>(cellList[newR][newC]);
+                if(s->getItem() != nullptr &&
+                    s->getItem()->getType() == 'P') {
+                    message->addMessage("PC sees an unknown potion.");
+                break;
+               }
+           }
+       }
+    }
+    
 }
 
 
-void Floor::jumpCharacter(int oldRow, int oldCol, int row, int col, Character *c){
+int Floor::jumpCharacter(int oldRow, int oldCol, int row, int col, Character *c){
     int deltaR = row - oldRow;
     int deltaC = col - oldCol;
     int newR = row + deltaR;
     int newC = col + deltaC;
     if (newR > 24 || newR < 0) {
-        return;
+        return 2;
     } else if (newC > 79 || newC < 0) {
-        return;
+        return 2;
     } else {
         Cell *curCell = cellList[newR][newC];
         Spawn *s = dynamic_cast<Spawn*>(curCell);
+        Passage *pCell = dynamic_cast<Passage*>(curCell);
+        Door *dCell = dynamic_cast<Door*>(curCell);
+        Stair *sCell = dynamic_cast<Stair*>(curCell);
         if (s) {
             if (!s->hasCharacter() && !s->hasItem()){
                 simpleMoveCharacter(oldRow, oldCol, newR, newC, c);
             }
+        } else if (pCell || dCell) {
+            simpleMoveCharacter(oldRow, oldCol, newR, newC, c);            
+        } else if (sCell){
+            return 1;
         }
     }
+    return 0;
 }
 
 

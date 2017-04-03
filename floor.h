@@ -80,7 +80,7 @@ public:
     
     void printMessage();
     
-    void jumpCharacter(int, int, int, int, Character *c);
+    int jumpCharacter(int, int, int, int, Character *c);
     
 };
 
