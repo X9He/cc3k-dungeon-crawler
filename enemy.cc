@@ -4,7 +4,7 @@ using namespace std;
 
 
 Enemy::Enemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved, int damagePC)
-  : Character{initHP, initAtk, initDef, Gold}, Target(target), moved{moved},damagePC{damagePC} {}
+: Character{initHP, initAtk, initDef, Gold}, Target(target), moved{moved},damagePC{damagePC} {}
 
 
 Enemy::~Enemy() {
@@ -21,13 +21,13 @@ bool Enemy::getMoved() {
 
 
 void Enemy::changeDamagePC(int amount) {
-  damagePC = amount;
+    damagePC = amount;
 }
 
 int Enemy::getDamagePC() {
-  int result = damagePC;
-  damagePC = 0;
-  return result;
+    int result = damagePC;
+    damagePC = 0;
+    return result;
 }
 
 
@@ -45,8 +45,9 @@ int random_gold(){
     return 2;
 }
 
-NormalEnemy::NormalEnemy(int initHP, int initAtk, int initDef, int Gold, PC * target, bool moved, int damagePC):
-  Enemy{initHP, initAtk, initDef, Gold, target, moved, damagePC}{}
+NormalEnemy::NormalEnemy(int initHP, int initAtk, int initDef,
+                         int Gold, PC * target, bool moved, int damagePC):
+Enemy{initHP, initAtk, initDef, Gold, target, moved, damagePC}{}
 
 NormalEnemy::~NormalEnemy() {}
 
@@ -237,7 +238,7 @@ void Halfling::hurt(Troll *p) {
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
-	changeDamagePC(effect);
+        changeDamagePC(effect);
     }
 }
 
@@ -246,7 +247,7 @@ void Halfling::hurt(Vampire *p) {
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
-	changeDamagePC(effect);
+        changeDamagePC(effect);
     }
 }
 
@@ -256,7 +257,7 @@ void Halfling::hurt(Goblin *p) {
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
-	changeDamagePC(effect);
+        changeDamagePC(effect);
     }
 }
 
@@ -265,7 +266,7 @@ void Halfling::hurt(Drow *p) {
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
-	changeDamagePC(effect);
+        changeDamagePC(effect);
     }
 }
 
@@ -275,7 +276,7 @@ void Halfling::hurt(Shade *p) {
     int r = random2(0, 1);
     if (r == 0) {
         changeHP(effect);
-	changeDamagePC(effect);
+        changeDamagePC(effect);
     }
 }
 
@@ -285,27 +286,27 @@ void Elf::attack(PC * player) {
 
 
 void Dwarf::attack(PC * player) {
-     player->hurt(*this);
+    player->hurt(*this);
 }
 
 void Halfling::attack(PC * player) {
-     player->hurt(*this);
+    player->hurt(*this);
 }
 
 void Orcs::attack(PC * player) {
-     player->hurt(*this);
+    player->hurt(*this);
 }
 
 void Merchant::attack(PC * player) {
-     player->hurt(*this);
+    player->hurt(*this);
 }
 
 void Dragon::attack(PC * player) {
-     player->hurt(*this);
+    player->hurt(*this);
 }
 
 void Human::attack(PC * player) {
-     player->hurt(*this);
+    player->hurt(*this);
 }
 
 
@@ -315,5 +316,5 @@ Treasure * Dragon::getHoard(){
 
 
 void Dragon::putHoard(Treasure *t){
-  hoard = t;
+    hoard = t;
 }

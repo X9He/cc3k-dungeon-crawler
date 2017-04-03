@@ -19,30 +19,32 @@ class Enemy: public Character {
     bool moved;
     int damagePC;
 public:
-    Enemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false, int damagePC = 0); 
+    Enemy(int initHP, int intAtk, int initDef, int Gold,
+          PC * target, bool moved = false, int damagePC = 0);
     Enemy(PC *target);
     virtual ~Enemy();
-
+    
     virtual void attack(PC *target) = 0;
     virtual void hurt(Troll *p)=0;
     virtual void hurt(Vampire *p)=0;
     virtual void hurt(Goblin *p)=0;
     virtual void hurt(Drow *p)=0;
     virtual void hurt(Shade *p)=0;
-
+    
     void changeMoved();
     bool getMoved();
-
+    
     int getDamagePC();
-   void changeDamagePC(int amount);
+    void changeDamagePC(int amount);
 };
 
 class NormalEnemy: public Enemy {
     virtual void attack (PC *target) = 0;
 public:
-    NormalEnemy(int initHP, int intAtk, int initDef, int Gold, PC * target, bool moved = false, int damagePC = 0);
+    NormalEnemy(int initHP, int intAtk, int initDef, int Gold,
+                PC * target, bool moved = false, int damagePC = 0);
     virtual ~NormalEnemy();
-
+    
     virtual void hurt(Troll *p);
     virtual void hurt(Vampire *p);
     virtual void hurt(Goblin *p);
@@ -55,7 +57,7 @@ public:
     void attack(PC *target) override;
     Elf(PC *target);
     ~Elf() override;
-
+    
 };
 
 class Dwarf: public NormalEnemy {
@@ -75,7 +77,7 @@ public:
     void hurt(Vampire *p) override;
     void hurt(Shade *p) override;
     void hurt(Goblin *p) override;
-       
+    
 };
 
 class Orcs: public NormalEnemy {

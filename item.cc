@@ -12,7 +12,8 @@ int Item::getCol() {
     return col;
 }
 
-Item::Item(char itemType, PC* target): row{0}, col{0}, itemType{itemType}, target{target} {}
+Item::Item(char itemType, PC* target): row{0},
+col{0}, itemType{itemType}, target{target} {}
 
 Item::~Item() {target=nullptr;}
 

@@ -8,13 +8,13 @@
 
 class Passage : public NormalCell {
 public:
-	Passage(char type, int row, int col, Character *c=nullptr);
-
-	~Passage() override;
-
-	void prettyPrint() override;
-
-	// int canPass(char c) override;
+    Passage(char type, int row, int col, Character *c=nullptr);
+    
+    ~Passage() override;
+    
+    void prettyPrint() override;
+    
+    // int canPass(char c) override;
 };
 
 #endif

@@ -10,7 +10,7 @@ Potion::Potion(PC* player, char itemType): Item{itemType, player} {}
 Potion::~Potion() {}
 
 string Potion::getPotionType() {
-  return potionType;
+    return potionType;
 }
 
 
@@ -18,7 +18,7 @@ RH::RH(PC* player): Potion(player) {potionType = "RH"; }
 BA::BA(PC* player): Potion(player) {potionType = "BA"; }
 BD::BD(PC* player): Potion(player) {potionType = "BD"; }
 PH::PH(PC* player): Potion(player) {potionType = "PH"; }
-WD::WD(PC* player): Potion(player) {potionType = "WD"; } 
+WD::WD(PC* player): Potion(player) {potionType = "WD"; }
 WA::WA(PC* player): Potion(player) {potionType = "WA"; }
 
 RH::~RH() {}

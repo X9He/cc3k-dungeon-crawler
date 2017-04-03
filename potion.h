@@ -6,7 +6,7 @@
 
 class Potion: public Item {
 protected:
- std::string potionType;
+    std::string potionType;
 public:
     Potion(PC* = nullptr, char itemType = 'P');
     virtual ~Potion();
@@ -17,7 +17,7 @@ public:
 class RH: public Potion {
 public:
     RH(PC*);
-     ~RH() override;
+    ~RH() override;
     void useItem(int mag) override;
 };
 
@@ -37,22 +37,22 @@ public:
 
 class PH: public Potion {
 public:
-     PH(PC*);
+    PH(PC*);
     ~PH() override;
     void useItem(int mag) override;
 };
 
 class WA: public Potion {
 public:
-     WA(PC*);
+    WA(PC*);
     ~WA() override;
     void useItem(int mag) override;
 };
 
 class WD: public Potion {
 public:
-     WD(PC*);
-     ~WD() override;
+    WD(PC*);
+    ~WD() override;
     void useItem(int mag) override;
 };
 

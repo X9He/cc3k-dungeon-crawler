@@ -10,11 +10,11 @@ Cell::~Cell(){}
 
 
 int Cell::getRow(){
-	return row;
+    return row;
 }
 
 int Cell::getCol(){
-	return col;
+    return col;
 }
 
 char Cell::getType() {

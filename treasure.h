@@ -16,25 +16,25 @@ public:
 };
 
 class Small: public Treasure {
-    public:
+public:
     Small(PC* player);
     ~Small() override;
 };
 
 class Normal: public Treasure {
-    public:
+public:
     Normal(PC* player);
     ~Normal() override;
 };
 
 class MH: public Treasure {
-    public:
+public:
     MH(PC* player);
     ~MH() override;
 };
 
 class DH: public Treasure {
-    public:
+public:
     DH(PC* player);
     ~DH() override;
 };

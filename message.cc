@@ -7,17 +7,17 @@ Message::Message(): action{""} {}
 Message::~Message() {}
 
 void Message::clearMessage() {
-  action = "";
+    action = "";
 }
 
 void Message::addMessage(string act) {
-  if (action != ""){
-    action = action + " " + act;
-  } else {
-    action += act;
-  }
+    if (action != ""){
+        action = action + " " + act;
+    } else {
+        action += act;
+    }
 }
 
 void Message::getMessage() {
-  cout << action << endl;
+    cout << action << endl;
 }

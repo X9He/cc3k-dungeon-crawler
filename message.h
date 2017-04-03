@@ -5,12 +5,12 @@
 
 class Message {
     std::string action;
-  public:
-  Message();
-  ~Message();
-  void clearMessage();
-  void addMessage(std::string act);
-  void getMessage();
+public:
+    Message();
+    ~Message();
+    void clearMessage();
+    void addMessage(std::string act);
+    void getMessage();
 };
 
 #endif

@@ -17,13 +17,13 @@ void Character::changeGold(int i) {
 }
 
 int Character::damage(Character *other, float mag) {
-  cout << "FOurteen" << endl;
-  this->getDef();
-  
-  if (&other) {
-  } else {
-  }
-  other->getAtk();
+    cout << "FOurteen" << endl;
+    this->getDef();
+    
+    if (&other) {
+    } else {
+    }
+    other->getAtk();
     return 0 - ceil((100 * (mag * other->getAtk()))/ (100 + this->getDef()));
 }
 
@@ -65,7 +65,7 @@ int Character::getHP() {
 }
 
 int Character::getAtk() {
-  cout << "getting atk" << endl;
+    cout << "getting atk" << endl;
     return curAtk;
 }
 
@@ -87,7 +87,7 @@ void Character::initAll(){
     curDef = initDef;
     curHp = initHP;
     Gold = 0;
-
+    
 }
 
 int Character::getinitHp() {
@@ -95,11 +95,11 @@ int Character::getinitHp() {
 }
 
 void Character::changeCurHP(int i) {
-  if (curHp + i <= 0) {
-    curHp = 0;
-  } else {
-    curHp += i;
-  }
+    if (curHp + i <= 0) {
+        curHp = 0;
+    } else {
+        curHp += i;
+    }
     cout << " " << i <<"              " <<curHp << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 }
 

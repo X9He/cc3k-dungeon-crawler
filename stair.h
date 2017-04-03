@@ -5,16 +5,16 @@
 #include <utility>
 #include "normalCell.h"
 
-class Stair : public NormalCell {	
+class Stair : public NormalCell {
 public:
-	Stair(char type, int row, int col, Character *c=nullptr);
-
-	~Stair() override;
-	
-	void prettyPrint() override;
-
-	// int canPass() override;
-
+    Stair(char type, int row, int col, Character *c=nullptr);
+    
+    ~Stair() override;
+    
+    void prettyPrint() override;
+    
+    // int canPass() override;
+    
 };
 
 #endif

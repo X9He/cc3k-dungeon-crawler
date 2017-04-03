@@ -7,24 +7,24 @@
 #include "item.h"
 
 class Spawn: public NormalCell {
-	Item *item;
-
+    Item *item;
+    
 public:
-	Spawn(char type, int row, int col, Character *c = nullptr, Item* item = nullptr);
-
-	~Spawn() override;
-
-	void prettyPrint() override;
-
-	// int canPass();
-
-	void putItem(Item *);
-
-	void removeItem();
-
-	Item * getItem();
-
-	bool hasItem();
+    Spawn(char type, int row, int col, Character *c = nullptr, Item* item = nullptr);
+    
+    ~Spawn() override;
+    
+    void prettyPrint() override;
+    
+    // int canPass();
+    
+    void putItem(Item *);
+    
+    void removeItem();
+    
+    Item * getItem();
+    
+    bool hasItem();
 };
 
 #endif

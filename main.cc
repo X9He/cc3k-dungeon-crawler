@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     bool loop = false;
     string race;
     
-
+    
     ifstream fs;
     string s;
     vector<vector<vector<int>>> v1;
@@ -35,93 +35,93 @@ int main(int argc, char* argv[]) {
             for(int i = 0; i < 25; ++i){
                 vector<int> layerTwoV;
                 getline(fs,s);
-                for(int j = 0; j < 79; ++j){  
+                for(int j = 0; j < 79; ++j){
                     if (s[j] == ' ')
                     {
-                     layerTwoV.emplace_back(18);
+                        layerTwoV.emplace_back(18);
                     }
                     else if (s[j] == '-')
                     {
-                     layerTwoV.emplace_back(19);
+                        layerTwoV.emplace_back(19);
                     }
                     else if (s[j] == '|')
                     {
-                     layerTwoV.emplace_back(20);
+                        layerTwoV.emplace_back(20);
                     }
                     else if (s[j] == '#')
                     {
-                     layerTwoV.emplace_back(21);
+                        layerTwoV.emplace_back(21);
                     }
                     else if (s[j] == '.')
                     {
-                     layerTwoV.emplace_back(22);
-
+                        layerTwoV.emplace_back(22);
+                        
                     }
                     else if (s[j] == '+')
                     {
-                     layerTwoV.emplace_back(23);
-
-                    } 
-                    else if (s[j] == '\\') 
+                        layerTwoV.emplace_back(23);
+                        
+                    }
+                    else if (s[j] == '\\')
                     {
-                     layerTwoV.emplace_back(24);
-
+                        layerTwoV.emplace_back(24);
+                        
                     }
                     else if (s[j] == '0'){
-                     layerTwoV.emplace_back(0);
-                    }              
-                    else if (s[j] == '1'){
-                     layerTwoV.emplace_back(1);
+                        layerTwoV.emplace_back(0);
                     }
-                    else if (s[j] == '2'){                   
-                     layerTwoV.emplace_back(2);                  
+                    else if (s[j] == '1'){
+                        layerTwoV.emplace_back(1);
+                    }
+                    else if (s[j] == '2'){
+                        layerTwoV.emplace_back(2);
                     }
                     else if (s[j] == '3'){
-                     layerTwoV.emplace_back(3);
+                        layerTwoV.emplace_back(3);
                     }
                     else if (s[j] == '4'){
-                     layerTwoV.emplace_back(4);
+                        layerTwoV.emplace_back(4);
                     }
                     else if (s[j] == '5'){
-                     layerTwoV.emplace_back(5);
+                        layerTwoV.emplace_back(5);
                     }
                     else if (s[j] == '6'){
-                     layerTwoV.emplace_back(6);
+                        layerTwoV.emplace_back(6);
                     }
                     else if (s[j] == '7'){
-                     layerTwoV.emplace_back(7);
+                        layerTwoV.emplace_back(7);
                     }
                     else if (s[j] == '8'){
-                     layerTwoV.emplace_back(8);
+                        layerTwoV.emplace_back(8);
                     }
                     else if (s[j] == '9'){
-                     layerTwoV.emplace_back(9);
+                        layerTwoV.emplace_back(9);
                     }
                     else if (s[j] == 'L'){
-                     layerTwoV.emplace_back(10);
+                        layerTwoV.emplace_back(10);
                     }
                     else if (s[j] == 'W'){
-                     layerTwoV.emplace_back(11);
+                        layerTwoV.emplace_back(11);
                     }
                     else if (s[j] == 'E'){
-                     layerTwoV.emplace_back(12);
+                        layerTwoV.emplace_back(12);
                     }
                     else if (s[j] == 'H'){
-                     layerTwoV.emplace_back(13);
+                        layerTwoV.emplace_back(13);
                     }
                     else if (s[j] == 'O'){
-                     layerTwoV.emplace_back(14);
+                        layerTwoV.emplace_back(14);
                     }
                     else if (s[j] == 'M'){
-                     layerTwoV.emplace_back(15);
+                        layerTwoV.emplace_back(15);
                     }
                     else if (s[j] == 'D'){
-                     layerTwoV.emplace_back(16);
+                        layerTwoV.emplace_back(16);
                     }
                     else if (s[j] == '@'){
-                     layerTwoV.emplace_back(17);
+                        layerTwoV.emplace_back(17);
                     } else {
-                     layerTwoV.emplace_back(30);
+                        layerTwoV.emplace_back(30);
                     }
                 }
                 layerOneV.emplace_back(layerTwoV);
@@ -148,7 +148,7 @@ int main(int argc, char* argv[]) {
     string role;
     PC *player = nullptr;
     while (getline(cin, role)) {
-
+        
         if (role == "s" || role == "") {
             player = new Shade;
             race = "Shade";
@@ -216,23 +216,23 @@ int main(int argc, char* argv[]) {
         }
         
         cout<< "Enter a direction: " <<endl;
-
-
-
-
-
+        
+        
+        
+        
+        
         while (getline(cin, cmd))
         {
             if (cmd == "q")
             {
                 cout << "Quiting" << endl;
-	  
+                
                 f.clearFloor();
                 delete player;
                 return 0;
             }
             if (!loop && (cmd == "no" || cmd=="so" || cmd == "ea" || cmd == "we"
-                || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ))
+                          || cmd == "ne" || cmd == "nw" || cmd == "se" || cmd == "sw" ))
             {
                 if (f.movePlayer(cmd) == false)
                 {
@@ -241,8 +241,8 @@ int main(int argc, char* argv[]) {
                     break;
                 }
             }
-            else if (!loop && ((cmd == "a no") || (cmd == "a so") || (cmd == "a ea") || (cmd == "a we") || (cmd == "a nw") || 
-                (cmd == "a ne") || (cmd == "a se") || (cmd == "a sw")))
+            else if (!loop && ((cmd == "a no") || (cmd == "a so") || (cmd == "a ea") || (cmd == "a we") || (cmd == "a nw") ||
+                               (cmd == "a ne") || (cmd == "a se") || (cmd == "a sw")))
             {
                 string dir;
                 // cin >> dir;
@@ -254,8 +254,8 @@ int main(int argc, char* argv[]) {
                     loop = true;
                 }
             }
-            else if (!loop && ((cmd == "u no") || (cmd == "u so") || (cmd == "u ea") || (cmd == "u we") || (cmd == "u nw") || 
-                (cmd == "u ne") || (cmd == "u se") || (cmd == "u sw")))
+            else if (!loop && ((cmd == "u no") || (cmd == "u so") || (cmd == "u ea") || (cmd == "u we") || (cmd == "u nw") ||
+                               (cmd == "u ne") || (cmd == "u se") || (cmd == "u sw")))
             {
                 string dir;
                 dir = cmd.substr(2,3);
@@ -270,7 +270,7 @@ int main(int argc, char* argv[]) {
             else if (!loop && (cmd == "f"))
             {
                 f.setFrozen();
-		cout << "Enemy frozen" << endl;
+                cout << "Enemy frozen" << endl;
                 cout << "Enter a direction: " << endl;
                 continue;
             }
@@ -322,7 +322,7 @@ int main(int argc, char* argv[]) {
             }
             
             if(!loop){
-
+                
                 f.updateEnemy();
                 
                 if (player->die()) {
@@ -340,8 +340,8 @@ int main(int argc, char* argv[]) {
                     cout<< "Enter a direction: " <<endl;
                 }
                 
-            } 
-
+            }
+            
             if(loop){
                 cout << "we're still in pugatory" << endl;
             }

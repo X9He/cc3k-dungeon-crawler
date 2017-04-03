@@ -4,11 +4,12 @@
 #include "stair.h"
 using namespace std;
 
-Stair::Stair(char type, int row, int col, Character *c): NormalCell{type, row, col, c}{}
+Stair::Stair(char type, int row, int col, Character *c):
+NormalCell{type, row, col, c}{}
 
 Stair::~Stair() {}
 
 void Stair::prettyPrint(){
-	cout << getType();
+    cout << getType();
 }
 

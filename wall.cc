@@ -9,6 +9,6 @@ Wall::Wall(char type, int row, int col): Cell(type, row, col) {}
 Wall::~Wall(){}
 
 void Wall::prettyPrint(){
-	cout << getType();
+    cout << getType();
 }
 
