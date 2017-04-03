@@ -12,10 +12,3 @@ void Stair::prettyPrint(){
 	cout << getType();
 }
 
-// int Stair::canPass(char *c){
-// 	if (c == '@') {
-// 		return 0;
-// 	} else {
-// 		return 3;
-// 	}
-// }
