@@ -2,15 +2,6 @@
 #include <sstream>
 using namespace std;
 
-/*
-Character::Character(int initHP, ini initAtk, int initDef, int Gold):
-  initHP{initHP}, initAtk{initAtk}, initDef{initDef}, Gold{Gold}{
-   curHP = initHp;
-   curAtk = initAtk;
-   curDef = initDef;
-   }
-}
-*/
 
 PC::PC(int initHP, int initAtk, int initDef, int damageE): 
   Character{initHP, initAtk, initDef,0}, max{initHP}, damageE{damageE}{
@@ -44,8 +35,6 @@ int random6(int x, int y){
 }
 
 void PC::attack(Enemy  *target) {
-  // cout << "ONE" << endl;
-  cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
   Shade *s = dynamic_cast<Shade *>(this);
   if(s){
     target->hurt(s);
@@ -66,90 +55,14 @@ void PC::attack(Enemy  *target) {
   if(v){
     target->hurt(v);
   }
-  cout << "yuyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"<< endl;
-  // cout << "TWO" << endl;
   if (target->getHP() <= 0 && !g) {
-    cout << "JHHHHHHHHHHGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH" << endl;
     changeGold(target->getGold());
-    stringstream a;
-    int amount = target->getGold();
-    a << amount;
   } else if (target->getHP() <= 0 && g) {
-    cout << "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" << endl;
     changeGold(5);
-    stringstream a;
-    int amount = target->getGold();
-    a << amount;
-  }else {
-    int effect1= target->damage(this, 2);
-    int effect2 = damage(target);
-    stringstream a1;
-    stringstream a2;
-    a1 << effect1;
-    a2 << effect2;
   }
-    cout << target->getHP() << endl;
 }
 
-/*
-void PC::attack(Elf  *target) {
-   target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " from " + to_string(target->name);
-   } else {
-     int effect1= target->damage(*this, 2);
-     int effect2 = damage(target);
-     stringstream a1;
-     stringstream a2;
-     a1 << effect1;
-     a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
-       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-   }
-}
-void PC::attack(Dward  *target) {
-   target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " from " + to_string(target->name);
-   } else {
-     int effect1= target->damage(*this);
-     int effect2 = damage(target);
-     stringstream a1;
-     stringstream a2;
-     a1 << effect1;
-     a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
-       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-   }
-}
-void PC::attack(Halfing  *target) {
-   target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " from " + to(target->name);
-   } else {
-     int effect1= target->damage(*this);
-     int effect2 = damage(target);
-     stringstream a1;
-     stringstream a2;
-     a1 << effect1;
-     a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
-       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-   }
-}
-*/
+
 
 
 int random3(int x, int y){
@@ -159,129 +72,7 @@ int random3(int x, int y){
 }
 
 
-/*void PC::attack(Orcs  *target) {
-  // 50% miss
-  int ran = random(0, 1);
-  if (ran == 0) {
-   target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " from " + to_string(target->name);
-   }
-  } else {
-    int effect1= target->damage(*this, 1.5);
-    int effect2 = damage(target);
-    stringstream a1;
-    stringstream a2;
-    a1 << effect1;
-    a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
-      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-  }
-}
-void PC::attack(Merchant  *target) {
-   target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " from " + to_string(target->name);
-   } else {
-     int effect1= target->damage(*this);
-     int effect2 = damage(target);
-     stringstream a1;
-     stringstream a2;
-     a1 << effect1;
-     a2 << effect2;
-     message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) +
-       "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-   }
-}
-void PC::attack(Dragon  *target) {
-   target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " from " + to_string(target->name);
-   }
-  else {
-    int effect1= target->damage(*this);
-    int effect2 = damage(target);
-    stringstream a1;
-    stringstream a2;
-    a1 << effect1;
-    a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) +
-      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-  }
-}
-void PC::attack(Human  *target) {
-   target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " from " + to_string(target->name);
-   }
-  else {
-    int effect1= target->damage(*this);
-    int effect2 = damage(target);
-    stringstream a1;
-    stringstream a2;
-    a1 << effect1;
-    a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
-      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-  }
-}
-*/
 
-
-/*
-void PC::hurt(Merchant &m){
-  if (!m.status){
-    int effect = m.damage(*this);
-    m.changetHP(effect);
-  }
-}
-void PC::hurt(Human &h){
-  int effect = h.damage(*this);
-  h.changetHP(effect);
-}
-void PC::hurt(Dragon &d){
-  int effect = d.damage(*this);
-  d.changetHP(effect);
-}
-void PC::hurt(Elf &e){
-  int effect = e.damage(*this);
-   e.changetHP(effect);
-}
-integer Character::damage(Character &other, float mag = 1) {
-  return 0 - ceiling((100 / (100 + Def))) * (mag * other.Atk);
-}
-void PC::hurt(Halfing &l){
-  int effect = l.damage(*this);
-  l.changetHP(effect);
-}
-void PC::hurt(Dwarf &w){
-  int effect = w.damage(*this);
-  w.changetHP(effect);
-}
-void PC::hurt(Orcs &o){
-  int effect = o.damage(*this);
-  o.changetHP(effect);
-}
-*/ 
-
-
-//
 void PC::hurt(Merchant & m) {
   int effect = damage(&m);
    changeHP(effect);
@@ -317,20 +108,7 @@ void PC::hurt(Human & h) {
     changeHP(effect);
 }
 
-/*
-  void Vampire::hurt(Elf & e) {
-    int effect = damage(e);
-    changeHP(effect);
-}
-void Goblin::hurt(Orcs & o) {
-    int effect = damage(o, 1.5);
-    changHP(effect);
-}
-void Drow::hurt(Elf & e) {
-    int effect = damage(e);
-    changeHP(effect);
-}
-*/
+
 void Shade::attack(Enemy *target){
   target->hurt(this);
   if (target->getHP() == 0) {
@@ -351,7 +129,6 @@ void Vampire::attack(Enemy *target){
     int min = -5;
     VchangeHP(min);
   } else if (target->getName() != 'W') {
-    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~`" <<endl;
     int add = 5;
     VchangeHP(add);
   }
@@ -417,7 +194,7 @@ void Drow::pickUpItem(Item &i, int effect){
   i.useItem(effect);
 }
 
-////////////////////////////////////
+
 void Troll::hurt(Merchant &m) {
   int effect = damage(&m);
   int r = random6(0, 1);
@@ -706,73 +483,5 @@ void Shade::hurt(Orcs &o) {
   }
 }
 
-//////////////////////////////////////
-/*
-void Troll::attack(Enemy *target) {
-  target->hurt(*this);
-  if (target->getHP() == 0) {
-    changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " gold from " + to_string(target->name);
-  }
-  else {
-    int effect1= target->damage(*this);
-    int effect2 = damage(target);
-    stringstream a1;
-    stringstream a2;
-    a1 << effect1;
-    a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
-      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-  }
-}
-void Vampire::attack(Enemy *target) {
-  target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " gold from " + to_string(target->name);
-   }
-  else {
-    int effect1= target->damage(*this);
-    int effect2 = damage(target);
-    stringstream a1;
-    stringstream a2;
-    a1 << effect1;
-    a2 << effect2;
-    if (effect1 > 0) {
-      message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + "). "
-        + "PC gains 5 HP. " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-    } else {
-      message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
-        "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-    }
-  }
-}
-void Drow::attaCK(Enemey *target) {
-  target->hurt(*this);
-   if (target->getHP() == 0) {
-     changeGold(target->getGold());
-     stringstream a;
-     int amount = targey->getGold();
-     a << amount
-     message = "PC steals " + a.str() + " gold  from " + to_string(target->name);
-   }
-  else {
-    int effect1= target->damage(*this);
-    int effect2 = damage(target);
-    stringstream a1;
-    stringstream a2;
-    a1 << effect1;
-    a2 << effect2;
-    message  = "PC deals " + a1.str() + "damages to (" + to_string(target->name) + 
-      "). " + to_string(target->name) + " deals " + a2.str()+ " to PC.";
-  }
-}
-*/
 
 
