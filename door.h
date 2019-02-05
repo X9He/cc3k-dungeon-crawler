@@ -3,17 +3,17 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "NormalCell.h"
+#include "normalCell.h"
 
 class Door : public NormalCell{
 public:
-	Door(char type, int row, int col, int num);
-
-	~Door();
-
-	void prettyPrint() override;
-
-	int canPass() override;
+    Door(char type, int row, int col, Character *c=nullptr);
+    
+    ~Door() override;
+    
+    void prettyPrint() override;
+    
+    // int canPass() override;
 };
 
 #endif

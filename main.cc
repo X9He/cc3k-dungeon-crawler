@@ -20,7 +20,6 @@ int main(int argc, char* argv[]) {
     bool hostile = false;
     bool specialInit = false;
     bool loop = false;
-    bool validCommand = false;
     string race;
     
     
@@ -212,10 +211,8 @@ int main(int argc, char* argv[]) {
         
         
         
-        int frozen = 0;
         while (getline(cin, cmd))
         {
-            validCommand = true;
             if (cmd == "q")
             {
                 cout << "Quiting" << endl;
@@ -260,13 +257,8 @@ int main(int argc, char* argv[]) {
             }
             else if (!loop && (cmd == "f"))
             {
-                ++frozen;
                 f.setFrozen();
-                if (frozen % 2 == 1) {
-                    cout << "Enemy freeze" << endl;
-                } else {
-                    cout << "Enemy unfreeze" << endl;
-                }
+                cout << "Enemy frozen" << endl;
                 cout << "Enter a direction: " << endl;
                 continue;
             }
@@ -315,8 +307,6 @@ int main(int argc, char* argv[]) {
                 player->initAll();
                 loop = false;
                 break;
-            } else {
-                validCommand = false;
             }
             
             if(!loop){
@@ -353,7 +343,7 @@ int main(int argc, char* argv[]) {
     if(!player->die()) {
         cout << "YOU WON!!!!!" << endl;
         int gold = player->getGold();
-        if (role == "s" || role == "") {
+        if (role == "s") {
             gold = gold * 2;
         }
         cout << "Gold Amount: " << gold << endl;

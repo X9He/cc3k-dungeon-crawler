@@ -4,27 +4,26 @@
 #include <utility>
 using namespace std;
 
-NormalCell::NormalCell(char type, int row, int col, Character *c): Cell(type, row, col), charTarget{c} {}
+NormalCell::NormalCell(char type,int row, int col, Character *charTarget):
+Cell(type, row, col), charTarget{charTarget} {}
 
-NormalCell::~NormalCell(){}
+NormalCell::~NormalCell(){
+    charTarget=nullptr;
+}
 
-
-// void NormalCell::attach(Cell *c){
-// 	neighbours.emplaceback(c);
-// }
 
 void NormalCell::putCharacter(Character *c) {
-	charTarget = c;
+    charTarget = c;
 }
 
 void NormalCell::removeCharacter(){
-	charTarget = nullptr;
+    charTarget = nullptr;
 }
 
 Character* NormalCell::getCharacter(){
-	return charTarget;
+    return charTarget;
 }
 
 bool NormalCell::hasCharacter(){
-	return (charTarget != nullptr);
+    return (charTarget != nullptr);
 }

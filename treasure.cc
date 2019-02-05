@@ -1,10 +1,14 @@
-
-
+#include <iostream>
+#include <vector>
+#include <utility>
 #include "treasure.h"
+#include "pc.h"
 
 
-Treasure::Treasure(int value, bool protect):
-value{value}, protect{protect} {}
+Treasure::Treasure(int value, bool protect, PC* player, char itemType):
+Item{itemType, player},protect{protect}, value{value} {}
+
+Treasure::~Treasure() {}
 
 int Treasure::getValue() {
     return value;
@@ -14,22 +18,31 @@ bool Treasure::isProtect() {
 }
 
 void Treasure::useItem(int mag) {
-    target->pickupItem(*this);
+    target->changeGold(getValue());
 }
 
-void Treasure::changeProtect() {
-    protect = !protect;
+void Treasure::changeProtect(bool f) {
+    protect = f;
 }
 
-Small::Small():
-Treasure{1, false} {}
+Small::Small(PC* player):
+Treasure{1, false, player}{}
 
-Normal::Normal():
-Treasure{2, false} {}
+Normal::Normal(PC* player):
+Treasure{2, false, player} {}
 
-MH::MH():
-Treasure{4, false} {}
+MH::MH(PC* player):
+Treasure{4, false, player} {}
 
-DH::DH():
-Treasure{6, true} {}
+DH::DH(PC* player):
+Treasure{6, true, player} {}
+
+
+Small::~Small(){}
+
+Normal::~Normal(){}
+
+MH::~MH(){}
+
+DH::~DH(){}
 
