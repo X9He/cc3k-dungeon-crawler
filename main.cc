@@ -211,7 +211,6 @@ int main(int argc, char* argv[]) {
         
         
         
-        
         while (getline(cin, cmd))
         {
             if (cmd == "q")
